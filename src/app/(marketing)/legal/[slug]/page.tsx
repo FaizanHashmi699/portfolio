@@ -1,0 +1,67 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Section } from "@/components/ui/section";
+import { getLegalDocument, legalDocuments } from "@/content/legal";
+import { formatDate } from "@/lib/utils";
+
+export function generateStaticParams() {
+  return legalDocuments.map((doc) => ({ slug: doc.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const doc = getLegalDocument(slug);
+  if (!doc) return {};
+  return {
+    title: doc.title,
+    description: doc.description,
+    alternates: { canonical: `/legal/${doc.slug}` },
+  };
+}
+
+export default async function LegalPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const doc = getLegalDocument(slug);
+  if (!doc) notFound();
+
+  return (
+    <Section>
+      <article className="mx-auto max-w-3xl">
+        <h1 className="text-h1">{doc.title}</h1>
+        <p className="mt-3 text-muted-foreground">{doc.description}</p>
+        <p className="mt-1.5 text-sm text-muted-foreground">
+          Last updated {formatDate(doc.updated)}
+        </p>
+
+        <div className="mt-12 space-y-10">
+          {doc.sections.map((section) => (
+            <section key={section.heading}>
+              <h2 className="text-h2">{section.heading}</h2>
+              <div className="mt-4 space-y-4">
+                {section.body.map((paragraph, index) => (
+                  <p key={index} className="text-muted-foreground">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+
+        <p className="mt-14 rounded-card border border-border bg-surface p-5 text-sm text-muted-foreground">
+          This document is a drafting starting point and has not yet been reviewed by a
+          UAE qualified legal practitioner. It must be reviewed and adapted before the
+          business trades.
+        </p>
+      </article>
+    </Section>
+  );
+}
