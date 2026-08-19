@@ -6,13 +6,13 @@
 
 ## 1. Design goals (and the constraints that produced them)
 
-| Goal | Why | Consequence |
-|---|---|---|
-| **Ship a real product on a free tier** | Pre-revenue. Hosting cost must be ~0 until traffic justifies spend. | Vercel Hobby + Supabase Free. No always-on containers. |
-| **Zero-key local run** | The founder must be able to `npm install && npm run dev` on a laptop with no accounts. | Repository pattern with an in-memory seeded adapter. Supabase is opt-in via env. |
-| **Deterministic legal logic** | Visa eligibility is regulated. An LLM must never be the decider. | Rules engine in pure TypeScript; LLM only narrates its output. |
-| **Mobile-first, sub-2s LCP on 4G** | Our users are expats on phones. 1s delay ≈ 7% conversion loss. | Server Components by default; 3D and animation lazy-loaded and motion-gated. |
-| **Handle passports safely** | UAE PDPL; catastrophic breach risk. | RLS on every table, private buckets, signed short-TTL URLs, audit log. |
+| Goal                                   | Why                                                                                    | Consequence                                                                      |
+| -------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **Ship a real product on a free tier** | Pre-revenue. Hosting cost must be ~0 until traffic justifies spend.                    | Vercel Hobby + Supabase Free. No always-on containers.                           |
+| **Zero-key local run**                 | The founder must be able to `npm install && npm run dev` on a laptop with no accounts. | Repository pattern with an in-memory seeded adapter. Supabase is opt-in via env. |
+| **Deterministic legal logic**          | Visa eligibility is regulated. An LLM must never be the decider.                       | Rules engine in pure TypeScript; LLM only narrates its output.                   |
+| **Mobile-first, sub-2s LCP on 4G**     | Our users are expats on phones. 1s delay ≈ 7% conversion loss.                         | Server Components by default; 3D and animation lazy-loaded and motion-gated.     |
+| **Handle passports safely**            | UAE PDPL; catastrophic breach risk.                                                    | RLS on every table, private buckets, signed short-TTL URLs, audit log.           |
 
 ## 2. Why this stack
 
@@ -25,7 +25,7 @@ The single most consequential decision was **rejecting a separate backend servic
 > user's initial instinct). Rejected because: (a) Render's free tier cold-starts at ~50s,
 > which is fatal for a conversion-critical form; (b) two deploys, two CORS surfaces, two
 > secret stores and two CI pipelines is real ongoing cost for a solo operator; (c) Next.js
-> Route Handlers + Server Actions *are* a backend — they run as serverless functions with
+> Route Handlers + Server Actions _are_ a backend — they run as serverless functions with
 > full Node APIs. The architecture keeps a clean `src/server` boundary so extracting a
 > standalone service later is a refactor, not a rewrite. See `docs/adr/0001-no-separate-backend.md`.
 
@@ -122,18 +122,18 @@ change is a data edit with an audit trail — not a code change.
 
 Modelled explicitly on the checks the UAE's own ICP/MoHRE AI screening performs since May 2026:
 
-| Check | Rule | Severity |
-|---|---|---|
-| Passport validity | ≥ 6 months beyond intended entry | **Blocker** |
-| Passport blank pages | ≥ 2 facing pages | Warning |
-| Photo specification | white background, 43×55mm, face 70–80% | **Blocker** |
-| Name consistency | exact match across passport / certificate / contract | **Blocker** |
-| Attestation chain | notary → MOFA origin → UAE embassy → MOFA UAE | **Blocker** for employment |
-| Salary threshold | route-dependent (e.g. Golden Visa salary route) | **Blocker** |
-| Insurance & medical | present for residence categories | Warning |
-| Document freshness | bank statements ≤ 3 months old | Warning |
+| Check                | Rule                                                 | Severity                   |
+| -------------------- | ---------------------------------------------------- | -------------------------- |
+| Passport validity    | ≥ 6 months beyond intended entry                     | **Blocker**                |
+| Passport blank pages | ≥ 2 facing pages                                     | Warning                    |
+| Photo specification  | white background, 43×55mm, face 70–80%               | **Blocker**                |
+| Name consistency     | exact match across passport / certificate / contract | **Blocker**                |
+| Attestation chain    | notary → MOFA origin → UAE embassy → MOFA UAE        | **Blocker** for employment |
+| Salary threshold     | route-dependent (e.g. Golden Visa salary route)      | **Blocker**                |
+| Insurance & medical  | present for residence categories                     | Warning                    |
+| Document freshness   | bank statements ≤ 3 months old                       | Warning                    |
 
-Output is a **Rejection Risk Score** (0–100) with itemised, actionable fixes. Shown *before*
+Output is a **Rejection Risk Score** (0–100) with itemised, actionable fixes. Shown _before_
 the customer pays any government fee. This is the single feature no competitor offers.
 
 ## 7. Request lifecycles
@@ -186,13 +186,13 @@ justified, not the default.
 
 ## 10. Testing strategy
 
-| Layer | Tool | What it proves |
-|---|---|---|
-| Domain logic | Vitest | Eligibility, pricing and document rules are correct. No mocks needed. |
-| Components | Vitest + Testing Library | UI renders correct states from props. |
-| Server Actions | Vitest + in-memory repos | Validation and authorization behave. |
-| End-to-end | Playwright | The real journeys work in a real browser. |
-| Accessibility | axe-core in Playwright | No WCAG violations on key pages. |
+| Layer          | Tool                     | What it proves                                                        |
+| -------------- | ------------------------ | --------------------------------------------------------------------- |
+| Domain logic   | Vitest                   | Eligibility, pricing and document rules are correct. No mocks needed. |
+| Components     | Vitest + Testing Library | UI renders correct states from props.                                 |
+| Server Actions | Vitest + in-memory repos | Validation and authorization behave.                                  |
+| End-to-end     | Playwright               | The real journeys work in a real browser.                             |
+| Accessibility  | axe-core in Playwright   | No WCAG violations on key pages.                                      |
 
 Domain tests are the ones that matter most: they encode the business rules that, if wrong,
 cost a customer a rejected application.

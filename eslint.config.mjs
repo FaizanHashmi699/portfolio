@@ -12,6 +12,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated output — not our source, and linting it produces noise only.
+    "coverage/**",
+    "playwright-report/**",
+    "test-results/**",
+    // The previous owner's HTML/CSS assignment, kept for history.
+    "legacy/**",
   ]),
 ]);
 
