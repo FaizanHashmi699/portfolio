@@ -1,0 +1,52 @@
+{
+  "name": "maqam",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.119.0",
+    "@hookform/resolvers": "^5.9.1",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.33.0",
+    "motion": "^13.1.0",
+    "next": "16.3.1",
+    "next-themes": "^0.4.6",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-hook-form": "^7.85.0",
+    "resend": "^6.20.0",
+    "tailwind-merge": "^3.6.0",
+    "three": "^0.185.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1",
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.0.5",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.1",
+    "jsdom": "^30.0.1",
+    "prettier": "^3.9.6",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^4.1.11"
+  }
+}
