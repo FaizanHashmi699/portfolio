@@ -37,23 +37,23 @@ const validPassport = doc("passport", {
 describe("passport validity", () => {
   it("passes a passport with years of validity left", () => {
     const result = validateDocuments([validPassport], { now: NOW });
-    expect(result.findings.filter((f) => f.code.startsWith("PASSPORT_"))).toHaveLength(0);
+    expect(result.findings.filter((f) => f.code.startsWith("PASSPORT_"))).toHaveLength(
+      0,
+    );
   });
 
   it("blocks an expired passport", () => {
-    const result = validateDocuments(
-      [doc("passport", { expiryDate: "2026-01-01" })],
-      { now: NOW },
-    );
+    const result = validateDocuments([doc("passport", { expiryDate: "2026-01-01" })], {
+      now: NOW,
+    });
     expect(result.blockers.map((b) => b.code)).toContain("PASSPORT_EXPIRED");
     expect(result.readyToSubmit).toBe(false);
   });
 
   it(`blocks a passport with under ${PASSPORT_VALIDITY_MONTHS} months validity`, () => {
-    const result = validateDocuments(
-      [doc("passport", { expiryDate: "2026-11-01" })],
-      { now: NOW },
-    );
+    const result = validateDocuments([doc("passport", { expiryDate: "2026-11-01" })], {
+      now: NOW,
+    });
     const finding = result.blockers.find((b) => b.code === "PASSPORT_VALIDITY_SHORT");
     expect(finding).toBeDefined();
     expect(finding!.message).toMatch(/2 months/);
@@ -93,16 +93,30 @@ describe("photograph specification", () => {
   it("accepts a face filling 70-80% of the frame", () => {
     for (const ratio of [0.7, 0.75, 0.8]) {
       const result = validateDocuments(
-        [doc("photo", { backgroundIsWhite: true, faceRatio: ratio }, { mimeType: "image/jpeg" })],
+        [
+          doc(
+            "photo",
+            { backgroundIsWhite: true, faceRatio: ratio },
+            { mimeType: "image/jpeg" },
+          ),
+        ],
         { now: NOW },
       );
-      expect(result.findings.filter((f) => f.code === "PHOTO_FACE_RATIO")).toHaveLength(0);
+      expect(result.findings.filter((f) => f.code === "PHOTO_FACE_RATIO")).toHaveLength(
+        0,
+      );
     }
   });
 
   it("blocks a face outside the permitted range and says by how much", () => {
     const result = validateDocuments(
-      [doc("photo", { backgroundIsWhite: true, faceRatio: 0.5 }, { mimeType: "image/jpeg" })],
+      [
+        doc(
+          "photo",
+          { backgroundIsWhite: true, faceRatio: 0.5 },
+          { mimeType: "image/jpeg" },
+        ),
+      ],
       { now: NOW },
     );
     const finding = result.blockers.find((b) => b.code === "PHOTO_FACE_RATIO");
@@ -148,7 +162,9 @@ describe("attestation chain", () => {
       [doc("degree", { attestationStamps: [...ATTESTATION_CHAIN] })],
       { now: NOW },
     );
-    expect(result.findings.filter((f) => f.code === "ATTESTATION_INCOMPLETE")).toHaveLength(0);
+    expect(
+      result.findings.filter((f) => f.code === "ATTESTATION_INCOMPLETE"),
+    ).toHaveLength(0);
   });
 
   it("blocks and names the missing steps", () => {
@@ -163,7 +179,9 @@ describe("attestation chain", () => {
 
   it("stays silent when attestation data was never extracted", () => {
     const result = validateDocuments([doc("degree", {})], { now: NOW });
-    expect(result.findings.filter((f) => f.code === "ATTESTATION_INCOMPLETE")).toHaveLength(0);
+    expect(
+      result.findings.filter((f) => f.code === "ATTESTATION_INCOMPLETE"),
+    ).toHaveLength(0);
   });
 
   it("checks marriage and birth certificates too", () => {
@@ -244,7 +262,11 @@ describe("missing requirements", () => {
     const result = validateDocuments(
       [
         validPassport,
-        doc("photo", { backgroundIsWhite: true, faceRatio: 0.75 }, { mimeType: "image/jpeg" }),
+        doc(
+          "photo",
+          { backgroundIsWhite: true, faceRatio: 0.75 },
+          { mimeType: "image/jpeg" },
+        ),
         doc("other", {}, { id: "ticket" }),
       ],
       { now: NOW, requirements: service.documents },
@@ -262,10 +284,9 @@ describe("risk scoring", () => {
   });
 
   it("escalates the band as blockers accumulate", () => {
-    const one = validateDocuments(
-      [doc("passport", { expiryDate: "2026-01-01" })],
-      { now: NOW },
-    );
+    const one = validateDocuments([doc("passport", { expiryDate: "2026-01-01" })], {
+      now: NOW,
+    });
     const three = validateDocuments(
       [
         doc("passport", { expiryDate: "2026-01-01", fullName: "A B" }),
@@ -282,7 +303,11 @@ describe("risk scoring", () => {
     const result = validateDocuments(
       [
         doc("passport", { expiryDate: "2026-01-01", fullName: "A B" }),
-        doc("photo", { backgroundIsWhite: false, faceRatio: 0.3 }, { mimeType: "image/jpeg" }),
+        doc(
+          "photo",
+          { backgroundIsWhite: false, faceRatio: 0.3 },
+          { mimeType: "image/jpeg" },
+        ),
         doc("degree", { fullName: "C D", attestationStamps: ["notary"] }),
         doc("insurance", { expiryDate: "2026-05-01" }, { id: "ins" }),
       ],
@@ -295,8 +320,16 @@ describe("risk scoring", () => {
   it("checks every photograph, not only the first", () => {
     const result = validateDocuments(
       [
-        doc("photo", { backgroundIsWhite: true, faceRatio: 0.75 }, { id: "p1", mimeType: "image/jpeg" }),
-        doc("photo", { backgroundIsWhite: false }, { id: "p2", mimeType: "image/jpeg" }),
+        doc(
+          "photo",
+          { backgroundIsWhite: true, faceRatio: 0.75 },
+          { id: "p1", mimeType: "image/jpeg" },
+        ),
+        doc(
+          "photo",
+          { backgroundIsWhite: false },
+          { id: "p2", mimeType: "image/jpeg" },
+        ),
       ],
       { now: NOW },
     );
@@ -317,7 +350,11 @@ describe("risk scoring", () => {
     const result = validateDocuments(
       [
         doc("passport", { expiryDate: "2026-01-01", blankPages: 0 }),
-        doc("photo", { backgroundIsWhite: false, faceRatio: 0.4 }, { mimeType: "image/heic" }),
+        doc(
+          "photo",
+          { backgroundIsWhite: false, faceRatio: 0.4 },
+          { mimeType: "image/heic" },
+        ),
       ],
       { now: NOW },
     );

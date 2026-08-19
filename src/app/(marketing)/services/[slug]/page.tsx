@@ -90,7 +90,7 @@ export default async function ServiceDetailPage({
       />
 
       <Section className="pb-8">
-        <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
+        <nav aria-label="Breadcrumb" className="text-muted-foreground text-sm">
           <ol className="flex flex-wrap items-center gap-1.5">
             <li>
               <Link href="/" className="hover:text-foreground">
@@ -111,9 +111,11 @@ export default async function ServiceDetailPage({
         <div className="mt-6 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
           <div>
             {pillar && <Badge tone="brand">{pillar.name}</Badge>}
-            <h1 className="mt-4 text-h1">{service.name}</h1>
-            <p className="mt-4 text-lead text-muted-foreground">{service.description}</p>
-            <p className="mt-4 text-sm text-muted-foreground">
+            <h1 className="text-h1 mt-4">{service.name}</h1>
+            <p className="text-lead text-muted-foreground mt-4">
+              {service.description}
+            </p>
+            <p className="text-muted-foreground mt-4 text-sm">
               <strong className="text-foreground">Who this is for:</strong>{" "}
               {service.audience}
             </p>
@@ -122,15 +124,15 @@ export default async function ServiceDetailPage({
           {/* The price is the headline, not a thing you have to ask for. */}
           <Card className="lg:sticky lg:top-24">
             <CardContent className="pt-6">
-              <p className="text-sm text-muted-foreground">All-in total</p>
+              <p className="text-muted-foreground text-sm">All-in total</p>
               <p className="font-display text-4xl font-semibold tabular-nums">
                 {formatAed(quote.total)}
               </p>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <p className="text-muted-foreground mt-1 text-sm">
                 Including all government fees, third-party costs and 5% VAT
               </p>
 
-              <dl className="mt-5 space-y-2 border-t border-border pt-4 text-sm">
+              <dl className="border-border mt-5 space-y-2 border-t pt-4 text-sm">
                 <div className="flex items-center justify-between gap-3">
                   <dt className="text-muted-foreground">Standard processing</dt>
                   <dd className="font-medium">
@@ -174,7 +176,7 @@ export default async function ServiceDetailPage({
 
       <Section className="py-8">
         <h2 className="text-h2">Where every dirham goes</h2>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
+        <p className="text-muted-foreground mt-3 max-w-2xl">
           Most consultancies show you one number. Here is the same total, split by who
           actually receives the money.
         </p>
@@ -185,7 +187,7 @@ export default async function ServiceDetailPage({
 
       <Section className="py-8">
         <h2 className="text-h2">How it runs</h2>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
+        <p className="text-muted-foreground mt-3 max-w-2xl">
           {service.stages.length} stages, about {totalDays} working days of actual
           activity. Your portal shows exactly which of these you are on, and whose turn
           it is.
@@ -200,11 +202,11 @@ export default async function ServiceDetailPage({
                 {!last && (
                   <span
                     aria-hidden="true"
-                    className="absolute top-11 bottom-0 left-[1.375rem] w-px bg-border"
+                    className="bg-border absolute top-11 bottom-0 left-[1.375rem] w-px"
                   />
                 )}
-                <span className="relative flex size-11 shrink-0 items-center justify-center rounded-full border border-border bg-surface-raised">
-                  <Icon className="size-5 text-primary" />
+                <span className="border-border bg-surface-raised relative flex size-11 shrink-0 items-center justify-center rounded-full border">
+                  <Icon className="text-primary size-5" />
                 </span>
                 <div className="pt-1.5">
                   <div className="flex flex-wrap items-center gap-2.5">
@@ -213,11 +215,11 @@ export default async function ServiceDetailPage({
                       {ACTOR_LABEL[stage.actor]}
                     </Badge>
                   </div>
-                  <p className="mt-1.5 text-sm text-muted-foreground">
+                  <p className="text-muted-foreground mt-1.5 text-sm">
                     {stage.description}
                   </p>
                   {stage.days > 0 && (
-                    <p className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <p className="text-muted-foreground mt-1.5 flex items-center gap-1.5 text-xs">
                       <Clock className="size-3.5" />
                       Typically {stage.days} working day{stage.days === 1 ? "" : "s"}
                     </p>
@@ -236,7 +238,7 @@ export default async function ServiceDetailPage({
             <ul className="mt-6 space-y-4">
               {service.documents.map((doc) => (
                 <li key={doc.id} className="flex gap-3">
-                  <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-success-500" />
+                  <CheckCircle2 className="text-success-500 mt-0.5 size-5 shrink-0" />
                   <div>
                     <p className="font-medium">
                       {doc.label}
@@ -251,11 +253,11 @@ export default async function ServiceDetailPage({
                         </Badge>
                       )}
                     </p>
-                    <p className="mt-1 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mt-1 text-sm">
                       {doc.description}
                     </p>
                     {doc.conditional && (
-                      <p className="mt-1 text-sm text-muted-foreground italic">
+                      <p className="text-muted-foreground mt-1 text-sm italic">
                         {doc.conditional}
                       </p>
                     )}
@@ -272,17 +274,18 @@ export default async function ServiceDetailPage({
           */}
           <div>
             <h2 className="text-h2">Why applications like this get refused</h2>
-            <p className="mt-3 text-muted-foreground">
+            <p className="text-muted-foreground mt-3">
               We publish these because knowing them in advance is worth more to you than
-              a reassuring sales page. Each one is checked automatically when you upload.
+              a reassuring sales page. Each one is checked automatically when you
+              upload.
             </p>
             <ul className="mt-6 space-y-3">
               {service.commonRejectionReasons.map((reason) => (
                 <li
                   key={reason}
-                  className="flex gap-3 rounded-xl border border-border bg-surface p-4"
+                  className="border-border bg-surface flex gap-3 rounded-xl border p-4"
                 >
-                  <AlertTriangle className="mt-0.5 size-5 shrink-0 text-warning-600" />
+                  <AlertTriangle className="text-warning-600 mt-0.5 size-5 shrink-0" />
                   <span className="text-sm">{reason}</span>
                 </li>
               ))}
@@ -305,12 +308,12 @@ export default async function ServiceDetailPage({
                       <h3 className="font-display text-h3">
                         <Link
                           href={`/services/${related.slug}`}
-                          className="after:absolute after:inset-0 hover:text-primary"
+                          className="hover:text-primary after:absolute after:inset-0"
                         >
                           {related.name}
                         </Link>
                       </h3>
-                      <p className="mt-2 text-sm text-muted-foreground">
+                      <p className="text-muted-foreground mt-2 text-sm">
                         {related.summary}
                       </p>
                       <p className="mt-3 text-sm font-medium tabular-nums">

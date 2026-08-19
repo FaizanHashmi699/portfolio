@@ -6,7 +6,7 @@ export function Label({
 }: React.LabelHTMLAttributes<HTMLLabelElement>) {
   return (
     <label
-      className={cn("block text-sm font-medium text-foreground", className)}
+      className={cn("text-foreground block text-sm font-medium", className)}
       {...props}
     />
   );
@@ -33,15 +33,13 @@ export function Select({
   className,
   ...props
 }: React.SelectHTMLAttributes<HTMLSelectElement>) {
-  return (
-    <select className={cn(controlBase, "h-11 pr-10", className)} {...props} />
-  );
+  return <select className={cn(controlBase, "h-11 pr-10", className)} {...props} />;
 }
 
 export function FieldError({ children }: { children?: React.ReactNode }) {
   if (!children) return null;
   return (
-    <p role="alert" className="mt-1.5 text-sm text-danger-600 dark:text-danger-500">
+    <p role="alert" className="text-danger-600 dark:text-danger-500 mt-1.5 text-sm">
       {children}
     </p>
   );
@@ -63,7 +61,7 @@ export function Field({
   return (
     <div>
       <Label htmlFor={htmlFor}>{label}</Label>
-      {hint && <p className="mt-1 text-sm text-muted-foreground">{hint}</p>}
+      {hint && <p className="text-muted-foreground mt-1 text-sm">{hint}</p>}
       <div className="mt-2">{children}</div>
       <FieldError>{error}</FieldError>
     </div>

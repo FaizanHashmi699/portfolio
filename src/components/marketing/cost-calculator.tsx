@@ -76,7 +76,10 @@ export function CostCalculator({ initialSlug }: { initialSlug?: string }) {
               value={applicants}
               onChange={(event) =>
                 setApplicants(
-                  Math.min(50, Math.max(1, Math.floor(Number(event.target.value) || 1))),
+                  Math.min(
+                    50,
+                    Math.max(1, Math.floor(Number(event.target.value) || 1)),
+                  ),
                 )
               }
             />
@@ -90,7 +93,8 @@ export function CostCalculator({ initialSlug }: { initialSlug?: string }) {
                 onChange={(event) => setSpeed(event.target.value as ProcessingSpeed)}
               >
                 <option value="standard">
-                  Standard — {service.processingDays.min}–{service.processingDays.max} days
+                  Standard — {service.processingDays.min}–{service.processingDays.max}{" "}
+                  days
                 </option>
                 <option value="express">
                   Express — {service.expressDays?.min}–{service.expressDays?.max} days
@@ -111,13 +115,13 @@ export function CostCalculator({ initialSlug }: { initialSlug?: string }) {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-h2">{service.name}</h2>
-            <p className="mt-1.5 text-muted-foreground">
+            <p className="text-muted-foreground mt-1.5">
               {window.min}–{window.max} working days
               {applicants > 1 ? ` · ${applicants} applicants` : ""}
             </p>
           </div>
           <div className="text-right">
-            <p className="text-sm text-muted-foreground">All-in total</p>
+            <p className="text-muted-foreground text-sm">All-in total</p>
             <p
               className="font-display text-4xl font-semibold tabular-nums"
               aria-live="polite"
@@ -141,11 +145,11 @@ export function CostCalculator({ initialSlug }: { initialSlug?: string }) {
           </ButtonLink>
         </div>
 
-        <p className="mt-6 text-sm text-muted-foreground">
-          Government fees are set by the authorities and can change without notice. Lines
-          marked as an estimate genuinely vary — health insurance by age and cover, free
-          zone licences by activity and zone. Before you pay anything we confirm the
-          final figure in writing, and we honour it.{" "}
+        <p className="text-muted-foreground mt-6 text-sm">
+          Government fees are set by the authorities and can change without notice.
+          Lines marked as an estimate genuinely vary — health insurance by age and
+          cover, free zone licences by activity and zone. Before you pay anything we
+          confirm the final figure in writing, and we honour it.{" "}
           <Link href="/legal/disclaimer" className="underline underline-offset-4">
             Read the full terms
           </Link>

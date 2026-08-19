@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { buildQuote, fromPrice, processingWindow, serviceFeeShare, volumeDiscount } from "../quote";
+import {
+  buildQuote,
+  fromPrice,
+  processingWindow,
+  serviceFeeShare,
+  volumeDiscount,
+} from "../quote";
 import { getService, services } from "@/domain/catalog/services";
 import type { ServiceDefinition } from "@/domain/catalog/types";
 
@@ -156,7 +162,9 @@ describe("catalog integrity", () => {
 
   it("quotes a sane processing window for every service", () => {
     for (const service of services) {
-      expect(service.processingDays.min).toBeLessThanOrEqual(service.processingDays.max);
+      expect(service.processingDays.min).toBeLessThanOrEqual(
+        service.processingDays.max,
+      );
       if (service.expressDays) {
         expect(service.expressDays.max).toBeLessThanOrEqual(service.processingDays.max);
       }

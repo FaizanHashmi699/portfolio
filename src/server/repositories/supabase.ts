@@ -115,7 +115,11 @@ export const supabaseLeads: LeadRepository = {
   },
 
   async get(id) {
-    const { data, error } = await db().from("leads").select("*").eq("id", id).maybeSingle();
+    const { data, error } = await db()
+      .from("leads")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
     if (error) throw new Error(`Failed to load lead: ${error.message}`);
     if (!data) return null;
     return {

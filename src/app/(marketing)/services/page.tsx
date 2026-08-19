@@ -46,7 +46,7 @@ export default async function ServicesPage({
             className={cn(
               "rounded-pill border px-4 py-2 text-sm font-medium transition-colors",
               !active
-                ? "border-transparent bg-primary text-primary-foreground"
+                ? "bg-primary text-primary-foreground border-transparent"
                 : "border-border hover:bg-surface",
             )}
           >
@@ -60,7 +60,7 @@ export default async function ServicesPage({
               className={cn(
                 "rounded-pill border px-4 py-2 text-sm font-medium transition-colors",
                 active?.slug === p.slug
-                  ? "border-transparent bg-primary text-primary-foreground"
+                  ? "bg-primary text-primary-foreground border-transparent"
                   : "border-border hover:bg-surface",
               )}
             >
@@ -85,26 +85,26 @@ export default async function ServicesPage({
                       {service.popular && <Badge tone="accent">Popular</Badge>}
                     </div>
 
-                    <h2 className="mt-4 font-display text-h3">
+                    <h2 className="font-display text-h3 mt-4">
                       <Link
                         href={`/services/${service.slug}`}
-                        className="after:absolute after:inset-0 hover:text-primary"
+                        className="hover:text-primary after:absolute after:inset-0"
                       >
                         {service.name}
                       </Link>
                     </h2>
-                    <p className="mt-2 flex-1 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mt-2 flex-1 text-sm">
                       {service.summary}
                     </p>
 
-                    <div className="mt-5 flex items-end justify-between border-t border-border pt-4">
+                    <div className="border-border mt-5 flex items-end justify-between border-t pt-4">
                       <div>
-                        <p className="text-xs text-muted-foreground">All-in total</p>
+                        <p className="text-muted-foreground text-xs">All-in total</p>
                         <p className="font-display text-xl font-semibold tabular-nums">
                           {formatAed(quote.total)}
                         </p>
                       </div>
-                      <ArrowRight className="size-5 text-muted-foreground" />
+                      <ArrowRight className="text-muted-foreground size-5" />
                     </div>
                   </CardContent>
                 </Card>

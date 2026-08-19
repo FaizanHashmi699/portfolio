@@ -41,12 +41,36 @@ export const questions: Question[] = [
     title: "What brings you to the UAE?",
     hint: "This decides which routes we assess. You can change it afterwards.",
     options: [
-      { value: "work", label: "A job", hint: "Employment visa, sponsored by a company" },
-      { value: "long-term-residence", label: "Long-term residence", hint: "Golden Visa — 10 years, no sponsor" },
-      { value: "business", label: "Starting a business", hint: "Company setup with an investor visa" },
-      { value: "freelance", label: "Freelancing", hint: "Freelance permit or the creators route" },
-      { value: "family", label: "Joining or sponsoring family", hint: "Spouse, children or parents" },
-      { value: "visit", label: "Visiting", hint: "Tourism, family visit or business meetings" },
+      {
+        value: "work",
+        label: "A job",
+        hint: "Employment visa, sponsored by a company",
+      },
+      {
+        value: "long-term-residence",
+        label: "Long-term residence",
+        hint: "Golden Visa — 10 years, no sponsor",
+      },
+      {
+        value: "business",
+        label: "Starting a business",
+        hint: "Company setup with an investor visa",
+      },
+      {
+        value: "freelance",
+        label: "Freelancing",
+        hint: "Freelance permit or the creators route",
+      },
+      {
+        value: "family",
+        label: "Joining or sponsoring family",
+        hint: "Spouse, children or parents",
+      },
+      {
+        value: "visit",
+        label: "Visiting",
+        hint: "Tourism, family visit or business meetings",
+      },
     ],
   },
   {
@@ -142,8 +166,7 @@ export const questions: Question[] = [
     type: "boolean",
     title: "Do you have documented professional recognition?",
     hint: "Awards, patents, publications, media coverage, a verified audience, or an official nomination.",
-    when: (a) =>
-      a.purpose === "long-term-residence" || a.purpose === "freelance",
+    when: (a) => a.purpose === "long-term-residence" || a.purpose === "freelance",
   },
   {
     id: "savingsAed",

@@ -36,8 +36,8 @@ export default async function LegalPage({
     <Section>
       <article className="mx-auto max-w-3xl">
         <h1 className="text-h1">{doc.title}</h1>
-        <p className="mt-3 text-muted-foreground">{doc.description}</p>
-        <p className="mt-1.5 text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-3">{doc.description}</p>
+        <p className="text-muted-foreground mt-1.5 text-sm">
           Last updated {formatDate(doc.updated)}
         </p>
 
@@ -56,7 +56,7 @@ export default async function LegalPage({
           ))}
         </div>
 
-        <p className="mt-14 rounded-card border border-border bg-surface p-5 text-sm text-muted-foreground">
+        <p className="rounded-card border-border bg-surface text-muted-foreground mt-14 border p-5 text-sm">
           This document is a drafting starting point and has not yet been reviewed by a
           UAE qualified legal practitioner. It must be reviewed and adapted before the
           business trades.

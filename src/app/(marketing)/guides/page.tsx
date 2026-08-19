@@ -30,24 +30,24 @@ export default function GuidesPage() {
               <CardContent className="flex h-full flex-col pt-6">
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge tone="brand">{guide.category}</Badge>
-                  <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <span className="text-muted-foreground inline-flex items-center gap-1.5 text-xs">
                     <Clock className="size-3.5" />
                     {guide.readingMinutes} min read
                   </span>
                 </div>
 
-                <h2 className="mt-4 font-display text-h3">
+                <h2 className="font-display text-h3 mt-4">
                   <Link
                     href={`/guides/${guide.slug}`}
-                    className="after:absolute after:inset-0 hover:text-primary"
+                    className="hover:text-primary after:absolute after:inset-0"
                   >
                     {guide.title}
                   </Link>
                 </h2>
-                <p className="mt-2.5 flex-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-2.5 flex-1 text-sm">
                   {guide.description}
                 </p>
-                <p className="mt-4 text-xs text-muted-foreground">
+                <p className="text-muted-foreground mt-4 text-xs">
                   Updated {formatDate(guide.updated)}
                 </p>
               </CardContent>

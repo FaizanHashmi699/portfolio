@@ -103,7 +103,9 @@ export const legalDocuments: LegalDocument[] = [
         body: [
           "Application records are retained for the period required by UAE record-keeping obligations, then deleted.",
           "Enquiries that do not become engagements are deleted within 24 months.",
-          "You may request deletion of your data at any time by writing to " + brand.email.support + ". Where a legal obligation requires us to retain a record, we will tell you which, and delete the rest.",
+          "You may request deletion of your data at any time by writing to " +
+            brand.email.support +
+            ". Where a legal obligation requires us to retain a record, we will tell you which, and delete the rest.",
         ],
       },
       {

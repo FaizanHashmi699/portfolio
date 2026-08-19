@@ -94,14 +94,14 @@ export function EligibilityWizard({ initialService }: { initialService?: string 
 
   return (
     <div className="mx-auto max-w-2xl">
-      <div className="flex items-center justify-between text-sm text-muted-foreground">
+      <div className="text-muted-foreground flex items-center justify-between text-sm">
         <span>
           Question {index + 1} of {visible.length}
         </span>
         <button
           type="button"
           onClick={restart}
-          className="inline-flex items-center gap-1.5 hover:text-foreground"
+          className="hover:text-foreground inline-flex items-center gap-1.5"
         >
           <RotateCcw className="size-3.5" />
           Start over
@@ -109,7 +109,7 @@ export function EligibilityWizard({ initialService }: { initialService?: string 
       </div>
 
       <div
-        className="mt-3 h-1.5 overflow-hidden rounded-pill bg-border"
+        className="rounded-pill bg-border mt-3 h-1.5 overflow-hidden"
         role="progressbar"
         aria-valuenow={Math.round(progress)}
         aria-valuemin={0}
@@ -117,16 +117,17 @@ export function EligibilityWizard({ initialService }: { initialService?: string 
         aria-label="Progress through the eligibility check"
       >
         <div
-          className="h-full rounded-pill bg-accent transition-[width] duration-400 ease-out"
+          className="rounded-pill bg-accent h-full transition-[width] duration-400 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
 
-      <div key={question.id as string} className="mt-9 motion-safe:animate-[riseIn_0.35s_ease-out]">
+      <div
+        key={question.id as string}
+        className="mt-9 motion-safe:animate-[riseIn_0.35s_ease-out]"
+      >
         <h2 className="text-h2">{question.title}</h2>
-        {question.hint && (
-          <p className="mt-3 text-muted-foreground">{question.hint}</p>
-        )}
+        {question.hint && <p className="text-muted-foreground mt-3">{question.hint}</p>}
 
         <div className="mt-7">
           <QuestionInput
@@ -138,7 +139,7 @@ export function EligibilityWizard({ initialService }: { initialService?: string 
         </div>
 
         {error && (
-          <p role="alert" className="mt-4 text-sm text-danger-600 dark:text-danger-500">
+          <p role="alert" className="text-danger-600 dark:text-danger-500 mt-4 text-sm">
             {error}
           </p>
         )}
@@ -161,7 +162,7 @@ export function EligibilityWizard({ initialService }: { initialService?: string 
             <button
               type="button"
               onClick={goNext}
-              className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground text-sm underline underline-offset-4"
             >
               Skip
             </button>
@@ -169,7 +170,7 @@ export function EligibilityWizard({ initialService }: { initialService?: string 
         </div>
       </div>
 
-      <p className="mt-10 border-t border-border pt-5 text-sm text-muted-foreground">
+      <p className="border-border text-muted-foreground mt-10 border-t pt-5 text-sm">
         Your answers stay in your browser. Nothing is sent to us, and nothing is stored,
         unless you choose to save your report at the end.
       </p>
@@ -216,7 +217,7 @@ function QuestionInput({
                 <span>
                   <span className="block font-medium">{option.label}</span>
                   {option.hint && (
-                    <span className="mt-0.5 block text-sm text-muted-foreground">
+                    <span className="text-muted-foreground mt-0.5 block text-sm">
                       {option.hint}
                     </span>
                   )}
@@ -287,9 +288,7 @@ function QuestionInput({
         className="max-w-56 text-lg"
         autoFocus
       />
-      {question.unit && (
-        <span className="text-muted-foreground">{question.unit}</span>
-      )}
+      {question.unit && <span className="text-muted-foreground">{question.unit}</span>}
     </div>
   );
 }

@@ -63,8 +63,7 @@ export function buildQuote(
     lines.push({
       ...fee,
       amount,
-      label:
-        applicants > 1 ? `${fee.label} × ${applicants}` : fee.label,
+      label: applicants > 1 ? `${fee.label} × ${applicants}` : fee.label,
     });
   }
 
@@ -72,12 +71,8 @@ export function buildQuote(
     lines.push({
       kind: "service",
       label:
-        applicants > 1
-          ? `Express processing × ${applicants}`
-          : "Express processing",
-      amount: round2(
-        service.expressSurcharge * applicants * (1 - discount),
-      ),
+        applicants > 1 ? `Express processing × ${applicants}` : "Express processing",
+      amount: round2(service.expressSurcharge * applicants * (1 - discount)),
       vatable: true,
       note: "Priority handling and expedited appointment slots.",
     });

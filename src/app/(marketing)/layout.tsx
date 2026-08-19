@@ -2,11 +2,7 @@ import { SiteHeader } from "@/components/marketing/site-header";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { WhatsAppButton } from "@/components/marketing/whatsapp-button";
 
-export default function MarketingLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <SiteHeader />

@@ -51,7 +51,7 @@ export function resetInMemoryStore(): void {
   };
 }
 
-const clone = <T,>(value: T): T => structuredClone(value);
+const clone = <T>(value: T): T => structuredClone(value);
 
 export const inMemoryLeads: LeadRepository = {
   async create(lead) {
@@ -88,9 +88,7 @@ export const inMemoryApplications: ApplicationRepository = {
     return clone(store().applications.find((a) => a.id === id) ?? null);
   },
   async getByReference(reference) {
-    return clone(
-      store().applications.find((a) => a.reference === reference) ?? null,
-    );
+    return clone(store().applications.find((a) => a.reference === reference) ?? null);
   },
   async create(application) {
     const now = new Date().toISOString();

@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { assessEligibility, STRONG_THRESHOLD, verdictDescription, verdictLabel } from "../engine";
+import {
+  assessEligibility,
+  STRONG_THRESHOLD,
+  verdictDescription,
+  verdictLabel,
+} from "../engine";
 import { routes } from "../rules/routes";
 import type { ApplicantProfile } from "../types";
 import { getService } from "@/domain/catalog/services";
@@ -35,15 +40,13 @@ describe("assessEligibility — determinism and shape", () => {
   });
 
   it("never returns an empty report, even for an unusual purpose", () => {
-    const report = assessEligibility(
-      { ...base, purpose: "visit" },
-      { now: NOW },
-    );
+    const report = assessEligibility({ ...base, purpose: "visit" }, { now: NOW });
     expect(report.routes.length).toBeGreaterThan(0);
   });
 
   it("scores every route between 0 and 100", () => {
-    for (const route of assessEligibility(base, { now: NOW, includeAllRoutes: true }).routes) {
+    for (const route of assessEligibility(base, { now: NOW, includeAllRoutes: true })
+      .routes) {
       expect(route.score).toBeGreaterThanOrEqual(0);
       expect(route.score).toBeLessThanOrEqual(100);
     }

@@ -95,10 +95,7 @@ function Dunes() {
   return (
     <points>
       <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-        />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <shaderMaterial
         ref={material}

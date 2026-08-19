@@ -30,12 +30,12 @@ export function SaveReportForm({
     return (
       <Card className="border-success-500/40">
         <CardContent className="flex items-start gap-3 pt-6">
-          <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-success-500" />
+          <CheckCircle2 className="text-success-500 mt-0.5 size-5 shrink-0" />
           <div>
             <p className="font-medium">{state.message}</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Your report stays valid against rules version {report.rulesVersion}. If the
-              criteria change, run the check again.
+            <p className="text-muted-foreground mt-1 text-sm">
+              Your report stays valid against rules version {report.rulesVersion}. If
+              the criteria change, run the check again.
             </p>
           </div>
         </CardContent>
@@ -48,11 +48,11 @@ export function SaveReportForm({
   return (
     <Card>
       <CardContent className="pt-6">
-        <h2 className="flex items-center gap-2.5 font-display text-h3">
-          <Mail className="size-5 text-primary" />
+        <h2 className="font-display text-h3 flex items-center gap-2.5">
+          <Mail className="text-primary size-5" />
           Want a copy of this?
         </h2>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-2 text-sm">
           Optional. You already have your result — this just emails it to you so you
           don&apos;t have to answer the questions again.
         </p>
@@ -61,8 +61,17 @@ export function SaveReportForm({
           <input type="hidden" name="serviceSlug" value={serviceSlug ?? ""} />
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Your name" htmlFor="save-name" error={state.errors?.name?.[0]}>
-              <Input id="save-name" name="name" autoComplete="name" placeholder="Optional" />
+            <Field
+              label="Your name"
+              htmlFor="save-name"
+              error={state.errors?.name?.[0]}
+            >
+              <Input
+                id="save-name"
+                name="name"
+                autoComplete="name"
+                placeholder="Optional"
+              />
             </Field>
             <Field label="Email" htmlFor="save-email" error={state.errors?.email?.[0]}>
               <Input
@@ -89,7 +98,7 @@ export function SaveReportForm({
           </label>
 
           {state.status === "error" && state.message && (
-            <p role="alert" className="text-sm text-danger-600 dark:text-danger-500">
+            <p role="alert" className="text-danger-600 dark:text-danger-500 text-sm">
               {state.message}
             </p>
           )}

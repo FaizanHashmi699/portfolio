@@ -26,7 +26,9 @@ function deviceLooksCapable(): boolean {
 
   // Respect data-saver mode: someone metering their bytes did not ask for a shader.
   const connection = (
-    navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }
+    navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }
   ).connection;
   if (connection?.saveData) return false;
   if (connection?.effectiveType && /2g/.test(connection.effectiveType)) return false;
@@ -62,7 +64,7 @@ export function HeroCanvas() {
 
   return (
     <div
-      className="absolute inset-0 motion-safe:animate-[fadeIn_1.2s_ease-out_forwards] opacity-0"
+      className="absolute inset-0 opacity-0 motion-safe:animate-[fadeIn_1.2s_ease-out_forwards]"
       style={{ animationFillMode: "forwards" }}
       data-testid="hero-canvas"
     >

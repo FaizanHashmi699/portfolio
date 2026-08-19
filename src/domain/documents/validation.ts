@@ -1,10 +1,5 @@
 import type { DocumentRequirement } from "@/domain/catalog/types";
-import type {
-  DocumentRecord,
-  Finding,
-  RiskAssessment,
-  Severity,
-} from "./types";
+import type { DocumentRecord, Finding, RiskAssessment, Severity } from "./types";
 
 /**
  * Document validation and rejection-risk scoring.

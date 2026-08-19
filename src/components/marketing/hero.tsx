@@ -28,26 +28,26 @@ export function Hero() {
         className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/35 to-slate-950/80"
       />
 
-      <div className="relative container-page py-24 md:py-36">
+      <div className="container-page relative py-24 md:py-36">
         <div className="max-w-3xl">
-          <p className="inline-flex items-center gap-2 rounded-pill border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm backdrop-blur-sm">
-            <Sparkles className="size-4 text-sand-400" />
+          <p className="rounded-pill inline-flex items-center gap-2 border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm backdrop-blur-sm">
+            <Sparkles className="text-sand-400 size-4" />
             <span>
               The UAE now screens applications with AI.{" "}
               <span className="text-slate-300">So do we — first.</span>
             </span>
           </p>
 
-          <h1 className="mt-6 text-display font-semibold">
+          <h1 className="text-display mt-6 font-semibold">
             Know before
             <br />
             <span className="text-gradient">you owe.</span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-lead text-slate-300">
-            Check which UAE visa you qualify for in about two minutes — no phone
-            number, no sales call, no obligation. Then see the full cost broken down
-            to the dirham, before you commit to anything.
+          <p className="text-lead mt-6 max-w-xl text-slate-300">
+            Check which UAE visa you qualify for in about two minutes — no phone number,
+            no sales call, no obligation. Then see the full cost broken down to the
+            dirham, before you commit to anything.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -65,9 +65,12 @@ export function Hero() {
           </div>
 
           <p className="mt-6 flex items-center gap-2 text-sm text-slate-400">
-            <ShieldCheck className="size-4 shrink-0 text-success-500" />
+            <ShieldCheck className="text-success-500 size-4 shrink-0" />
             Free, and you keep the result.{" "}
-            <Link href="/legal/disclaimer" className="underline underline-offset-4 hover:text-slate-200">
+            <Link
+              href="/legal/disclaimer"
+              className="underline underline-offset-4 hover:text-slate-200"
+            >
               No outcome is ever guaranteed.
             </Link>
           </p>
@@ -77,7 +80,7 @@ export function Hero() {
       {/* Fade the hero into the page rather than ending it with a hard edge. */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent"
+        className="from-background absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t to-transparent"
       />
     </section>
   );

@@ -19,12 +19,12 @@ const legal = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-border bg-surface">
+    <footer className="border-border bg-surface mt-auto border-t">
       <div className="container-page py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-6">
           <div className="lg:col-span-2">
             <Logo />
-            <p className="mt-4 max-w-xs text-sm text-muted-foreground">
+            <p className="text-muted-foreground mt-4 max-w-xs text-sm">
               {brand.description}
             </p>
             <dl className="mt-6 space-y-1.5 text-sm">
@@ -60,7 +60,7 @@ export function SiteFooter() {
                     <li key={service.slug}>
                       <Link
                         href={`/services/${service.slug}`}
-                        className="text-sm text-muted-foreground hover:text-foreground"
+                        className="text-muted-foreground hover:text-foreground text-sm"
                       >
                         {service.name}
                       </Link>
@@ -71,14 +71,14 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-8 border-t border-border pt-8 sm:grid-cols-2">
+        <div className="border-border mt-10 grid gap-8 border-t pt-8 sm:grid-cols-2">
           <nav aria-label="Company">
             <ul className="flex flex-wrap gap-x-5 gap-y-2">
               {company.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-muted-foreground hover:text-foreground"
+                    className="text-muted-foreground hover:text-foreground text-sm"
                   >
                     {item.label}
                   </Link>
@@ -92,7 +92,7 @@ export function SiteFooter() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-muted-foreground hover:text-foreground"
+                    className="text-muted-foreground hover:text-foreground text-sm"
                   >
                     {item.label}
                   </Link>
@@ -106,13 +106,12 @@ export function SiteFooter() {
           Two things stated plainly, because the category's biggest trust problem is
           consultancies implying government affiliation and guaranteeing outcomes.
         */}
-        <div className="mt-8 rounded-card border border-border bg-background p-5 text-sm text-muted-foreground">
+        <div className="rounded-card border-border bg-background text-muted-foreground mt-8 border p-5 text-sm">
           <p>
-            <strong className="text-foreground">{brand.legalName}</strong> is a
-            private consultancy. We are not a government entity and are not affiliated
-            with the ICP, GDRFA, MoHRE or any embassy. We prepare and submit
-            applications on your behalf — we do not decide them, and no one can
-            guarantee a visa outcome.
+            <strong className="text-foreground">{brand.legalName}</strong> is a private
+            consultancy. We are not a government entity and are not affiliated with the
+            ICP, GDRFA, MoHRE or any embassy. We prepare and submit applications on your
+            behalf — we do not decide them, and no one can guarantee a visa outcome.
           </p>
           <p className="mt-3">
             Trade licence {brand.licenceNumber} · Fees shown are indicative and
@@ -120,7 +119,7 @@ export function SiteFooter() {
           </p>
         </div>
 
-        <p className="mt-8 text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-8 text-sm">
           © {new Date().getFullYear()} {brand.legalName}. All rights reserved.
         </p>
       </div>

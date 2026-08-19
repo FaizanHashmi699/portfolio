@@ -65,15 +65,15 @@ export function ProblemSection() {
         {problems.map((problem) => (
           <Card key={problem.wrong} className="flex flex-col">
             <CardContent className="flex-1 pt-6">
-              <p className="flex items-start gap-2.5 text-sm text-muted-foreground line-through decoration-danger-500/60 decoration-2">
-                <XCircle className="mt-0.5 size-4 shrink-0 text-danger-500 no-underline" />
+              <p className="text-muted-foreground decoration-danger-500/60 flex items-start gap-2.5 text-sm line-through decoration-2">
+                <XCircle className="text-danger-500 mt-0.5 size-4 shrink-0 no-underline" />
                 <span>{problem.wrong}</span>
               </p>
               <p className="mt-4 flex items-start gap-2.5 font-medium">
-                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-success-500" />
+                <CheckCircle2 className="text-success-500 mt-0.5 size-4 shrink-0" />
                 <span>{problem.right}</span>
               </p>
-              <p className="mt-4 border-t border-border pt-4 text-sm text-muted-foreground">
+              <p className="border-border text-muted-foreground mt-4 border-t pt-4 text-sm">
                 {problem.detail}
               </p>
             </CardContent>
@@ -111,16 +111,16 @@ export function AiSection() {
           <Badge tone="accent">
             <Sparkle /> What changed in 2026
           </Badge>
-          <h2 className="mt-4 text-h2">
+          <h2 className="text-h2 mt-4">
             The UAE started screening applications with AI. Most consultants
             haven&apos;t noticed.
           </h2>
-          <div className="mt-5 space-y-4 text-lead text-muted-foreground">
+          <div className="text-lead text-muted-foreground mt-5 space-y-4">
             <p>
               Since May 2026 the ICP and MoHRE have screened work permits with an
-              automated system that scores skills, education and experience against
-              live labour-market data, and verifies passports, photographs and
-              certificates automatically.
+              automated system that scores skills, education and experience against live
+              labour-market data, and verifies passports, photographs and certificates
+              automatically.
             </p>
             <p>
               That quietly changes what a consultancy is for. When a machine makes the
@@ -143,14 +143,14 @@ export function AiSection() {
             <li key={item.title}>
               <Card>
                 <CardContent className="flex gap-4 pt-6">
-                  <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-ink-50 text-ink-600 dark:bg-ink-950 dark:text-ink-300">
+                  <span className="bg-ink-50 text-ink-600 dark:bg-ink-950 dark:text-ink-300 flex size-11 shrink-0 items-center justify-center rounded-xl">
                     <item.icon className="size-5" />
                   </span>
                   <div>
                     <h3 className="font-display text-base font-semibold">
                       {item.title}
                     </h3>
-                    <p className="mt-1.5 text-sm text-muted-foreground">{item.body}</p>
+                    <p className="text-muted-foreground mt-1.5 text-sm">{item.body}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -186,16 +186,16 @@ export function ServicesSection() {
           return (
             <Card key={pillar.slug} className="group flex flex-col">
               <CardContent className="flex flex-1 flex-col pt-6">
-                <span className="flex size-12 items-center justify-center rounded-xl bg-ink-50 text-ink-600 transition-colors group-hover:bg-accent group-hover:text-accent-foreground dark:bg-ink-950 dark:text-ink-300">
+                <span className="bg-ink-50 text-ink-600 group-hover:bg-accent group-hover:text-accent-foreground dark:bg-ink-950 dark:text-ink-300 flex size-12 items-center justify-center rounded-xl transition-colors">
                   {Icon && <Icon className="size-6" />}
                 </span>
-                <h3 className="mt-5 font-display text-h3">{pillar.name}</h3>
-                <p className="mt-2 flex-1 text-sm text-muted-foreground">
+                <h3 className="font-display text-h3 mt-5">{pillar.name}</h3>
+                <p className="text-muted-foreground mt-2 flex-1 text-sm">
                   {pillar.description}
                 </p>
                 <Link
                   href={`/services?pillar=${pillar.slug}`}
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2.5 transition-all"
+                  className="text-primary mt-5 inline-flex items-center gap-1.5 text-sm font-medium transition-all hover:gap-2.5"
                 >
                   {count} services
                   <ArrowRight className="size-4" />
@@ -229,14 +229,16 @@ export function PopularSection() {
                 <Badge tone="brand" className="self-start">
                   {service.processingDays.min}–{service.processingDays.max} working days
                 </Badge>
-                <h3 className="mt-4 font-display text-h3">{service.name}</h3>
-                <p className="mt-2 flex-1 text-sm text-muted-foreground">
+                <h3 className="font-display text-h3 mt-4">{service.name}</h3>
+                <p className="text-muted-foreground mt-2 flex-1 text-sm">
                   {service.summary}
                 </p>
 
-                <dl className="mt-5 space-y-1.5 border-t border-border pt-4 text-sm">
+                <dl className="border-border mt-5 space-y-1.5 border-t pt-4 text-sm">
                   <div className="flex justify-between gap-3">
-                    <dt className="text-muted-foreground">Government &amp; third party</dt>
+                    <dt className="text-muted-foreground">
+                      Government &amp; third party
+                    </dt>
                     <dd className="tabular-nums">{formatAed(quote.passThrough)}</dd>
                   </div>
                   <div className="flex justify-between gap-3">
@@ -247,7 +249,7 @@ export function PopularSection() {
                     <dt className="text-muted-foreground">VAT (5%)</dt>
                     <dd className="tabular-nums">{formatAed(quote.vat)}</dd>
                   </div>
-                  <div className="flex justify-between gap-3 border-t border-border pt-2 font-semibold">
+                  <div className="border-border flex justify-between gap-3 border-t pt-2 font-semibold">
                     <dt>Total</dt>
                     <dd className="tabular-nums">{formatAed(quote.total)}</dd>
                   </div>
@@ -255,7 +257,7 @@ export function PopularSection() {
 
                 <Link
                   href={`/services/${service.slug}`}
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2.5 transition-all"
+                  className="text-primary mt-5 inline-flex items-center gap-1.5 text-sm font-medium transition-all hover:gap-2.5"
                 >
                   Full breakdown
                   <ArrowRight className="size-4" />
@@ -266,7 +268,7 @@ export function PopularSection() {
         })}
       </div>
 
-      <p className="mt-8 text-sm text-muted-foreground">
+      <p className="text-muted-foreground mt-8 text-sm">
         Government fees are set by the authorities and change without notice. Where a
         cost genuinely varies — insurance by age, free zone by activity — we mark it as
         an estimate rather than pretending to a precision we don&apos;t have.
@@ -307,13 +309,13 @@ export function ProcessSection() {
         {steps.map((step, index) => (
           <li key={step.title} className="relative">
             <span
-              className="font-display text-5xl font-bold text-border-strong"
+              className="font-display text-5xl font-bold text-slate-500 dark:text-slate-400"
               aria-hidden="true"
             >
               {String(index + 1).padStart(2, "0")}
             </span>
-            <h3 className="mt-3 font-display text-h3">{step.title}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{step.body}</p>
+            <h3 className="font-display text-h3 mt-3">{step.title}</h3>
+            <p className="text-muted-foreground mt-2 text-sm">{step.body}</p>
           </li>
         ))}
       </ol>
@@ -360,11 +362,11 @@ export function TrustSection() {
         {commitments.map((item) => (
           <Card key={item.title}>
             <CardContent className="pt-6">
-              <h3 className="flex items-center gap-2.5 font-display text-h3">
-                <CheckCircle2 className="size-5 shrink-0 text-success-500" />
+              <h3 className="font-display text-h3 flex items-center gap-2.5">
+                <CheckCircle2 className="text-success-500 size-5 shrink-0" />
                 {item.title}
               </h3>
-              <p className="mt-3 text-sm text-muted-foreground">{item.body}</p>
+              <p className="text-muted-foreground mt-3 text-sm">{item.body}</p>
             </CardContent>
           </Card>
         ))}
@@ -376,14 +378,14 @@ export function TrustSection() {
 export function CtaSection() {
   return (
     <Section>
-      <div className="relative overflow-hidden rounded-card bg-slate-950 px-6 py-16 text-center text-slate-50 md:px-16">
+      <div className="rounded-card relative overflow-hidden bg-slate-950 px-6 py-16 text-center text-slate-50 md:px-16">
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(80%_120%_at_50%_0%,oklch(0.417_0.129_257)_0%,transparent_70%)]"
         />
         <div className="relative mx-auto max-w-2xl">
           <h2 className="text-h1">Find out where you stand.</h2>
-          <p className="mt-5 text-lead text-slate-300">
+          <p className="text-lead mt-5 text-slate-300">
             Two minutes. No phone number. You keep the result whether or not you ever
             hire us.
           </p>

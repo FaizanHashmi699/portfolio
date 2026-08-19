@@ -81,7 +81,7 @@ export default async function GuidePage({
 
       <Section>
         <article className="mx-auto max-w-3xl">
-          <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
+          <nav aria-label="Breadcrumb" className="text-muted-foreground text-sm">
             <Link href="/guides" className="hover:text-foreground">
               ← All guides
             </Link>
@@ -89,17 +89,17 @@ export default async function GuidePage({
 
           <div className="mt-6 flex flex-wrap items-center gap-2">
             <Badge tone="brand">{guide.category}</Badge>
-            <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+            <span className="text-muted-foreground inline-flex items-center gap-1.5 text-xs">
               <Clock className="size-3.5" />
               {guide.readingMinutes} min read
             </span>
-            <span className="text-xs text-muted-foreground">
+            <span className="text-muted-foreground text-xs">
               Updated {formatDate(guide.updated)}
             </span>
           </div>
 
-          <h1 className="mt-4 text-h1">{guide.title}</h1>
-          <p className="mt-5 text-lead text-muted-foreground">{guide.intro}</p>
+          <h1 className="text-h1 mt-4">{guide.title}</h1>
+          <p className="text-lead text-muted-foreground mt-5">{guide.intro}</p>
 
           <div className="mt-12 space-y-10">
             {guide.sections.map((section) => (
@@ -116,7 +116,7 @@ export default async function GuidePage({
                   <ol className="mt-5 space-y-3">
                     {section.list.map((item, index) => (
                       <li key={index} className="flex gap-3">
-                        <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+                        <span className="bg-primary text-primary-foreground flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold">
                           {index + 1}
                         </span>
                         <span className="text-muted-foreground">{item}</span>
@@ -128,9 +128,9 @@ export default async function GuidePage({
             ))}
           </div>
 
-          <div className="mt-14 rounded-card border border-border bg-surface p-6">
+          <div className="rounded-card border-border bg-surface mt-14 border p-6">
             <h2 className="font-display text-h3">Not sure how this applies to you?</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="text-muted-foreground mt-2 text-sm">
               Run the eligibility check — it takes about two minutes, needs no sign-up,
               and tells you which routes you actually qualify for.
             </p>
@@ -154,12 +154,12 @@ export default async function GuidePage({
                           <h3 className="font-display text-base font-semibold">
                             <Link
                               href={`/services/${service.slug}`}
-                              className="after:absolute after:inset-0 hover:text-primary"
+                              className="hover:text-primary after:absolute after:inset-0"
                             >
                               {service.name}
                             </Link>
                           </h3>
-                          <p className="mt-1.5 text-sm text-muted-foreground">
+                          <p className="text-muted-foreground mt-1.5 text-sm">
                             {service.summary}
                           </p>
                           <p className="mt-2.5 text-sm font-medium tabular-nums">

@@ -7,26 +7,13 @@
  */
 
 export type Purpose =
-  | "visit"
-  | "work"
-  | "family"
-  | "long-term-residence"
-  | "business"
-  | "freelance";
+  "visit" | "work" | "family" | "long-term-residence" | "business" | "freelance";
 
 export type EducationLevel =
-  | "none"
-  | "secondary"
-  | "diploma"
-  | "bachelors"
-  | "masters"
-  | "doctorate";
+  "none" | "secondary" | "diploma" | "bachelors" | "masters" | "doctorate";
 
 export type CurrentStatus =
-  | "outside-uae"
-  | "visit-visa"
-  | "residence-visa"
-  | "cancelled-visa";
+  "outside-uae" | "visit-visa" | "residence-visa" | "cancelled-visa";
 
 export interface ApplicantProfile {
   /** ISO 3166-1 alpha-2 country code. */

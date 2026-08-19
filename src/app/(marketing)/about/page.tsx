@@ -15,25 +15,23 @@ export default function AboutPage() {
     <>
       <Section className="pb-8">
         <div className="max-w-3xl">
-          <h1 className="text-h1">
-            We built the consultancy we couldn&apos;t find.
-          </h1>
-          <div className="mt-6 space-y-5 text-lead text-muted-foreground">
+          <h1 className="text-h1">We built the consultancy we couldn&apos;t find.</h1>
+          <div className="text-lead text-muted-foreground mt-6 space-y-5">
             <p>
               The UAE visa industry works. Applications get filed, visas get issued, and
               most consultants are competent. What it doesn&apos;t do is tell you
               anything before you&apos;ve handed over your phone number.
             </p>
             <p>
-              Ask what a Golden Visa costs and you get &ldquo;from AED 9,000&rdquo; and a
-              callback request. Ask whether you qualify and you get a form. Ask for an
-              update mid-process and you get silence, then &ldquo;still processing&rdquo;.
-              None of that is malicious. It is just what happens when the whole business
-              model runs on controlling information.
+              Ask what a Golden Visa costs and you get &ldquo;from AED 9,000&rdquo; and
+              a callback request. Ask whether you qualify and you get a form. Ask for an
+              update mid-process and you get silence, then &ldquo;still
+              processing&rdquo;. None of that is malicious. It is just what happens when
+              the whole business model runs on controlling information.
             </p>
             <p className="text-foreground">
-              {brand.name} is built on the opposite bet: that giving away the answers wins
-              more business than hoarding them.
+              {brand.name} is built on the opposite bet: that giving away the answers
+              wins more business than hoarding them.
             </p>
           </div>
         </div>
@@ -45,17 +43,19 @@ export default function AboutPage() {
           title="One line on every invoice. That's it."
           description="Government fees and third-party costs pass through at cost. Our service fee is the only thing we earn, and it is printed on every page of this website before you ever speak to us."
         />
-        <div className="mt-8 max-w-3xl space-y-5 text-muted-foreground">
+        <div className="text-muted-foreground mt-8 max-w-3xl space-y-5">
           <p>
-            This matters more than it sounds. Once a consultancy earns a hidden margin on
-            pass-through fees, every incentive bends: they steer you toward the free zone
-            that pays the best commission rather than the one that fits your activity, and
-            they can never show you an itemised quote without exposing the markup.
+            This matters more than it sounds. Once a consultancy earns a hidden margin
+            on pass-through fees, every incentive bends: they steer you toward the free
+            zone that pays the best commission rather than the one that fits your
+            activity, and they can never show you an itemised quote without exposing the
+            markup.
           </p>
           <p>
             We took that option off the table deliberately. Our pricing engine has no
-            concept of a markup on a government fee — you can read the code that generates
-            every price on this site, and it is the same code that generates your invoice.
+            concept of a markup on a government fee — you can read the code that
+            generates every price on this site, and it is the same code that generates
+            your invoice.
           </p>
         </div>
       </Section>
@@ -87,7 +87,7 @@ export default function AboutPage() {
             <Card key={item.title}>
               <CardContent className="pt-6">
                 <h3 className="font-display text-h3">{item.title}</h3>
-                <p className="mt-2.5 text-sm text-muted-foreground">{item.body}</p>
+                <p className="text-muted-foreground mt-2.5 text-sm">{item.body}</p>
               </CardContent>
             </Card>
           ))}
@@ -97,7 +97,7 @@ export default function AboutPage() {
       <Section className="py-8">
         <div className="max-w-3xl">
           <h2 className="text-h2">Where the AI fits</h2>
-          <div className="mt-5 space-y-5 text-muted-foreground">
+          <div className="text-muted-foreground mt-5 space-y-5">
             <p>
               In May 2026 the UAE began screening work permit applications with an
               automated system that scores skills, education and experience against live
@@ -111,12 +111,12 @@ export default function AboutPage() {
               rejection-risk score before you have spent a dirham on government fees.
             </p>
             <p>
-              What our AI does <em>not</em> do is decide whether you are eligible. That is
-              a deterministic rules engine with versioned, effective-dated rules, so every
-              result can be reproduced and audited. The language model explains the
-              outcome in plain English. It never overrides it. When you are dealing with
-              someone&apos;s right to live in a country, &ldquo;the model said so&rdquo;
-              is not an acceptable answer.
+              What our AI does <em>not</em> do is decide whether you are eligible. That
+              is a deterministic rules engine with versioned, effective-dated rules, so
+              every result can be reproduced and audited. The language model explains
+              the outcome in plain English. It never overrides it. When you are dealing
+              with someone&apos;s right to live in a country, &ldquo;the model said
+              so&rdquo; is not an acceptable answer.
             </p>
           </div>
           <ButtonLink href="/eligibility" variant="primary" className="mt-8">

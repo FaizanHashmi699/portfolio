@@ -50,13 +50,13 @@ export function SiteHeader() {
       className={cn(
         "sticky top-0 z-50 transition-all duration-300",
         scrolled
-          ? "border-b border-border bg-background/85 backdrop-blur-xl"
+          ? "border-border bg-background/85 border-b backdrop-blur-xl"
           : "border-b border-transparent",
       )}
     >
       <a
         href="#main"
-        className="sr-only-focusable absolute top-2 left-2 z-50 rounded-full bg-primary px-4 py-2 text-sm text-primary-foreground"
+        className="sr-only-focusable bg-primary text-primary-foreground absolute top-2 left-2 z-50 rounded-full px-4 py-2 text-sm"
       >
         Skip to content
       </a>
@@ -105,7 +105,7 @@ export function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="rounded-full p-2 text-foreground hover:bg-surface lg:hidden"
+            className="text-foreground hover:bg-surface rounded-full p-2 lg:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -116,14 +116,14 @@ export function SiteHeader() {
         <nav
           id="mobile-nav"
           aria-label="Mobile"
-          className="border-t border-border bg-background lg:hidden"
+          className="border-border bg-background border-t lg:hidden"
         >
           <ul className="container-page flex flex-col py-3">
             {navigation.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="block rounded-xl px-3 py-3.5 text-base font-medium hover:bg-surface"
+                  className="hover:bg-surface block rounded-xl px-3 py-3.5 text-base font-medium"
                 >
                   {item.label}
                 </Link>
@@ -132,7 +132,7 @@ export function SiteHeader() {
             <li>
               <Link
                 href="/portal"
-                className="block rounded-xl px-3 py-3.5 text-base font-medium hover:bg-surface"
+                className="hover:bg-surface block rounded-xl px-3 py-3.5 text-base font-medium"
               >
                 Sign in
               </Link>

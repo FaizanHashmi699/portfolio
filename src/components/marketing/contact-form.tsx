@@ -18,10 +18,10 @@ export function ContactForm({ initialService }: { initialService?: string }) {
     return (
       <Card className="border-success-500/40">
         <CardContent className="flex items-start gap-3 pt-6">
-          <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-success-500" />
+          <CheckCircle2 className="text-success-500 mt-0.5 size-5 shrink-0" />
           <div>
             <p className="font-medium">{state.message}</p>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="text-muted-foreground mt-1 text-sm">
               If it&apos;s urgent, WhatsApp is faster than email.
             </p>
           </div>
@@ -57,7 +57,11 @@ export function ContactForm({ initialService }: { initialService?: string }) {
           <Input id="phone" name="phone" type="tel" autoComplete="tel" />
         </Field>
         <Field label="What's this about?" htmlFor="serviceSlug">
-          <Select id="serviceSlug" name="serviceSlug" defaultValue={initialService ?? ""}>
+          <Select
+            id="serviceSlug"
+            name="serviceSlug"
+            defaultValue={initialService ?? ""}
+          >
             <option value="">Not sure yet</option>
             {pillars.map((pillar) => (
               <optgroup key={pillar.slug} label={pillar.name}>
@@ -84,7 +88,7 @@ export function ContactForm({ initialService }: { initialService?: string }) {
       </Field>
 
       {state.status === "error" && state.message && (
-        <p role="alert" className="text-sm text-danger-600 dark:text-danger-500">
+        <p role="alert" className="text-danger-600 dark:text-danger-500 text-sm">
           {state.message}
         </p>
       )}
@@ -93,9 +97,9 @@ export function ContactForm({ initialService }: { initialService?: string }) {
         {pending ? "Sending…" : "Send message"}
       </Button>
 
-      <p className="text-sm text-muted-foreground">
-        We reply within one working day. We never sell your details, and we won&apos;t add
-        you to a marketing list from this form.
+      <p className="text-muted-foreground text-sm">
+        We reply within one working day. We never sell your details, and we won&apos;t
+        add you to a marketing list from this form.
       </p>
     </form>
   );

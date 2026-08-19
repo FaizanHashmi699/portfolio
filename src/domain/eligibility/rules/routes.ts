@@ -68,8 +68,7 @@ export const routes: RouteDefinition[] = [
     id: "golden-salary",
     name: "Golden Visa — Salary Route",
     serviceSlug: "golden-visa",
-    summary:
-      "Ten-year residence for high earners on a valid UAE employment contract.",
+    summary: "Ten-year residence for high earners on a valid UAE employment contract.",
     effectiveFrom: "2026-01-01",
     purposes: ["long-term-residence", "work"],
     rules: [
@@ -136,8 +135,7 @@ export const routes: RouteDefinition[] = [
         weight: 3,
         blocker: true,
         fix: "A DLD title deed in the applicant's own name is required. Company-held property does not qualify on this route.",
-        evaluate: (p) =>
-          (p.propertyValueAed ?? 0) > 0 ? "met" : "unknown",
+        evaluate: (p) => ((p.propertyValueAed ?? 0) > 0 ? "met" : "unknown"),
       },
       {
         id: "mortgage-ratio",
@@ -331,8 +329,7 @@ export const routes: RouteDefinition[] = [
         label: "NOC from your current sponsor, if you are a UAE resident",
         weight: 2,
         fix: "Existing residents need a no-objection certificate from their current sponsor.",
-        evaluate: (p) =>
-          p.currentStatus === "residence-visa" ? "unknown" : "met",
+        evaluate: (p) => (p.currentStatus === "residence-visa" ? "unknown" : "met"),
       },
     ],
   },
@@ -437,8 +434,7 @@ export const routes: RouteDefinition[] = [
         label: "NOC from current sponsor, if a UAE resident",
         weight: 2,
         fix: "Existing residents need a no-objection certificate from their current sponsor.",
-        evaluate: (p) =>
-          p.currentStatus === "residence-visa" ? "unknown" : "met",
+        evaluate: (p) => (p.currentStatus === "residence-visa" ? "unknown" : "met"),
       },
     ],
   },

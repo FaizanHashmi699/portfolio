@@ -11,7 +11,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <Link
       href="/"
-      className={cn("inline-flex items-center gap-2.5 group", className)}
+      className={cn("group inline-flex items-center gap-2.5", className)}
       aria-label={`${brand.name} home`}
     >
       <svg

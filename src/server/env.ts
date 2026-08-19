@@ -43,9 +43,7 @@ export const env = parsed.data;
 
 export const features = {
   /** Persistent storage is available. */
-  database: Boolean(
-    env.NEXT_PUBLIC_SUPABASE_URL && env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  ),
+  database: Boolean(env.NEXT_PUBLIC_SUPABASE_URL && env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
   /** Server-side privileged database access is available. */
   serviceRole: Boolean(env.SUPABASE_SERVICE_ROLE_KEY),
   /** LLM narration is available. */

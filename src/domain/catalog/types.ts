@@ -6,10 +6,7 @@
  */
 
 export type ServicePillar =
-  | "uae-visas"
-  | "business-setup"
-  | "outbound-visas"
-  | "attestation-pro";
+  "uae-visas" | "business-setup" | "outbound-visas" | "attestation-pro";
 
 /**
  * A single line in a quote. Every price the customer sees is built from these,

@@ -11,6 +11,13 @@ export type ApplicationStatus =
   | "rejected"
   | "cancelled";
 
+/** Statuses after which the file is closed and document risk is no longer meaningful. */
+export const TERMINAL_STATUSES = ["approved", "rejected", "cancelled"] as const;
+
+export function isTerminal(status: ApplicationStatus): boolean {
+  return (TERMINAL_STATUSES as readonly string[]).includes(status);
+}
+
 export interface ApplicationEvent {
   id: string;
   applicationId: string;
@@ -76,7 +83,10 @@ export interface ApplicationRepository {
   get(id: string): Promise<Application | null>;
   getByReference(reference: string): Promise<Application | null>;
   create(
-    application: Omit<Application, "id" | "createdAt" | "updatedAt" | "events" | "documents">,
+    application: Omit<
+      Application,
+      "id" | "createdAt" | "updatedAt" | "events" | "documents"
+    >,
   ): Promise<Application>;
   updateStatus(
     id: string,

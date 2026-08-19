@@ -31,33 +31,20 @@ const buttonVariants = cva(
 
 type BaseProps = VariantProps<typeof buttonVariants> & { className?: string };
 
-export type ButtonProps = BaseProps &
-  React.ButtonHTMLAttributes<HTMLButtonElement>;
+export type ButtonProps = BaseProps & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function Button({ className, variant, size, ...props }: ButtonProps) {
   return (
-    <button
-      className={cn(buttonVariants({ variant, size }), className)}
-      {...props}
-    />
+    <button className={cn(buttonVariants({ variant, size }), className)} {...props} />
   );
 }
 
-export type ButtonLinkProps = BaseProps &
-  React.ComponentProps<typeof Link>;
+export type ButtonLinkProps = BaseProps & React.ComponentProps<typeof Link>;
 
 /** A link that looks like a button. Kept distinct so navigation stays a real anchor. */
-export function ButtonLink({
-  className,
-  variant,
-  size,
-  ...props
-}: ButtonLinkProps) {
+export function ButtonLink({ className, variant, size, ...props }: ButtonLinkProps) {
   return (
-    <Link
-      className={cn(buttonVariants({ variant, size }), className)}
-      {...props}
-    />
+    <Link className={cn(buttonVariants({ variant, size }), className)} {...props} />
   );
 }
 

@@ -10,8 +10,7 @@ import type { Application, Lead } from "./types";
 
 export const DEMO_USER_ID = "demo-user-1";
 
-const daysAgo = (n: number) =>
-  new Date(Date.now() - n * 86_400_000).toISOString();
+const daysAgo = (n: number) => new Date(Date.now() - n * 86_400_000).toISOString();
 
 export function seedApplications(): Application[] {
   return [
@@ -40,6 +39,28 @@ export function seedApplications(): Application[] {
             expiryDate: "2031-04-02",
             blankPages: 8,
           },
+        },
+        {
+          id: "doc-1b",
+          kind: "photo",
+          fileName: "photo.jpg",
+          uploadedAt: daysAgo(12),
+          sizeBytes: 240_000,
+          mimeType: "image/jpeg",
+          fields: {
+            fullName: "Amina Yusuf",
+            backgroundIsWhite: true,
+            faceRatio: 0.75,
+          },
+        },
+        {
+          id: "offer",
+          kind: "employment-offer",
+          fileName: "offer-letter.pdf",
+          uploadedAt: daysAgo(12),
+          sizeBytes: 310_000,
+          mimeType: "application/pdf",
+          fields: { fullName: "Amina Yusuf" },
         },
         {
           id: "doc-2",

@@ -43,7 +43,7 @@
   --color-ink-950: oklch(0.186 0.048 259);
 
   /* Accent — sand */
-  --color-sand-50: oklch(0.977 0.020 90);
+  --color-sand-50: oklch(0.977 0.02 90);
   --color-sand-100: oklch(0.948 0.045 90);
   --color-sand-200: oklch(0.902 0.084 88);
   --color-sand-300: oklch(0.855 0.116 85);
@@ -66,7 +66,7 @@
   --color-slate-700: oklch(0.374 0.016 257);
   --color-slate-800: oklch(0.271 0.014 258);
   --color-slate-900: oklch(0.208 0.012 259);
-  --color-slate-950: oklch(0.146 0.010 260);
+  --color-slate-950: oklch(0.146 0.01 260);
 
   /* Semantic */
   --color-success-50: oklch(0.966 0.028 158);
@@ -83,8 +83,10 @@
   --color-danger-900: oklch(0.322 0.108 25);
 
   /* Typography */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display:
+    var(--font-sora), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 
   /* A fluid type scale. clamp() means we never need a breakpoint for text size. */
@@ -128,6 +130,9 @@
   --primary-foreground: var(--color-slate-0);
   --accent: var(--color-sand-500);
   --accent-foreground: var(--color-ink-950);
+  /* Gold at its brand lightness only reaches 2.2:1 on white, so text uses a darker
+     step of the same hue. The accent still reads as gold; it just clears AA. */
+  --accent-text: var(--color-sand-700);
   --ring: var(--color-ink-500);
 }
 
@@ -143,6 +148,7 @@
   --primary-foreground: var(--color-slate-950);
   --accent: var(--color-sand-400);
   --accent-foreground: var(--color-ink-950);
+  --accent-text: var(--color-sand-300);
   --ring: var(--color-ink-400);
 }
 
@@ -158,6 +164,7 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-text: var(--accent-text);
   --color-ring: var(--ring);
 }
 
@@ -182,7 +189,10 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     font-weight: 600;
     text-wrap: balance;
@@ -201,7 +211,9 @@
 
   /* Respect the user's stated preference. Everything still works, it just stops moving. */
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -224,7 +236,9 @@
   }
 
   @media (min-width: 768px) {
-    .container-page { padding-inline: 2rem; }
+    .container-page {
+      padding-inline: 2rem;
+    }
   }
 
   /* Accessible visually-hidden text for screen readers. */
@@ -263,11 +277,21 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes riseIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }

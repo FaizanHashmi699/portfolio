@@ -143,7 +143,11 @@ export const guides: Guide[] = [
     updated: "2026-08-19",
     readingMinutes: 7,
     category: "Applications",
-    services: ["tourist-visa-30-day", "employment-visa-mainland", "family-sponsorship-visa"],
+    services: [
+      "tourist-visa-30-day",
+      "employment-visa-mainland",
+      "family-sponsorship-visa",
+    ],
     intro:
       "Visa refusals feel arbitrary from the outside. They mostly are not. The overwhelming majority trace back to a handful of document errors that are entirely visible before submission — which is precisely why we check for them at upload rather than after your fees are spent.",
     sections: [

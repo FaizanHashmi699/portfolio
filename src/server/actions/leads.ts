@@ -27,7 +27,10 @@ export async function saveEligibilityReport(
   _previous: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
-  const limit = rateLimit(await clientKey("save-report"), { limit: 5, windowMs: 60_000 });
+  const limit = rateLimit(await clientKey("save-report"), {
+    limit: 5,
+    windowMs: 60_000,
+  });
   if (!limit.allowed) {
     return {
       status: "error",

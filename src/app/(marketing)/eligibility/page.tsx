@@ -23,13 +23,15 @@ export default async function EligibilityPage({
     <Section>
       <div className="mx-auto max-w-2xl text-center">
         <Badge tone="accent">Free · No sign-up · About 2 minutes</Badge>
-        <h1 className="mt-4 text-h1">
-          {service ? `Do you qualify for ${service.name}?` : "Which UAE visa do you qualify for?"}
+        <h1 className="text-h1 mt-4">
+          {service
+            ? `Do you qualify for ${service.name}?`
+            : "Which UAE visa do you qualify for?"}
         </h1>
-        <p className="mt-4 text-lead text-muted-foreground">
-          We check your answers against the published criteria for every route, then show
-          you what you meet, what you don&apos;t, and precisely what it takes to close the
-          gap.
+        <p className="text-lead text-muted-foreground mt-4">
+          We check your answers against the published criteria for every route, then
+          show you what you meet, what you don&apos;t, and precisely what it takes to
+          close the gap.
         </p>
       </div>
 

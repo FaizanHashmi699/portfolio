@@ -19,19 +19,19 @@ export function FaqSection({
     <Section className="bg-surface">
       <SectionHeading eyebrow={eyebrow} title={title} />
 
-      <div className="mt-10 max-w-3xl divide-y divide-border border-y border-border">
+      <div className="divide-border border-border mt-10 max-w-3xl divide-y border-y">
         {items.map((faq) => (
           <details key={faq.question} className="group py-5">
-            <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-display text-h3 marker:hidden">
+            <summary className="font-display text-h3 flex cursor-pointer list-none items-start justify-between gap-4 marker:hidden">
               {faq.question}
               <span
                 aria-hidden="true"
-                className="mt-1 shrink-0 text-2xl leading-none text-muted-foreground transition-transform group-open:rotate-45"
+                className="text-muted-foreground mt-1 shrink-0 text-2xl leading-none transition-transform group-open:rotate-45"
               >
                 +
               </span>
             </summary>
-            <p className="mt-3 max-w-2xl text-muted-foreground">{faq.answer}</p>
+            <p className="text-muted-foreground mt-3 max-w-2xl">{faq.answer}</p>
           </details>
         ))}
       </div>
