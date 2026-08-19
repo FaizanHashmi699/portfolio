@@ -46,6 +46,8 @@ test.describe("customer portal", () => {
     await expect(
       page.getByText(/attestation chain is incomplete/i).first(),
     ).toBeVisible();
+    // The fix text must name the steps in plain language, not internal slugs.
+    await expect(page.getByText(/UAE embassy in that country/i)).toBeVisible();
     await expect(
       page.getByText(/legalisation must be completed in order/i).first(),
     ).toBeVisible();

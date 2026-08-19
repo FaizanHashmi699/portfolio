@@ -24,6 +24,14 @@ export const ATTESTATION_CHAIN = [
   "uae-mofa",
 ] as const;
 
+/** Human labels for the chain steps. Slugs must never reach customer-facing copy. */
+const ATTESTATION_LABELS: Record<(typeof ATTESTATION_CHAIN)[number], string> = {
+  notary: "notary or issuing authority",
+  "home-mofa": "your country's Ministry of Foreign Affairs",
+  "uae-embassy": "the UAE embassy in that country",
+  "uae-mofa": "UAE Ministry of Foreign Affairs",
+};
+
 const SEVERITY_WEIGHT: Record<Severity, number> = {
   blocker: 34,
   warning: 8,
@@ -179,7 +187,9 @@ export function validateDocuments(
         kind: doc.kind,
         severity: "blocker",
         code: "ATTESTATION_INCOMPLETE",
-        message: `The attestation chain is incomplete — missing: ${missingSteps.join(", ")}.`,
+        message: `The attestation chain is incomplete — still needed: ${missingSteps
+          .map((step) => ATTESTATION_LABELS[step])
+          .join(", then ")}.`,
         fix: "Legalisation must be completed in order: notary, home country MOFA, UAE embassy, then UAE MOFA. Skipping a step invalidates the ones after it.",
       });
     }

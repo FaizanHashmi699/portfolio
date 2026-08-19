@@ -68,7 +68,6 @@ export default async function ServiceDetailPage({
   const expressQuote = service.expressSurcharge
     ? buildQuote(service, { speed: "express" })
     : null;
-  const totalDays = service.stages.reduce((sum, stage) => sum + stage.days, 0);
 
   return (
     <>
@@ -188,9 +187,9 @@ export default async function ServiceDetailPage({
       <Section className="py-8">
         <h2 className="text-h2">How it runs</h2>
         <p className="text-muted-foreground mt-3 max-w-2xl">
-          {service.stages.length} stages, about {totalDays} working days of actual
-          activity. Your portal shows exactly which of these you are on, and whose turn
-          it is.
+          {service.stages.length} stages, typically {service.processingDays.min}–
+          {service.processingDays.max} working days end to end. Your portal shows
+          exactly which one you are on, and whose turn it is.
         </p>
 
         <ol className="mt-8 max-w-3xl space-y-0">

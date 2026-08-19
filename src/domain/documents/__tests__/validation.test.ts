@@ -173,8 +173,10 @@ describe("attestation chain", () => {
       { now: NOW },
     );
     const finding = result.blockers.find((f) => f.code === "ATTESTATION_INCOMPLETE");
-    expect(finding!.message).toContain("uae-embassy");
-    expect(finding!.message).toContain("uae-mofa");
+    // Customers see human labels, never internal slugs.
+    expect(finding!.message).toContain("UAE embassy");
+    expect(finding!.message).toContain("UAE Ministry of Foreign Affairs");
+    expect(finding!.message).not.toMatch(/uae-embassy|uae-mofa|home-mofa/);
   });
 
   it("stays silent when attestation data was never extracted", () => {
