@@ -3,6 +3,7 @@ import { brand } from "@/config/brand";
 import { services } from "@/domain/catalog/services";
 import { guides } from "@/content/guides";
 import { legalDocuments } from "@/content/legal";
+import { prefixedLocales } from "@/i18n/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -18,6 +19,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   return [
+    // Localised homepages. Only the pages that are genuinely translated are listed —
+    // submitting a URL that serves English under an Arabic path invites a duplicate-
+    // content penalty and wastes crawl budget.
+    ...prefixedLocales.map((locale) => ({
+      url: `${brand.url}/${locale}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    })),
     ...staticRoutes.map((route) => ({
       url: `${brand.url}${route.path}`,
       lastModified: now,

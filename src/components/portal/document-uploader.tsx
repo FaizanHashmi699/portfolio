@@ -268,7 +268,7 @@ export function DocumentUploader({
                     defaultValue="yes"
                   >
                     <option value="yes">Yes, plain white</option>
-                    <option value="no">No, or I'm not sure</option>
+                    <option value="no">No, or I&rsquo;m not sure</option>
                   </Select>
                 </Field>
               )}

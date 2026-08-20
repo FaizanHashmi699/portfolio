@@ -4,6 +4,12 @@
    explicit choice always wins over their OS setting. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Direction variants, so a chevron can be flipped for Arabic and Urdu without
+   duplicating the component. Tailwind's logical utilities (ms-/me-/ps-/pe-/start-/end-)
+   handle spacing; these cover the cases where an icon genuinely has a handedness. */
+@custom-variant rtl (&:where([dir="rtl"], [dir="rtl"] *));
+@custom-variant ltr (&:where([dir="ltr"], [dir="ltr"] *));
+
 /*
  * ── Colour system ─────────────────────────────────────────────────────────────
  *
@@ -222,8 +228,15 @@
   }
 
   /* Arabic and Urdu run right to left. Logical properties handle most of it. */
+  /* Arabic and Urdu need their own numerals policy: we keep Western digits for money and
+     dates so a customer can match our figures against a government portal character for
+     character, which is the entire point of publishing them. */
   [dir="rtl"] {
     font-feature-settings: normal;
+  }
+
+  [dir="rtl"] .tabular-nums {
+    font-variant-numeric: tabular-nums;
   }
 }
 
