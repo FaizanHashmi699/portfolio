@@ -19,6 +19,8 @@ const legal = [
   { href: "/legal/privacy", label: "Privacy policy" },
   { href: "/legal/terms", label: "Terms of service" },
   { href: "/legal/disclaimer", label: "Disclaimer" },
+  { href: "/legal/cookies", label: "Cookies" },
+  { href: "/legal/accessibility", label: "Accessibility" },
 ];
 
 export function SiteFooter() {

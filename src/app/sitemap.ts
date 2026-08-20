@@ -21,6 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/free-zones", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/faq", priority: 0.7, changeFrequency: "monthly" as const },
     { path: "/reviews", priority: 0.4, changeFrequency: "monthly" as const },
+    { path: "/legal/cookies", priority: 0.3, changeFrequency: "yearly" as const },
+    { path: "/legal/accessibility", priority: 0.3, changeFrequency: "yearly" as const },
     { path: "/about", priority: 0.6, changeFrequency: "monthly" as const },
     { path: "/contact", priority: 0.6, changeFrequency: "monthly" as const },
   ];

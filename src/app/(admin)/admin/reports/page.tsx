@@ -12,6 +12,7 @@ import {
   servicePerformance,
 } from "@/domain/analytics/reports";
 import { formatAed } from "@/lib/utils";
+import { topPages, topReferrers, totals } from "@/server/services/analytics";
 
 export const metadata = { title: "Reports" };
 
@@ -31,6 +32,9 @@ export default async function ReportsPage() {
   const open = openApplications(allApplications);
 
   const maxPipeline = Math.max(1, ...pipeline.map((bucket) => bucket.count));
+  const traffic = totals();
+  const pages = topPages(8);
+  const referrers = topReferrers(6);
 
   return (
     <Section className="py-10">
@@ -120,7 +124,66 @@ export default async function ReportsPage() {
         </CardContent>
       </Card>
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-2">
+      <div className="mt-10 grid gap-8 lg:grid-cols-2">
+        <div>
+          <h2 className="text-h2">Traffic</h2>
+          <p className="text-muted-foreground mt-1.5 text-sm">
+            {traffic.views} views from ~{traffic.visitors} visitors since this instance
+            started. First-party and cookieless, so these numbers are approximate by
+            design — see the cookies page for why.
+          </p>
+
+          {pages.length === 0 ? (
+            <p className="text-muted-foreground mt-5 text-sm">
+              Nothing recorded yet on this instance.
+            </p>
+          ) : (
+            <table className="mt-5 w-full text-sm">
+              <thead>
+                <tr className="border-border-strong border-b text-left">
+                  <th scope="col" className="py-2.5 pr-3 font-medium">
+                    Page
+                  </th>
+                  <th scope="col" className="py-2.5 pr-3 text-right font-medium">
+                    Views
+                  </th>
+                  <th scope="col" className="py-2.5 text-right font-medium">
+                    Visitors
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--border)]">
+                {pages.map((page) => (
+                  <tr key={page.path}>
+                    <td className="py-2.5 pr-3 font-mono text-xs">{page.path}</td>
+                    <td className="py-2.5 pr-3 text-right tabular-nums">
+                      {page.views}
+                    </td>
+                    <td className="py-2.5 text-right tabular-nums">{page.visitors}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+
+          {referrers.length > 0 && (
+            <>
+              <h3 className="font-display mt-8 text-base font-semibold">Referrers</h3>
+              <ul className="mt-3 space-y-1.5">
+                {referrers.map((referrer) => (
+                  <li
+                    key={referrer.host}
+                    className="flex justify-between gap-3 text-sm"
+                  >
+                    <span className="text-muted-foreground">{referrer.host}</span>
+                    <span className="tabular-nums">{referrer.count}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+
         <div>
           <h2 className="text-h2">Pipeline</h2>
           <ul className="mt-5 space-y-3">
@@ -142,7 +205,9 @@ export default async function ReportsPage() {
             ))}
           </ul>
         </div>
+      </div>
 
+      <div className="mt-10">
         <div>
           <h2 className="text-h2">By service</h2>
           <div className="mt-5 overflow-x-auto">

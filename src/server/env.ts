@@ -26,6 +26,10 @@ const schema = z.object({
   // Resend. When absent, emails are logged to the server console instead of sent.
   RESEND_API_KEY: z.string().min(1).optional(),
   RESEND_FROM_EMAIL: z.string().email().optional(),
+
+  // Upstash Redis. When absent, rate limiting is per-instance rather than shared.
+  UPSTASH_REDIS_REST_URL: z.string().url().optional(),
+  UPSTASH_REDIS_REST_TOKEN: z.string().min(1).optional(),
 });
 
 const parsed = schema.safeParse(process.env);
@@ -50,4 +54,8 @@ export const features = {
   ai: Boolean(env.ANTHROPIC_API_KEY),
   /** Transactional email can actually be delivered. */
   email: Boolean(env.RESEND_API_KEY && env.RESEND_FROM_EMAIL),
+  /** Rate limits are shared across serverless instances rather than per-instance. */
+  distributedRateLimit: Boolean(
+    env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN,
+  ),
 } as const;
