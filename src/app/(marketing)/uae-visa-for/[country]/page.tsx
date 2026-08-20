@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  AlertTriangle,
-  ArrowRight,
-  CheckCircle2,
-  Clock,
-  FileCheck,
-} from "lucide-react";
+import { AlertTriangle, ArrowRight, Clock, FileCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ButtonLink } from "@/components/ui/button";
@@ -17,9 +11,8 @@ import {
   attestationSummary,
   countries,
   entryRuleSummary,
-  getCountry,
 } from "@/domain/geography/countries";
-import { getService, services } from "@/domain/catalog/services";
+import { getService } from "@/domain/catalog/services";
 import { buildQuote } from "@/domain/pricing/quote";
 import { breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 import { formatAed, slugify } from "@/lib/utils";
