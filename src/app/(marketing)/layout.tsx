@@ -1,6 +1,7 @@
 import { SiteHeader } from "@/components/marketing/site-header";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { WhatsAppButton } from "@/components/marketing/whatsapp-button";
+import { AssistantWidget } from "@/components/marketing/assistant-widget";
 
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -10,6 +11,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
         {children}
       </main>
       <SiteFooter />
+      <AssistantWidget />
       <WhatsAppButton />
     </>
   );

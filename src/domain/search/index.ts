@@ -147,6 +147,84 @@ function normalise(value: string): string {
 }
 
 /**
+ * Words that carry no signal in a question.
+ *
+ * Site search receives keywords; the assistant receives whole sentences. Without this,
+ * "how much is the golden visa" fails the all-terms rule on "how", "much", "is" and "the"
+ * and returns nothing — which is exactly the question a visitor is most likely to ask.
+ */
+const STOPWORDS = new Set([
+  "a",
+  "an",
+  "and",
+  "any",
+  "are",
+  "as",
+  "at",
+  "be",
+  "by",
+  "can",
+  "cost",
+  "costs",
+  "do",
+  "does",
+  "for",
+  "from",
+  "get",
+  "getting",
+  "have",
+  "how",
+  "i",
+  "if",
+  "in",
+  "is",
+  "it",
+  "long",
+  "many",
+  "me",
+  "much",
+  "my",
+  "need",
+  "of",
+  "on",
+  "or",
+  "price",
+  "should",
+  "so",
+  "take",
+  "takes",
+  "than",
+  "that",
+  "the",
+  "their",
+  "there",
+  "they",
+  "this",
+  "to",
+  "use",
+  "want",
+  "was",
+  "what",
+  "when",
+  "where",
+  "which",
+  "who",
+  "why",
+  "will",
+  "with",
+  "would",
+  "you",
+  "your",
+]);
+
+/** Query terms, with stopwords removed unless that would leave nothing. */
+export function queryTerms(query: string): string[] {
+  const all = normalise(query).split(" ").filter(Boolean);
+  const meaningful = all.filter((term) => !STOPWORDS.has(term) && term.length > 1);
+  return meaningful.length > 0 ? meaningful : all;
+}
+
+/**
  * Field-weighted scoring. A title match beats a description match, which beats a keyword
  * match — someone typing "golden visa" wants the Golden Visa page, not every page that
  * happens to mention it.
@@ -156,8 +234,15 @@ export function searchEntries(
   query: string,
   limit = 20,
 ): SearchEntry[] {
-  const terms = normalise(query).split(" ").filter(Boolean);
+  const terms = queryTerms(query);
   if (terms.length === 0) return [];
+
+  /*
+   * Short queries are keywords, and every word is intentional — require all of them.
+   * Longer queries are sentences, where insisting on every word returns nothing useful.
+   * Requiring a majority keeps precision without punishing people for writing normally.
+   */
+  const required = terms.length <= 3 ? terms.length : Math.ceil(terms.length * 0.6);
 
   const scored = index.map((entry) => {
     const title = normalise(entry.title);
@@ -172,14 +257,12 @@ export function searchEntries(
       if (keywords.includes(term)) score += 2;
     }
 
-    // Every term must appear somewhere, or it is not a match at all. Without this,
-    // "golden visa india" would return every page mentioning "visa".
-    const matchesAll = terms.every(
+    const matched = terms.filter(
       (term) =>
         title.includes(term) || description.includes(term) || keywords.includes(term),
-    );
+    ).length;
 
-    return { entry, score: matchesAll ? score : 0 };
+    return { entry, score: matched >= required ? score : 0 };
   });
 
   return scored

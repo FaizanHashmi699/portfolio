@@ -17,9 +17,12 @@ const controlBase =
 
 export function Input({
   className,
+  ref,
   ...props
-}: React.InputHTMLAttributes<HTMLInputElement>) {
-  return <input className={cn(controlBase, "h-11", className)} {...props} />;
+}: React.InputHTMLAttributes<HTMLInputElement> & {
+  ref?: React.Ref<HTMLInputElement>;
+}) {
+  return <input ref={ref} className={cn(controlBase, "h-11", className)} {...props} />;
 }
 
 export function Textarea({

@@ -90,3 +90,35 @@ describe("searchEntries", () => {
     expect(results.length).toBeGreaterThan(0);
   });
 });
+
+describe("natural-language queries", () => {
+  it("answers a full sentence, not just keywords", () => {
+    // Site search takes keywords; the assistant takes questions. Without stopword
+    // handling this returned nothing for the most likely question a visitor asks.
+    const results = searchEntries(index, "how much is the golden visa");
+    expect(results.length).toBeGreaterThan(0);
+    expect(results.some((entry) => entry.title.includes("Golden Visa"))).toBe(true);
+  });
+
+  it("handles 'how long does attestation take'", () => {
+    const results = searchEntries(index, "how long does attestation take");
+    expect(results.length).toBeGreaterThan(0);
+  });
+
+  it("still requires every term on a short keyword query", () => {
+    // Two or three words are all intentional; a majority rule there would be too loose.
+    expect(searchEntries(index, "golden unicorn")).toEqual([]);
+  });
+
+  it("tolerates one stray word in a longer question", () => {
+    const results = searchEntries(
+      index,
+      "what documents do I need for a mainland employment visa",
+    );
+    expect(results.length).toBeGreaterThan(0);
+  });
+
+  it("returns nothing when a query is only stopwords plus nonsense", () => {
+    expect(searchEntries(index, "what is the qwertyuiop")).toEqual([]);
+  });
+});
