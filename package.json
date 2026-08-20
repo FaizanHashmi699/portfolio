@@ -2,6 +2,10 @@
   "name": "maqam",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -60,5 +64,5 @@
     "typescript": "^5",
     "vitest": "^4.1.11"
   },
-  "description": "UAE visa and business setup consultancy platform — transparent pricing, AI document checks and live application tracking."
+  "description": "UAE visa and business setup consultancy platform \u2014 transparent pricing, AI document checks and live application tracking."
 }
