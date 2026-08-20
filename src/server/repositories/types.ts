@@ -95,6 +95,14 @@ export interface ApplicationRepository {
     event: Omit<ApplicationEvent, "id" | "applicationId" | "at">,
   ): Promise<Application | null>;
   addDocument(id: string, document: DocumentRecord): Promise<Application | null>;
+  reviewDocument(
+    id: string,
+    documentId: string,
+    review: Pick<
+      DocumentRecord,
+      "reviewedAt" | "reviewedBy" | "reviewNote" | "reviewDecision"
+    >,
+  ): Promise<Application | null>;
 }
 
 export interface AuditRepository {
@@ -175,12 +183,33 @@ export interface NotificationRepository {
   unreadCount(userId: string): Promise<number>;
 }
 
+// ── People ──────────────────────────────────────────────────────────────────
+
+export type PersonRole = "customer" | "staff" | "admin";
+
+export interface Person {
+  id: string;
+  email: string;
+  fullName: string;
+  role: PersonRole;
+  createdAt: string;
+  phone?: string;
+  nationality?: string;
+}
+
+export interface PersonRepository {
+  list(role?: PersonRole): Promise<Person[]>;
+  get(id: string): Promise<Person | null>;
+  updateRole(id: string, role: PersonRole): Promise<Person | null>;
+}
+
 export interface Repositories {
   leads: LeadRepository;
   applications: ApplicationRepository;
   messages: MessageRepository;
   invoices: InvoiceRepository;
   notifications: NotificationRepository;
+  people: PersonRepository;
   audit: AuditRepository;
   /** Which adapter is active. Surfaced in the admin console so it is never ambiguous. */
   driver: "in-memory" | "supabase";

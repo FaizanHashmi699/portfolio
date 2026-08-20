@@ -1,4 +1,11 @@
-import type { Application, Invoice, Lead, Message, Notification } from "./types";
+import type {
+  Application,
+  Invoice,
+  Lead,
+  Message,
+  Notification,
+  Person,
+} from "./types";
 
 /**
  * Demo data for the zero-key local run.
@@ -393,6 +400,40 @@ export function seedNotifications(): Notification[] {
       href: "/portal/applications/app-1",
       read: true,
       kind: "status",
+    },
+  ];
+}
+
+export function seedPeople(): Person[] {
+  return [
+    {
+      id: "demo-admin-1",
+      email: "ops@example.com",
+      fullName: "Operations (demo)",
+      role: "admin",
+      createdAt: daysAgo(200),
+    },
+    {
+      id: "demo-staff-1",
+      email: "rashid@example.com",
+      fullName: "Rashid Al Balushi",
+      role: "staff",
+      createdAt: daysAgo(150),
+    },
+    {
+      id: "demo-staff-2",
+      email: "priya@example.com",
+      fullName: "Priya Menon",
+      role: "staff",
+      createdAt: daysAgo(90),
+    },
+    {
+      id: DEMO_USER_ID,
+      email: "amina@example.com",
+      fullName: "Amina Yusuf",
+      role: "customer",
+      createdAt: daysAgo(40),
+      nationality: "EG",
     },
   ];
 }

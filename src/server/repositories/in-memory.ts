@@ -15,6 +15,9 @@ import type {
   MessageRepository,
   Notification,
   NotificationRepository,
+  Person,
+  PersonRepository,
+  PersonRole,
 } from "./types";
 import type { DocumentRecord } from "@/domain/documents/types";
 import {
@@ -23,6 +26,7 @@ import {
   seedLeads,
   seedMessages,
   seedNotifications,
+  seedPeople,
 } from "./seed";
 
 /**
@@ -42,6 +46,7 @@ interface Store {
   messages: Message[];
   invoices: Invoice[];
   notifications: Notification[];
+  people: Person[];
   audit: AuditEntry[];
 }
 
@@ -52,6 +57,7 @@ function freshStore(): Store {
     messages: seedMessages(),
     invoices: seedInvoices(),
     notifications: seedNotifications(),
+    people: seedPeople(),
     audit: [],
   };
 }
@@ -151,6 +157,15 @@ export const inMemoryApplications: ApplicationRepository = {
     const application = store().applications.find((a) => a.id === id);
     if (!application) return null;
     application.documents.push(document);
+    application.updatedAt = new Date().toISOString();
+    return clone(application);
+  },
+  async reviewDocument(id, documentId, review) {
+    const application = store().applications.find((a) => a.id === id);
+    if (!application) return null;
+    const document = application.documents.find((d) => d.id === documentId);
+    if (!document) return null;
+    Object.assign(document, review);
     application.updatedAt = new Date().toISOString();
     return clone(application);
   },
@@ -276,5 +291,25 @@ export const inMemoryNotifications: NotificationRepository = {
   },
   async unreadCount(userId) {
     return store().notifications.filter((n) => n.userId === userId && !n.read).length;
+  },
+};
+
+export const inMemoryPeople: PersonRepository = {
+  async list(role) {
+    const all = store().people;
+    return clone(
+      (role ? all.filter((p) => p.role === role) : all).sort((a, b) =>
+        a.fullName.localeCompare(b.fullName),
+      ),
+    );
+  },
+  async get(id) {
+    return clone(store().people.find((p) => p.id === id) ?? null);
+  },
+  async updateRole(id, role: PersonRole) {
+    const person = store().people.find((p) => p.id === id);
+    if (!person) return null;
+    person.role = role;
+    return clone(person);
   },
 };

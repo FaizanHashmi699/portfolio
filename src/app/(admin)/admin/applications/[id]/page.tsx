@@ -5,6 +5,10 @@ import { Section } from "@/components/ui/section";
 import { StatusBadge } from "@/components/portal/status-badge";
 import { RiskPanel } from "@/components/portal/risk-panel";
 import { StatusForm } from "@/components/admin/status-form";
+import { DocumentReview } from "@/components/admin/document-review";
+import { MessageThread } from "@/components/portal/message-thread";
+import { InvoiceList } from "@/components/portal/invoice-list";
+import { createDownloadUrl } from "@/server/services/storage";
 import { getRepositories } from "@/server/repositories";
 import { isTerminal } from "@/server/repositories/types";
 import { requireStaff } from "@/server/auth";
@@ -20,9 +24,23 @@ export default async function AdminApplicationPage({
   const { id } = await params;
   await requireStaff();
 
-  const { applications } = await getRepositories();
+  const { applications, messages, invoices } = await getRepositories();
   const application = await applications.get(id);
   if (!application) notFound();
+
+  const [thread, applicationInvoices, downloadUrls] = await Promise.all([
+    messages.listForApplication(application.id),
+    invoices.listForApplication(application.id),
+    // Signed URLs are minted per render and expire in minutes, so a screenshot of this
+    // page does not become a durable link to someone's passport.
+    Promise.all(
+      application.documents.map(async (document) => [
+        document.id,
+        document.storagePath ? await createDownloadUrl(document.storagePath) : null,
+      ]),
+    ).then((entries) => Object.fromEntries(entries) as Record<string, string | null>),
+  ]);
+  await messages.markRead(application.id, "staff");
 
   const service = getService(application.serviceSlug);
   const closed = isTerminal(application.status);
@@ -77,23 +95,41 @@ export default async function AdminApplicationPage({
           <Card>
             <CardContent className="pt-6">
               <h2 className="font-display text-h3">Documents</h2>
+              <p className="text-muted-foreground mt-1.5 text-sm">
+                Automated checks are above. This is where a person confirms the scan is
+                legible and the stamps look right.
+              </p>
+
               {application.documents.length === 0 ? (
                 <p className="text-muted-foreground mt-4 text-sm">Nothing uploaded.</p>
               ) : (
-                <ul className="divide-border mt-4 divide-y">
+                <ul className="mt-5 space-y-3">
                   {application.documents.map((document) => (
-                    <li key={document.id} className="py-3">
-                      <p className="font-medium">{document.fileName}</p>
-                      <p className="text-muted-foreground text-xs">
-                        {document.kind} · {(document.sizeBytes / 1024).toFixed(0)} KB ·{" "}
-                        {document.mimeType}
-                      </p>
+                    <li key={document.id}>
+                      <DocumentReview
+                        applicationId={application.id}
+                        document={document}
+                        downloadUrl={downloadUrls[document.id]}
+                      />
                     </li>
                   ))}
                 </ul>
               )}
             </CardContent>
           </Card>
+
+          <MessageThread
+            applicationId={application.id}
+            messages={thread}
+            viewerRole="staff"
+          />
+
+          {applicationInvoices.length > 0 && (
+            <div>
+              <h2 className="text-h2 mb-4">Invoices</h2>
+              <InvoiceList invoices={applicationInvoices} />
+            </div>
+          )}
         </div>
 
         <div className="space-y-6">

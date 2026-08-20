@@ -8,6 +8,7 @@ import {
   inMemoryLeads,
   inMemoryMessages,
   inMemoryNotifications,
+  inMemoryPeople,
 } from "./in-memory";
 
 /**
@@ -32,6 +33,7 @@ export async function getRepositories(): Promise<Repositories> {
       messages: supabase.supabaseMessages,
       invoices: supabase.supabaseInvoices,
       notifications: supabase.supabaseNotifications,
+      people: supabase.supabasePeople,
       audit: supabase.supabaseAudit,
       driver: "supabase",
     };
@@ -44,6 +46,7 @@ export async function getRepositories(): Promise<Repositories> {
     messages: inMemoryMessages,
     invoices: inMemoryInvoices,
     notifications: inMemoryNotifications,
+    people: inMemoryPeople,
     audit: inMemoryAudit,
     driver: "in-memory",
   };

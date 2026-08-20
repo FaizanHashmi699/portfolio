@@ -17,6 +17,8 @@ import type {
   MessageRepository,
   Notification,
   NotificationRepository,
+  Person,
+  PersonRepository,
 } from "./types";
 import type { DocumentRecord } from "@/domain/documents/types";
 
@@ -245,6 +247,24 @@ export const supabaseApplications: ApplicationRepository = {
       .select()
       .single();
     if (error) throw new Error(`Failed to attach document: ${error.message}`);
+    return toApplication(data);
+  },
+
+  async reviewDocument(id, documentId, review) {
+    const existing = await this.get(id);
+    if (!existing) return null;
+
+    const documents = existing.documents.map((document) =>
+      document.id === documentId ? { ...document, ...review } : document,
+    );
+
+    const { data, error } = await db()
+      .from("applications")
+      .update({ documents, updated_at: new Date().toISOString() })
+      .eq("id", id)
+      .select()
+      .single();
+    if (error) throw new Error(`Failed to record review: ${error.message}`);
     return toApplication(data);
   },
 };
@@ -516,5 +536,50 @@ export const supabaseNotifications: NotificationRepository = {
       .eq("read", false);
     if (error) throw new Error(`Failed to count notifications: ${error.message}`);
     return count ?? 0;
+  },
+};
+
+function toPerson(row: Record<string, unknown>): Person {
+  return {
+    id: row.id as string,
+    email: row.email as string,
+    fullName: (row.full_name as string | null) ?? (row.email as string),
+    role: row.role as Person["role"],
+    createdAt: row.created_at as string,
+    phone: (row.phone as string | null) ?? undefined,
+    nationality: (row.nationality as string | null) ?? undefined,
+  };
+}
+
+export const supabasePeople: PersonRepository = {
+  async list(role) {
+    let query = db().from("profiles").select("*").order("full_name");
+    if (role) query = query.eq("role", role);
+    const { data, error } = await query;
+    if (error) throw new Error(`Failed to list people: ${error.message}`);
+    return (data ?? []).map(toPerson);
+  },
+
+  async get(id) {
+    const { data, error } = await db()
+      .from("profiles")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+    if (error) throw new Error(`Failed to load person: ${error.message}`);
+    return data ? toPerson(data) : null;
+  },
+
+  async updateRole(id, role) {
+    // Role changes go through the service-role client deliberately: the RLS policy on
+    // profiles forbids a user changing their own role, and it must stay that way.
+    const { data, error } = await db()
+      .from("profiles")
+      .update({ role })
+      .eq("id", id)
+      .select()
+      .single();
+    if (error) throw new Error(`Failed to update role: ${error.message}`);
+    return toPerson(data);
   },
 };

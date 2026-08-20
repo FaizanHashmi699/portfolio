@@ -57,6 +57,7 @@ export interface DocumentRecord {
   reviewedAt?: string;
   reviewedBy?: string;
   reviewNote?: string;
+  reviewDecision?: "accepted" | "rejected";
 }
 
 export interface Finding {
