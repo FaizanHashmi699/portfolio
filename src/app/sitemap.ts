@@ -4,6 +4,9 @@ import { services } from "@/domain/catalog/services";
 import { guides } from "@/content/guides";
 import { legalDocuments } from "@/content/legal";
 import { prefixedLocales } from "@/i18n/config";
+import { countries } from "@/domain/geography/countries";
+import { freeZones } from "@/domain/geography/free-zones";
+import { slugify } from "@/lib/utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -14,6 +17,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/pricing", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/eligibility", priority: 0.9, changeFrequency: "monthly" as const },
     { path: "/guides", priority: 0.8, changeFrequency: "weekly" as const },
+    { path: "/uae-visa-for", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/free-zones", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/faq", priority: 0.7, changeFrequency: "monthly" as const },
+    { path: "/reviews", priority: 0.4, changeFrequency: "monthly" as const },
     { path: "/about", priority: 0.6, changeFrequency: "monthly" as const },
     { path: "/contact", priority: 0.6, changeFrequency: "monthly" as const },
   ];
@@ -39,6 +46,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    ...countries.map((country) => ({
+      url: `${brand.url}/uae-visa-for/${slugify(country.name)}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...freeZones.map((zone) => ({
+      url: `${brand.url}/free-zones/${zone.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
     ...guides.map((guide) => ({
       url: `${brand.url}/guides/${guide.slug}`,

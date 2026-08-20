@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { ButtonLink } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/marketing/theme-toggle";
@@ -13,6 +13,7 @@ const navigation = [
   { href: "/services", label: "Services" },
   { href: "/pricing", label: "Pricing" },
   { href: "/eligibility", label: "Check eligibility" },
+  { href: "/free-zones", label: "Free zones" },
   { href: "/guides", label: "Guides" },
   { href: "/about", label: "About" },
 ];
@@ -87,6 +88,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Link
+            href="/search"
+            aria-label="Search"
+            className="hover:bg-surface text-muted-foreground hover:text-foreground rounded-full p-2 transition-colors"
+          >
+            <Search className="size-5" />
+          </Link>
           <ThemeToggle />
           <ButtonLink
             href="/sign-in"

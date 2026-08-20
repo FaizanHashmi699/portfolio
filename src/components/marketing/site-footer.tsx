@@ -8,6 +8,10 @@ const company = [
   { href: "/about", label: "About" },
   { href: "/pricing", label: "Transparent pricing" },
   { href: "/guides", label: "Guides" },
+  { href: "/uae-visa-for", label: "By nationality" },
+  { href: "/free-zones", label: "Free zones" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/reviews", label: "Reviews" },
   { href: "/contact", label: "Contact" },
 ];
 
