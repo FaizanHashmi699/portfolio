@@ -8,8 +8,15 @@ import type {
   ApplicationStatus,
   AuditEntry,
   AuditRepository,
+  Invoice,
+  InvoiceRepository,
+  InvoiceStatus,
   Lead,
   LeadRepository,
+  Message,
+  MessageRepository,
+  Notification,
+  NotificationRepository,
 } from "./types";
 import type { DocumentRecord } from "@/domain/documents/types";
 
@@ -280,5 +287,234 @@ export const supabaseAudit: AuditRepository = {
       subject: row.subject,
       detail: row.detail ?? undefined,
     })) as AuditEntry[];
+  },
+};
+
+function toMessage(row: Record<string, unknown>): Message {
+  return {
+    id: row.id as string,
+    applicationId: row.application_id as string,
+    at: row.at as string,
+    authorId: row.author_id as string,
+    authorName: row.author_name as string,
+    authorRole: row.author_role as Message["authorRole"],
+    body: row.body as string,
+    readByCustomer: Boolean(row.read_by_customer),
+    readByStaff: Boolean(row.read_by_staff),
+  };
+}
+
+export const supabaseMessages: MessageRepository = {
+  async listForApplication(applicationId) {
+    const { data, error } = await db()
+      .from("messages")
+      .select("*")
+      .eq("application_id", applicationId)
+      .order("at", { ascending: true });
+    if (error) throw new Error(`Failed to list messages: ${error.message}`);
+    return (data ?? []).map(toMessage);
+  },
+
+  async create(message) {
+    const { data, error } = await db()
+      .from("messages")
+      .insert({
+        application_id: message.applicationId,
+        author_id: message.authorId,
+        author_name: message.authorName,
+        author_role: message.authorRole,
+        body: message.body,
+        read_by_customer: message.readByCustomer,
+        read_by_staff: message.readByStaff,
+      })
+      .select()
+      .single();
+    if (error) throw new Error(`Failed to send message: ${error.message}`);
+    return toMessage(data);
+  },
+
+  async markRead(applicationId, reader) {
+    const column = reader === "customer" ? "read_by_customer" : "read_by_staff";
+    const { error } = await db()
+      .from("messages")
+      .update({ [column]: true })
+      .eq("application_id", applicationId);
+    if (error) throw new Error(`Failed to mark messages read: ${error.message}`);
+  },
+
+  async unreadCountForUser(userId) {
+    const { data: applications, error: appError } = await db()
+      .from("applications")
+      .select("id")
+      .eq("user_id", userId);
+    if (appError) throw new Error(`Failed to load applications: ${appError.message}`);
+
+    const ids = (applications ?? []).map((row) => row.id as string);
+    if (ids.length === 0) return 0;
+
+    const { count, error } = await db()
+      .from("messages")
+      .select("id", { count: "exact", head: true })
+      .in("application_id", ids)
+      .eq("author_role", "staff")
+      .eq("read_by_customer", false);
+    if (error) throw new Error(`Failed to count messages: ${error.message}`);
+    return count ?? 0;
+  },
+};
+
+function toInvoice(row: Record<string, unknown>): Invoice {
+  return {
+    id: row.id as string,
+    reference: row.reference as string,
+    applicationId: row.application_id as string,
+    userId: row.user_id as string,
+    issuedAt: row.issued_at as string,
+    dueAt: row.due_at as string,
+    status: row.status as InvoiceStatus,
+    paidAt: (row.paid_at as string | null) ?? undefined,
+    lines: (row.lines as Invoice["lines"]) ?? [],
+    subtotal: Number(row.subtotal ?? 0),
+    vat: Number(row.vat ?? 0),
+    total: Number(row.total ?? 0),
+    description: row.description as string,
+  };
+}
+
+export const supabaseInvoices: InvoiceRepository = {
+  async listForUser(userId) {
+    const { data, error } = await db()
+      .from("invoices")
+      .select("*")
+      .eq("user_id", userId)
+      .order("issued_at", { ascending: false });
+    if (error) throw new Error(`Failed to list invoices: ${error.message}`);
+    return (data ?? []).map(toInvoice);
+  },
+
+  async listForApplication(applicationId) {
+    const { data, error } = await db()
+      .from("invoices")
+      .select("*")
+      .eq("application_id", applicationId)
+      .order("issued_at", { ascending: false });
+    if (error) throw new Error(`Failed to list invoices: ${error.message}`);
+    return (data ?? []).map(toInvoice);
+  },
+
+  async listAll() {
+    const { data, error } = await db()
+      .from("invoices")
+      .select("*")
+      .order("issued_at", { ascending: false });
+    if (error) throw new Error(`Failed to list invoices: ${error.message}`);
+    return (data ?? []).map(toInvoice);
+  },
+
+  async get(id) {
+    const { data, error } = await db()
+      .from("invoices")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+    if (error) throw new Error(`Failed to load invoice: ${error.message}`);
+    return data ? toInvoice(data) : null;
+  },
+
+  async create(invoice) {
+    const { data, error } = await db()
+      .from("invoices")
+      .insert({
+        reference: invoice.reference,
+        application_id: invoice.applicationId,
+        user_id: invoice.userId,
+        due_at: invoice.dueAt,
+        status: invoice.status,
+        paid_at: invoice.paidAt ?? null,
+        lines: invoice.lines,
+        subtotal: invoice.subtotal,
+        vat: invoice.vat,
+        total: invoice.total,
+        description: invoice.description,
+      })
+      .select()
+      .single();
+    if (error) throw new Error(`Failed to create invoice: ${error.message}`);
+    return toInvoice(data);
+  },
+
+  async updateStatus(id, status) {
+    const { data, error } = await db()
+      .from("invoices")
+      .update({
+        status,
+        paid_at: status === "paid" ? new Date().toISOString() : null,
+      })
+      .eq("id", id)
+      .select()
+      .single();
+    if (error) throw new Error(`Failed to update invoice: ${error.message}`);
+    return toInvoice(data);
+  },
+};
+
+function toNotification(row: Record<string, unknown>): Notification {
+  return {
+    id: row.id as string,
+    userId: row.user_id as string,
+    at: row.at as string,
+    title: row.title as string,
+    body: row.body as string,
+    href: (row.href as string | null) ?? undefined,
+    read: Boolean(row.read),
+    kind: row.kind as Notification["kind"],
+  };
+}
+
+export const supabaseNotifications: NotificationRepository = {
+  async listForUser(userId, limit = 30) {
+    const { data, error } = await db()
+      .from("notifications")
+      .select("*")
+      .eq("user_id", userId)
+      .order("at", { ascending: false })
+      .limit(limit);
+    if (error) throw new Error(`Failed to list notifications: ${error.message}`);
+    return (data ?? []).map(toNotification);
+  },
+
+  async create(notification) {
+    const { data, error } = await db()
+      .from("notifications")
+      .insert({
+        user_id: notification.userId,
+        title: notification.title,
+        body: notification.body,
+        href: notification.href ?? null,
+        kind: notification.kind,
+        read: false,
+      })
+      .select()
+      .single();
+    if (error) throw new Error(`Failed to create notification: ${error.message}`);
+    return toNotification(data);
+  },
+
+  async markAllRead(userId) {
+    const { error } = await db()
+      .from("notifications")
+      .update({ read: true })
+      .eq("user_id", userId);
+    if (error) throw new Error(`Failed to mark notifications read: ${error.message}`);
+  },
+
+  async unreadCount(userId) {
+    const { count, error } = await db()
+      .from("notifications")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", userId)
+      .eq("read", false);
+    if (error) throw new Error(`Failed to count notifications: ${error.message}`);
+    return count ?? 0;
   },
 };

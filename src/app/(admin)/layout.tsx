@@ -1,16 +1,14 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/marketing/theme-toggle";
 import { DemoBanner } from "@/components/portal/demo-banner";
+import { UserMenu } from "@/components/portal/user-menu";
 import { Badge } from "@/components/ui/badge";
-import { requireStaff } from "@/server/auth";
+import { getCurrentUser, isStaff } from "@/server/auth";
+import { features } from "@/server/env";
 
-/**
- * Never prerender or cache authenticated HTML. In demo mode the auth helpers can resolve
- * without touching cookies(), which is enough for Next to treat these routes as static
- * and serve one visitor's render to another.
- */
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
@@ -22,41 +20,51 @@ const navigation = [
   { href: "/admin", label: "Overview" },
   { href: "/admin/applications", label: "Applications" },
   { href: "/admin/leads", label: "Leads" },
+  { href: "/admin/reports", label: "Reports" },
+  { href: "/admin/team", label: "Team" },
+  { href: "/admin/audit", label: "Audit log" },
+  { href: "/admin/settings", label: "Settings" },
 ];
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const user = await requireStaff();
+  const user = await getCurrentUser();
+  if (!user) redirect("/sign-in");
+
+  // In demo mode there is no authentication to enforce, so the console stays explorable.
+  // Once Supabase is configured this is a real role check.
+  if (features.database && !isStaff(user)) redirect("/portal");
 
   return (
     <>
-      {user?.isDemo && <DemoBanner />}
-      <header className="border-border bg-background/85 sticky top-0 z-40 border-b backdrop-blur-xl">
+      {user.isDemo && <DemoBanner />}
+      <header className="bg-background/85 border-border sticky top-0 z-40 border-b backdrop-blur-xl">
         <div className="container-page flex h-16 items-center justify-between gap-4">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             <Logo />
             <Badge tone="brand">Console</Badge>
-            <nav aria-label="Console" className="hidden gap-1 md:flex">
-              {navigation.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-muted-foreground hover:text-foreground rounded-full px-3.5 py-2 text-sm font-medium"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <ThemeToggle />
-            {user && (
-              <span className="text-muted-foreground hidden text-sm sm:block">
-                {user.name}
-              </span>
-            )}
+            <UserMenu user={user} />
           </div>
         </div>
       </header>
+
+      <nav aria-label="Console" className="border-border border-b">
+        <ul className="container-page flex gap-1 overflow-x-auto py-2">
+          {navigation.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className="text-muted-foreground hover:bg-surface hover:text-foreground block rounded-full px-3.5 py-1.5 text-sm font-medium whitespace-nowrap"
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
       <main id="main" className="flex-1">
         {children}
       </main>

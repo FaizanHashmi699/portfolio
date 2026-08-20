@@ -6,11 +6,24 @@ import type {
   ApplicationStatus,
   AuditEntry,
   AuditRepository,
+  Invoice,
+  InvoiceRepository,
+  InvoiceStatus,
   Lead,
   LeadRepository,
+  Message,
+  MessageRepository,
+  Notification,
+  NotificationRepository,
 } from "./types";
 import type { DocumentRecord } from "@/domain/documents/types";
-import { seedApplications, seedLeads } from "./seed";
+import {
+  seedApplications,
+  seedInvoices,
+  seedLeads,
+  seedMessages,
+  seedNotifications,
+} from "./seed";
 
 /**
  * In-memory repositories, seeded with demo data.
@@ -26,29 +39,33 @@ import { seedApplications, seedLeads } from "./seed";
 interface Store {
   applications: Application[];
   leads: Lead[];
+  messages: Message[];
+  invoices: Invoice[];
+  notifications: Notification[];
   audit: AuditEntry[];
+}
+
+function freshStore(): Store {
+  return {
+    applications: seedApplications(),
+    leads: seedLeads(),
+    messages: seedMessages(),
+    invoices: seedInvoices(),
+    notifications: seedNotifications(),
+    audit: [],
+  };
 }
 
 const globalStore = globalThis as typeof globalThis & { __maqamStore?: Store };
 
 function store(): Store {
-  if (!globalStore.__maqamStore) {
-    globalStore.__maqamStore = {
-      applications: seedApplications(),
-      leads: seedLeads(),
-      audit: [],
-    };
-  }
+  globalStore.__maqamStore ??= freshStore();
   return globalStore.__maqamStore;
 }
 
 /** Exposed for tests, which need a clean slate between cases. */
 export function resetInMemoryStore(): void {
-  globalStore.__maqamStore = {
-    applications: seedApplications(),
-    leads: seedLeads(),
-    audit: [],
-  };
+  globalStore.__maqamStore = freshStore();
 }
 
 const clone = <T>(value: T): T => structuredClone(value);
@@ -151,5 +168,113 @@ export const inMemoryAudit: AuditRepository = {
   },
   async list(limit = 100) {
     return clone(store().audit.slice(0, limit));
+  },
+};
+
+export const inMemoryMessages: MessageRepository = {
+  async listForApplication(applicationId) {
+    return clone(
+      store()
+        .messages.filter((m) => m.applicationId === applicationId)
+        .sort((a, b) => a.at.localeCompare(b.at)),
+    );
+  },
+  async create(message) {
+    const created: Message = {
+      ...message,
+      id: randomUUID(),
+      at: new Date().toISOString(),
+    };
+    store().messages.push(created);
+    return clone(created);
+  },
+  async markRead(applicationId, reader) {
+    for (const message of store().messages) {
+      if (message.applicationId !== applicationId) continue;
+      if (reader === "customer") message.readByCustomer = true;
+      else message.readByStaff = true;
+    }
+  },
+  async unreadCountForUser(userId) {
+    const owned = new Set(
+      store()
+        .applications.filter((a) => a.userId === userId)
+        .map((a) => a.id),
+    );
+    // A customer's unread messages are the ones staff wrote, and vice versa.
+    return store().messages.filter(
+      (m) =>
+        owned.has(m.applicationId) && m.authorRole === "staff" && !m.readByCustomer,
+    ).length;
+  },
+};
+
+export const inMemoryInvoices: InvoiceRepository = {
+  async listForUser(userId) {
+    return clone(
+      store()
+        .invoices.filter((i) => i.userId === userId)
+        .sort((a, b) => b.issuedAt.localeCompare(a.issuedAt)),
+    );
+  },
+  async listForApplication(applicationId) {
+    return clone(
+      store()
+        .invoices.filter((i) => i.applicationId === applicationId)
+        .sort((a, b) => b.issuedAt.localeCompare(a.issuedAt)),
+    );
+  },
+  async listAll() {
+    return clone(
+      [...store().invoices].sort((a, b) => b.issuedAt.localeCompare(a.issuedAt)),
+    );
+  },
+  async get(id) {
+    return clone(store().invoices.find((i) => i.id === id) ?? null);
+  },
+  async create(invoice) {
+    const created: Invoice = {
+      ...invoice,
+      id: randomUUID(),
+      issuedAt: new Date().toISOString(),
+    };
+    store().invoices.unshift(created);
+    return clone(created);
+  },
+  async updateStatus(id, status: InvoiceStatus) {
+    const invoice = store().invoices.find((i) => i.id === id);
+    if (!invoice) return null;
+    invoice.status = status;
+    if (status === "paid") invoice.paidAt = new Date().toISOString();
+    return clone(invoice);
+  },
+};
+
+export const inMemoryNotifications: NotificationRepository = {
+  async listForUser(userId, limit = 30) {
+    return clone(
+      store()
+        .notifications.filter((n) => n.userId === userId)
+        .sort((a, b) => b.at.localeCompare(a.at))
+        .slice(0, limit),
+    );
+  },
+  async create(notification) {
+    const created: Notification = {
+      ...notification,
+      id: randomUUID(),
+      at: new Date().toISOString(),
+      read: false,
+    };
+    store().notifications.unshift(created);
+    return clone(created);
+  },
+  async markAllRead(userId) {
+    for (const notification of store().notifications) {
+      if (notification.userId === userId) notification.read = true;
+    }
+  },
+  async unreadCount(userId) {
+    return store().notifications.filter((n) => n.userId === userId && !n.read).length;
   },
 };

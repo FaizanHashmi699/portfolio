@@ -1,7 +1,14 @@
 import "server-only";
 import { features } from "@/server/env";
 import type { Repositories } from "./types";
-import { inMemoryApplications, inMemoryAudit, inMemoryLeads } from "./in-memory";
+import {
+  inMemoryApplications,
+  inMemoryAudit,
+  inMemoryInvoices,
+  inMemoryLeads,
+  inMemoryMessages,
+  inMemoryNotifications,
+} from "./in-memory";
 
 /**
  * Repository selection.
@@ -22,6 +29,9 @@ export async function getRepositories(): Promise<Repositories> {
     cached = {
       leads: supabase.supabaseLeads,
       applications: supabase.supabaseApplications,
+      messages: supabase.supabaseMessages,
+      invoices: supabase.supabaseInvoices,
+      notifications: supabase.supabaseNotifications,
       audit: supabase.supabaseAudit,
       driver: "supabase",
     };
@@ -31,6 +41,9 @@ export async function getRepositories(): Promise<Repositories> {
   cached = {
     leads: inMemoryLeads,
     applications: inMemoryApplications,
+    messages: inMemoryMessages,
+    invoices: inMemoryInvoices,
+    notifications: inMemoryNotifications,
     audit: inMemoryAudit,
     driver: "in-memory",
   };

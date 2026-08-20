@@ -226,11 +226,11 @@ function RouteCard({
               </ButtonLink>
               {featured && (
                 <ButtonLink
-                  href={`/contact?service=${service.slug}`}
+                  href={`/portal/start/${service.slug}`}
                   variant="primary"
                   size="sm"
                 >
-                  Start this
+                  Start this application
                   <ArrowRight className="size-4" />
                 </ButtonLink>
               )}

@@ -1,5 +1,6 @@
 import type { ApplicantProfile, EligibilityReport } from "@/domain/eligibility/types";
 import type { DocumentRecord } from "@/domain/documents/types";
+import type { FeeLine } from "@/domain/catalog/types";
 
 export type ApplicationStatus =
   | "draft"
@@ -101,9 +102,85 @@ export interface AuditRepository {
   list(limit?: number): Promise<AuditEntry[]>;
 }
 
+// ── Messages ────────────────────────────────────────────────────────────────
+
+export interface Message {
+  id: string;
+  applicationId: string;
+  at: string;
+  authorId: string;
+  authorName: string;
+  authorRole: "customer" | "staff";
+  body: string;
+  readByCustomer: boolean;
+  readByStaff: boolean;
+}
+
+// ── Invoices ────────────────────────────────────────────────────────────────
+
+export type InvoiceStatus = "draft" | "sent" | "paid" | "overdue" | "void";
+
+export interface Invoice {
+  id: string;
+  reference: string;
+  applicationId: string;
+  userId: string;
+  issuedAt: string;
+  dueAt: string;
+  status: InvoiceStatus;
+  paidAt?: string;
+  /** The same itemised lines the quote was built from. An invoice that cannot be
+   *  reconciled against the published quote would defeat the entire positioning. */
+  lines: FeeLine[];
+  subtotal: number;
+  vat: number;
+  total: number;
+  /** Which part of the process this invoice covers, e.g. "Service fee" or "Government fees". */
+  description: string;
+}
+
+// ── Notifications ───────────────────────────────────────────────────────────
+
+export interface Notification {
+  id: string;
+  userId: string;
+  at: string;
+  title: string;
+  body: string;
+  href?: string;
+  read: boolean;
+  kind: "status" | "document" | "message" | "invoice" | "reminder";
+}
+
+export interface MessageRepository {
+  listForApplication(applicationId: string): Promise<Message[]>;
+  create(message: Omit<Message, "id" | "at">): Promise<Message>;
+  markRead(applicationId: string, reader: "customer" | "staff"): Promise<void>;
+  unreadCountForUser(userId: string): Promise<number>;
+}
+
+export interface InvoiceRepository {
+  listForUser(userId: string): Promise<Invoice[]>;
+  listForApplication(applicationId: string): Promise<Invoice[]>;
+  listAll(): Promise<Invoice[]>;
+  get(id: string): Promise<Invoice | null>;
+  create(invoice: Omit<Invoice, "id" | "issuedAt">): Promise<Invoice>;
+  updateStatus(id: string, status: InvoiceStatus): Promise<Invoice | null>;
+}
+
+export interface NotificationRepository {
+  listForUser(userId: string, limit?: number): Promise<Notification[]>;
+  create(notification: Omit<Notification, "id" | "at" | "read">): Promise<Notification>;
+  markAllRead(userId: string): Promise<void>;
+  unreadCount(userId: string): Promise<number>;
+}
+
 export interface Repositories {
   leads: LeadRepository;
   applications: ApplicationRepository;
+  messages: MessageRepository;
+  invoices: InvoiceRepository;
+  notifications: NotificationRepository;
   audit: AuditRepository;
   /** Which adapter is active. Surfaced in the admin console so it is never ambiguous. */
   driver: "in-memory" | "supabase";

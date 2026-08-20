@@ -162,12 +162,18 @@ export default async function ServiceDetailPage({
                 <ArrowRight className="size-4" />
               </ButtonLink>
               <ButtonLink
-                href={`/contact?service=${service.slug}`}
+                href={`/portal/start/${service.slug}`}
                 variant="outline"
                 className="mt-2.5 w-full"
               >
-                Ask a question
+                Start this application
               </ButtonLink>
+              <Link
+                href={`/contact?service=${service.slug}`}
+                className="text-muted-foreground hover:text-foreground mt-4 block text-center text-sm"
+              >
+                Or ask a question first
+              </Link>
             </CardContent>
           </Card>
         </div>

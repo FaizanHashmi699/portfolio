@@ -1,4 +1,4 @@
-import type { Application, Lead } from "./types";
+import type { Application, Invoice, Lead, Message, Notification } from "./types";
 
 /**
  * Demo data for the zero-key local run.
@@ -241,6 +241,158 @@ export function seedLeads(): Lead[] {
       serviceSlug: "free-zone-company-setup",
       message: "Looking to set up a consultancy licence, which zone is cheapest?",
       source: "contact",
+    },
+  ];
+}
+
+export function seedMessages(): Message[] {
+  return [
+    {
+      id: "msg-1",
+      applicationId: "app-2",
+      at: daysAgo(1),
+      authorId: "demo-admin-1",
+      authorName: "Rashid (Maqam)",
+      authorRole: "staff",
+      body: "Hi Amina — our checks flagged two things on Omar's file. His passport expires in under six months, and the marriage certificate is only attested to the Egyptian MOFA stage. Both are fixable, and it's much cheaper to fix them now than after we've paid the government fee. Happy to walk you through either.",
+      readByCustomer: false,
+      readByStaff: true,
+    },
+    {
+      id: "msg-2",
+      applicationId: "app-1",
+      at: daysAgo(2),
+      authorId: "demo-admin-1",
+      authorName: "Rashid (Maqam)",
+      authorRole: "staff",
+      body: "Your file cleared MoHRE's automated screening this morning and is now with a case officer. Nothing needed from you — I'll update you the moment it moves.",
+      readByCustomer: true,
+      readByStaff: true,
+    },
+    {
+      id: "msg-3",
+      applicationId: "app-1",
+      at: daysAgo(2),
+      authorId: DEMO_USER_ID,
+      authorName: "Amina Yusuf",
+      authorRole: "customer",
+      body: "Thank you — is there anything I should prepare for the medical while we wait?",
+      readByCustomer: true,
+      readByStaff: true,
+    },
+  ];
+}
+
+export function seedInvoices(): Invoice[] {
+  return [
+    {
+      id: "inv-1",
+      reference: "INV-2026-0417",
+      applicationId: "app-1",
+      userId: DEMO_USER_ID,
+      issuedAt: daysAgo(12),
+      dueAt: daysAgo(5),
+      status: "paid",
+      paidAt: daysAgo(11),
+      description: "Service fee — mainland employment visa",
+      lines: [
+        {
+          kind: "service",
+          label: "Maqam service fee",
+          amount: 1800,
+          vatable: true,
+          note: "MoHRE and ICP handling, document validation, appointment coordination.",
+        },
+      ],
+      subtotal: 1800,
+      vat: 90,
+      total: 1890,
+    },
+    {
+      id: "inv-2",
+      reference: "INV-2026-0418",
+      applicationId: "app-1",
+      userId: DEMO_USER_ID,
+      issuedAt: daysAgo(9),
+      dueAt: daysAgo(2),
+      status: "paid",
+      paidAt: daysAgo(9),
+      description: "Government and third-party fees — passed through at cost",
+      lines: [
+        {
+          kind: "government",
+          label: "MoHRE work permit",
+          amount: 2000,
+          vatable: false,
+        },
+        { kind: "government", label: "Entry permit", amount: 500, vatable: false },
+        {
+          kind: "third-party",
+          label: "Medical fitness test",
+          amount: 320,
+          vatable: true,
+        },
+      ],
+      subtotal: 2820,
+      vat: 16,
+      total: 2836,
+    },
+    {
+      id: "inv-3",
+      reference: "INV-2026-0431",
+      applicationId: "app-2",
+      userId: DEMO_USER_ID,
+      issuedAt: daysAgo(4),
+      dueAt: daysAgo(-10),
+      status: "sent",
+      description: "Service fee — spouse sponsorship",
+      lines: [
+        {
+          kind: "service",
+          label: "Maqam service fee",
+          amount: 1200,
+          vatable: true,
+          note: "Eligibility check, document preparation and submission.",
+        },
+      ],
+      subtotal: 1200,
+      vat: 60,
+      total: 1260,
+    },
+  ];
+}
+
+export function seedNotifications(): Notification[] {
+  return [
+    {
+      id: "notif-1",
+      userId: DEMO_USER_ID,
+      at: daysAgo(1),
+      title: "Two issues found on MQ-2026-0431",
+      body: "Passport validity and an incomplete attestation chain. Both fixable.",
+      href: "/portal/applications/app-2",
+      read: false,
+      kind: "document",
+    },
+    {
+      id: "notif-2",
+      userId: DEMO_USER_ID,
+      at: daysAgo(1),
+      title: "New message from Rashid",
+      body: "About the documents on Omar's sponsorship application.",
+      href: "/portal/applications/app-2",
+      read: false,
+      kind: "message",
+    },
+    {
+      id: "notif-3",
+      userId: DEMO_USER_ID,
+      at: daysAgo(2),
+      title: "MQ-2026-0417 is with the authority",
+      body: "Cleared automated screening and is now with a case officer.",
+      href: "/portal/applications/app-1",
+      read: true,
+      kind: "status",
     },
   ];
 }

@@ -8,6 +8,9 @@ import { Section } from "@/components/ui/section";
 import { StatusBadge } from "@/components/portal/status-badge";
 import { RiskPanel } from "@/components/portal/risk-panel";
 import { getRepositories } from "@/server/repositories";
+import { DocumentUploader } from "@/components/portal/document-uploader";
+import { MessageThread } from "@/components/portal/message-thread";
+import { InvoiceList } from "@/components/portal/invoice-list";
 import { isTerminal } from "@/server/repositories/types";
 import { requireUser } from "@/server/auth";
 import { getService } from "@/domain/catalog/services";
@@ -39,7 +42,7 @@ export default async function ApplicationPage({
 }) {
   const { id } = await params;
   const user = await requireUser();
-  const { applications } = await getRepositories();
+  const { applications, messages, invoices } = await getRepositories();
   const application = await applications.get(id);
 
   // Ownership is enforced here as well as in the database. Defence in depth: an
@@ -53,6 +56,13 @@ export default async function ApplicationPage({
   const risk = validateDocuments(application.documents, {
     requirements: closed ? undefined : service?.documents,
   });
+
+  const [thread, applicationInvoices] = await Promise.all([
+    messages.listForApplication(application.id),
+    invoices.listForApplication(application.id),
+  ]);
+  // Opening the application is the moment the customer has actually seen the thread.
+  await messages.markRead(application.id, "customer");
 
   return (
     <Section className="py-10">
@@ -175,6 +185,25 @@ export default async function ApplicationPage({
               )}
             </CardContent>
           </Card>
+          {!closed && service && (
+            <DocumentUploader
+              applicationId={application.id}
+              requirements={service.documents}
+            />
+          )}
+
+          <MessageThread
+            applicationId={application.id}
+            messages={thread}
+            viewerRole="customer"
+          />
+
+          {applicationInvoices.length > 0 && (
+            <div>
+              <h2 className="text-h2 mb-4">Invoices</h2>
+              <InvoiceList invoices={applicationInvoices} />
+            </div>
+          )}
         </div>
 
         <Card className="lg:sticky lg:top-24">

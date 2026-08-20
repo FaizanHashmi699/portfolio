@@ -1,17 +1,20 @@
 import "server-only";
 import { cookies } from "next/headers";
-import { features, env } from "@/server/env";
+import { env, features } from "@/server/env";
 import { DEMO_USER_ID } from "@/server/repositories/seed";
 
 /**
  * Session resolution.
  *
- * With Supabase configured, the session comes from the Supabase auth cookie. Without it,
- * the app runs in demo mode against a fixed local user so the portal and admin console are
- * fully explorable on a laptop with no accounts.
+ * With Supabase configured this reads the real auth session. Without it, the app runs in
+ * demo mode against a fixed local identity so the portal and console are fully explorable
+ * on a laptop with no accounts.
  *
- * Demo mode is deliberately loud: `isDemo` is surfaced in the UI on every authenticated
- * page, so it is never possible to mistake seeded data for real customer data.
+ * Demo mode is deliberately signed in by default — requiring a login to see seeded data
+ * would be friction with nothing behind it. The sign-in, sign-up and password flows are
+ * still fully present and become real the moment Supabase credentials appear; in demo they
+ * act as a role switcher. `isDemo` is surfaced on every authenticated page so seeded data
+ * can never be mistaken for the real thing.
  */
 
 export type Role = "customer" | "staff" | "admin";
@@ -23,6 +26,9 @@ export interface SessionUser {
   role: Role;
   isDemo: boolean;
 }
+
+export const DEMO_ROLE_COOKIE = "maqam-demo-role";
+export const DEMO_SIGNED_OUT_COOKIE = "maqam-demo-signed-out";
 
 const DEMO_CUSTOMER: SessionUser = {
   id: DEMO_USER_ID,
@@ -40,53 +46,73 @@ const DEMO_ADMIN: SessionUser = {
   isDemo: true,
 };
 
-export async function getCurrentUser(): Promise<SessionUser | null> {
-  if (!features.database) {
-    // Demo mode. A cookie lets you flip between the two consoles while exploring.
-    const store = await cookies();
-    return store.get("maqam-demo-role")?.value === "admin" ? DEMO_ADMIN : DEMO_CUSTOMER;
-  }
+export function demoUserForRole(role: string | undefined): SessionUser {
+  return role === "admin" || role === "staff" ? DEMO_ADMIN : DEMO_CUSTOMER;
+}
 
+/** Creates a Supabase client bound to the request's cookies. */
+export async function getSupabaseServerClient() {
   const { createServerClient } = await import("@supabase/ssr");
   const store = await cookies();
 
-  const supabase = createServerClient(
+  return createServerClient(
     env.NEXT_PUBLIC_SUPABASE_URL!,
     env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
         getAll: () => store.getAll(),
         setAll: (items) => {
-          // Server Components cannot set cookies; middleware refreshes the session instead.
+          // Server Components cannot set cookies. Server Actions and Route Handlers can,
+          // which is where sign-in and sign-out run.
           try {
             for (const item of items) {
               store.set(item.name, item.value, item.options);
             }
           } catch {
-            /* no-op in a Server Component render */
+            /* no-op during a Server Component render */
           }
         },
       },
     },
   );
+}
 
+export async function getCurrentUser(): Promise<SessionUser | null> {
+  const store = await cookies();
+
+  if (!features.database) {
+    if (store.get(DEMO_SIGNED_OUT_COOKIE)?.value === "1") return null;
+    return demoUserForRole(store.get(DEMO_ROLE_COOKIE)?.value);
+  }
+
+  const supabase = await getSupabaseServerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const role = (user.app_metadata?.role as Role | undefined) ?? "customer";
+  // The role is read from the profiles table, never from user-editable metadata —
+  // a role a user can set on themselves is not a role.
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role, full_name")
+    .eq("id", user.id)
+    .maybeSingle();
 
   return {
     id: user.id,
     email: user.email ?? "",
-    name: (user.user_metadata?.full_name as string | undefined) ?? user.email ?? "",
-    role,
+    name:
+      (profile?.full_name as string | undefined) ??
+      (user.user_metadata?.full_name as string | undefined) ??
+      user.email ??
+      "",
+    role: ((profile?.role as Role | undefined) ?? "customer") satisfies Role,
     isDemo: false,
   };
 }
 
-/** Throws if there is no session. Use at the top of every authenticated page. */
+/** Returns the session or null. Pages should redirect rather than throw. */
 export async function requireUser(): Promise<SessionUser> {
   const user = await getCurrentUser();
   if (!user) throw new Error("UNAUTHENTICATED");
@@ -96,17 +122,27 @@ export async function requireUser(): Promise<SessionUser> {
 /**
  * Throws unless the session holds a staff or admin role.
  *
- * In demo mode there is no authentication at all, so this resolves to the demo operator
- * rather than refusing: the console has to be explorable on a fresh checkout, and the
- * demo banner makes it unmistakable that none of the data is real. The moment Supabase
- * is configured, this becomes a genuine role check with no special case.
+ * In demo mode there is no authentication to enforce, so this resolves to the demo
+ * operator rather than refusing — the console has to be explorable on a fresh checkout,
+ * and the demo banner makes it unmistakable that no data is real. With Supabase
+ * configured this becomes a genuine role check with no special case.
  */
 export async function requireStaff(): Promise<SessionUser> {
-  if (!features.database) return DEMO_ADMIN;
+  if (!features.database) {
+    const store = await cookies();
+    if (store.get(DEMO_SIGNED_OUT_COOKIE)?.value === "1") {
+      throw new Error("UNAUTHENTICATED");
+    }
+    return DEMO_ADMIN;
+  }
 
   const user = await requireUser();
   if (user.role !== "staff" && user.role !== "admin") {
     throw new Error("FORBIDDEN");
   }
   return user;
+}
+
+export function isStaff(user: SessionUser | null): boolean {
+  return user?.role === "staff" || user?.role === "admin";
 }

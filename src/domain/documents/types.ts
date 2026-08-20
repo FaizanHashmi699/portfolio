@@ -50,7 +50,13 @@ export interface DocumentRecord {
   uploadedAt: string;
   sizeBytes: number;
   mimeType: string;
+  /** Object key in private storage. Never a public URL — reads go through signed URLs. */
+  storagePath?: string;
   fields?: ExtractedFields;
+  /** Set once a staff member has reviewed the document by eye. */
+  reviewedAt?: string;
+  reviewedBy?: string;
+  reviewNote?: string;
 }
 
 export interface Finding {

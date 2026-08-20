@@ -89,7 +89,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <ButtonLink
-            href="/portal"
+            href="/sign-in"
             variant="ghost"
             size="sm"
             className="hidden sm:inline-flex"
