@@ -20,6 +20,7 @@ export default function ReviewsPage() {
     <>
       <Section className="pb-8">
         <SectionHeading
+          as="h1"
           eyebrow="Reviews"
           title="We don't host our own five-star wall."
           description="Not out of modesty. Self-published, uniformly glowing reviews are now one of the clearest warning signs in this category, and sophisticated buyers discount them on sight."

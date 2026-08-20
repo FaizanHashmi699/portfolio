@@ -44,6 +44,7 @@ export default function NationalitiesPage() {
     <>
       <Section className="pb-8">
         <SectionHeading
+          as="h1"
           eyebrow="By nationality"
           title="Your passport changes two things."
           description="Whether you can get a visa on arrival, and how your documents must be legalised. Everything else is the same — but those two differences decide your timeline and a good part of your cost."

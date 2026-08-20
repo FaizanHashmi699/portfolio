@@ -8,6 +8,16 @@ import { expect, test } from "@playwright/test";
  */
 const PAGES = [
   { path: "/", name: "homepage" },
+  { path: "/uae-visa-for", name: "nationalities" },
+  { path: "/uae-visa-for/india", name: "nationality detail" },
+  { path: "/free-zones", name: "free zones" },
+  { path: "/free-zones/dmcc", name: "free zone detail" },
+  { path: "/faq", name: "faq" },
+  { path: "/reviews", name: "reviews" },
+  { path: "/search", name: "search" },
+  { path: "/sign-in", name: "sign in" },
+  { path: "/legal/accessibility", name: "accessibility statement" },
+  { path: "/legal/cookies", name: "cookies" },
   { path: "/services", name: "services" },
   { path: "/services/golden-visa", name: "service detail" },
   { path: "/pricing", name: "pricing" },
@@ -26,6 +36,9 @@ for (const target of PAGES) {
 
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      // Not a WCAG failure, but a page with no h1 is genuinely hard to navigate with a
+      // screen reader — and we shipped seven of them before this rule was added.
+      .withRules(["page-has-heading-one"])
       .analyze();
 
     const serious = results.violations.filter(

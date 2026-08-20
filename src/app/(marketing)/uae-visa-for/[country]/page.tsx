@@ -26,6 +26,14 @@ import { formatAed, slugify } from "@/lib/utils";
  * carefully avoid: what specifically applies to someone with *your* passport.
  */
 
+/**
+ * The valid slugs are known at build time and the set is finite, so anything else is a
+ * genuine 404 rather than a page to attempt. Without this Next renders the route on
+ * demand, reaches notFound(), and can still serve the result with a 200 — which tells
+ * search engines a nonexistent page exists.
+ */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return countries.map((country) => ({ country: slugify(country.name) }));
 }

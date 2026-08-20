@@ -17,6 +17,31 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#0a0f1a",
     orientation: "portrait-primary",
     categories: ["business", "productivity"],
-    icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" }],
+    icons: [
+      { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
+      // Android crops maskable icons to the launcher's shape. Without a maskable
+      // variant the mark gets clipped on most devices.
+      {
+        src: "/icon-maskable.svg",
+        sizes: "any",
+        type: "image/svg+xml",
+        purpose: "maskable",
+      },
+      { src: "/apple-icon", sizes: "180x180", type: "image/png", purpose: "any" },
+    ],
+    shortcuts: [
+      {
+        name: "Check eligibility",
+        short_name: "Eligibility",
+        url: "/eligibility",
+        description: "Find out which UAE visa routes you qualify for",
+      },
+      {
+        name: "My applications",
+        short_name: "Applications",
+        url: "/portal",
+        description: "Track where each application stands",
+      },
+    ],
   };
 }

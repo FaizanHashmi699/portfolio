@@ -18,6 +18,7 @@ export default function GuidesPage() {
   return (
     <Section>
       <SectionHeading
+        as="h1"
         eyebrow="Guides"
         title="The answers most consultancies leave out."
         description="We write about the parts where the honest answer costs the writer a lead — which route you don't qualify for, why a cheaper quote isn't cheaper, and what actually causes refusals."

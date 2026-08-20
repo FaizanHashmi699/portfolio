@@ -229,11 +229,27 @@ export function queryTerms(query: string): string[] {
  * match — someone typing "golden visa" wants the Golden Visa page, not every page that
  * happens to mention it.
  */
+export interface SearchOptions {
+  limit?: number;
+  /**
+   * Lowers the matching bar to a bare majority of terms.
+   *
+   * Site search stays strict: someone typing two words means both, and returning loosely
+   * related pages is worse than returning nothing. The assistant uses relaxed matching as
+   * a second pass, because a question like "will my golden visa be approved" contains
+   * words that appear nowhere in the catalog and should still find the Golden Visa page.
+   */
+  relaxed?: boolean;
+}
+
 export function searchEntries(
   index: SearchEntry[],
   query: string,
-  limit = 20,
+  options: SearchOptions | number = {},
 ): SearchEntry[] {
+  const { limit = 20, relaxed = false } =
+    typeof options === "number" ? { limit: options } : options;
+
   const terms = queryTerms(query);
   if (terms.length === 0) return [];
 
@@ -242,7 +258,11 @@ export function searchEntries(
    * Longer queries are sentences, where insisting on every word returns nothing useful.
    * Requiring a majority keeps precision without punishing people for writing normally.
    */
-  const required = terms.length <= 3 ? terms.length : Math.ceil(terms.length * 0.6);
+  const required = relaxed
+    ? Math.max(1, Math.ceil(terms.length / 2))
+    : terms.length <= 3
+      ? terms.length
+      : Math.ceil(terms.length * 0.6);
 
   const scored = index.map((entry) => {
     const title = normalise(entry.title);

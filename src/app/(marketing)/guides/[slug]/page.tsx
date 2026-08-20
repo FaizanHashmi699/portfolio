@@ -13,6 +13,14 @@ import { breadcrumbJsonLd } from "@/lib/seo";
 import { brand } from "@/config/brand";
 import { formatAed, formatDate } from "@/lib/utils";
 
+/**
+ * The valid slugs are known at build time and the set is finite, so anything else is a
+ * genuine 404 rather than a page to attempt. Without this Next renders the route on
+ * demand, reaches notFound(), and can still serve the result with a 200 — which tells
+ * search engines a nonexistent page exists.
+ */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return guides.map((guide) => ({ slug: guide.slug }));
 }

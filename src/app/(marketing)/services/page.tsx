@@ -30,6 +30,7 @@ export default async function ServicesPage({
     <>
       <Section className="pb-8">
         <SectionHeading
+          as="h1"
           eyebrow="Services"
           title={active ? active.headline : "Everything we do, priced in the open."}
           description={

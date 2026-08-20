@@ -16,8 +16,11 @@ test.describe("customer portal", () => {
     await page.goto("/portal");
 
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Hello");
-    await expect(page.getByText("MQ-2026-0417").first()).toBeVisible();
-    await expect(page.getByRole("heading", { name: /to fix/i })).toBeVisible();
+    // Scoped to main: the notification bell also mentions these references, and its
+    // dropdown contents are in the DOM but hidden.
+    const main = page.getByRole("main");
+    await expect(main.getByText("MQ-2026-0417").first()).toBeVisible();
+    await expect(main.getByRole("heading", { name: /to fix/i })).toBeVisible();
   });
 
   test("shows the glass-box timeline on an application", async ({ page }) => {
@@ -27,10 +30,11 @@ test.describe("customer portal", () => {
       .first()
       .click();
 
-    await expect(page.getByRole("heading", { name: /progress/i })).toBeVisible();
-    await expect(page.getByText(/under review by mohre/i).first()).toBeVisible();
+    const main = page.getByRole("main");
+    await expect(main.getByRole("heading", { name: /progress/i })).toBeVisible();
+    await expect(main.getByText(/under review by mohre/i).first()).toBeVisible();
     // Whose turn it is must be visible, not inferred.
-    await expect(page.getByText("Authority").first()).toBeVisible();
+    await expect(main.getByText("Authority").first()).toBeVisible();
   });
 
   test("scores rejection risk and gives a fix for every finding", async ({ page }) => {

@@ -28,7 +28,15 @@ export interface RetrievedContext {
 const index = buildSearchIndex();
 
 export function retrieveContext(question: string): RetrievedContext {
-  const entries = searchEntries(index, question, 6);
+  // Strict first, so a precise question gets a precise answer. Questions routinely
+  // contain words that appear nowhere in the catalog ("will my golden visa be
+  // approved"), so fall back to majority matching rather than giving up.
+  const strict = searchEntries(index, question, { limit: 6 });
+  const entries =
+    strict.length > 0
+      ? strict
+      : searchEntries(index, question, { limit: 6, relaxed: true });
+
   const facts: string[] = [];
 
   for (const entry of entries) {

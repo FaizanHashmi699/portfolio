@@ -30,6 +30,7 @@ export default function FreeZonesPage() {
     <>
       <Section className="pb-8">
         <SectionHeading
+          as="h1"
           eyebrow="Free zones"
           title="Compared honestly, downsides included."
           description="Free zones pay consultants referral commissions, which is exactly why almost no published comparison is neutral. Every zone below lists what it is bad at alongside what it is good at — including the ones it would pay us most to recommend."

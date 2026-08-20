@@ -86,3 +86,21 @@ describe("fallbackAnswer", () => {
     expect(answer).not.toMatch(/AED/);
   });
 });
+
+describe("question phrasing", () => {
+  it("finds the right page even when the question uses words we never publish", () => {
+    // "approved" appears nowhere in the catalog, but the question is obviously about
+    // the Golden Visa and must not come back empty.
+    const context = retrieveContext("will my golden visa be approved");
+    expect(context.facts.join("\n")).toContain("Golden Visa");
+  });
+
+  it("still refuses to guess at genuine nonsense", () => {
+    // The relaxed fallback must not turn into "always return something".
+    expect(retrieveContext("qwertyuiop asdfghjkl zxcvbnm").facts).toEqual([]);
+  });
+
+  it("handles a question with no catalog terms at all", () => {
+    expect(retrieveContext("what is the weather like today").facts).toEqual([]);
+  });
+});

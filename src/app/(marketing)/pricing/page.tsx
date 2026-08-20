@@ -34,6 +34,7 @@ export default async function PricingPage({
 
       <Section className="pb-8">
         <SectionHeading
+          as="h1"
           eyebrow="Pricing"
           title="Four lines. That's the whole quote."
           description="Every price we publish splits into what the government takes, what mandated third parties take, what we take, and VAT. You can verify each one independently — which is exactly the point."

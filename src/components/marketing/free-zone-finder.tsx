@@ -101,7 +101,7 @@ export function FreeZoneFinder() {
             : `${results.length} zone${results.length === 1 ? "" : "s"} fit, cheapest first.`}
         </p>
 
-        <ul className="mt-5 space-y-4">
+        <ul className="mt-5 space-y-4" aria-label="Matching free zones">
           {results.map((zone) => (
             <li key={zone.slug}>
               <Card className="relative">

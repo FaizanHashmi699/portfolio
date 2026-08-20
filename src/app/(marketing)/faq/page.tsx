@@ -26,6 +26,7 @@ export default function FaqPage() {
 
       <Section className="pb-4">
         <SectionHeading
+          as="h1"
           eyebrow="FAQ"
           title="Straight answers, including the awkward ones."
           description="If a question here has an answer that costs us a sale, that is usually a sign it was worth publishing."

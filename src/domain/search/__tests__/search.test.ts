@@ -122,3 +122,23 @@ describe("natural-language queries", () => {
     expect(searchEntries(index, "what is the qwertyuiop")).toEqual([]);
   });
 });
+
+describe("relaxed matching", () => {
+  it("is off by default, so site search stays precise", () => {
+    expect(searchEntries(index, "golden unicorn")).toEqual([]);
+  });
+
+  it("finds the obvious page when explicitly relaxed", () => {
+    const results = searchEntries(index, "golden unicorn", { relaxed: true });
+    expect(results.some((entry) => entry.title.includes("Golden Visa"))).toBe(true);
+  });
+
+  it("does not turn into 'always return something'", () => {
+    expect(searchEntries(index, "qwerty asdfgh zxcvb", { relaxed: true })).toEqual([]);
+  });
+
+  it("still accepts a plain number as the limit", () => {
+    // The older call signature is used in several places; keep it working.
+    expect(searchEntries(index, "visa", 3).length).toBeLessThanOrEqual(3);
+  });
+});
