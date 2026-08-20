@@ -66,12 +66,17 @@ Runs 30–60 concurrent applications. Spends a large share of the day answering 
 
 ### v2 — next, not now
 
-- Real document upload with OCR extraction feeding the existing validation rules
-- Payments (Stripe or Telr) with staged collection matching when fees fall due
-- Arabic, Hindi, Urdu and Russian, with full RTL
-- WhatsApp Business API for status notifications on the channel this market actually uses
-- Corporate dashboard for HR-managed bulk visas
-- Automated expiry monitoring and renewal prompts
+- **OCR extraction** feeding the existing validation rules. Upload works today and the
+  rules run on the fields; we ask for those fields rather than reading them, because
+  inventing a passport expiry would be far worse than asking for one.
+- **Payments** (Stripe or Telr) with staged collection matching when fees actually fall due
+- **Translated service and legal content**, professionally reviewed. Navigation and the
+  homepage are translated; the detail is not, deliberately.
+- **WhatsApp Business API** for status notifications on the channel this market uses
+- **Corporate dashboard** for HR-managed bulk visas — the highest-LTV segment, served by
+  nobody here with real software
+- **Automated expiry monitoring** and renewal prompts
+- **Durable analytics aggregates** written on a schedule, preserving unlinkability
 
 ### Explicitly out of scope
 

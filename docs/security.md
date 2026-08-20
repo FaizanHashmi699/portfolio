@@ -88,11 +88,17 @@ mass-assignment bugs happen.
 Public mutation endpoints are rate limited per IP: 5/minute for saving an eligibility
 report, 3/minute for the contact form.
 
-The current implementation is an in-process fixed window, which is honest about what it is
-— it protects a single serverless instance, not the fleet. It stops trivial abuse at zero
-cost and no extra infrastructure. **Before taking real traffic this must move to Upstash
-Redis or Vercel KV** so the window is shared across instances; the call site does not
-change when it does.
+Two backends sit behind one call. Without Redis configured this is an in-process fixed
+window, which is honest about what it protects: a single serverless instance, not the
+fleet. Setting `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` switches it to a
+window shared across every instance, with no change at the call site.
+
+The Redis path fails **open**. If Redis is unreachable we allow the request rather than
+locking every customer out of the sign-in form because a cache is down — a brief window of
+unlimited requests is a smaller harm than a total outage.
+
+Sign-in is limited harder than other forms (8 attempts per 5 minutes) because it is the
+endpoint actually worth brute-forcing.
 
 ## 7. Transport and browser headers
 
@@ -168,7 +174,8 @@ one who does not.
 Stated openly, because a security document that lists no gaps is not describing a real
 system.
 
-1. **Rate limiting is per-instance.** Move to shared Redis before real traffic.
+1. **Shared rate limiting is optional.** The Upstash adapter exists but is not required.
+   Configure it before real traffic, or limits protect one instance rather than the fleet.
 2. **No malware scanning on uploads.** Files are type- and size-restricted but not scanned.
    Add an antivirus step before staff open documents at volume.
 3. **No MFA on staff accounts.** Should be mandatory before staff handle live customer

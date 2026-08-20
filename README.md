@@ -63,6 +63,21 @@ Everything in this codebase follows from those two facts.
 - Node.js 20.9+ (22 recommended)
 - npm 10+
 
+### What's in it
+
+| Area              | Detail                                                                                                                                                                 |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Services**      | 14 across UAE visas, business setup, outbound visas and attestation — each with a full itemised fee table, real processing windows and its published rejection reasons |
+| **Nationalities** | 48 countries with their actual entry rule and exact attestation chain, including whether the Hague Apostille route applies                                             |
+| **Free zones**    | 12 compared on cost, visa quota and premises — every one publishing what it is _bad_ at                                                                                |
+| **Eligibility**   | 10 routes as versioned, effective-dated rule data; deterministic scoring with blockers and concrete fixes                                                              |
+| **Documents**     | Validation at upload against the government's own screening criteria, producing a rejection-risk score before any fee is paid                                          |
+| **Portal**        | Glass-box timeline, document upload, message threads, invoices carrying the same lines as the quote, in-app notifications                                              |
+| **Console**       | Pipeline reports, per-document human review, team roles, append-only audit log, live integration status                                                                |
+| **Assistant**     | Answers strictly from the published catalog and cites the page each answer came from. Works with no API key.                                                           |
+| **Search**        | Client-side over a build-time index. No search service, no third-party script.                                                                                         |
+| **Content**       | Four in-depth guides, three FAQ sets, privacy / terms / disclaimer / cookies / accessibility                                                                           |
+
 ### Commands
 
 | Command                 | What it does                                    |
@@ -137,7 +152,15 @@ Set `RESEND_API_KEY` and `RESEND_FROM_EMAIL` from [resend.com](https://resend.co
 them, emails are logged to the server console — which is what you want locally and in CI,
 and stops you emailing real people by accident.
 
-### 4. Deploy
+### 4. Shared rate limiting — Upstash
+
+Set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` from
+[upstash.com](https://upstash.com). Without them, rate limiting protects a single
+serverless instance rather than the whole fleet — fine locally, not fine under real
+traffic. The Redis path fails open: an unreachable cache must not lock every customer out
+of the sign-in form.
+
+### 5. Deploy
 
 **Frontend and backend together, on Vercel.** There is no separate backend service to
 deploy: Next.js Route Handlers and Server Actions _are_ the backend. See
@@ -180,7 +203,12 @@ src/
 │   ├── eligibility/    the rules engine
 │   ├── pricing/        fee computation
 │   ├── documents/      validation and rejection-risk scoring
-│   └── catalog/        services, fees, requirements
+│   ├── catalog/        services, fees, requirements
+│   ├── geography/      countries, attestation chains, free zones
+│   ├── analytics/      reporting and the privacy-preserving hashing
+│   ├── search/         index building and scoring
+│   └── assistant/      retrieval over the catalog
+├── i18n/           locale config and typed dictionaries
 └── content/        guides, FAQs, legal copy
 ```
 
@@ -208,13 +236,16 @@ for.
 ## Testing
 
 ```
-npm test          90 unit tests  — domain logic: pricing, eligibility, documents
-npm run test:e2e  108 e2e tests  — real journeys in a real browser, desktop + mobile
+npm test          241 unit tests  — pricing, eligibility, documents, geography,
+                                    search, assistant, reporting, i18n, privacy
+npm run test:e2e  256 e2e tests   — real journeys in a real browser, desktop + mobile
 ```
 
-The end-to-end suite covers the marketing site, the full eligibility journey, the portal,
-the admin console, accessibility (axe, WCAG 2.1 AA, zero serious violations across 11
-pages), and security headers.
+The end-to-end suite covers the marketing site, the full eligibility journey, sign-in and
+password reset, starting an application, document upload, messaging, invoices, the admin
+console, the localised RTL pages, the assistant, error and offline states, accessibility
+(axe, WCAG 2.1 AA plus the missing-h1 rule, zero serious violations across 21 pages), and
+security headers.
 
 `e2e/security.spec.ts` exists because of a real bug. An earlier nonce-based CSP blocked
 every Next.js script: the HTML rendered perfectly, every content assertion passed, and the

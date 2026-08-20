@@ -61,13 +61,24 @@ which is precisely why it is unit-testable without mocks or a running database.
 │   ├─ eligibility/  the rules engine                         │
 │   ├─ pricing/      fee computation                          │
 │   ├─ documents/    validation rules + risk scoring          │
-│   └─ catalog/      services, visa types, requirements       │
+│   ├─ catalog/      services, visa types, requirements       │
+│   ├─ geography/    countries, attestation chains, zones     │
+│   ├─ analytics/    reporting + privacy-preserving hashing   │
+│   ├─ search/       index building and scoring               │
+│   └─ assistant/    retrieval over the catalog               │
 └────────────────────────────────────────────────────────────┘
 ```
 
 **The rule that matters:** `domain/` must never import from `server/`, `app/`, or any
 package that performs I/O. This is enforced by lint and by the fact that domain tests run
 with no database, no network, and no environment variables.
+
+The rule earns its keep. The analytics privacy logic was originally written beside its
+event store in `server/services/`, which imports `server-only` — and that import made the
+module untestable. The guard was right and the code was in the wrong layer: the hashing and
+aggregation are pure, so they moved to `domain/analytics/`, leaving the server module
+owning only the rotating salt and the bounded buffer. The unlinkability claim on our
+cookies page is now asserted by direct unit tests rather than by intent.
 
 ## 4. The data adapter (how zero-key local dev works)
 
@@ -197,7 +208,44 @@ justified, not the default.
 Domain tests are the ones that matter most: they encode the business rules that, if wrong,
 cost a customer a rejected application.
 
-## 11. Deployment
+## 11. Content, search and the assistant
+
+Three surfaces share one index, built at request time from the catalog, guides, country
+data, free zones and FAQs:
+
+- **Site search** — client-side scoring over that index. No search service and no
+  third-party script, which keeps the content security policy tight and costs nothing to
+  run. Field-weighted: a title match beats a description match beats a keyword match.
+- **The assistant** — the same retrieval, resolved into pre-computed facts (exact totals,
+  exact fee lines, that country's exact attestation chain) which are handed to the model.
+  It is never asked what it knows about UAE immigration. See ADR-0002 for why.
+- **Nationality and free-zone pages** — generated from `domain/geography`, so the country a
+  visitor reads about and the country the assistant cites cannot disagree.
+
+Matching is strict for search and falls back to majority matching for the assistant.
+Someone typing two words into a search box means both; someone asking "will my golden visa
+be approved" uses words that appear nowhere in the catalog and should still reach the right
+page.
+
+## 12. Internationalisation
+
+Five locales, chosen from the actual UAE expatriate population rather than a generic list.
+English stays unprefixed at the root; Arabic, Hindi, Urdu and Russian are additive routes.
+Arabic and Urdu render right-to-left. Only genuinely translated pages exist and enter the
+sitemap — see ADR-0005 for why serving English under an `/ar` path would be worse than not
+having it.
+
+Money and dates keep Western digits under RTL, deliberately: a customer must be able to
+match our figures against a government portal character for character.
+
+## 13. Analytics
+
+First-party, cookieless, and structurally unable to follow anyone between visits. The
+visitor hash mixes IP and user agent with a salt regenerated on every process start and
+never persisted. That rules out funnels and cohorts, which is a real cost, taken knowingly
+for this audience. See ADR-0006.
+
+## 14. Deployment
 
 ```
 GitHub push

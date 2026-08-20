@@ -89,7 +89,8 @@ production customer data.
 - [ ] `npm run verify` green
 - [ ] `npm run test:e2e` green
 - [ ] Lighthouse ≥ 95 on performance, accessibility, best practices and SEO
-- [ ] Open Graph image added
+- [ ] Open Graph cards checked in a real share preview (they are generated per page)
+- [ ] Localised pages reviewed by a native speaker before the translation notice comes down
 - [ ] Sitemap submitted to Google Search Console and Bing Webmaster Tools
 - [ ] Real applications processed end to end in staging
 
