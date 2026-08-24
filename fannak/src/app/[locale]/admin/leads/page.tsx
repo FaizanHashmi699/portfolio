@@ -39,17 +39,22 @@ export default async function AdminLeads({
                     <p className="font-mono text-xs text-[var(--color-ink-500)]">
                       {lead.ref}
                     </p>
-                    <h3 className="font-bold">{lead.customer_name}</h3>
+                    <h3 className="font-bold" data-user-content>
+                      {lead.customer_name}
+                    </h3>
                     <p className="font-mono text-sm text-[var(--color-ink-500)]" dir="ltr">
                       {lead.phone}
                     </p>
                     {lead.notes ? (
-                      <p className="mt-1 text-sm text-[var(--color-ink-500)]">
+                      <p
+                        className="mt-1 text-sm text-[var(--color-ink-500)]"
+                        data-user-content
+                      >
                         {lead.notes}
                       </p>
                     ) : null}
                   </div>
-                  <span className="pill">{lead.status}</span>
+                  <span className="pill">{t(`status.lead.${lead.status}`)}</span>
                 </div>
 
                 {assigned.length ? (

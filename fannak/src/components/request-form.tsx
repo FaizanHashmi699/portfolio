@@ -227,7 +227,9 @@ export function RequestForm({
       </div>
 
       {state.message ? (
-        <p className="text-sm text-[var(--color-sand-600)]">{state.message}</p>
+        <p className="text-sm text-[var(--color-sand-600)]">
+          {t("errors.write_failed")}
+        </p>
       ) : null}
 
       <div>

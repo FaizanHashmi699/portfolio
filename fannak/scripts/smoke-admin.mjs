@@ -96,7 +96,9 @@ try {
   }, optionValue);
   await leadCard.locator('button[type="submit"]').click();
   await page.waitForTimeout(1800);
-  const refused = await page.locator("text=insufficient credits").count();
+  // The message is translated now, so assert the rendered English string —
+  // and that no assignment was actually created.
+  const refused = await page.locator("text=Not enough credits").count();
   check("server refuses assignment without credits", refused > 0);
 
   // --- Top up, then assign ----------------------------------------------

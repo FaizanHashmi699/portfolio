@@ -66,14 +66,24 @@ export default async function AdminOverview({
               <span
                 className={`pill ${m.status === "failed" ? "text-[var(--color-sand-600)]" : ""}`}
               >
-                {m.status}
+                {t(`status.message.${m.status}`)}
               </span>
               <span className="font-mono text-xs" dir="ltr">
-                {m.recipient}
+                {m.recipient === "unknown"
+                  ? t("admin.recipient_unknown")
+                  : m.recipient}
               </span>
-              <span className="text-[var(--color-ink-500)]">{m.template}</span>
+              <span className="text-[var(--color-ink-500)]">
+                {m.template === "manual"
+                  ? t("admin.template_manual")
+                  : t("admin.template_auto")}
+              </span>
               {m.error ? (
-                <span className="text-xs text-[var(--color-sand-600)]">{m.error}</span>
+                <span className="text-xs text-[var(--color-sand-600)]">
+                  {m.error === "partner_missing_phone"
+                    ? t("errors.partner_missing_phone")
+                    : t("errors.send_failed_generic")}
+                </span>
               ) : null}
             </div>
           ))}

@@ -35,7 +35,9 @@ export function CreditsForm({ tenantId }: { tenantId: string }) {
         </span>
       ) : null}
       {state.status === "error" ? (
-        <span className="text-sm text-[var(--color-sand-600)]">{state.message}</span>
+        <span className="text-sm text-[var(--color-sand-600)]">
+          {state.message ? t(`errors.${state.message}`, state.params ?? {}) : null}
+        </span>
       ) : null}
     </form>
   );

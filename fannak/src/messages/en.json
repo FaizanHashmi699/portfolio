@@ -133,7 +133,10 @@
     "assigned": "Assigned",
     "credits_cost": "Cost",
     "no_credits": "no credits",
-    "open_whatsapp": "Open WhatsApp"
+    "open_whatsapp": "Open WhatsApp",
+    "template_auto": "Automatic message",
+    "template_manual": "Sent manually",
+    "recipient_unknown": "No number"
   },
   "partner": {
     "title": "Partner portal",
@@ -149,5 +152,38 @@
     "completed": "Completed",
     "ledger": "Credit history",
     "no_ledger": "No entries."
+  },
+  "status": {
+    "lead": {
+      "new": "New",
+      "assigned": "Assigned",
+      "accepted": "Accepted",
+      "declined": "Declined",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "message": {
+      "queued": "Queued",
+      "sent": "Sent",
+      "failed": "Failed"
+    }
+  },
+  "errors": {
+    "partner_not_found": "Partner not found",
+    "already_assigned": "This lead is already assigned to that partner",
+    "insufficient_credits": "Not enough credits — has {has}, needs {needs}",
+    "invalid_credits": "Enter a whole number greater than zero",
+    "assignment_not_found": "Assignment not found",
+    "write_failed": "That could not be saved. Try again.",
+    "invalid_partner": "Check the partner details",
+    "missing_fields": "Missing details",
+    "not_authorised": "You do not have access",
+    "invalid_request": "Invalid request",
+    "assigned_but_not_sent": "Assigned and charged, but the WhatsApp message failed — contact the partner directly.",
+    "assigned_manual": "Assigned. Send the details to the partner on WhatsApp.",
+    "wathq_verified": "Commercial registration verified through Wathq",
+    "wathq_unverified": "Registration not verified — the provider will show as pending",
+    "partner_missing_phone": "This partner has no mobile number",
+    "send_failed_generic": "The message could not be sent"
   }
 }

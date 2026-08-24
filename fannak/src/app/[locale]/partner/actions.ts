@@ -6,6 +6,7 @@ import { respondToAssignment } from "@/lib/store";
 
 export interface PartnerActionState {
   status: "idle" | "ok" | "error";
+  /** A translation key, never prose. */
   message?: string;
 }
 
@@ -29,7 +30,7 @@ export async function respondAction(
   // Scoped to the caller's own tenant, so one partner can never act on
   // another partner's assignment even with a guessed id.
   const result = await respondToAssignment(assignmentId, tenantId, action);
-  if (!result.ok) return { status: "error", message: result.error };
+  if (!result.ok) return { status: "error", message: result.code };
 
   revalidatePath("/[locale]/partner", "page");
   return { status: "ok" };

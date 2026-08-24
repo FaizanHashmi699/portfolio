@@ -78,14 +78,16 @@ export function CreatePartnerForm({
         <p className="text-sm text-[var(--color-verified-500)]">
           {t("admin.partner_created")}
           {state.detail ? (
-            <span className="ms-2 font-mono text-xs text-[var(--color-ink-500)]">
-              {state.detail}
+            <span className="ms-2 text-xs text-[var(--color-ink-500)]">
+              {t(`errors.${state.detail}`)}
             </span>
           ) : null}
         </p>
       ) : null}
       {state.status === "error" ? (
-        <p className="text-sm text-[var(--color-sand-600)]">{state.message}</p>
+        <p className="text-sm text-[var(--color-sand-600)]">
+          {state.message ? t(`errors.${state.message}`, state.params ?? {}) : null}
+        </p>
       ) : null}
 
       <div>

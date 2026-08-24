@@ -1,10 +1,9 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { LanguageSwitcher } from "./language-switcher";
 
 export async function SiteHeader() {
   const t = await getTranslations();
-  const locale = await getLocale();
-  const other = locale === "ar" ? "en" : "ar";
 
   return (
     <header className="border-b border-[var(--color-line)] bg-[var(--color-surface)]">
@@ -28,13 +27,7 @@ export async function SiteHeader() {
           <Link href="/request" className="btn btn-primary text-sm">
             {t("nav.request")}
           </Link>
-          <Link
-            href="/"
-            locale={other}
-            className="rounded border border-[var(--color-line)] px-3 py-2 text-xs font-semibold text-[var(--color-ink-500)] hover:text-[var(--color-brand-500)]"
-          >
-            {t("nav.language")}
-          </Link>
+          <LanguageSwitcher />
         </nav>
       </div>
     </header>

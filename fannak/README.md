@@ -26,6 +26,7 @@ npm run smoke        # public flow: directory, search, request form, RTL
 # Operator flow needs the admin env vars set on the SERVER:
 ADMIN_ACCESS_KEY=dev-key FANNAK_SECRET=dev-secret npm start &
 ADMIN_ACCESS_KEY=dev-key npm run smoke:admin
+ADMIN_ACCESS_KEY=dev-key npm run smoke:i18n   # language purity + switching
 ```
 
 ## What exists
@@ -67,6 +68,25 @@ Two invariants worth knowing before changing anything:
 
 Each reports honestly when unconfigured rather than pretending to succeed.
 
+## One language at a time
+
+Each locale renders in one language only — no mixed Arabic and English on a
+page. Three rules keep it that way:
+
+1. **Servers return translation keys, never prose.** A store that returns
+   `"insufficient credits"` puts English on an Arabic page; it returns
+   `insufficient_credits` plus params, and the UI renders it in the viewer's
+   language. The same applies to status enums and the message log.
+2. **Switching language keeps you where you are**, filters and all. Sending
+   the viewer home is not a language switch — it is a switch plus losing your
+   place.
+3. **User-entered content is exempt.** A customer called زبون is Arabic
+   whatever language the operator reads in. Those elements are marked
+   `data-user-content` so the audit can exclude them.
+
+`npm run smoke:i18n` walks every surface in both locales and fails if the
+wrong script appears, which catches leaks a reviewer would miss.
+
 ## Conventions
 
 - **RTL is not a feature flag.** Use logical properties (`ms-`, `me-`, `ps-`,
@@ -100,5 +120,4 @@ authentication answer into every response.
 Payments (Moyasar), ZATCA invoicing, ratings, vendor self-signup. See the
 "Deferred" table in `../research/step-2-tech-stack.md` for what triggers each.
 
-Known polish item: lead status badges in the admin console still render the
-raw enum (`new`, `assigned`) rather than a translated label.
+

@@ -133,7 +133,10 @@
     "assigned": "تم الإسناد",
     "credits_cost": "التكلفة",
     "no_credits": "لا يوجد رصيد",
-    "open_whatsapp": "فتح واتساب"
+    "open_whatsapp": "فتح واتساب",
+    "template_auto": "رسالة تلقائية",
+    "template_manual": "إرسال يدوي",
+    "recipient_unknown": "بدون رقم"
   },
   "partner": {
     "title": "لوحة الشريك",
@@ -149,5 +152,38 @@
     "completed": "مكتمل",
     "ledger": "سجل الرصيد",
     "no_ledger": "لا توجد حركات."
+  },
+  "status": {
+    "lead": {
+      "new": "جديد",
+      "assigned": "مُسند",
+      "accepted": "مقبول",
+      "declined": "مرفوض",
+      "completed": "مكتمل",
+      "cancelled": "ملغى"
+    },
+    "message": {
+      "queued": "في الانتظار",
+      "sent": "أُرسلت",
+      "failed": "فشلت"
+    }
+  },
+  "errors": {
+    "partner_not_found": "المزود غير موجود",
+    "already_assigned": "الطلب مُسند لهذا المزود مسبقاً",
+    "insufficient_credits": "رصيد غير كافٍ — المتاح {has} والمطلوب {needs}",
+    "invalid_credits": "أدخل عدداً صحيحاً أكبر من صفر",
+    "assignment_not_found": "الإسناد غير موجود",
+    "write_failed": "تعذّر حفظ العملية. حاول مرة أخرى.",
+    "invalid_partner": "تحقق من بيانات المزود",
+    "missing_fields": "بيانات ناقصة",
+    "not_authorised": "لا تملك صلاحية",
+    "invalid_request": "طلب غير صالح",
+    "assigned_but_not_sent": "تم الإسناد والخصم، لكن تعذّر إرسال رسالة واتساب — تواصل مع المزود يدوياً.",
+    "assigned_manual": "تم الإسناد. أرسل التفاصيل للمزود على واتساب.",
+    "wathq_verified": "تم التحقق من السجل التجاري عبر واثق",
+    "wathq_unverified": "لم يتم التحقق من السجل — سيظهر المزود كـ«قيد التحقق»",
+    "partner_missing_phone": "لا يوجد رقم جوال لهذا المزود",
+    "send_failed_generic": "تعذّر إرسال الرسالة"
   }
 }

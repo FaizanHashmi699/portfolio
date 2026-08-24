@@ -82,7 +82,9 @@ export default async function PartnerPortal({
                     <p className="font-mono text-xs text-[var(--color-ink-500)]">
                       {lead?.ref}
                     </p>
-                    <h3 className="font-bold">{lead?.customer_name}</h3>
+                    <h3 className="font-bold" data-user-content>
+                      {lead?.customer_name}
+                    </h3>
                     {/* The phone number is the value being sold: shown only
                         because this partner has already been charged for it. */}
                     <a
@@ -93,7 +95,10 @@ export default async function PartnerPortal({
                       {lead?.phone}
                     </a>
                     {lead?.notes ? (
-                      <p className="mt-1 text-sm text-[var(--color-ink-500)]">
+                      <p
+                        className="mt-1 text-sm text-[var(--color-ink-500)]"
+                        data-user-content
+                      >
                         {lead.notes}
                       </p>
                     ) : null}

@@ -50,7 +50,9 @@ export function RespondButtons({
         </button>
       )}
       {state.status === "error" ? (
-        <span className="text-sm text-[var(--color-sand-600)]">{state.message}</span>
+        <span className="text-sm text-[var(--color-sand-600)]">
+          {state.message ? t(`errors.${state.message}`) : null}
+        </span>
       ) : null}
     </form>
   );

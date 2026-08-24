@@ -60,7 +60,24 @@ export interface NewPartner {
   district_slugs: string[];
 }
 
-export type Result<T> = { ok: true; value: T } | { ok: false; error: string };
+/**
+ * Failures carry a translation KEY and its parameters, never prose. A store
+ * that returns "insufficient credits" in English puts English on an Arabic
+ * page; returning a code lets the UI render it in whichever language the
+ * viewer chose.
+ */
+export interface Failure {
+  code:
+    | "partner_not_found"
+    | "already_assigned"
+    | "insufficient_credits"
+    | "invalid_credits"
+    | "assignment_not_found"
+    | "write_failed";
+  params?: Record<string, string | number>;
+}
+
+export type Result<T> = { ok: true; value: T } | ({ ok: false } & Failure);
 
 /* ------------------------------------------------------------------ */
 /* In-memory implementation                                            */
@@ -179,7 +196,11 @@ export async function createPartner(input: NewPartner): Promise<Result<Provider>
     .single();
 
   if (error || !data) {
-    return { ok: false, error: error?.message ?? "insert failed" };
+    return {
+      ok: false,
+      code: "write_failed",
+      params: { detail: error?.message ?? "insert failed" },
+    };
   }
   return {
     ok: true,
@@ -194,14 +215,14 @@ export async function addCredits(
   ref?: string,
 ): Promise<Result<number>> {
   if (!Number.isInteger(credits) || credits <= 0) {
-    return { ok: false, error: "credits must be a positive whole number" };
+    return { ok: false, code: "invalid_credits" };
   }
 
   const sb = getServiceSupabase();
   if (!sb) {
     const mem = memory();
     const partner = mem.partners.find((p) => p.id === tenantId);
-    if (!partner) return { ok: false, error: "partner not found" };
+    if (!partner) return { ok: false, code: "partner_not_found" };
 
     partner.credit_balance += credits;
     mem.ledger.push({
@@ -222,7 +243,7 @@ export async function addCredits(
     p_reason: reason,
     p_ref: ref ?? null,
   });
-  if (error) return { ok: false, error: error.message };
+  if (error) return { ok: false, code: "write_failed", params: { detail: error.message } };
   return { ok: true, value: data as number };
 }
 
@@ -257,17 +278,18 @@ export async function assignLead(
   if (!sb) {
     const mem = memory();
     const partner = mem.partners.find((p) => p.id === tenantId);
-    if (!partner) return { ok: false, error: "partner not found" };
+    if (!partner) return { ok: false, code: "partner_not_found" };
 
     const already = mem.assignments.find(
       (a) => a.lead_id === leadId && a.tenant_id === tenantId,
     );
-    if (already) return { ok: false, error: "already assigned to this partner" };
+    if (already) return { ok: false, code: "already_assigned" };
 
     if (partner.credit_balance < credits) {
       return {
         ok: false,
-        error: `insufficient credits: has ${partner.credit_balance}, needs ${credits}`,
+        code: "insufficient_credits",
+        params: { has: partner.credit_balance, needs: credits },
       };
     }
 
@@ -302,7 +324,14 @@ export async function assignLead(
     p_tenant_id: tenantId,
     p_credits: credits,
   });
-  if (error) return { ok: false, error: error.message };
+  if (error) {
+    // assign_lead() raises a descriptive exception; map the one case the
+    // operator can act on to its own code so it reads in their language.
+    const code = /insufficient credits/i.test(error.message)
+      ? "insufficient_credits"
+      : "write_failed";
+    return { ok: false, code, params: { detail: error.message } };
+  }
   return { ok: true, value: data as Assignment };
 }
 
@@ -331,7 +360,7 @@ export async function respondToAssignment(
     const assignment = memory().assignments.find(
       (a) => a.id === assignmentId && a.tenant_id === tenantId,
     );
-    if (!assignment) return { ok: false, error: "assignment not found" };
+    if (!assignment) return { ok: false, code: "assignment_not_found" };
 
     if (action === "accept") assignment.accepted_at = now;
     if (action === "decline") assignment.declined_at = now;
@@ -354,7 +383,13 @@ export async function respondToAssignment(
     .select("*")
     .single();
 
-  if (error || !data) return { ok: false, error: error?.message ?? "update failed" };
+  if (error || !data) {
+    return {
+      ok: false,
+      code: "write_failed",
+      params: { detail: error?.message ?? "update failed" },
+    };
+  }
   return { ok: true, value: data as Assignment };
 }
 

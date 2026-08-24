@@ -16,7 +16,10 @@ import { isWhatsappConfigured, sendTemplate, whatsappLink } from "@/lib/whatsapp
 
 export interface ActionState {
   status: "idle" | "ok" | "error";
+  /** A translation key, never prose — the UI renders it in the viewer's language. */
   message?: string;
+  params?: Record<string, string | number>;
+  /** Non-linguistic payload only: a number, a URL. Never a sentence. */
   detail?: string;
 }
 
@@ -79,23 +82,25 @@ export async function createPartnerAction(
   // Verification is attempted, never assumed. A provider is only marked
   // verified when Wathq actually confirms an active registration.
   let verifiedAt: string | null = null;
-  let detail: string | undefined;
+  let verificationKey: string | undefined;
 
   if (parsed.data.cr_number) {
     const result = await verifyCommercialRegistration(parsed.data.cr_number);
     if (result.ok && result.isActive) {
       verifiedAt = new Date().toISOString();
-      detail = `wathq_verified:${result.name ?? parsed.data.cr_number}`;
+      verificationKey = "wathq_verified";
     } else {
-      detail = `wathq_unverified:${result.error ?? result.status ?? "not active"}`;
+      verificationKey = "wathq_unverified";
     }
   }
 
   const created = await createPartner({ ...parsed.data, cr_verified_at: verifiedAt });
-  if (!created.ok) return { status: "error", message: created.error };
+  if (!created.ok) {
+    return { status: "error", message: created.code, params: created.params };
+  }
 
   revalidatePath("/[locale]/admin/partners", "page");
-  return { status: "ok", message: "partner_created", detail };
+  return { status: "ok", message: "partner_created", detail: verificationKey };
 }
 
 const creditsSchema = z.object({
@@ -124,7 +129,9 @@ export async function addCreditsAction(
     "bank_transfer",
     parsed.data.ref,
   );
-  if (!result.ok) return { status: "error", message: result.error };
+  if (!result.ok) {
+    return { status: "error", message: result.code, params: result.params };
+  }
 
   revalidatePath("/[locale]/admin/partners", "page");
   return { status: "ok", message: "credits_added", detail: String(result.value) };
@@ -149,7 +156,9 @@ export async function assignLeadAction(
   // Charge first. If the partner cannot pay for the lead, nothing is sent —
   // the debit and the assignment are one transaction in the database.
   const assigned = await assignLead(leadId, tenantId, credits);
-  if (!assigned.ok) return { status: "error", message: assigned.error };
+  if (!assigned.ok) {
+    return { status: "error", message: assigned.code, params: assigned.params };
+  }
 
   const [partner, leads] = await Promise.all([getPartner(tenantId), listLeads()]);
   const lead = leads.find((l) => l.id === leadId);
@@ -172,7 +181,7 @@ export async function assignLeadAction(
       error: sent.error,
     });
     if (!sent.ok) {
-      return { status: "error", message: "assigned_but_not_sent", detail: sent.error };
+      return { status: "error", message: "assigned_but_not_sent" };
     }
   } else {
     // No WhatsApp API yet: log the intent and hand the operator a click-to-chat
@@ -183,7 +192,8 @@ export async function assignLeadAction(
       recipient: recipient || "unknown",
       template: "manual",
       status: "queued",
-      error: recipient ? undefined : "partner has no phone number",
+      // A code, not prose: the log is rendered in the operator's language.
+      error: recipient ? undefined : "partner_missing_phone",
     });
     const text = `طلب جديد ${lead?.ref ?? ""} — ${lead?.customer_name ?? ""} — ${lead?.phone ?? ""}`;
     return {

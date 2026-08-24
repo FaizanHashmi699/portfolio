@@ -54,7 +54,9 @@ export function AssignForm({
 
       {state.status === "ok" ? (
         <span className="w-full text-sm text-[var(--color-verified-500)]">
-          {t("admin.assigned")}
+          {state.message === "assigned_manual"
+            ? t("errors.assigned_manual")
+            : t("admin.assigned")}
           {state.detail?.startsWith("https://wa.me/") ? (
             <a
               href={state.detail}
@@ -69,7 +71,7 @@ export function AssignForm({
       ) : null}
       {state.status === "error" ? (
         <span className="w-full text-sm text-[var(--color-sand-600)]">
-          {state.message}
+          {state.message ? t(`errors.${state.message}`, state.params ?? {}) : null}
         </span>
       ) : null}
     </form>
