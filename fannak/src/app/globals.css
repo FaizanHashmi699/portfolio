@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Fannak design tokens.
+   Palette is built around cooling/AC and verification: a petrol-cyan primary,
+   a warm sand for calls to action, and a distinct green reserved ONLY for
+   "registration verified" so trust never reads as decoration.
+--------------------------------------------------------------------------- */
+@theme {
+  --font-sans: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, "Segoe UI",
+    Tahoma, sans-serif;
+
+  --color-ink-900: #0d1b1f;
+  --color-ink-700: #24393f;
+  --color-ink-500: #4d666d;
+  --color-ink-300: #8ba3a9;
+  --color-line: #dbe5e7;
+  --color-surface: #ffffff;
+  --color-canvas: #f6f9f9;
+
+  --color-brand-50: #e7f4f5;
+  --color-brand-100: #c6e5e8;
+  --color-brand-500: #0d6e78;
+  --color-brand-600: #0a5a63;
+  --color-brand-700: #08464d;
+
+  --color-sand-500: #c6752e;
+  --color-sand-600: #a85f22;
+
+  --color-verified-500: #1a7f56;
+  --color-verified-50: #e6f3ec;
+
+  --radius-card: 0.5rem;
+}
+
+/* Dark theme. Tokens only — components never hardcode a colour. */
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --color-ink-900: #eaf2f3;
+      --color-ink-700: #c2d3d6;
+      --color-ink-500: #90a7ac;
+      --color-ink-300: #6b8288;
+      --color-line: #23383d;
+      --color-surface: #101c20;
+      --color-canvas: #0a1417;
+      --color-brand-50: #0f2b2e;
+      --color-brand-100: #14403f;
+      --color-brand-500: #46b0a8;
+      --color-brand-600: #62c4bb;
+      --color-brand-700: #7fd4cb;
+      --color-sand-500: #d9924f;
+      --color-sand-600: #e8a566;
+      --color-verified-500: #4bb383;
+      --color-verified-50: #122c22;
+    }
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+  }
+
+  /* Arabic benefits from slightly looser leading and a touch more size. */
+  html[dir="rtl"] body {
+    line-height: 1.8;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+    line-height: 1.2;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-card);
+    padding: 0.65rem 1.15rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .btn-primary {
+    background-color: var(--color-brand-500);
+    color: #fff;
+  }
+  .btn-primary:hover { background-color: var(--color-brand-600); }
+
+  .btn-accent {
+    background-color: var(--color-sand-500);
+    color: #fff;
+  }
+  .btn-accent:hover { background-color: var(--color-sand-600); }
+
+  .btn-ghost {
+    background-color: transparent;
+    border-color: var(--color-line);
+    color: var(--color-ink-700);
+  }
+  .btn-ghost:hover { border-color: var(--color-brand-500); color: var(--color-brand-500); }
+
+  .field {
+    width: 100%;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: 0.6rem 0.8rem;
+    color: var(--color-ink-900);
+    font-size: 0.95rem;
+  }
+  .field:focus { border-color: var(--color-brand-500); outline: none; }
+
+  .label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-ink-500);
+    margin-bottom: 0.35rem;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink-500);
+  }
+
+  .pill-verified {
+    background-color: var(--color-verified-50);
+    border-color: var(--color-verified-500);
+    color: var(--color-verified-500);
+  }
+}
