@@ -292,7 +292,115 @@ Do **not** build a general "book any service" consumer app — that is a head-on
 
 ---
 
+## 11. ALLIANCES — the core of the plan (added after Step 1 review)
+
+**Revised framing:** you are a **technology middleman**. You do not employ labour, do not register an entity yet, and do not collect customer money in Saudi Arabia. Everything you earn must arrive as **payment from a business to a software/marketing supplier abroad** — that is an IT export, taxed in Pakistan at **0.25%** under the PSEB regime, and it sidesteps the entire Saudi entity question until you have revenue to justify one.
+
+This makes alliances not a "nice to have" but **the entire business model**. You have no labour, no licence, no capital and no local entity. What you have is software and demand-generation skill. Alliances are how those two assets touch a market.
+
+### 11.1 The five alliance types, ranked by how fast they pay you
+
+| # | Alliance | They bring | You bring | Money reaches you how | Speed to first riyal |
+|---|---|---|---|---|---|
+| **1** | **Licensed service companies** (cleaning, AC, maintenance) | CR, licences, workers, tools, insurance, the right to invoice | Bookings + software | They pay **you** a lead fee or subscription | **Fastest** ⭐ |
+| **2** | **Demand owners** (property managers, compounds, short-let hosts, FM firms) | Recurring, pre-qualified demand you never pay to acquire | Coordination + a single point of accountability | Referral/management fee, or you route to #1 and bill #1 | Fast |
+| **3** | **Anchor operator** (one licensed company as your on-the-ground front) | Legal cover for delivery, local presence, a real bank account | Your whole tech stack + growth | Written revenue share, invoiced monthly | Medium |
+| **4** | **Rails** (payment gateway, ZATCA e-invoicing provider, WhatsApp Business API) | Compliance and plumbing you'd otherwise build | Volume | Not a revenue source — a cost/enabler | n/a |
+| **5** | **Legitimacy** (Monsha'at accelerators, university accelerators, SVC-backed funds) | Credibility, network, and the accelerator backing that the **MISA Entrepreneur Licence** route effectively expects | A working product with traction | Not cash — it's the on-ramp to the entity, later | Slow, but it's how you get registered **without** paying SAR 10k–60k/yr out of pocket |
+
+**Alliance #1 is where you start. Everything else is downstream of it.**
+
+### 11.2 Why licensed service companies will actually say yes
+
+This is the part that makes the whole thing work: **there is a surplus of supply and a shortage of demand.** The research found 34+ commercial cleaning firms, 65+ facility management firms, and a long tail of small maintenance outfits — all fighting for the same customers. Meanwhile:
+
+- FM companies in Saudi **subcontract heavily** ✅ — subcontracting is already a normal, accepted commercial habit in this market. You are not asking them to do something strange.
+- Small operators have **idle capacity** (a technician sitting still on Tuesday morning earns them nothing).
+- They are usually **bad at digital** — no booking system, no online presence, WhatsApp-and-notebook operations, and a looming **ZATCA Phase-2 e-invoicing** obligation they may not have solved.
+
+So your pitch is not "give me a cut of your business." It is: **"I fill your empty Tuesday, and I hand you a system that issues your ZATCA-compliant invoices. You pay me nothing until I send you work."** That is an easy yes.
+
+### 11.3 The four deal structures — and which one to use while you have no entity
+
+**A. Prepaid lead credits** ⭐ **use this one first**
+Partner buys a block of credits up front (e.g. SAR 500 = 10 leads). Each qualified booking you route consumes one credit.
+- **Why it's the right first structure:** you are **paid before you deliver**, so there is no collection risk, no chasing, no dependence on their honesty about what they earned. You never touch customer money. You are simply a foreign marketing/software supplier being paid by a Saudi business — clean invoice, clean remittance, IT-export tax treatment.
+- It also **kills the disintermediation problem**, which is the thing that quietly murders marketplaces: it does not matter if the partner steals the customer for job #2, because you were already paid for the introduction. Stop trying to police repeat business — price the introduction correctly instead.
+- **Pricing:** international CPL for home services runs **USD 30–230** ⚠️, but you cannot import those numbers — a SAR 99 AC clean cannot support a SAR 180 lead fee. **Price the lead at 10–20% of expected job value:** SAR 10–20 for a one-off SAR 99 job; **SAR 60–130 for an AMC lead** (SAR 500–800 value); **SAR 300–1,000 for a B2B contract lead** (SAR 3,000–5,000/month value ⚠️, needs field validation). B2B leads are where the money is — one contract lead is worth 30 consumer leads.
+
+**B. Flat SaaS subscription**
+SAR 300–800/month per partner company for booking, dispatch, customer records and ZATCA-compliant invoicing.
+- **Upside:** predictable, boring, scalable; unrelated to their revenue so there is nothing to argue about or audit; and it is unambiguously a software export.
+- **Downside:** small service SMEs are slow, sceptical software buyers. Sell this **second**, to partners who already trust you because your leads made them money. Never lead with it.
+
+**C. Revenue share / commission (15–20%)**
+Only workable once you have an entity or a written anchor agreement — it requires you to see their books and trust their reporting. **Defer this.** Urban Company can charge ~28% because it controls the customer; you can't yet.
+
+**D. White-label**
+They run under **their own brand**, powered by your engine. Common structures are per-booking fees or revenue share, plus a setup fee ⚠️.
+- **Strategic value:** the least threatening deal on the table. A service-company owner who bristles at "join my platform" (you become their master) will happily accept "here is your own booking site" (they stay the boss). White-label converts rivals into customers. It also means you build **one** system and license it repeatedly — the highest-leverage thing a two-person team can do.
+
+**Recommended sequence: A → D → B.** Lead fees prove you generate money → white-label makes you infrastructure → subscriptions make it recurring. Revenue share only after there's an entity.
+
+### 11.4 Demand-owner alliances — the shortcut most people miss
+
+Everyone tries to acquire consumers one at a time with ads. Don't — you can't outspend Yammak or B8ak. Instead ally with whoever **already holds a cluster of recurring demand**:
+
+| Partner | Why they have clustered demand | The offer to them |
+|---|---|---|
+| **Property/real-estate management firms** | Manage dozens/hundreds of units, each needing AC service, cleaning, turnover, repairs | One number, one invoice, guaranteed response time |
+| **Short-let / furnished-apartment hosts** | Need cleaning **between every guest** — the highest-frequency recurring demand in the whole market | Automated turnover cleaning tied to checkout |
+| **Compound & building managers** | Whole-building AC, tank cleaning, common-area cleaning | Scheduled annual programme, fixed price |
+| **Facility management firms** | Win big contracts, then **subcontract heavily** ✅ | Overflow capacity and small-job handling they don't want |
+| **SMEs — clinics, gyms, salons, small offices, nurseries** | Legally/commercially obliged to stay clean, on a schedule | Monthly contract, predictable cost |
+
+**One property manager with 60 units is worth more than a thousand app downloads**, costs nothing to acquire beyond your brother's time, and can be signed with a WhatsApp conversation and a price list. This is the single highest-leverage move available to you right now.
+
+### 11.5 The anchor-partner alliance (the "no entity" structure)
+
+If you want one relationship to carry the whole business while you stay unregistered:
+
+- Pick **one** licensed operator with capacity and a competent owner.
+- **They** hold the CR, employ/supply the workers, invoice the customer, collect the money, and carry the legal responsibility.
+- **You** provide the booking system, the online presence, the demand and the analytics — and invoice them monthly from Pakistan as a software/marketing supplier.
+- Put it in **writing** from day one: scope, fee, payment terms, IP ownership (**your code stays yours** — this is the clause people forget and it is the only asset you have), termination, and what happens to the customer data.
+
+**Guard rails:**
+- **No exclusivity in year one.** Exclusivity is what you *sell later*, expensively, once you have leverage. Giving it away at the start hands your only leverage to a partner who has not yet proven they can deliver.
+- **No equity to a partner** for anything less than the licences, workers and cash you cannot otherwise get.
+- **No unpaid pilots that never end.** Free for 30 days, then it converts or it stops. Free forever teaches them your work is worth nothing.
+- **Never let the partner own the customer-facing phone number or booking channel.** That number is the business. If it's theirs, you are a temporary vendor.
+- **Two anchors, not one**, as soon as you can — a single anchor can hold you hostage the moment they realise you have no alternative.
+
+### 11.6 On the car angle
+
+Your brother drives and knows cars well — worth noting, but **the on-demand car market is already crowded**: CAFU (KSA operations), Wecarry, CleanCar KSA, Wasel, Al-Futtaim Express, Petromin Express, plus aggregators CarSpa, Ezhalha, CarHub and **Morni** ✅. Mobile-wash uptake is real (≈35% of car owners in the region use mobile services ⚠️; waterless methods at ≈47% adoption due to water scarcity ⚠️), but a consumer car-wash app is a fight against funded incumbents.
+
+**The alliance version is better:** garages, workshops and fleet owners are exactly the kind of under-digitised SMEs described in §11.2, and fleets (delivery companies, rental firms, corporate pools) are **demand owners** in the §11.4 sense — recurring, contracted, one decision-maker. If the car domain is where his knowledge and credibility are strongest, aim it at **fleet servicing contracts and workshop software**, not at consumer car washes.
+
+### 11.7 Alliance outreach — the first 20 conversations
+
+1. **Build a target list of 30** licensed service companies in one city, one vertical (Maroof, Google Maps, Instagram, Chamber of Commerce directory). Record: services, prices, size, whether they have any booking system at all.
+2. **Do not pitch software.** Open with: *"I can send you paying customers. Do you have spare capacity this week?"* Capacity is a pain they feel immediately; software is a pain they've learned to live with.
+3. **Bring one real job to the first meeting** if at all possible. A single genuine booking is worth more than any deck — it converts you from "another guy with an app idea" into "the guy who sent me work."
+4. **Sell the second lead, not the first.** Give lead #1 free, then quote the credit pack. You are selling a proven result, not a promise.
+5. **Qualify hard:** do they answer the phone within an hour? Do they have a valid CR and the right activity? Will they accept a scheduled time slot? A partner who no-shows destroys **your** name, not theirs.
+6. **Aim for 3–5 active partners per vertical.** Fewer and you can't fulfil; more and none of them get enough volume to care about you.
+7. **Track one number above all: partner repeat-purchase rate.** If partners buy a second credit pack, you have a business. If they don't, your leads aren't converting and nothing else you build matters.
+
+### 11.8 What this changes about Step 2 (the tech)
+
+Because the first customer is a **business partner**, not a consumer, the build order inverts:
+
+- **Build first:** a partner-facing dispatch/job board + a lead-delivery mechanism (WhatsApp is fine at the start) + ZATCA-compliant invoicing. This is what someone will actually pay you for.
+- **Build later:** the consumer booking app. It is a marketing surface, and you should not fund it until partners are paying.
+- **Design constraint from day one:** multi-tenant and white-label-ready (§11.3 D), because the moment partner #2 asks for their own branded booking page, that architecture decision either costs you a weekend or a rewrite.
+
+**We will pick the actual stack in Step 2 — this section only fixes what the software has to do and who pays for it.**
+
 ## Sources
+
+Alliances & partnership models: [Monsha'at Business Accelerators](https://www.monshaat.gov.sa/en/acc) · [Saudi incubators & accelerators overview](https://vision2030.ai/encyclopedia/saudi-arabia-incubators-accelerators/) · [White-label booking partner models](https://simplybook.me/en/white-label-partner-program) · [Choosing a white-label booking provider](https://ulansoftware.com/blog/choose-white-label-booking-software) · [Cost per lead for contractors 2026](https://constructionsnapshotforghl.com/blog/cost-per-lead-for-contractors/) · [Pay-per-lead services](https://clicksgeek.com/pay-per-lead-services/) · [KSA car wash market & competitors](https://www.kenresearch.com/saudi-arabia-car-wash-services-market) · [KSA online car wash benchmarking](https://www.kenresearch.com/competition-benchmarking/ksa-car-wash-market)
 
 Market & pricing: [ResearchAndMarkets on-demand home services KSA](https://www.businesswire.com/news/home/20230901367001/en/Saudi-Arabia-On-Demand-Home-Service-Market-Outlook-Report-2022-2023-2027-Urban-Landscape-Drives-On-Demand-Home-Services---Cleaning-Leads-Salon-and-More-Follow-Suit---ResearchAndMarkets.com) · [TechSci cleaning services market](https://www.techsciresearch.com/report/saudi-arabia-cleaning-services-market/15160.html) · [Mordor FM market](https://www.mordorintelligence.com/industry-reports/saudi-arabia-facility-management-market) · [P&S FM market](https://www.psmarketresearch.com/market-analysis/saudi-arabia-facility-management-market) · [AC repair pricing Riyadh](https://nawalacrepair.com/2026/03/06/how-much-does-ac-repair-cost-in-riyadh-guide-2026/) · [Shams maintenance pricing](https://therepairingservices.com/en/pricing/) · [Expatistan Riyadh cleaning rates](https://www.expatistan.com/price/cleaning-help/riyadh)
 
