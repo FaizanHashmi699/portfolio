@@ -1,4 +1,5 @@
 import { CITIES, DISTRICTS, PROVIDERS, SERVICES } from "./seed-data";
+import { recordLead } from "./store";
 import { getSupabase, isSupabaseConfigured } from "./supabase/server";
 import type { City, District, Provider, Service } from "./types";
 
@@ -148,8 +149,19 @@ export async function createLead(
   const sb = getSupabase();
 
   if (!sb) {
-    // No database yet. Report honestly that nothing was stored — a silent
-    // success here would be a lie the operator finds out about later.
+    // No database yet. The lead still reaches the in-memory store so the
+    // operator flow is demoable end to end, but `persisted: false` is
+    // returned so the UI never claims it was durably saved.
+    await recordLead({
+      id: `lead-${ref}`,
+      ref,
+      customer_name: input.customer_name,
+      phone: input.phone,
+      status: "new",
+      created_at: new Date().toISOString(),
+      address: input.address,
+      notes: input.notes,
+    });
     return { ok: true, ref, persisted: false };
   }
 

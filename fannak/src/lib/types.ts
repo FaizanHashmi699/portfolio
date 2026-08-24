@@ -37,6 +37,8 @@ export interface Provider {
   about_ar?: string;
   about_en?: string;
   city_id: string;
+  phone?: string;
+  whatsapp?: string;
   /** Set only when verified through Wathq. Never self-declared. */
   cr_number?: string;
   cr_verified_at?: string | null;

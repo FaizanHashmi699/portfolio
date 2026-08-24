@@ -21,7 +21,11 @@ demoable. Copy `.env.example` to `.env.local` when you have real services.
 npm run build        # production build (also emits a standalone server)
 npm run typecheck
 npm start &          # then, against a running server:
-npm run smoke        # end-to-end checks in Chromium
+npm run smoke        # public flow: directory, search, request form, RTL
+
+# Operator flow needs the admin env vars set on the SERVER:
+ADMIN_ACCESS_KEY=dev-key FANNAK_SECRET=dev-secret npm start &
+ADMIN_ACCESS_KEY=dev-key npm run smoke:admin
 ```
 
 ## What exists
@@ -32,6 +36,8 @@ npm run smoke        # end-to-end checks in Chromium
 | `/[locale]/providers` | **Directory + search** — filter by service, district, free text |
 | `/[locale]/providers/[slug]` | Provider profile: services, prices, districts served |
 | `/[locale]/request` | Customer request form → creates a lead |
+| `/[locale]/admin` | Operator console — overview, partners, leads, message log |
+| `/[locale]/partner` | Partner portal — assigned leads, accept/decline, credit history |
 
 Locales: `ar` (default, RTL) and `en`. Every directory search is a plain `GET`,
 so each filter combination is a shareable, indexable URL — that is what makes
@@ -71,7 +77,28 @@ Each reports honestly when unconfigured rather than pretending to succeed.
 - The green `pill-verified` style is reserved for **verified registration
   only**, so trust never reads as decoration.
 
+## Operator access
+
+There is no email or SMS login: phone OTP needs a CITC-approved sender ID
+(which needs a local entity) and magic links need a verified sending domain.
+So both operator surfaces are reached the way this business already
+communicates — a link sent over WhatsApp:
+
+- **Admin** — one shared access key (`ADMIN_ACCESS_KEY`). **Admin routes 404
+  entirely unless both `ADMIN_ACCESS_KEY` and `FANNAK_SECRET` are set**, so an
+  unconfigured deployment never exposes an open console.
+- **Partner** — a signed per-tenant link generated in the admin console.
+  Your brother sends it on WhatsApp; the partner's browser keeps the session.
+  Tokens are HMAC-signed, so a forged one is rejected.
+
+Admin and partner routes are `force-dynamic`. They must never be
+prerendered — a statically generated admin page freezes a build-time
+authentication answer into every response.
+
 ## Not built yet
 
-Partner portal, admin console, payments, ZATCA invoicing. See the "Deferred"
-table in `../research/step-2-tech-stack.md` for what triggers each.
+Payments (Moyasar), ZATCA invoicing, ratings, vendor self-signup. See the
+"Deferred" table in `../research/step-2-tech-stack.md` for what triggers each.
+
+Known polish item: lead status badges in the admin console still render the
+raw enum (`new`, `assigned`) rather than a translated label.
