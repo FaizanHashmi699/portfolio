@@ -1,291 +1,327 @@
 # Manarat Foundation — Competitor & Market Research
 
 **Subject:** Manarat Foundation — manaratfoundation.org.uk
-**Compiled:** 31 August 2026
+**Compiled:** 31 August 2026 · **Revision 2**
 **Market:** Masjids, Islamic centres and Islamic education charities serving Sheldon, Solihull and east/south-east Birmingham
+
+> **Revision 2 corrects three conclusions from revision 1.** Five-year financial histories and two
+> organisations missed the first time round changed the headline. Corrections are listed in §9.
 
 ---
 
 ## 1. Executive summary
 
-Manarat Foundation is the **second-largest organisation by income in its immediate local market**
-— £394,135 in the year to 31 March 2025, behind only Jami Mosque & Islamic Centre and well ahead
-of every other Solihull-area competitor. For an organisation founded in 2012 competing against a
-1973 institution, that is a genuinely strong position.
+Manarat Foundation is **third of six by income in its local market**, not second — and it was
+overtaken in the year just reported.
 
-The vulnerabilities are not about size. They are three specific things:
+**The Olton Project**, a charity registered in 2019 and based in Olton, inside Manarat's own stated
+catchment, raised **£496,482** in the year to 31 March 2025. Manarat raised **£394,135** in the
+identical financial year — **down 13%** from £452,950, its first decline in five years.
 
-1. **The website cannot take a donation.** Published giving routes are cheque and in person.
-   Every direct competitor except SIEA takes card payments.
-2. **The prayer timetable is a PDF from July 2020.** The highest-frequency reason to visit a
-   masjid website has been handed to third-party aggregators.
-3. **Only 61% of income is being spent.** A ~£156k annual surplus is accumulating with no
-   publicly named project attached to it.
+The Olton Project's core offer is Qur'an and Islamic studies for ages 4–16, running **every day of
+the week**, streamed by ability, in small classes with qualified teachers, sold through a
+**dedicated academy website**. That is Manarat's core programme, positioned better and marketed
+harder by an organisation less than half its age.
 
-Those three are unusually cheap to fix relative to their impact, and the first two are website
-work rather than organisational change.
+Manarat's underlying position is still strong. Income roughly tripled between 2021 and 2024. The
+building holds a thousand people. The Hifz programme is substantively better than what beat it.
+Five years of surpluses have accumulated **roughly £660,600** in reserves.
 
----
+But three structural gaps now have a cost attached:
 
-## 2. Market map
-
-| Organisation | Founded | Income | Expenditure | Spend ratio | Period end |
-|---|---:|---:|---:|---:|---|
-| Green Lane Masjid *(tier 2 benchmark)* | 1979 | £5,380,031 | £5,048,978 | 94% | 31 Dec 2024 |
-| Jami Mosque & Islamic Centre | 1973 | £1,933,550 | — | — | 31 Mar 2024 |
-| **Manarat Foundation** | **2012** | **£394,135** | **£239,198** | **61%** | **31 Mar 2025** |
-| Solihull Islamic Education Academy | — | £156,496 | £135,095 | 86% | 31 Aug 2024 |
-| Solihull Central Masjid | 2016 | £0 *(nil return)* | £0 | — | 31 Dec 2024 |
-| Deen Central | — | *not published* | — | — | — |
-
-Two things stand out. Manarat is **2nd of 5 locally** — a strong result. And Manarat's **spend
-ratio is the lowest of every organisation that filed real figures**, by a wide margin.
+1. **The website cannot take a donation** — cheque and in person only.
+2. **The education offer has no shop window** — no fees, no timetable, no age ranges, no enquiry form.
+3. **£660k of reserves has no public name on it** — so it raises nothing and explains nothing.
 
 ---
 
-## 3. The subject
+## 2. Five-year trend
 
-**Manarat Foundation** — charity 1148223, company 08098742, charitable company.
-155 Coventry Road, Sheldon, Birmingham. Founded 2012 by a group of scholars.
+Manarat's own numbers, from the Charity Commission's financial history:
 
-The first purpose-established masjid and Islamic centre for the Muslims of Sheldon, Solihull and
-surrounding areas. A spacious permanent building with a large car park, serving over a thousand
-worshippers. Explicitly promotes tolerance and rejects extremism.
+| Year to 31 March | Income | Expenditure | Surplus | Spend ratio |
+|---|---:|---:|---:|---:|
+| 2021 | £128,870 | £109,710 | £19,160 | 85.1% |
+| 2022 | £210,060 | £109,100 | £100,960 | 51.9% |
+| 2023 | £330,420 | £164,890 | £165,530 | 49.9% |
+| 2024 | £452,950 | £232,940 | £220,010 | 51.4% |
+| **2025** | **£394,135** | **£239,198** | **£154,937** | **60.7%** |
+| | | | **£660,597 cumulative** | |
 
-**Financials (FYE 31 March 2025):** income £394,135, expenditure £239,198, surplus ~£155,937.
-**Governance:** 5 trustees, 25 volunteers, no employee over £60k, no trustee remuneration,
-reporting up to date.
+Income roughly tripled across four years, then fell 13%. Expenditure kept rising through the
+decline. One down year is not a trend — but it is the first, and it landed in the same year a
+younger local rival out-raised the organisation.
 
-**Services:** five daily prayers and Jumu'ah; Quran recitation, Tajweed and Islamic studies; a
-three-year Hifz programme running weekdays and weekends; Arabic for children; character
-development; Nikah including both Islamic and civil marriage registration; local charitable work.
-
-**Website:** WordPress, approximately five top-level pages — home, about, services, donation,
-contact. Prayer times are a PDF uploaded in July 2020. Donations by cheque or in person. Online
-giving is intermediated by MosquePay. Also listed on The Masjid App, MosqueFinder and Giving is
-Great. Social presence on X (@ManaratSheldon), Facebook and LinkedIn.
+For contrast, **Green Lane Masjid has grown every single year** — £3.61m, £4.69m, £4.80m, £5.00m,
+£5.38m — and **Jami has grown from £817k to £1.90m** since 2021.
 
 ---
 
-## 4. Competitor profiles
+## 3. The league table
 
-### 4.1 Jami Mosque & Islamic Centre (JMIC) — *threat: high*
+| | Organisation | Income | Expenditure | Spend ratio | Period end |
+|---|---|---:|---:|---:|---|
+| — | Green Lane Masjid *(benchmark)* | £5,380,000 | £5,050,000 | 93.9% | 31 Dec 2024 |
+| 1 | Jami Mosque & Islamic Centre | £1,900,000 | £1,250,000 | 65.8% | 31 Mar 2024 |
+| 2 | **The Olton Project** | **£496,482** | £256,489 | 51.7% | **31 Mar 2025** |
+| 3 | **Manarat Foundation** | **£394,135** | £239,198 | 60.7% | **31 Mar 2025** |
+| 4 | Solihull Islamic Education Academy | £156,496 | £135,095 | 86.3% | 31 Aug 2024 |
+| 5 | Solihull Central Masjid | £0 *(nil return)* | £0 | — | 31 Dec 2024 |
+| — | Deen Central / The Hub | *not published* | — | — | — |
+
+Rows 2 and 3 share a year end, so that comparison is exact.
+
+---
+
+## 4. The market is growing — and crowding faster
+
+**Demand is real.** Muslims were **5.3% of Solihull's population** at the 2021 Census, up from
+**2.5% in 2011** — more than double in a decade. Birmingham overall stands at 29.9%, up 8.0 points,
+the largest rise of any religious group in the city.
+
+**Supply grew faster.** Manarat opened in 2012 as the first purpose-established masjid for Sheldon
+and Solihull. At least five organisations now serve that same catchment:
+
+- The Olton Project (registered 2019)
+- Solihull Central Masjid (2016) — which now claims to be **the first and only masjid in Solihull with a full-time Imam**
+- Deen Central, operating as The Hub
+- Solihull Islamic Education Academy
+- Manarat itself
+
+**Manarat's founding advantage was being first into an underserved area. That advantage has
+expired.** The market is still growing; Manarat's share of it is not.
+
+---
+
+## 5. Competitor profiles
+
+### 5.1 The Olton Project — *threat: critical*
+
+`theoltonproject.com` · `academy.theoltonproject.com` · charity 1183781 (CIO, registered June 2019)
+Kineton Green Road, Olton, Solihull B92 7EB · 7 trustees, 11 volunteers
+
+**Income £496,482, expenditure £256,489, year to 31 March 2025** — the same year Manarat raised
+£394,135.
+
+Describes itself as providing "safe, open spaces for the community to meet, learn and grow
+together" for over ten years. **TOP Academy** is the engine: Qur'an and Islamic studies for ages
+4–16, lessons **every day of the week**, weekday and weekend classes **streamed by ability**, a
+**low teacher-to-pupil ratio**, and teachers drawn largely from child-facing professions. It is
+framed as equipping children "to practise their religion in modern Britain," and it has **its own
+domain**.
+
+Around it: spiritual gatherings, language and religious classes, weekly coffee mornings,
+educational excursions, monthly movie nights, guest speakers, social functions, and food and
+equipment delivery to vulnerable local people.
+
+> **Read across:** TOP is positioned on exactly what parents actually choose on — daily
+> availability, ability streaming, small classes, qualified staff — and it is sold on a site of its
+> own. Manarat's three-year Hifz programme is a stronger offer and is effectively invisible next to
+> it.
+
+### 5.2 Jami Mosque & Islamic Centre — *threat: high*
 
 `jamimosque.org.uk` · charity 1000355 · est. 1973 · 521–527 Coventry Road, Small Heath B10 0LL
-Capacity 2,000 across two halls, plus a separate Darul Uloom building.
 
-**The same road, about three miles west, with a 50-year head start on donor relationships.**
+Same arterial road, three miles west, capacity 2,000, and a fifty-year head start.
+**Income has more than doubled since 2021** — £817.6k, £1.39m, £1.34m, £1.90m.
 
-**Income FYE 31 March 2024: ~£1,933,550**
+| Income source (FYE Mar 2024) | Amount |
+|---|---:|
+| Trading — rental property and education fees | £900,330 |
+| Other income | £554,020 |
+| Donations and legacies | **£362,430** |
+| Investments | £87,300 |
+| Government grants | £29,470 |
 
-| Source | Amount | Share |
-|---|---:|---:|
-| Trading — rental property and education fees | £900,330 | 47% |
-| Other income | £554,020 | 29% |
-| Donations and legacies | £362,430 | **19%** |
-| Investments | £87,300 | 5% |
-| Government grants | £29,470 | 2% |
+Evening maktab (1975), Hifz madrasa (1983), Darul Uloom boys' secondary school (1985), Raheem
+Academy for ages 5–16, funeral services (1995), social welfare, JMIC Muslimah, a live `/timetable/`,
+online giving and named campaign pages such as a Ramadan Appeal 2026 form.
 
-**Services:** evening maktab (1975), Hifz madrasa (1983), Darul Uloom boys' secondary school
-combining national curriculum with Hifz and Alimiyyah (1985), Raheem Academy evening and weekend
-maktab for ages 5–16, Muslim funeral services (1995), social welfare, JMIC Muslimah, community
-services.
-
-**Website:** a structured service tree with individual sub-pages — `/services/darul-uloom/`,
-`/services/community-services/`, `/services/social-welfare/`, `/jmic-muslimah/` — plus a live
-`/timetable/`, online giving, and named campaign pages such as a Ramadan Appeal 2026 donation form.
-
-> **Read across:** JMIC takes only 19% of its income from donations. Rental property and school
-> fees carry the organisation. Notably, its *donation* income — £362,430 — is slightly **below**
-> Manarat's total income. Manarat is competitive on fundraising; it is not competitive on
+> **Read across:** only **19%** of income comes from donations. And its donation income — £362,430 —
+> is *below* Manarat's total income. Manarat is competitive on fundraising; it is not competitive on
 > diversification.
 
-### 4.2 Solihull Central Masjid & Community Centre — *threat: medium and rising*
+### 5.3 Solihull Central Masjid — *threat: medium and rising*
 
-`solihullmasjid.org.uk` · charity 1200650 (CIO) · company CE030387 · est. 2016
-Sandalls Cottage, 1021 Warwick Road, Solihull.
+`solihullmasjid.org.uk` · charity 1200650 (CIO) · est. 2016 · 1021 Warwick Road, Solihull
 
-The nearest masjid inside Solihull proper. **Manarat's claim to be the masjid for "Sheldon and
-Solihull" weakens as this site matures.**
+Filed a **nil return** for FYE 31 December 2024, so its published £0 tells you nothing about its
+real activity. Competes on convenience — town-centre proximity, M42/M40/M6 access — monetises the
+building through **catering equipment hire**, and markets itself as **the first and only masjid in
+Solihull with a full-time Imam**. That last claim is aimed squarely at the ground Manarat should
+own.
 
-Filed a **nil return** for FYE 31 December 2024 — £0 income and expenditure, 3 volunteers,
-reporting on time. The published figures do not reflect actual activity.
+### 5.4 Solihull Islamic Education Academy — *threat: medium*
 
-**Services:** daily prayers, Jummah, Eid, Taraweeh; Qur'anic studies, Islamic education and
-Arabic; lifelong learning and personal development; marriage services and family support;
-interfaith meetings, community gatherings, talks and workshops.
+`solihullislamiceducationacademy.org.uk` · charity 1138757 · **£156,496 income**, 86.3% spent, FYE Aug 2024
 
-**Positioning is built on convenience, not scholarship:** proximity to Solihull town centre,
-motorway access via M42/M40/M6, and — unusually — **catering equipment hire** as an earned-income
-line. Online giving through its own `/pages/donate.html` plus MosquePay, TotalGiving and
-CharityChoice. The site is a static `.html` page tree, a dated architecture.
+Sunday supplementary school, **mother-tongue languages beyond Arabic — Bangla and Urdu** — weekly
+adult Islamic education, talks on Islam in schools, and **weekly badminton and football clubs** for
+teenagers. Not a masjid, so no competition for prayer footfall, but direct competition for the same
+families' children.
 
-### 4.3 Solihull Islamic Education Academy (SIEA) — *threat: medium*
+### 5.5 Deen Central, operating as The Hub — *threat: low and falling*
 
-`solihullislamiceducationacademy.org.uk` · charity 1138757 · Solihull
-**Income FYE 31 August 2024: £156,496** · expenditure £135,095 · spend ratio 86%
+`deencentral.org` · The Hub, 5–9 Hermitage Road, Solihull B91 2LL
 
-Not a masjid, so it does not compete for prayer footfall — but it competes directly for the same
-Solihull families' children and their weekend education spend, **which is Manarat's core
-programme**.
+**Revision 1 treated Deen Central and The Hub as two organisations. They are one.**
 
-**Services:** Sunday supplementary school; mother-tongue languages — Arabic, **Bangla and Urdu**;
-weekly adult Islamic education; talks on Islam in schools and community organisations; **weekly
-badminton and football youth clubs** for teenagers.
+No published charity figures. The organisation has publicly stated its **donor income dropped by
+almost 100%** while daily masjid overheads continued. Despite that, it runs daily and Jumu'ah
+prayers, Quran classes for children and adults, **a bereavement service**, community events,
+**function rooms for hire**, a live prayer-times page and **a newsletter**.
 
-> **Read across:** mother-tongue languages beyond Arabic, and sport-based youth clubs, reach
-> families that a prayer-and-Quran-only offer does not.
+> **Read across:** a live cautionary case for donation-only funding against fixed overheads — and
+> even in distress it has three things Manarat doesn't: bereavement services, room-hire income, and
+> an owned email channel.
 
-### 4.4 Deen Central — *threat: low and falling*
+### 5.6 Green Lane Masjid — *benchmark, not head-to-head*
 
-`deencentral.org` · Solihull · "a safe, open space for Islamic education, community and spiritual
-nurturing"
+`greenlanemasjid.org` · charity 1125833 · est. 1979 · Small Heath
 
-No published charity figures located. The organisation has **publicly stated that its donor income
-dropped by almost 100%** while daily masjid overheads continued.
+**£5.38m income, 93.9% deployed** — and it has grown every year for five years: £3.61m → £4.69m →
+£4.80m → £5.00m → £5.38m. Donations alone reached £4.69m in 2024.
 
-Site pages include `/about/`, a live `/prayer-times/` page and `/charity-projects/`. Active on
-Instagram and Facebook as @deencentraluk.
+A foodbank running eight years, **Celebrate Eid** at 60,000–80,000 attendees, and an international
+wing that has raised over £7m in six years.
 
-> **Read across:** a live cautionary case for donation-only funding against fixed building
-> overheads — the exact shape of Manarat's own income. Also worth treating as a possible
-> partnership rather than a pure rival.
-
-### 4.5 Green Lane Masjid & Community Centre (GLMCC) — *benchmark, not head-to-head*
-
-`greenlanemasjid.org` · charity 1125833 · est. 1979 · Small Heath, grade II listed Victorian building
-
-**Income FYE 31 December 2024: £5,380,031** — £4.69m donations and legacies, £397,130 charitable
-activities. Expenditure £5,048,978, of which £4.96m charitable. **Spend ratio 94%.**
-
-Roughly **13.6× Manarat's income**, and its donation income alone is about **12×** Manarat's total.
-
-**Services:** a mosque attended by thousands weekly; an educational college; a foodbank running
-8+ years serving Muslims and non-Muslims; welfare services; **Celebrate Eid**, the largest outdoor
-Eid event in Europe at 60,000–80,000 attendees; and Task Force Green Lane Masjid, its international
-humanitarian wing, which has raised over £7m in six years.
-
-**Website:** campaign-led. Every ask is a named project with its own page — `/donate/consistentdeeds/`,
-`/donate/glmcc-expansion-project/`, `/welfare-services/foodbank/` — plus press releases. The
-flagship ask is **recurring monthly giving priced as a daily habit: £20 a month, framed as 67p a day.**
-
-> **Read across:** GLMCC does not ask for donations. It asks for a *named project*, monthly, at a
-> daily price. And its 94% spend ratio is itself the fundraising argument.
+> **Read across:** Green Lane never asks for "a donation." It asks for a **named project, monthly,
+> at a daily price** — "£20 a month, 67p a day" — with every appeal on a page of its own. And its
+> 94% spend ratio is itself the fundraising argument.
 
 ---
 
-## 5. Feature matrix
+## 6. Feature matrix
 
-| | Manarat | JMIC | Solihull Central | SIEA | Deen Central | GLMCC |
-|---|---|---|---|---|---|---|
-| Live on-site prayer timetable | ⚠️ PDF, 2020 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Native online donation flow | ❌ | ✅ | ✅ | ❌ | ✅ | ✅ |
-| Recurring / monthly giving | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Named campaign pages | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Per-service sub-pages | ❌ | ✅ | ✅ | ❌ | ❌ | ✅ |
-| Women's programme | ❌ | ✅ | ❌ | ❌ | ❌ | ✅ |
-| Funeral / janazah service | ❌ | ✅ | ❌ | ❌ | ❌ | ✅ |
-| Full-time school | ❌ | ✅ | ❌ | ❌ | ❌ | college |
-| Nikah / marriage | ✅ *(+ civil)* | ❌ | ✅ | ❌ | ❌ | ✅ |
-| Foodbank / welfare delivery | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Youth sport / clubs | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ |
-| Earned income stream | ❌ | rental + fees | catering hire | fees | ❌ | ✅ |
-| News / press releases | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| | Manarat | Olton | Jami | Solihull C. | SIEA | Deen C. | Green Lane |
+|---|---|---|---|---|---|---|---|
+| Live on-site prayer timetable | ⚠️ PDF, 2020 | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Native online donation flow | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
+| Recurring / monthly giving | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Named campaign pages | ❌ | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Per-service sub-pages | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
+| Dedicated education site | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Children's classes every weekday | ⚠️ Hifz only | ✅ | ✅ | ❌ | ⚠️ Sunday | ✅ | ✅ |
+| Women's programme | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ✅ |
+| Funeral / bereavement | ❌ | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Full-time school | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | college |
+| Nikah / marriage | ✅ *+ civil* | ❌ | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Foodbank / welfare | ❌ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Youth / social activities | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Earned income stream | ❌ | fees | rental + fees | catering | fees | room hire | ✅ |
+| Newsletter / press releases | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
 
-Manarat is the **only organisation in the set with civil marriage registration alongside Nikah** —
-a genuine, unexploited differentiator. It is also the only one with no earned-income line at all.
-
----
-
-## 6. Findings
-
-**F1 — No native online donation flow.** *(high)*
-Published routes are cheque and in person. Cash-and-cheque giving structurally excludes under-40
-donors and makes **Ramadan night-giving — the highest-intent moment in the Islamic giving calendar
-— almost impossible to capture.**
-
-**F2 — Prayer times are a six-year-old PDF.** *(high)*
-`/wp-content/uploads/2020/07/Manarat-Foundation-Prayer-Timetable-3.pdf`. Prayer times are the
-highest-frequency reason a local Muslim opens a masjid website. That recurring traffic currently
-goes to MosquePay, The Masjid App and MosqueFinder instead.
-
-**F3 — Only 61% of income is being spent.** *(high)*
-£394,135 in, £239,198 out, ~£156k surplus in one year. GLMCC deploys 94%, SIEA 86%. Either
-Manarat is building toward a capital project — in which case **that project is not named anywhere
-public and is therefore raising nothing** — or it is under-deploying. Both readings have the same
-fix: name the project.
-
-**F4 — Single-source income concentration.** *(medium)*
-Manarat appears almost entirely donation-funded. JMIC takes 19% from donations; Solihull Central
-hires out catering equipment; SIEA charges fees. Deen Central, donation-only, has reported a
-near-total collapse in donor income. Manarat has a 1,000-capacity building and a large car park
-with no visible earned-income line.
-
-**F5 — Thin site, no per-service pages.** *(medium)*
-Five top-level pages against JMIC's service tree. The Hifz programme, Arabic course and combined
-Islamic-plus-civil marriage registration each justify their own page and each is a distinct search
-entry point currently collapsed into one.
-
-**F6 — No funeral or janazah service.** *(medium)*
-JMIC has run funerals since 1995. A bereaved family that travels to Small Heath at the hardest
-moment of their lives tends to keep going there afterwards. **This is the highest-loyalty service
-in the sector.**
-
-**F7 — No visible women's or youth programme.** *(medium)*
-JMIC runs JMIC Muslimah; SIEA runs weekly badminton and football. Manarat's public offer reaches
-men and children, but not women or teenagers as distinct constituencies.
-
-**F8 — Discoverability is rented, not owned.** *(low)*
-MosquePay, The Masjid App, MosqueFinder and Giving is Great own the recurring visit and the donor
-relationship. Fine as acquisition channels; a problem as the primary one.
-
-**F9 — The strongest differentiator is unstated.** *(low)*
-Founded by scholars, first purpose-established masjid for Sheldon and Solihull, and an explicit
-anti-extremism position. That last one is rare, publicly valuable, and absent from how the site
-sells itself. Solihull Central competes on parking and motorway access; **Manarat can compete on
-scholarship and civic trust.**
+Manarat is the **only organisation in the set** with no earned-income line, no live prayer timetable
+and no way to take a donation on its own site. It is also the **only one** offering civil marriage
+registration alongside Nikah — a real, unexploited differentiator.
 
 ---
 
-## 7. Recommendations, ranked
+## 7. Findings
+
+**F0 — Manarat has been overtaken, and did not see it coming.** *(critical)*
+The Olton Project raised £496,482 to Manarat's £394,135 in the same financial year, with a core
+offer that is a direct substitute for Manarat's, positioned better and sold on a dedicated site.
+
+**F1 — Income fell for the first time in five years.** *(critical)*
+£128.9k → £210.1k → £330.4k → £453.0k → £394.1k. A 13% drop, with expenditure still rising.
+
+**F2 — The website cannot take a donation.** *(high)*
+Cheque and in person only. Excludes under-40 donors and makes Ramadan night-giving — the
+highest-intent moment in the Islamic giving calendar — almost impossible to capture.
+
+**F3 — Prayer times are a six-year-old PDF.** *(high)*
+Uploaded July 2020. The highest-frequency reason to visit a masjid site, handed to MosquePay, The
+Masjid App and MosqueFinder.
+
+**F4 — £660k has accumulated with no public name on it.** *(high)*
+The 61% spend ratio is not itself the problem — Jami runs 65.8%, Olton 51.7%, so reserve-building is
+normal here. The problem is that **Manarat's reserve is the only one with no named project attached.**
+Green Lane has its Expansion Project; Jami is visibly building property and a school.
+
+**F5 — The education offer has no shop window.** *(high)*
+No fees, no timetable, no age ranges, no teacher credentials, no enquiry form — all collapsed into
+one `/services/` page. Parents cannot compare Manarat without phoning. This is precisely where TOP won.
+
+**F6 — Single-source income concentration.** *(medium)*
+The only organisation in the set with no earned income at all, against Jami's rental and fees,
+Solihull Central's catering hire, Deen Central's room hire and TOP's and SIEA's course fees.
+
+**F7 — The founding advantage has expired.** *(medium)*
+First-mover in 2012; five organisations in the catchment now. Demand doubled 2011→2021; supply grew
+faster.
+
+**F8 — No funeral or bereavement service.** *(medium)*
+Jami since 1995, Green Lane, and even Deen Central from a far weaker financial base. The
+highest-loyalty service in the sector.
+
+**F9 — No visible women's or youth programme.** *(medium)*
+Against JMIC Muslimah, SIEA's sport clubs and TOP's coffee mornings, excursions and social calendar.
+
+**F10 — Discoverability is rented, not owned.** *(low)*
+Aggregators own the recurring visit. And with no newsletter, Manarat has **no owned channel to a
+single supporter** — something Deen Central maintains even while financially distressed.
+
+**F11 — The strongest differentiator is unstated.** *(low)*
+Founded by scholars, first for Sheldon and Solihull, explicitly anti-extremism — none of it surfaced,
+while Solihull Central actively markets its full-time Imam.
+
+---
+
+## 8. Recommendations, ranked
 
 | # | Action | Fixes | Effort | Why |
 |---|---|---|---|---|
-| 1 | Live prayer timetable — auto-calculated, mobile-first, with Jumu'ah and Janazah announcements | F2, F8 | Low | Recovers the highest-frequency reason to visit; every other ask can then sit next to it |
-| 2 | Native online donation flow — card, Apple/Google Pay, **Gift Aid capture** | F1 | Medium | Gift Aid is worth 25p per eligible pound and is currently uncollected on cash and cheque |
-| 3 | **Name the capital project** the £156k surplus is building toward, with its own appeal page and a progress figure | F3, F1 | Low | An unnamed reserve raises nothing; a named project raises money *and* explains the surplus |
-| 4 | Recurring monthly giving tier, priced as a daily habit | F1, F4 | Medium | 200 donors at £15/month is £36k of certainty against volatile seasonal giving |
-| 5 | Split `/services/` into a page per programme — Hifz, Arabic, Islamic studies, Nikah — each with fees, times, age range and an enquiry form | F5 | Low | Four search entry points instead of one; removes the phone call now needed for basic details |
-| 6 | Introduce a funeral and janazah service | F6 | High | The clearest reason Sheldon families currently travel to Small Heath |
-| 7 | Open a second income line from the existing building — hall hire, car park, paid short courses | F4 | Medium | A 1,000-capacity building with a large car park is an under-used asset |
-| 8 | Start a women's programme and a youth activity, each with its own page | F7 | Medium | Matches JMIC Muslimah and SIEA's sport clubs; reaches the constituencies now missed |
-| 9 | Lead the homepage with scholarship, the Sheldon–Solihull first-mover story, and the anti-extremism position | F9 | Low | The one thing no local competitor can copy |
+| 1 | **Build a proper education shop window** — a page per programme with fees, timetable, age ranges, teacher credentials and an enquiry form | F5, F0 | Low | This is exactly where Manarat is losing to a weaker offer — and it's the cheapest item here |
+| 2 | **Live prayer timetable** — auto-calculated, mobile-first, with Jumu'ah and Janazah announcements | F3, F10 | Low | Recovers the highest-frequency reason to visit; every other ask then sits next to it |
+| 3 | **Native online donation flow** — card, Apple/Google Pay, Gift Aid capture | F2, F1 | Medium | Gift Aid is 25p per eligible pound, currently uncollected on cash and cheque |
+| 4 | **Name the capital project** the £660k is building toward — its own appeal page, with a progress figure | F4, F2 | Low | An unnamed reserve raises nothing; a named one raises money *and* explains itself |
+| 5 | **Recurring monthly giving**, priced as a daily habit | F2, F6, F1 | Medium | 200 donors at £15/month is £36k — most of this year's £59k decline |
+| 6 | **Start an email newsletter**, capturing addresses at every touchpoint | F10 | Low | Manarat has no owned channel to a single supporter; Deen Central has one while in distress |
+| 7 | **Open a second income line** from the building — hall hire, car park, paid short courses | F6 | Medium | The only organisation in the set with no earned income, sitting on a 1,000-capacity building |
+| 8 | **Introduce funeral and bereavement services** | F8 | High | The highest-loyalty service in the sector |
+| 9 | **Women's programme and a youth activity**, each with its own page | F9 | Medium | Reaches the two constituencies the current offer misses |
+| 10 | **Lead with scholarship** — the founding scholars, the first-mover story, the anti-extremism position | F11, F7 | Low | The one thing no competitor can copy, and the answer to the full-time-Imam claim |
 
-**If only three things get done: 1, 2 and 3.** They are all low or medium effort, they are all
-website work rather than organisational change, and together they close the donation gap, recover
-the recurring traffic, and turn a dormant £156k surplus into a fundraising story.
+**If only three things get done: 1, 2 and 3.** All low or medium effort, all website work rather
+than organisational change. Item 1 defends the programme that is actively being lost.
 
 ---
 
-## 8. Method, sources and gaps
+## 9. Corrections to revision 1
 
-**Sources:** Charity Commission for England and Wales (Register of Charities) for all financial and
-governance figures; Companies House; organisation websites surfaced via the search index; the
-MosquePay, The Masjid App, TotalGiving and CharityChoice donation platforms.
+| Revision 1 said | Revision 2 establishes |
+|---|---|
+| Manarat is **2nd of 5** by income | **3rd of 6.** The Olton Project raised £496,482 against Manarat's £394,135 in the same year. It was missed in round 1 and is the most important finding here. |
+| Manarat's 61% spend ratio is **the lowest** of every org with real figures | **Not an outlier.** Jami 65.8%, Olton 51.7%. Reserve-building is a market norm; the unnamed reserve is the real issue. |
+| Deen Central and The Hub are **separate organisations** | **The same organisation.** It also offers bereavement services, recorded as absent in round 1. |
+| Jami income **£1,933,550** | **£1.90m** gross per the register. The component breakdown sums about £33k higher; the register total is used. |
+
+---
+
+## 10. Method, sources and gaps
+
+**Sources.** Charity Commission for England and Wales, including the financial-history pages, for
+all financial and governance figures; Companies House; ONS Census 2021 and Birmingham City
+Observatory for demographics; organisation websites surfaced via the search index; MosquePay, The
+Masjid App, JustGiving, TotalGiving, CharityChoice, PraySalat and NearestMosque directories.
 
 **Gaps — limits of the research environment, not of the market:**
 
-1. **No live page crawls.** Outbound HTTPS to these domains was blocked by this environment's
-   egress proxy (403 on CONNECT). Site structure is evidenced by known URLs from the search index
-   rather than a full crawl, so page inventories are a floor, not a ceiling — a competitor may
-   have pages not surfaced here.
-2. **No quantitative SEO data.** The connected Ahrefs plan does not include Site Explorer
-   (`Insufficient plan`) and the Semrush account has no API units remaining. **There are no
-   traffic, domain-rating or keyword figures in this research.** Every quantitative claim above is
-   financial and comes from the Charity Commission.
-3. **Solihull Central Masjid filed a nil return** for FYE 2024, so its £0 does not reflect real
-   activity, and it is likely a stronger competitor than its published figures suggest.
-4. **Comparison periods differ** — year ends range from 31 March 2024 (JMIC) to 31 March 2025
-   (Manarat). Figures are each organisation's most recent published set, not a single common year.
-
-Closing gaps 1 and 2 needs either an allow-listed egress domain or SEO API credits.
+1. **No live page crawls.** Outbound HTTPS to these domains is blocked by this environment's egress
+   proxy (403 on CONNECT, re-tested this round). Site structure is evidenced by known URLs from the
+   search index, so page inventories are a floor, not a ceiling.
+2. **No quantitative SEO data.** The connected Ahrefs plan does not include Site Explorer and the
+   Semrush account has no API units. There are no traffic, domain-rating or keyword figures here;
+   every quantitative claim is financial or census-based.
+3. **Solihull Central Masjid filed a nil return** for FYE 2024 — likely a stronger competitor than
+   its figures suggest.
+4. **Ward-level Muslim population for Sheldon** was not obtainable; borough-level figures are used.
+5. **Deen Central / The Hub publishes no financials.** Charity 1154494 (Solihull Health & Education
+   Partnership) shares the Hermitage Road address, but the link is unconfirmed.
+6. **A second, older Olton Project registration** (1138839) exists alongside the CIO (1183781). The
+   CIO appears to have succeeded it; unconfirmed.
+7. **Comparison periods differ** — year ends range from 31 March 2024 (Jami) to 31 March 2025
+   (Manarat, Olton). The Manarat-versus-Olton comparison, the one that matters most, is same-year
+   and exact.

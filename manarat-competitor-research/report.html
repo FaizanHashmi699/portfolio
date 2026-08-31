@@ -336,6 +336,29 @@ footer {
   font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-mute); line-height: 1.7;
 }
 
+/* ---------- trend chart ---------- */
+.trend { width: 100%; height: auto; display: block; overflow: visible; }
+.trend .grid { stroke: var(--rule-soft); stroke-width: 1; }
+.trend .axis { stroke: var(--rule); stroke-width: 1; }
+.trend .ser { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.trend .s-inc { stroke: var(--subject); }
+.trend .s-exp { stroke: var(--accent); }
+.trend .dot { stroke: var(--surface); stroke-width: 2; }
+.trend .d-inc { fill: var(--subject); }
+.trend .d-exp { fill: var(--accent); }
+.trend text { font-family: var(--f-mono); font-size: 10.5px; fill: var(--ink-mute); }
+.trend .val { font-size: 11px; font-weight: 600; }
+.trend .v-inc { fill: var(--subject); }
+.trend .v-exp { fill: var(--accent); }
+.trend .drop { fill: var(--sev-high); font-size: 11px; font-weight: 600; }
+.trend .dropline { stroke: var(--sev-high); stroke-width: 1; stroke-dasharray: 3 3; }
+
+/* ---------- corrections ---------- */
+.corr { border-left: 3px solid var(--sev-med); background: var(--sev-med-bg); padding: 14px 18px; border-radius: 0 3px 3px 0; font-size: 14px; line-height: 1.55; }
+.corr b { font-weight: 600; }
+.rev-badge { display: inline-block; padding: 2px 8px; border-radius: 2px; background: var(--accent-wash); color: var(--accent); font-family: var(--f-mono); font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.was { text-decoration: line-through; color: var(--ink-mute); }
+
 /* ---------- tooltip ---------- */
 #tip {
   position: fixed; z-index: 50; pointer-events: none; opacity: 0;
@@ -354,14 +377,14 @@ footer {
 
 <header class="masthead">
   <div class="masthead-inner">
-    <div class="eyebrow">Competitor &amp; market research · Sheldon · Solihull · East Birmingham</div>
-    <h1>Second in the market,<br>last on the <em>website</em>.</h1>
-    <p class="standfirst">Manarat Foundation out-raises every local competitor except one. The gaps are not in the organisation — they are in the five pages that represent it.</p>
+    <div class="eyebrow">Competitor &amp; market research · Sheldon · Solihull · East Birmingham · <span class="rev-badge">Revision 2</span></div>
+    <h1>Third in a market it <em>opened</em>.</h1>
+    <p class="standfirst">Manarat Foundation was the first purpose-established masjid for Sheldon and Solihull. In the year just reported, a six-year-old charity in Olton raised more than it did — and Manarat's income fell for the first time in five years.</p>
     <div class="masthead-meta">
       <span><b>Subject</b> manaratfoundation.org.uk</span>
       <span><b>Charity</b> 1148223</span>
       <span><b>Compiled</b> 31 Aug 2026</span>
-      <span><b>Comparators</b> 5</span>
+      <span><b>Comparators</b> 6</span>
     </div>
   </div>
 </header>
@@ -370,12 +393,15 @@ footer {
   <nav class="rail" aria-label="Sections">
     <ol>
       <li><a href="#summary"><span class="n">01</span> Summary</a></li>
-      <li><a href="#map"><span class="n">02</span> Market map</a></li>
-      <li><a href="#rivals"><span class="n">03</span> The rivals</a></li>
-      <li><a href="#matrix"><span class="n">04</span> Feature matrix</a></li>
-      <li><a href="#findings"><span class="n">05</span> Findings</a></li>
-      <li><a href="#recs"><span class="n">06</span> What to do</a></li>
-      <li><a href="#method"><span class="n">07</span> Method &amp; gaps</a></li>
+      <li><a href="#trend"><span class="n">02</span> Five-year trend</a></li>
+      <li><a href="#map"><span class="n">03</span> League table</a></li>
+      <li><a href="#market"><span class="n">04</span> A crowding market</a></li>
+      <li><a href="#rivals"><span class="n">05</span> The rivals</a></li>
+      <li><a href="#matrix"><span class="n">06</span> Feature matrix</a></li>
+      <li><a href="#findings"><span class="n">07</span> Findings</a></li>
+      <li><a href="#recs"><span class="n">08</span> What to do</a></li>
+      <li><a href="#corrections"><span class="n">09</span> Corrections</a></li>
+      <li><a href="#method"><span class="n">10</span> Method &amp; gaps</a></li>
     </ol>
   </nav>
 
@@ -393,60 +419,125 @@ footer {
         <div class="kpi is-subject">
           <div class="k-label">Total income</div>
           <div class="k-val">£394k</div>
-          <div class="k-foot">2nd of 5 in the local market</div>
+          <div class="k-foot">3rd of 6 in the local market</div>
         </div>
         <div class="kpi">
-          <div class="k-label">Expenditure</div>
-          <div class="k-val">£239k</div>
-          <div class="k-foot">Leaving a ~£156k surplus</div>
+          <div class="k-label">Year on year</div>
+          <div class="k-val" style="color:var(--sev-high)">−13%</div>
+          <div class="k-foot">First decline in five years</div>
         </div>
         <div class="kpi">
-          <div class="k-label">Spend ratio</div>
-          <div class="k-val">61%</div>
-          <div class="k-foot">Lowest of every org with real figures</div>
+          <div class="k-label">Overtaken by</div>
+          <div class="k-val">£496k</div>
+          <div class="k-foot">The Olton Project, same year end</div>
         </div>
         <div class="kpi">
-          <div class="k-label">Founded</div>
-          <div class="k-val">2012</div>
-          <div class="k-foot">Against a 1973 incumbent next door</div>
+          <div class="k-label">Reserves built</div>
+          <div class="k-val">£661k</div>
+          <div class="k-foot">Five years of surpluses, unnamed</div>
         </div>
       </div>
 
       <div class="prose">
-        <p>Manarat Foundation is the <strong>second-largest organisation by income in its immediate local market</strong> — £394,135 in the year to 31 March 2025, behind only Jami Mosque &amp; Islamic Centre and well ahead of every other Solihull-area competitor. For an organisation founded in 2012, competing against an institution that has been on the same road since 1973, that is a genuinely strong position.</p>
-        <p>The vulnerabilities are not about size. They are three specific things:</p>
-        <p><strong>The website cannot take a donation.</strong> Published giving routes are cheque and in person. Every direct competitor except the education academy takes card payments.</p>
-        <p><strong>The prayer timetable is a PDF from July 2020.</strong> The highest-frequency reason to visit a masjid website has been handed to third-party aggregators.</p>
-        <p><strong>Only 61% of income is being spent.</strong> A ~£156k annual surplus is accumulating with no publicly named project attached to it.</p>
-        <p>All three are unusually cheap to fix relative to their impact, and the first two are website work rather than organisational change.</p>
+        <p>Manarat Foundation is <strong>third of six by income in its local market</strong> — not second — and it was overtaken in the year just reported.</p>
+        <p><strong>The Olton Project</strong>, a charity registered in 2019 and based in Olton, inside Manarat's own stated catchment, raised <strong>£496,482</strong> in the year to 31 March 2025. Manarat raised <strong>£394,135</strong> in the identical financial year — down 13% from £452,950.</p>
+        <p>The Olton Project's core offer is Qur'an and Islamic studies for ages 4–16, running <strong>every day of the week</strong>, streamed by ability, in small classes with qualified teachers, sold through a <strong>dedicated academy website</strong>. That is Manarat's core programme, positioned better and marketed harder by an organisation less than half its age.</p>
+        <p>The underlying position is still strong. Income roughly tripled between 2021 and 2024. The building holds a thousand people. The three-year Hifz programme is substantively better than what beat it. And five years of surpluses have accumulated around £660,600 in reserves.</p>
+        <p>But three structural gaps now have a cost attached: <strong>the website cannot take a donation</strong>; <strong>the education offer has no shop window</strong>; and <strong>£660k of reserves has no public name on it</strong>, so it raises nothing and explains nothing.</p>
       </div>
     </section>
 
     <!-- 02 -->
+    <section id="trend">
+      <div class="sec-head">
+        <div class="minaret"><i></i><u></u></div>
+        <div><h2>Five years, and one turn</h2>
+        <div class="sec-note">Manarat Foundation · years to 31 March</div></div>
+      </div>
+
+      <div class="panel">
+        <p class="panel-title">Income and expenditure, 2021–2025</p>
+        <p class="panel-sub">Income roughly tripled across four years, then fell 13%. Expenditure kept rising through the decline, so the annual surplus narrowed from £220k to £155k.</p>
+        <div class="legend">
+          <span><i class="sw-subject"></i> Income</span>
+          <span><i class="sw-accent"></i> Expenditure</span>
+        </div>
+        <div class="scroller">
+        <svg class="trend" viewBox="0 0 740 250" role="img" aria-label="Line chart of Manarat Foundation income and expenditure, years to 31 March 2021 through 2025. Income rises from £128,870 to a peak of £452,950 in 2024, then falls 13% to £394,135 in 2025. Expenditure rises steadily from £109,710 to £239,198.">
+          <line class="grid" x1="58" y1="20"  x2="700" y2="20"></line>
+          <line class="grid" x1="58" y1="58"  x2="700" y2="58"></line>
+          <line class="grid" x1="58" y1="96"  x2="700" y2="96"></line>
+          <line class="grid" x1="58" y1="134" x2="700" y2="134"></line>
+          <line class="grid" x1="58" y1="172" x2="700" y2="172"></line>
+          <line class="axis" x1="58" y1="210" x2="700" y2="210"></line>
+          <text x="50" y="24"  text-anchor="end">£500k</text>
+          <text x="50" y="62"  text-anchor="end">£400k</text>
+          <text x="50" y="100" text-anchor="end">£300k</text>
+          <text x="50" y="138" text-anchor="end">£200k</text>
+          <text x="50" y="176" text-anchor="end">£100k</text>
+          <text x="50" y="214" text-anchor="end">£0</text>
+
+          <line class="dropline" x1="540" y1="37.9" x2="700" y2="60.2"></line>
+          <polyline class="ser s-exp" points="58,168.3 218,168.5 379,147.3 540,121.5 700,119.1"></polyline>
+          <polyline class="ser s-inc" points="58,161.0 218,130.2 379,84.4 540,37.9 700,60.2"></polyline>
+
+          <circle class="dot d-exp" cx="58"  cy="168.3" r="5"></circle>
+          <circle class="dot d-exp" cx="218" cy="168.5" r="5"></circle>
+          <circle class="dot d-exp" cx="379" cy="147.3" r="5"></circle>
+          <circle class="dot d-exp" cx="540" cy="121.5" r="5"></circle>
+          <circle class="dot d-exp" cx="700" cy="119.1" r="5"></circle>
+          <circle class="dot d-inc" cx="58"  cy="161.0" r="5"></circle>
+          <circle class="dot d-inc" cx="218" cy="130.2" r="5"></circle>
+          <circle class="dot d-inc" cx="379" cy="84.4"  r="5"></circle>
+          <circle class="dot d-inc" cx="540" cy="37.9"  r="6"></circle>
+          <circle class="dot d-inc" cx="700" cy="60.2"  r="6"></circle>
+
+          <text class="val v-inc" x="70"  y="152" text-anchor="start">£129k</text>
+          <text class="val v-inc" x="540" y="27"  text-anchor="middle">£453k</text>
+          <text class="val v-inc" x="700" y="50"  text-anchor="end">£394k</text>
+          <text class="val v-exp" x="700" y="136" text-anchor="end">£239k</text>
+          <text class="drop"      x="628" y="86"  text-anchor="middle">−13%</text>
+
+          <text x="58"  y="232" text-anchor="middle">2021</text>
+          <text x="218" y="232" text-anchor="middle">2022</text>
+          <text x="379" y="232" text-anchor="middle">2023</text>
+          <text x="540" y="232" text-anchor="middle">2024</text>
+          <text x="700" y="232" text-anchor="middle">2025</text>
+        </svg>
+        </div>
+        <p class="axis-note">One down year is not a trend — but it is the first, and it landed in the same year a younger local rival out-raised the organisation. For contrast, Green Lane Masjid has grown every year since 2020, and Jami has gone from £818k to £1.90m since 2021.</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
     <section id="map">
       <div class="sec-head">
         <div class="minaret"><i></i><u></u></div>
-        <div><h2>The market map</h2>
+        <div><h2>The league table</h2>
         <div class="sec-note">Most recent published figures · periods differ</div></div>
       </div>
 
       <div class="panel" style="margin-bottom:16px">
         <p class="panel-title">Total annual income</p>
-        <p class="panel-sub">Each organisation's most recently published year. Green Lane is a regional benchmark rather than a head-to-head rival — it competes for the same donor pounds, not the same prayer footfall.</p>
+        <p class="panel-sub">Each organisation's most recently published year. Manarat and The Olton Project share a year end, so that comparison is exact. Green Lane is a regional benchmark rather than a head-to-head rival.</p>
         <div class="legend">
           <span><i class="sw-subject"></i> Manarat Foundation</span>
           <span><i class="sw-accent"></i> Comparison set</span>
         </div>
-        <div class="chart" id="income-chart">
-          <div class="row" data-tip="Green Lane Masjid — £5,380,031 income, year to 31 Dec 2024. Roughly 13.6× Manarat.">
+        <div class="chart">
+          <div class="row" data-tip="Green Lane Masjid — £5.38m income, year to 31 Dec 2024. Roughly 13.6× Manarat.">
             <div class="row-name"><b>Green Lane Masjid</b><span class="meta">benchmark · est. 1979</span></div>
             <div class="track"><div class="bar-wrap"><div class="bar" style="width:100%"></div></div><div class="bar-val">£5.38m</div></div>
           </div>
-          <div class="row" data-tip="Jami Mosque & Islamic Centre — £1,933,550 income, year to 31 Mar 2024. Only 19% from donations.">
+          <div class="row" data-tip="Jami Mosque & Islamic Centre — £1.90m income, year to 31 Mar 2024. Only 19% from donations.">
             <div class="row-name"><b>Jami Mosque &amp; Islamic Centre</b><span class="meta">est. 1973 · Coventry Rd</span></div>
-            <div class="track"><div class="bar-wrap"><div class="bar" style="width:35.9%"></div></div><div class="bar-val">£1.93m</div></div>
+            <div class="track"><div class="bar-wrap"><div class="bar" style="width:35.3%"></div></div><div class="bar-val">£1.90m</div></div>
           </div>
-          <div class="row is-subject" data-tip="Manarat Foundation — £394,135 income, year to 31 Mar 2025. Second of five locally.">
+          <div class="row" data-tip="The Olton Project — £496,482 income, year to 31 Mar 2025. Registered 2019. Same year end as Manarat.">
+            <div class="row-name"><b>The Olton Project</b><span class="meta">est. 2019 · Olton</span></div>
+            <div class="track"><div class="bar-wrap"><div class="bar" style="width:9.2%"></div></div><div class="bar-val">£496k</div></div>
+          </div>
+          <div class="row is-subject" data-tip="Manarat Foundation — £394,135 income, year to 31 Mar 2025. Down 13% year on year.">
             <div class="row-name"><b>Manarat Foundation<span class="youchip">you</span></b><span class="meta">est. 2012 · Sheldon</span></div>
             <div class="track"><div class="bar-wrap"><div class="bar is-subject" style="width:7.3%"></div></div><div class="bar-val">£394k</div></div>
           </div>
@@ -458,8 +549,8 @@ footer {
             <div class="row-name"><b>Solihull Central Masjid</b><span class="meta">est. 2016</span></div>
             <div class="track"><div class="nodata">nil return filed — not plotted as zero</div></div>
           </div>
-          <div class="row" data-tip="Deen Central — no published charity figures located.">
-            <div class="row-name"><b>Deen Central</b><span class="meta">Solihull</span></div>
+          <div class="row" data-tip="Deen Central, operating as The Hub — no published charity figures located.">
+            <div class="row-name"><b>Deen Central / The Hub</b><span class="meta">Solihull</span></div>
             <div class="track"><div class="nodata">no published figures</div></div>
           </div>
         </div>
@@ -468,7 +559,7 @@ footer {
 
       <div class="panel">
         <p class="panel-title">Share of income actually spent</p>
-        <p class="panel-sub">The proportion of the year's income deployed on activity. Jami Mosque and Solihull Central are omitted — neither publishes a comparable expenditure figure.</p>
+        <p class="panel-sub">The proportion of the year's income deployed on activity. Solihull Central and Deen Central are omitted — neither publishes comparable figures.</p>
         <div class="legend">
           <span><i class="sw-subject"></i> Manarat Foundation</span>
           <span><i class="sw-accent"></i> Comparison set</span>
@@ -482,88 +573,109 @@ footer {
             <div class="row-name"><b>Solihull Islamic Education Academy</b></div>
             <div class="track"><div class="meter-wrap"><div class="meter" style="width:86.3%"></div></div><div class="bar-val">86.3%</div></div>
           </div>
-          <div class="row is-subject" data-tip="Manarat Foundation spends 60.7% of income — £239,198 of £394,135. A ~£156k surplus.">
+          <div class="row" data-tip="Jami Mosque spends 65.8% of income — £1.25m of £1.90m.">
+            <div class="row-name"><b>Jami Mosque &amp; Islamic Centre</b></div>
+            <div class="track"><div class="meter-wrap"><div class="meter" style="width:65.8%"></div></div><div class="bar-val">65.8%</div></div>
+          </div>
+          <div class="row is-subject" data-tip="Manarat Foundation spends 60.7% of income — £239,198 of £394,135.">
             <div class="row-name"><b>Manarat Foundation<span class="youchip">you</span></b></div>
             <div class="track"><div class="meter-wrap"><div class="meter is-subject" style="width:60.7%"></div></div><div class="bar-val">60.7%</div></div>
           </div>
+          <div class="row" data-tip="The Olton Project spends 51.7% of income — £256,489 of £496,482.">
+            <div class="row-name"><b>The Olton Project</b></div>
+            <div class="track"><div class="meter-wrap"><div class="meter" style="width:51.7%"></div></div><div class="bar-val">51.7%</div></div>
+          </div>
         </div>
-        <p class="axis-note">Scale runs 0–100% of that year's income. A low ratio is not automatically bad — but it needs a named reason, and there isn't one in public.</p>
+        <p class="axis-note">Manarat is <strong>not</strong> the outlier revision 1 reported. Reserve-building is a market norm here — three of five sit below 66%. What distinguishes Manarat is that its reserve is the only one with no named project attached to it.</p>
       </div>
     </section>
 
-    <!-- 03 -->
+    <!-- 04 -->
+    <section id="market">
+      <div class="sec-head">
+        <div class="minaret"><i></i><u></u></div>
+        <div><h2>The market is growing — and crowding faster</h2>
+        <div class="sec-note">ONS Census 2011 → 2021</div></div>
+      </div>
+
+      <div class="kpis" style="margin-bottom:24px">
+        <div class="kpi">
+          <div class="k-label">Solihull Muslim population</div>
+          <div class="k-val">2.5% → 5.3%</div>
+          <div class="k-foot">More than doubled, 2011 to 2021</div>
+        </div>
+        <div class="kpi">
+          <div class="k-label">Birmingham</div>
+          <div class="k-val">29.9%</div>
+          <div class="k-foot">Up 8.0 points — largest rise of any faith group</div>
+        </div>
+        <div class="kpi">
+          <div class="k-label">Orgs in the catchment</div>
+          <div class="k-val">5+</div>
+          <div class="k-foot">Against one in 2012</div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p><strong>Demand is real.</strong> Muslims were 5.3% of Solihull's population at the 2021 Census, up from 2.5% in 2011 — more than double in a decade. Birmingham overall stands at 29.9%, up 8.0 points, the largest rise of any religious group in the city.</p>
+        <p><strong>Supply grew faster.</strong> Manarat opened in 2012 as the first purpose-established masjid for Sheldon and Solihull. At least five organisations now serve that same catchment: The Olton Project (2019), Solihull Central Masjid (2016) — which now markets itself as <em>the first and only masjid in Solihull with a full-time Imam</em> — Deen Central operating as The Hub, Solihull Islamic Education Academy, and Manarat itself.</p>
+        <p>Manarat's founding advantage was being first into an underserved area. <strong>That advantage has expired.</strong> The market is still growing; Manarat's share of it is not.</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
     <section id="rivals">
       <div class="sec-head">
         <div class="minaret"><i></i><u></u></div>
         <div><h2>The rivals, and what each one teaches</h2>
-        <div class="sec-note">Four direct competitors, one benchmark</div></div>
+        <div class="sec-note">Five direct competitors, one benchmark</div></div>
       </div>
 
       <div class="scroller" style="margin-bottom:26px">
         <table>
           <caption>Comparison set at a glance</caption>
           <thead>
-            <tr>
-              <th>Organisation</th><th>Founded</th><th class="num">Income</th>
-              <th class="num">Spend ratio</th><th>Period end</th><th>Threat</th>
-            </tr>
+            <tr><th>Organisation</th><th>Founded</th><th class="num">Income</th><th class="num">Spend ratio</th><th>Period end</th><th>Threat</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="org">Green Lane Masjid<small>charity 1125833</small></td>
-              <td class="num">1979</td><td class="num">£5,380,031</td><td class="num">93.9%</td>
-              <td>31 Dec 2024</td><td class="dim">Benchmark</td>
-            </tr>
-            <tr>
-              <td class="org">Jami Mosque &amp; Islamic Centre<small>charity 1000355</small></td>
-              <td class="num">1973</td><td class="num">£1,933,550</td><td class="num dim">—</td>
-              <td>31 Mar 2024</td><td>High</td>
-            </tr>
-            <tr class="is-subject">
-              <td class="org">Manarat Foundation<small>charity 1148223</small></td>
-              <td class="num">2012</td><td class="num">£394,135</td><td class="num">60.7%</td>
-              <td>31 Mar 2025</td><td class="dim">— subject —</td>
-            </tr>
-            <tr>
-              <td class="org">Solihull Islamic Education Academy<small>charity 1138757</small></td>
-              <td class="num dim">—</td><td class="num">£156,496</td><td class="num">86.3%</td>
-              <td>31 Aug 2024</td><td>Medium</td>
-            </tr>
-            <tr>
-              <td class="org">Solihull Central Masjid<small>charity 1200650</small></td>
-              <td class="num">2016</td><td class="num dim">nil return</td><td class="num dim">—</td>
-              <td>31 Dec 2024</td><td>Medium, rising</td>
-            </tr>
-            <tr>
-              <td class="org">Deen Central<small>no charity number located</small></td>
-              <td class="num dim">—</td><td class="num dim">not published</td><td class="num dim">—</td>
-              <td class="dim">—</td><td>Low, falling</td>
-            </tr>
+            <tr><td class="org">Green Lane Masjid<small>charity 1125833</small></td><td class="num">1979</td><td class="num">£5,380,000</td><td class="num">93.9%</td><td>31 Dec 2024</td><td class="dim">Benchmark</td></tr>
+            <tr><td class="org">Jami Mosque &amp; Islamic Centre<small>charity 1000355</small></td><td class="num">1973</td><td class="num">£1,900,000</td><td class="num">65.8%</td><td>31 Mar 2024</td><td>High</td></tr>
+            <tr><td class="org">The Olton Project<small>charity 1183781 (CIO)</small></td><td class="num">2019</td><td class="num">£496,482</td><td class="num">51.7%</td><td>31 Mar 2025</td><td>Critical</td></tr>
+            <tr class="is-subject"><td class="org">Manarat Foundation<small>charity 1148223</small></td><td class="num">2012</td><td class="num">£394,135</td><td class="num">60.7%</td><td>31 Mar 2025</td><td class="dim">— subject —</td></tr>
+            <tr><td class="org">Solihull Islamic Education Academy<small>charity 1138757</small></td><td class="num dim">—</td><td class="num">£156,496</td><td class="num">86.3%</td><td>31 Aug 2024</td><td>Medium</td></tr>
+            <tr><td class="org">Solihull Central Masjid<small>charity 1200650</small></td><td class="num">2016</td><td class="num dim">nil return</td><td class="num dim">—</td><td>31 Dec 2024</td><td>Medium, rising</td></tr>
+            <tr><td class="org">Deen Central / The Hub<small>no charity number confirmed</small></td><td class="num dim">—</td><td class="num dim">not published</td><td class="num dim">—</td><td class="dim">—</td><td>Low, falling</td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="prose">
-        <h3>Jami Mosque &amp; Islamic Centre — the real rival</h3>
-        <p>Same arterial road, about three miles west, with a fifty-year head start on donor relationships and a capacity of 2,000 across two halls. It runs an evening maktab from 1975, a Hifz madrasa from 1983, a full-time Darul Uloom boys' secondary school from 1985, and funeral services from 1995.</p>
-        <p>But the number that matters is this: <strong>only 19% of its £1.93m income comes from donations.</strong> Rental property and education fees carry the organisation. And its donation income — £362,430 — is slightly <em>below</em> Manarat's total income. Manarat is already competitive on fundraising. It is not competitive on diversification.</p>
+        <h3>The Olton Project — the one that overtook you</h3>
+        <p>Registered as a CIO in June 2019, based on Kineton Green Road in Olton, with 7 trustees and 11 volunteers. <strong>Income £496,482 against expenditure £256,489</strong> in the year to 31 March 2025 — the same year Manarat raised £394,135.</p>
+        <p><strong>TOP Academy</strong> is the engine: Qur'an and Islamic studies for ages 4–16, lessons <strong>every day of the week</strong>, weekday and weekend classes <strong>streamed by ability</strong>, a <strong>low teacher-to-pupil ratio</strong>, and teachers drawn largely from child-facing professions. It is framed as equipping children "to practise their religion in modern Britain," and it has <strong>its own domain</strong>. Around it sit spiritual gatherings, language classes, weekly coffee mornings, educational excursions, monthly movie nights, guest speakers, social functions, and food and equipment delivery to vulnerable local people.</p>
+        <p>TOP is positioned on exactly what parents actually choose on — daily availability, ability streaming, small classes, qualified staff — and it is sold on a site of its own. <strong>Manarat's three-year Hifz programme is a stronger offer and is effectively invisible next to it.</strong></p>
+
+        <h3>Jami Mosque &amp; Islamic Centre — the incumbent</h3>
+        <p>Same arterial road, three miles west, capacity 2,000, a fifty-year head start — and income that has more than doubled since 2021: £818k, £1.39m, £1.34m, £1.90m.</p>
+        <p>The number that matters: <strong>only 19% of income comes from donations.</strong> Rental property and education fees carry it. And its donation income — £362,430 — is <em>below</em> Manarat's total income. Manarat is competitive on fundraising; it is not competitive on diversification.</p>
 
         <h3>Solihull Central Masjid — the rising claim</h3>
-        <p>Established 2016 on Warwick Road, and the nearest masjid inside Solihull proper. It competes on convenience rather than scholarship — town-centre proximity, motorway access via the M42, M40 and M6 — and monetises its building through <strong>catering equipment hire</strong>. It filed a nil return for 2024, so its published £0 tells you nothing; it is almost certainly a stronger competitor than the register suggests. As it matures, Manarat's claim to be the masjid for <em>Sheldon and Solihull</em> gets harder to hold.</p>
+        <p>Established 2016 on Warwick Road. It filed a nil return for 2024, so its published £0 tells you nothing. It competes on convenience — town centre, M42/M40/M6 — monetises the building through <strong>catering equipment hire</strong>, and markets itself as <strong>the first and only masjid in Solihull with a full-time Imam</strong>. That claim is aimed squarely at the ground Manarat should own.</p>
 
         <h3>Solihull Islamic Education Academy — the quiet overlap</h3>
-        <p>Not a masjid, so no competition for prayer footfall — but direct competition for the same families' children and their weekend education spend, <strong>which is Manarat's core programme</strong>. It teaches mother-tongue languages beyond Arabic — Bangla and Urdu — and runs weekly badminton and football clubs for teenagers. Both reach families that a prayer-and-Quran-only offer does not.</p>
+        <p>£156,496 income, 86.3% spent. Sunday supplementary school, <strong>mother-tongue languages beyond Arabic — Bangla and Urdu</strong> — weekly adult Islamic education, talks on Islam in schools, and <strong>weekly badminton and football clubs</strong> for teenagers. Not a masjid, but direct competition for the same families' children.</p>
 
-        <h3>Deen Central — the cautionary case</h3>
-        <p>A Solihull organisation with an overlapping education-and-community pitch that has publicly stated its <strong>donor income dropped by almost 100%</strong> while daily masjid overheads continued. That is a live demonstration of the risk in donation-only funding against a fixed building — the exact shape of Manarat's own income. It may be worth approaching as a partner rather than treating as a rival.</p>
+        <h3>Deen Central, operating as The Hub — the cautionary case</h3>
+        <p>Revision 1 treated Deen Central and The Hub as two organisations. <strong>They are one</strong>, at 5–9 Hermitage Road, Solihull. It has publicly stated its <strong>donor income dropped by almost 100%</strong> while daily overheads continued.</p>
+        <p>Even so, it runs daily and Jumu'ah prayers, Quran classes for children and adults, <strong>a bereavement service</strong>, community events, <strong>function rooms for hire</strong>, a live prayer-times page and <strong>a newsletter</strong> — three of which Manarat does not have, from a far weaker financial base.</p>
 
         <h3>Green Lane Masjid — the benchmark</h3>
-        <p>£5.38m income, 94% of it deployed, and a fundraising machine: a foodbank running eight years, Celebrate Eid at 60,000–80,000 attendees, and an international wing that has raised over £7m in six years. Roughly 13.6× Manarat's income, with donation income alone about 12× Manarat's total.</p>
+        <p>£5.38m income, 93.9% deployed, and growth every year for five years: £3.61m → £4.69m → £4.80m → £5.00m → £5.38m. A foodbank running eight years, Celebrate Eid at 60,000–80,000 attendees, and an international wing that has raised over £7m in six years.</p>
         <p>The transferable lesson is not scale. It is that <strong>Green Lane never asks for a donation.</strong> It asks for a named project, monthly, at a daily price — "£20 a month, 67p a day" — with every appeal on a page of its own. And its 94% spend ratio is itself the fundraising argument.</p>
       </div>
     </section>
 
-    <!-- 04 -->
+    <!-- 06 -->
     <section id="matrix">
       <div class="sec-head">
         <div class="minaret"><i></i><u></u></div>
@@ -572,42 +684,28 @@ footer {
       </div>
 
       <div class="panel">
-        <p class="panel-sub" style="margin-bottom:18px">Manarat is the only organisation in the set offering <strong>civil marriage registration alongside Nikah</strong> — a real, unexploited differentiator. It is also the only one with no earned-income line at all.</p>
+        <p class="panel-sub" style="margin-bottom:18px">Manarat is the <strong>only organisation in the set</strong> with no earned-income line, no live prayer timetable and no way to take a donation on its own site. It is also the <strong>only one</strong> offering civil marriage registration alongside Nikah — a real, unexploited differentiator.</p>
         <div class="scroller">
           <table class="matrix">
             <thead>
-              <tr>
-                <th>Capability</th><th>Manarat</th><th>Jami</th><th>Solihull C.</th>
-                <th>SIEA</th><th>Deen C.</th><th>Green Lane</th>
-              </tr>
+              <tr><th>Capability</th><th>Manarat</th><th>Olton</th><th>Jami</th><th>Solihull C.</th><th>SIEA</th><th>Deen C.</th><th>Green Lane</th></tr>
             </thead>
             <tbody>
-              <tr><td>Live on-site prayer timetable</td>
-                <td><span class="mk mk-p">PDF, 2020</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">n/a</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
-              <tr><td>Native online donation flow</td>
-                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
-              <tr><td>Recurring / monthly giving</td>
-                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
-              <tr><td>Named campaign pages</td>
-                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
-              <tr><td>Per-service sub-pages</td>
-                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
-              <tr><td>Women's programme</td>
-                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
-              <tr><td>Funeral / janazah service</td>
-                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
-              <tr><td>Full-time school</td>
-                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-p">College</span></td></tr>
-              <tr><td>Nikah / marriage services</td>
-                <td><span class="mk mk-y">Yes + civil</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
-              <tr><td>Foodbank / welfare delivery</td>
-                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
-              <tr><td>Youth sport / clubs</td>
-                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
-              <tr><td>Earned income stream</td>
-                <td><span class="mk mk-n">None</span></td><td><span class="mk mk-p">Rental + fees</span></td><td><span class="mk mk-p">Catering hire</span></td><td><span class="mk mk-p">Course fees</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
-              <tr><td>News / press releases</td>
-                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Live on-site prayer timetable</td><td><span class="mk mk-p">PDF, 2020</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">n/a</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Native online donation flow</td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Recurring / monthly giving</td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Named campaign pages</td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Per-service sub-pages</td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Dedicated education site</td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td></tr>
+              <tr><td>Children's classes every weekday</td><td><span class="mk mk-p">Hifz only</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-p">Sunday</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Women's programme</td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Funeral / bereavement</td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Full-time school</td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-p">College</span></td></tr>
+              <tr><td>Nikah / marriage services</td><td><span class="mk mk-y">Yes + civil</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Foodbank / welfare delivery</td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Youth / social activities</td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Earned income stream</td><td><span class="mk mk-n">None</span></td><td><span class="mk mk-p">Course fees</span></td><td><span class="mk mk-p">Rental + fees</span></td><td><span class="mk mk-p">Catering hire</span></td><td><span class="mk mk-p">Course fees</span></td><td><span class="mk mk-p">Room hire</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Newsletter / press releases</td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -615,55 +713,67 @@ footer {
       </div>
     </section>
 
-    <!-- 05 -->
+    <!-- 07 -->
     <section id="findings">
       <div class="sec-head">
         <div class="minaret"><i></i><u></u></div>
         <div><h2>Findings</h2>
-        <div class="sec-note">Nine, by severity · IDs referenced by the recommendations</div></div>
+        <div class="sec-note">Twelve, by severity · IDs referenced by the recommendations</div></div>
       </div>
 
       <div class="findings">
         <div class="finding">
-          <div class="f-id">F1</div><div class="f-title">The website cannot take a donation</div><div class="chip chip-high">High</div>
-          <div class="f-body">Published routes are cheque and in person. Cash-and-cheque giving structurally excludes under-40 donors and makes <strong>Ramadan night-giving — the highest-intent moment in the Islamic giving calendar — almost impossible to capture.</strong> Online giving is currently intermediated by MosquePay.</div>
+          <div class="f-id">F0</div><div class="f-title">Manarat has been overtaken, and did not see it coming</div><div class="chip chip-high">Critical</div>
+          <div class="f-body">The Olton Project CIO — registered 2019, six years old, in Olton inside Manarat's stated catchment — raised <strong>£496,482</strong> in the year to 31 March 2025. Manarat raised <strong>£394,135</strong> in the identical financial year. TOP's core offer is Qur'an and Islamic studies for ages 4–16, running every day of the week, streamed by ability, in small classes, sold through a dedicated academy website. <strong>That is Manarat's core programme, positioned better and marketed harder.</strong></div>
         </div>
         <div class="finding">
-          <div class="f-id">F2</div><div class="f-title">Prayer times are a six-year-old PDF</div><div class="chip chip-high">High</div>
-          <div class="f-body">The timetable on the site was uploaded in July 2020. Prayer times are the highest-frequency reason a local Muslim opens a masjid website, and that recurring traffic currently goes to MosquePay, The Masjid App and MosqueFinder instead. Jami, Deen Central and Green Lane all host live timetables themselves.</div>
+          <div class="f-id">F1</div><div class="f-title">Income fell for the first time in five years</div><div class="chip chip-high">Critical</div>
+          <div class="f-body">£128.9k → £210.1k → £330.4k → £453.0k → £394.1k. A 13% drop, with expenditure still rising from £232.9k to £239.2k. One down year is not a trend — but it is the first, and it landed in the same year a local rival out-raised the organisation.</div>
         </div>
         <div class="finding">
-          <div class="f-id">F3</div><div class="f-title">Only 61% of income is being spent</div><div class="chip chip-high">High</div>
-          <div class="f-body">£394,135 in, £239,198 out, a ~£156k surplus in one year. Green Lane deploys 94%, the education academy 86%. Either Manarat is building toward a capital project — in which case <strong>that project is not named anywhere public and is therefore raising nothing</strong> — or it is under-deploying. Both readings have the same fix: name the project.</div>
+          <div class="f-id">F2</div><div class="f-title">The website cannot take a donation</div><div class="chip chip-high">High</div>
+          <div class="f-body">Published routes are cheque and in person. Every direct competitor with a live site except SIEA takes card payments; The Olton Project takes them through JustGiving. Cash-and-cheque giving structurally excludes under-40 donors and makes <strong>Ramadan night-giving — the highest-intent moment in the Islamic giving calendar — almost impossible to capture.</strong></div>
         </div>
         <div class="finding">
-          <div class="f-id">F4</div><div class="f-title">Single-source income concentration</div><div class="chip chip-med">Medium</div>
-          <div class="f-body">Manarat appears almost entirely donation-funded. Jami takes 19% from donations; Solihull Central hires out catering equipment; the academy charges fees. Deen Central, donation-only, has reported a near-total collapse in donor income. Manarat has a 1,000-capacity building and a large car park with no visible earned-income line.</div>
+          <div class="f-id">F3</div><div class="f-title">Prayer times are a six-year-old PDF</div><div class="chip chip-high">High</div>
+          <div class="f-body">The timetable on the site was uploaded in July 2020. Prayer times are the highest-frequency reason a local Muslim opens a masjid website, and that recurring traffic currently goes to MosquePay, The Masjid App and MosqueFinder. Jami, Deen Central and Green Lane all host live timetables themselves.</div>
         </div>
         <div class="finding">
-          <div class="f-id">F5</div><div class="f-title">Thin site, no per-service pages</div><div class="chip chip-med">Medium</div>
-          <div class="f-body">Roughly five top-level pages against Jami's service tree and Green Lane's project-per-page structure. The Hifz programme, Arabic course and combined Islamic-plus-civil marriage registration each justify their own page, and each is a distinct search entry point currently collapsed into one.</div>
+          <div class="f-id">F4</div><div class="f-title">£660k has accumulated with no public name on it</div><div class="chip chip-high">High</div>
+          <div class="f-body">Five years of surpluses total roughly <strong>£660,600</strong>. The 61% spend ratio is not itself the problem — Jami runs 65.8% and Olton 51.7%, so reserve-building is normal here. The problem is that <strong>Manarat's reserve is the only one with no named project attached.</strong> Green Lane has its Expansion Project; Jami is visibly building property and a school. An unnamed reserve raises nothing and explains nothing.</div>
         </div>
         <div class="finding">
-          <div class="f-id">F6</div><div class="f-title">No funeral or janazah service</div><div class="chip chip-med">Medium</div>
-          <div class="f-body">Jami has run funerals since 1995; Green Lane offers them. A bereaved family that travels to Small Heath at the hardest moment of their lives tends to keep going there afterwards. <strong>This is the highest-loyalty service in the sector</strong> and Manarat does not appear to offer it.</div>
+          <div class="f-id">F5</div><div class="f-title">The education offer has no shop window</div><div class="chip chip-high">High</div>
+          <div class="f-body">The Olton Project sells its academy on its own domain; SIEA has a dedicated site. Manarat's three-year Hifz programme, Arabic course and Islamic studies — substantively a stronger offer than either — live inside one undifferentiated <code>/services/</code> page with no fees, no timetable, no age ranges and no enquiry form. <strong>Parents choosing a madrasah cannot compare Manarat without phoning.</strong></div>
         </div>
         <div class="finding">
-          <div class="f-id">F7</div><div class="f-title">No visible women's or youth programme</div><div class="chip chip-med">Medium</div>
-          <div class="f-body">Jami runs a dedicated Muslimah section; the academy runs weekly badminton and football. Manarat's public offer — prayers, Quran, Arabic, Nikah — reaches men and children, but not women or teenagers as distinct constituencies.</div>
+          <div class="f-id">F6</div><div class="f-title">Single-source income concentration</div><div class="chip chip-med">Medium</div>
+          <div class="f-body">Manarat appears almost entirely donation-funded and is the only organisation in the set with no earned-income line. Jami takes 19% from donations and carries the rest on rental and school fees; Solihull Central hires out catering equipment; Deen Central hires out rooms; TOP and SIEA charge course fees.</div>
         </div>
         <div class="finding">
-          <div class="f-id">F8</div><div class="f-title">Discoverability is rented, not owned</div><div class="chip chip-low">Low</div>
-          <div class="f-body">MosquePay, The Masjid App, MosqueFinder and Giving is Great own the recurring visit and the donor relationship. Fine as acquisition channels; a problem as the primary one.</div>
+          <div class="f-id">F7</div><div class="f-title">The founding advantage has expired</div><div class="chip chip-med">Medium</div>
+          <div class="f-body">Manarat opened in 2012 as the first purpose-established masjid for Sheldon and Solihull. At least five organisations now serve that catchment. Demand is genuinely growing — Solihull's Muslim population went from 2.5% to 5.3% between the 2011 and 2021 Censuses — but supply has grown faster, and Solihull Central now claims to be the first and only Solihull masjid with a full-time Imam.</div>
         </div>
         <div class="finding">
-          <div class="f-id">F9</div><div class="f-title">The strongest differentiator is unstated</div><div class="chip chip-low">Low</div>
-          <div class="f-body">Founded by scholars, the first purpose-established masjid for Sheldon and Solihull, and an explicit anti-extremism position. That last one is rare, publicly valuable, and absent from how the site sells itself. Solihull Central competes on parking and motorway access; <strong>Manarat can compete on scholarship and civic trust.</strong></div>
+          <div class="f-id">F8</div><div class="f-title">No funeral or bereavement service</div><div class="chip chip-med">Medium</div>
+          <div class="f-body">Jami has run funerals since 1995, Green Lane offers them, and Deen Central runs a bereavement service from a much weaker financial base. A bereaved family that has to go elsewhere at the hardest moment of their lives tends to keep going there afterwards. <strong>This is the highest-loyalty service in the sector.</strong></div>
+        </div>
+        <div class="finding">
+          <div class="f-id">F9</div><div class="f-title">No visible women's or youth programme</div><div class="chip chip-med">Medium</div>
+          <div class="f-body">Jami runs JMIC Muslimah with its own site section; SIEA runs weekly badminton and football; TOP runs coffee mornings, excursions and movie nights. Manarat's public offer — prayers, Quran, Arabic, Nikah — reaches men and children, but not women or teenagers as distinct constituencies.</div>
+        </div>
+        <div class="finding">
+          <div class="f-id">F10</div><div class="f-title">Discoverability is rented, not owned</div><div class="chip chip-low">Low</div>
+          <div class="f-body">MosquePay, The Masjid App, MosqueFinder and Giving is Great own the recurring visit and the donor relationship. Manarat also has no newsletter, so there is <strong>no owned channel to a single supporter</strong> — something Deen Central maintains even while financially distressed.</div>
+        </div>
+        <div class="finding">
+          <div class="f-id">F11</div><div class="f-title">The strongest differentiator is unstated</div><div class="chip chip-low">Low</div>
+          <div class="f-body">Founded by scholars, the first purpose-established masjid for Sheldon and Solihull, and an explicit anti-extremism position. That last one is rare, publicly valuable, and absent from how the site sells itself — while Solihull Central actively markets its full-time Imam.</div>
         </div>
       </div>
     </section>
 
-    <!-- 06 -->
+    <!-- 08 -->
     <section id="recs">
       <div class="sec-head">
         <div class="minaret"><i></i><u></u></div>
@@ -675,23 +785,48 @@ footer {
         <table class="rec-table">
           <thead><tr><th class="num">#</th><th>Action</th><th>Fixes</th><th>Effort</th><th>Why</th></tr></thead>
           <tbody>
-            <tr><td>1</td><td><b>Live prayer timetable</b> — auto-calculated, mobile-first, with Jumu'ah and Janazah announcements</td><td class="fixes">F2, F8</td><td class="effort">Low</td><td>Recovers the highest-frequency reason to visit; every other ask can then sit next to it</td></tr>
-            <tr><td>2</td><td><b>Native online donation flow</b> — card, Apple/Google Pay, and Gift Aid capture</td><td class="fixes">F1</td><td class="effort">Medium</td><td>Gift Aid is worth 25p per eligible pound and is currently uncollected on cash and cheque</td></tr>
-            <tr><td>3</td><td><b>Name the capital project</b> the surplus is building toward — its own appeal page, with a progress figure</td><td class="fixes">F3, F1</td><td class="effort">Low</td><td>An unnamed reserve raises nothing; a named project raises money <em>and</em> explains the surplus</td></tr>
-            <tr><td>4</td><td><b>Recurring monthly giving</b>, priced as a daily habit</td><td class="fixes">F1, F4</td><td class="effort">Medium</td><td>200 donors at £15/month is £36k of certainty against volatile seasonal giving</td></tr>
-            <tr><td>5</td><td><b>Split the services page</b> — one page each for Hifz, Arabic, Islamic studies and Nikah, with fees, times, age range and an enquiry form</td><td class="fixes">F5</td><td class="effort">Low</td><td>Four search entry points instead of one; removes the phone call now needed for basic details</td></tr>
-            <tr><td>6</td><td><b>Introduce funeral and janazah services</b></td><td class="fixes">F6</td><td class="effort">High</td><td>The clearest reason Sheldon families currently travel to Small Heath</td></tr>
-            <tr><td>7</td><td><b>Open a second income line</b> from the existing building — hall hire, the car park, or paid short courses</td><td class="fixes">F4</td><td class="effort">Medium</td><td>A 1,000-capacity building with a large car park is an under-used asset</td></tr>
-            <tr><td>8</td><td><b>Start a women's programme and a youth activity</b>, each with its own page</td><td class="fixes">F7</td><td class="effort">Medium</td><td>Matches Jami's Muslimah section and the academy's sport clubs; reaches the constituencies now missed</td></tr>
-            <tr><td>9</td><td><b>Lead with scholarship</b> — the founding scholars, the Sheldon–Solihull first-mover story, the anti-extremism position</td><td class="fixes">F9</td><td class="effort">Low</td><td>The one thing no local competitor can copy</td></tr>
+            <tr><td>1</td><td><b>Build a proper education shop window</b> — a page per programme with fees, timetable, age ranges, teacher credentials and an enquiry form</td><td class="fixes">F5, F0</td><td class="effort">Low</td><td>Exactly where Manarat is losing to a weaker offer — and the cheapest item here</td></tr>
+            <tr><td>2</td><td><b>Live prayer timetable</b> — auto-calculated, mobile-first, with Jumu'ah and Janazah announcements</td><td class="fixes">F3, F10</td><td class="effort">Low</td><td>Recovers the highest-frequency reason to visit; every other ask then sits next to it</td></tr>
+            <tr><td>3</td><td><b>Native online donation flow</b> — card, Apple/Google Pay, Gift Aid capture</td><td class="fixes">F2, F1</td><td class="effort">Medium</td><td>Gift Aid is 25p per eligible pound, currently uncollected on cash and cheque</td></tr>
+            <tr><td>4</td><td><b>Name the capital project</b> the £660k is building toward — its own appeal page, with a progress figure</td><td class="fixes">F4, F2</td><td class="effort">Low</td><td>An unnamed reserve raises nothing; a named one raises money <em>and</em> explains itself</td></tr>
+            <tr><td>5</td><td><b>Recurring monthly giving</b>, priced as a daily habit</td><td class="fixes">F2, F6, F1</td><td class="effort">Medium</td><td>200 donors at £15/month is £36k — most of this year's £59k decline</td></tr>
+            <tr><td>6</td><td><b>Start an email newsletter</b>, capturing addresses at every touchpoint</td><td class="fixes">F10</td><td class="effort">Low</td><td>No owned channel to a single supporter today; Deen Central has one while in distress</td></tr>
+            <tr><td>7</td><td><b>Open a second income line</b> from the building — hall hire, car park, paid short courses</td><td class="fixes">F6</td><td class="effort">Medium</td><td>The only organisation in the set with no earned income, on a 1,000-capacity building</td></tr>
+            <tr><td>8</td><td><b>Introduce funeral and bereavement services</b></td><td class="fixes">F8</td><td class="effort">High</td><td>The highest-loyalty service in the sector</td></tr>
+            <tr><td>9</td><td><b>Women's programme and a youth activity</b>, each with its own page</td><td class="fixes">F9</td><td class="effort">Medium</td><td>Reaches the two constituencies the current offer misses</td></tr>
+            <tr><td>10</td><td><b>Lead with scholarship</b> — the founding scholars, the first-mover story, the anti-extremism position</td><td class="fixes">F11, F7</td><td class="effort">Low</td><td>The one thing no competitor can copy, and the answer to the full-time-Imam claim</td></tr>
           </tbody>
         </table>
       </div>
 
-      <div class="callout">If only three things get done, do <strong>1, 2 and 3</strong>. All are low or medium effort, all are website work rather than organisational change, and together they close the donation gap, recover the recurring traffic, and turn a dormant £156k surplus into a fundraising story.</div>
+      <div class="callout">If only three things get done, do <strong>1, 2 and 3</strong>. All are low or medium effort and all are website work rather than organisational change. Item 1 defends the programme that is actively being lost.</div>
     </section>
 
-    <!-- 07 -->
+    <!-- 09 -->
+    <section id="corrections">
+      <div class="sec-head">
+        <div class="minaret"><i></i><u></u></div>
+        <div><h2>Corrections to revision 1</h2>
+        <div class="sec-note">What deeper research changed</div></div>
+      </div>
+
+      <div class="panel">
+        <p class="panel-sub" style="margin-bottom:18px">Five-year financial histories and two organisations missed the first time round changed the headline. These are the conclusions that did not survive.</p>
+        <div class="scroller">
+          <table>
+            <thead><tr><th>Revision 1 said</th><th>Revision 2 establishes</th></tr></thead>
+            <tbody>
+              <tr><td class="was">Manarat is 2nd of 5 by income</td><td><strong>3rd of 6.</strong> The Olton Project raised £496,482 against Manarat's £394,135 in the same year. Missed in round 1, and the most important finding here.</td></tr>
+              <tr><td class="was">Manarat's 61% spend ratio is the lowest of every org with real figures</td><td><strong>Not an outlier.</strong> Jami 65.8%, Olton 51.7%. Reserve-building is a market norm; the unnamed reserve is the real issue.</td></tr>
+              <tr><td class="was">Deen Central and The Hub are separate organisations</td><td><strong>The same organisation.</strong> It also offers bereavement services, recorded as absent in round 1.</td></tr>
+              <tr><td class="was">Jami income £1,933,550</td><td><strong>£1.90m</strong> gross per the register. The component breakdown sums about £33k higher; the register total is used.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 -->
     <section id="method">
       <div class="sec-head">
         <div class="minaret"><i></i><u></u></div>
@@ -700,21 +835,24 @@ footer {
       </div>
 
       <div class="prose" style="margin-bottom:24px">
-        <p><strong>Sources.</strong> Charity Commission for England and Wales (Register of Charities) for all financial and governance figures; Companies House; organisation websites surfaced via the search index; and the MosquePay, The Masjid App, TotalGiving and CharityChoice donation platforms.</p>
+        <p><strong>Sources.</strong> Charity Commission for England and Wales, including the financial-history pages, for all financial and governance figures; Companies House; ONS Census 2021 and Birmingham City Observatory for demographics; organisation websites surfaced via the search index; and the MosquePay, The Masjid App, JustGiving, TotalGiving, CharityChoice, PraySalat and NearestMosque directories.</p>
       </div>
 
       <div class="panel">
         <p class="panel-title">Gaps — limits of the research environment, not of the market</p>
         <div class="gaps" style="margin-top:18px">
-          <div class="gap"><span><strong>No live page crawls.</strong> Outbound HTTPS to these domains was blocked by the research environment's egress proxy. Site structure is evidenced by known URLs from the search index rather than a full crawl, so page inventories are a floor, not a ceiling.</span></div>
-          <div class="gap"><span><strong>No quantitative SEO data.</strong> The connected Ahrefs plan does not include Site Explorer, and the Semrush account has no API units remaining. There are no traffic, domain-rating or keyword figures anywhere in this research — every quantitative claim here is financial, from the Charity Commission.</span></div>
+          <div class="gap"><span><strong>No live page crawls.</strong> Outbound HTTPS to these domains is blocked by the research environment's egress proxy (403 on CONNECT, re-tested this round). Site structure is evidenced by known URLs from the search index, so page inventories are a floor, not a ceiling.</span></div>
+          <div class="gap"><span><strong>No quantitative SEO data.</strong> The connected Ahrefs plan does not include Site Explorer, and the Semrush account has no API units remaining. There are no traffic, domain-rating or keyword figures anywhere in this research — every quantitative claim is financial or census-based.</span></div>
           <div class="gap"><span><strong>Solihull Central Masjid filed a nil return</strong> for the year to 31 December 2024, so its published £0 does not reflect real activity. It is likely a stronger competitor than its figures suggest.</span></div>
-          <div class="gap"><span><strong>Comparison periods differ</strong> — year ends range from 31 March 2024 (Jami) to 31 March 2025 (Manarat). Figures are each organisation's most recent published set, not a single common year.</span></div>
+          <div class="gap"><span><strong>Ward-level Muslim population for Sheldon</strong> was not obtainable from the search index; borough-level Census figures are used instead.</span></div>
+          <div class="gap"><span><strong>Deen Central / The Hub publishes no financials.</strong> Charity 1154494 (Solihull Health &amp; Education Partnership) shares the Hermitage Road address, but the link is unconfirmed.</span></div>
+          <div class="gap"><span><strong>A second, older Olton Project registration</strong> (1138839) exists alongside the CIO (1183781). The CIO appears to have succeeded it; this is unconfirmed.</span></div>
+          <div class="gap"><span><strong>Comparison periods differ</strong> — year ends range from 31 March 2024 (Jami) to 31 March 2025 (Manarat, Olton). The Manarat-versus-Olton comparison, the one that matters most, is same-year and exact.</span></div>
         </div>
       </div>
 
       <footer>
-        Compiled 31 August 2026 · Financial and governance data © Crown copyright, Charity Commission for England and Wales, used under the Open Government Licence · Figures are each organisation's most recently published annual return and are not restated to a common year end.
+        Revision 2 · compiled 31 August 2026 · Financial and governance data © Crown copyright, Charity Commission for England and Wales, used under the Open Government Licence · Census data © Crown copyright, Office for National Statistics · Figures are each organisation's most recently published annual return and are not restated to a common year end.
       </footer>
     </section>
 
