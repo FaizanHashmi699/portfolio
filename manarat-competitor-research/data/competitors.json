@@ -1,0 +1,360 @@
+{
+  "meta": {
+    "project": "Manarat Foundation - Competitor & Market Research",
+    "compiled": "2026-08-31",
+    "subject_domain": "manaratfoundation.org.uk",
+    "market": "Masjids, Islamic centres and Islamic education charities serving Sheldon, Solihull and east/south-east Birmingham (UK)",
+    "sources": [
+      "Charity Commission for England and Wales - Register of Charities",
+      "Companies House",
+      "Organisation websites (contents surfaced via web search index)",
+      "MosquePay, The Masjid App, TotalGiving, CharityChoice donation platforms"
+    ],
+    "known_gaps": [
+      "Direct HTTPS fetching of all sites was blocked by this environment's egress proxy; page-level detail is drawn from the search index rather than live crawls.",
+      "No quantitative SEO data (traffic, domain rating, keyword rankings): the connected Ahrefs plan does not cover Site Explorer and the Semrush account has no API units remaining.",
+      "Solihull Central Masjid filed a nil return for FYE 2024; real activity is not reflected in its published figures."
+    ]
+  },
+
+  "subject": {
+    "name": "Manarat Foundation",
+    "domain": "manaratfoundation.org.uk",
+    "charity_number": "1148223",
+    "company_number": "08098742",
+    "structure": "Charitable company",
+    "founded": 2012,
+    "address": "155 Coventry Road, Sheldon, Birmingham",
+    "positioning": "First purpose-established masjid and Islamic centre for the Muslims of Sheldon, Solihull and surrounding areas; founded by a group of scholars; explicitly promotes tolerance and rejects extremism",
+    "capacity": "1000+ worshippers, large car park",
+    "financials": {
+      "period_end": "2025-03-31",
+      "total_income_gbp": 394135,
+      "total_expenditure_gbp": 239198,
+      "surplus_gbp": 155937,
+      "expenditure_ratio": 0.607
+    },
+    "governance": {
+      "trustees": 5,
+      "volunteers": 25,
+      "employees_over_60k": 0,
+      "trustee_remuneration": false,
+      "reporting_status": "Up to date (on time)"
+    },
+    "services": [
+      "Five daily prayers and Jumu'ah congregations",
+      "Quran recitation, Tajweed and Islamic studies",
+      "Three-year Hifz ul-Qur'an programme (weekday and weekend)",
+      "Arabic language course for children",
+      "Character development",
+      "Nikah - Islamic and civil marriage registration",
+      "Local charitable and social welfare work"
+    ],
+    "website": {
+      "platform": "WordPress",
+      "known_pages": ["/", "/about-us/", "/services/", "/donation/", "/contact/"],
+      "depth": "Shallow - approximately five top-level pages",
+      "prayer_times": "PDF only, uploaded 2020-07 (/wp-content/uploads/2020/07/Manarat-Foundation-Prayer-Timetable-3.pdf); no live on-site timetable",
+      "donation_methods": ["Cheque payable to Manarat Foundation", "In person at the masjid"],
+      "online_giving": "No native online donation flow found on the site; online giving is intermediated by MosquePay",
+      "recurring_giving": false,
+      "named_campaigns": false
+    },
+    "third_party_listings": [
+      {"platform": "MosquePay", "id": "5305"},
+      {"platform": "The Masjid App", "url": "themasjidapp.org/manarat-foundation"},
+      {"platform": "MosqueFinder", "note": "prayer timetable PDF hosted externally"},
+      {"platform": "Giving is Great", "note": "charity factsheet"}
+    ],
+    "social": {
+      "x": "@ManaratSheldon",
+      "facebook": "Manarat Foundation (Birmingham)",
+      "linkedin": "manarat-foundation"
+    }
+  },
+
+  "competitors": [
+    {
+      "tier": 1,
+      "rank_by_income": 1,
+      "name": "Jami Mosque & Islamic Centre Birmingham (JMIC)",
+      "domain": "jamimosque.org.uk",
+      "charity_number": "1000355",
+      "legal_name": "Jami Mosque and Islamic Centre (Birmingham) Trustees Limited",
+      "founded": 1973,
+      "address": "521-527 Coventry Road, Small Heath, Birmingham B10 0LL",
+      "contact": {"phone": "0121 772 6408", "email": "enquiries@jamimosque.org.uk"},
+      "capacity": "2000 across two halls, plus separate Darul Uloom building",
+      "threat_level": "High",
+      "why_a_competitor": "Same arterial road (Coventry Road), roughly three miles west. Directly overlapping catchment for Hifz, maktab and funeral services, and a 50-year head start on donor relationships.",
+      "financials": {
+        "period_end": "2024-03-31",
+        "total_income_gbp": 1933550,
+        "breakdown_gbp": {
+          "donations_and_legacies": 362430,
+          "trading_rental_and_education_fees": 900330,
+          "other_income": 554020,
+          "investments": 87300,
+          "government_grants": 29470
+        },
+        "donation_dependency": 0.187
+      },
+      "services": [
+        "Evening maktab (since 1975)",
+        "Hifz madrasa (since 1983)",
+        "Darul Uloom Islamic High School - full-time boys secondary, national curriculum plus Hifz and Alimiyyah (since 1985)",
+        "Raheem Academy - evening and weekend maktab, ages 5-16",
+        "Muslim funeral services (since 1995)",
+        "Social welfare",
+        "JMIC Muslimah - dedicated women's programme",
+        "Community services"
+      ],
+      "website": {
+        "depth": "Deep - structured service tree with individual sub-pages",
+        "known_pages": [
+          "/services/", "/services/darul-uloom/", "/services/community-services/",
+          "/services/social-welfare/", "/jmic-muslimah/", "/timetable/",
+          "/donate/", "/donations/ramadan-appeal-2026/", "/contact/"
+        ],
+        "prayer_times": "Dedicated on-site /timetable/ page",
+        "online_giving": true,
+        "named_campaigns": true,
+        "campaign_example": "Ramadan Appeal 2026 - dedicated donation form page"
+      },
+      "key_lesson": "Only 19% of income comes from donations. Rental property and education fees carry the organisation, which insulates it from donation-cycle volatility."
+    },
+    {
+      "tier": 1,
+      "rank_by_income": 3,
+      "name": "Solihull Islamic Education Academy Ltd (SIEA)",
+      "domain": "solihullislamiceducationacademy.org.uk",
+      "charity_number": "1138757",
+      "address": "Solihull",
+      "threat_level": "Medium",
+      "why_a_competitor": "Not a masjid, so it does not compete for prayer footfall - but it competes directly for the same Solihull families' children and their weekend education spend, which is Manarat's core programme.",
+      "financials": {
+        "period_end": "2024-08-31",
+        "total_income_gbp": 156496,
+        "total_expenditure_gbp": 135095,
+        "expenditure_ratio": 0.863
+      },
+      "governance": {"trustee_remuneration": false},
+      "services": [
+        "Solihull supplementary Sunday school",
+        "Mother-tongue language teaching - Arabic, Bangla, Urdu",
+        "Weekly adult Islamic education",
+        "Talks on Islam in schools and community organisations",
+        "Weekly badminton and football youth clubs for teenagers"
+      ],
+      "key_lesson": "Mother-tongue languages beyond Arabic (Bangla, Urdu) and sport-based youth clubs reach families that a prayer-and-Quran-only offer does not."
+    },
+    {
+      "tier": 1,
+      "rank_by_income": 4,
+      "name": "Solihull Central Masjid & Community Centre",
+      "domain": "solihullmasjid.org.uk",
+      "charity_number": "1200650",
+      "company_number": "CE030387",
+      "structure": "Charitable incorporated organisation (CIO)",
+      "founded": 2016,
+      "address": "Sandalls Cottage, 1021 Warwick Road, Solihull",
+      "threat_level": "Medium and rising",
+      "why_a_competitor": "The nearest masjid inside Solihull proper. Manarat's claim to be 'the masjid for Sheldon and Solihull' weakens as this site matures.",
+      "financials": {
+        "period_end": "2024-12-31",
+        "total_income_gbp": 0,
+        "total_expenditure_gbp": 0,
+        "note": "Nil return filed; published figures do not reflect actual activity. Reporting is up to date."
+      },
+      "governance": {"volunteers": 3, "trustee_remuneration": false},
+      "services": [
+        "Daily prayers, Jummah, Eid (twice yearly) and Taraweeh",
+        "Qur'anic studies, Islamic education and Arabic language classes",
+        "Lifelong learning and personal development programmes",
+        "Marriage services and family support",
+        "Interfaith meetings, community gatherings, talks and workshops"
+      ],
+      "website": {
+        "depth": "Moderate",
+        "architecture": "Static .html page tree (e.g. /pages/aboutus/about-us.html, /pages/donate.html, /pages/activities/social-activities.html) - dated structure",
+        "online_giving": true,
+        "platforms": ["MosquePay (id 5927)", "TotalGiving", "CharityChoice"]
+      },
+      "positioning_angles": [
+        "Proximity to Solihull town centre",
+        "Motorway access - M42, M40, M6",
+        "Catering equipment hire - an unusual earned-income line"
+      ],
+      "key_lesson": "Competes on convenience (town centre, motorways, parking) rather than scholarship, and monetises the building through catering equipment hire."
+    },
+    {
+      "tier": 1,
+      "rank_by_income": null,
+      "name": "Deen Central",
+      "domain": "deencentral.org",
+      "address": "Solihull",
+      "threat_level": "Low and falling",
+      "why_a_competitor": "Overlapping Solihull catchment and a similar education-plus-community pitch, but currently financially distressed.",
+      "financials": {
+        "note": "No published charity figures located. The organisation has publicly stated that its donor income dropped by almost 100% while daily masjid overheads continued."
+      },
+      "positioning": "A safe, open space for Islamic education, community and spiritual nurturing",
+      "website": {
+        "known_pages": ["/", "/about/", "/prayer-times/", "/charity-projects/"],
+        "prayer_times": "Dedicated on-site page"
+      },
+      "social": {"instagram": "@deencentraluk", "facebook": "deencentraluk"},
+      "key_lesson": "A live cautionary case: a single-source donation model with fixed building overheads is fragile. Also a potential partnership or absorption opportunity rather than a pure rival."
+    },
+    {
+      "tier": 2,
+      "rank_by_income": 0,
+      "name": "Green Lane Masjid & Community Centre (GLMCC)",
+      "domain": "greenlanemasjid.org",
+      "charity_number": "1125833",
+      "founded": 1979,
+      "address": "Small Heath, Birmingham - grade II listed Victorian building",
+      "threat_level": "Not head-to-head; benchmark and aspiration",
+      "why_a_competitor": "Does not compete for Sheldon prayer footfall, but absorbs a large share of West Midlands Muslim discretionary giving - including from Manarat's own congregation - through national-scale appeals.",
+      "financials": {
+        "period_end": "2024-12-31",
+        "total_income_gbp": 5380031,
+        "breakdown_gbp": {
+          "donations_and_legacies": 4690000,
+          "charitable_activities": 397130
+        },
+        "total_expenditure_gbp": 5048978,
+        "charitable_expenditure_gbp": 4960000,
+        "expenditure_ratio": 0.939
+      },
+      "services": [
+        "Fully functional mosque attended by thousands weekly",
+        "Educational college",
+        "Foodbank - running 8+ years, serving Muslims and non-Muslims",
+        "Welfare services",
+        "Celebrate Eid - bi-annual outdoor event, largest in Europe, 60,000-80,000 attendees",
+        "Task Force Green Lane Masjid - international humanitarian wing, £7m+ raised over 6 years, £2m+ in 2019 alone",
+        "Outreach work"
+      ],
+      "website": {
+        "depth": "Very deep - campaign-led",
+        "known_pages": [
+          "/", "/donate/", "/donate/consistentdeeds/", "/donate/glmcc-expansion-project/",
+          "/welfare-services/foodbank/", "/glmcc-community-support/", "/contact/"
+        ],
+        "online_giving": true,
+        "recurring_giving": true,
+        "recurring_offer": "Consistent Deeds - £20/month, framed as 67p a day",
+        "capital_appeal": "GLMCC Expansion Project",
+        "press_releases": true
+      },
+      "key_lesson": "Every giving ask is a named project with a page of its own, and the flagship ask is recurring monthly giving priced as a daily habit. 94% of income is deployed, which is itself the fundraising argument."
+    }
+  ],
+
+  "comparative_table": [
+    {"org": "Green Lane Masjid (benchmark)", "income_gbp": 5380031, "expenditure_gbp": 5048978, "expenditure_ratio": 0.939, "period_end": "2024-12-31", "founded": 1979},
+    {"org": "Jami Mosque & Islamic Centre", "income_gbp": 1933550, "expenditure_gbp": null, "expenditure_ratio": null, "period_end": "2024-03-31", "founded": 1973},
+    {"org": "Manarat Foundation", "income_gbp": 394135, "expenditure_gbp": 239198, "expenditure_ratio": 0.607, "period_end": "2025-03-31", "founded": 2012},
+    {"org": "Solihull Islamic Education Academy", "income_gbp": 156496, "expenditure_gbp": 135095, "expenditure_ratio": 0.863, "period_end": "2024-08-31", "founded": null},
+    {"org": "Solihull Central Masjid", "income_gbp": 0, "expenditure_gbp": 0, "expenditure_ratio": null, "period_end": "2024-12-31", "founded": 2016, "note": "nil return"},
+    {"org": "Deen Central", "income_gbp": null, "expenditure_gbp": null, "expenditure_ratio": null, "period_end": null, "founded": null, "note": "no published figures"}
+  ],
+
+  "feature_matrix": {
+    "legend": "true = present, false = absent, string = qualifier",
+    "rows": [
+      {"feature": "Live on-site prayer timetable",   "manarat": "PDF from 2020", "jami": true,  "solihull_central": false, "siea": false, "deen_central": true,  "glmcc": true},
+      {"feature": "Native online donation flow",     "manarat": false,           "jami": true,  "solihull_central": true,  "siea": false, "deen_central": true,  "glmcc": true},
+      {"feature": "Recurring / monthly giving",      "manarat": false,           "jami": false, "solihull_central": false, "siea": false, "deen_central": false, "glmcc": true},
+      {"feature": "Named campaign pages",            "manarat": false,           "jami": true,  "solihull_central": false, "siea": false, "deen_central": true,  "glmcc": true},
+      {"feature": "Per-service sub-pages",           "manarat": false,           "jami": true,  "solihull_central": true,  "siea": false, "deen_central": false, "glmcc": true},
+      {"feature": "Dedicated women's programme page","manarat": false,           "jami": true,  "solihull_central": false, "siea": false, "deen_central": false, "glmcc": true},
+      {"feature": "Funeral / janazah service",       "manarat": false,           "jami": true,  "solihull_central": false, "siea": false, "deen_central": false, "glmcc": true},
+      {"feature": "Full-time school",                "manarat": false,           "jami": true,  "solihull_central": false, "siea": false, "deen_central": false, "glmcc": "college"},
+      {"feature": "Nikah / marriage services",       "manarat": "Islamic + civil registration", "jami": false, "solihull_central": true, "siea": false, "deen_central": false, "glmcc": true},
+      {"feature": "Foodbank / welfare delivery",     "manarat": false,           "jami": true,  "solihull_central": false, "siea": false, "deen_central": true,  "glmcc": true},
+      {"feature": "Youth sport / clubs",             "manarat": false,           "jami": false, "solihull_central": false, "siea": true,  "deen_central": false, "glmcc": true},
+      {"feature": "Earned income stream",            "manarat": false,           "jami": "rental + school fees", "solihull_central": "catering hire", "siea": "course fees", "deen_central": false, "glmcc": true},
+      {"feature": "News / press releases",           "manarat": false,           "jami": false, "solihull_central": false, "siea": false, "deen_central": false, "glmcc": true}
+    ]
+  },
+
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "high",
+      "title": "No native online donation flow",
+      "detail": "Manarat's published donation routes are cheque and in-person giving. Every tier-1 competitor except SIEA takes card payments on or from its own site, and online giving is intermediated for Manarat by MosquePay. Cheque-and-cash giving structurally excludes under-40 donors and makes Ramadan night-giving - the single highest-intent moment in the Islamic giving calendar - almost impossible to capture.",
+      "evidence": "Manarat donation page lists cheque and in-person only; JMIC runs /donate/ plus campaign forms; GLMCC and Solihull Central both take online payments."
+    },
+    {
+      "id": "F2",
+      "severity": "high",
+      "title": "Prayer times are a six-year-old PDF",
+      "detail": "The timetable on the site is a PDF uploaded in July 2020. Prayer times are the highest-frequency reason a local Muslim opens a masjid website, and that recurring traffic is currently being handed to MosquePay, The Masjid App and MosqueFinder. JMIC, Deen Central and GLMCC all host live timetables themselves.",
+      "evidence": "/wp-content/uploads/2020/07/Manarat-Foundation-Prayer-Timetable-3.pdf; a Manarat timetable is also hosted on mosquefinder.co.uk."
+    },
+    {
+      "id": "F3",
+      "severity": "high",
+      "title": "Only 61% of income is being spent",
+      "detail": "Income of £394,135 against expenditure of £239,198 leaves a surplus of roughly £156k in a single year. GLMCC deploys 94% of income and SIEA 86%. Either Manarat is quietly building toward a capital project - in which case that project is not named anywhere public and is therefore not raising money - or it is under-deploying. Both readings point to the same fix: name the project.",
+      "evidence": "Charity Commission, FYE 31 March 2025."
+    },
+    {
+      "id": "F4",
+      "severity": "medium",
+      "title": "Single-source income concentration",
+      "detail": "Manarat appears to be almost entirely donation-funded. JMIC takes only 19% of its income from donations, carrying the rest on rental property and education fees; Solihull Central hires out catering equipment; SIEA charges course fees. Deen Central, which is donation-only, has publicly reported a near-total collapse in donor income while overheads continued. Manarat has a 1,000-capacity building with a large car park and no visible earned-income line.",
+      "evidence": "JMIC FYE 2024 breakdown; Deen Central public statement."
+    },
+    {
+      "id": "F5",
+      "severity": "medium",
+      "title": "Thin site with no per-service pages",
+      "detail": "Roughly five top-level pages against JMIC's service tree and GLMCC's project-per-page structure. Manarat's Hifz programme, Arabic course and combined Islamic-plus-civil marriage registration are each strong enough to justify their own page, and each is a distinct search entry point currently collapsed into one /services/ page.",
+      "evidence": "Known page lists for each domain."
+    },
+    {
+      "id": "F6",
+      "severity": "medium",
+      "title": "No funeral or janazah service",
+      "detail": "JMIC has run funeral services since 1995 and GLMCC offers them. A bereaved family that has to go to Small Heath at the hardest moment of their lives tends to keep going there afterwards. This is the highest-loyalty service in the sector and Manarat does not appear to offer it.",
+      "evidence": "JMIC funeral services since 1995; no equivalent found for Manarat."
+    },
+    {
+      "id": "F7",
+      "severity": "medium",
+      "title": "No visible women's or youth programme",
+      "detail": "JMIC runs JMIC Muslimah with its own site section; SIEA runs weekly badminton and football youth clubs; GLMCC runs extensive outreach. Manarat's public offer is prayers, Quran, Arabic and Nikah, which reaches men and children but not women or teenagers as distinct constituencies.",
+      "evidence": "Competitor programme listings."
+    },
+    {
+      "id": "F8",
+      "severity": "low",
+      "title": "Discoverability is rented, not owned",
+      "detail": "Manarat is listed on MosquePay, The Masjid App, MosqueFinder and Giving is Great. Those aggregators own the donor relationship and the recurring visit. They are useful acquisition channels but should not be the primary one.",
+      "evidence": "Third-party listings above."
+    },
+    {
+      "id": "F9",
+      "severity": "low",
+      "title": "The strongest differentiator is unstated",
+      "detail": "Manarat was founded by a group of scholars, is the first purpose-established masjid for Sheldon and Solihull, and explicitly promotes tolerance and rejects extremism. That last position is rare, publicly valuable and completely absent from how the site sells itself. Solihull Central competes on parking and motorway access; Manarat can compete on scholarship and civic trust.",
+      "evidence": "Manarat about-us content; Solihull Central positioning."
+    }
+  ],
+
+  "recommendations": [
+    {"priority": 1, "action": "Put a live prayer timetable on the site, auto-calculated and mobile-first, with Jumu'ah and Janazah announcements", "addresses": ["F2", "F8"], "effort": "low", "rationale": "Recovers the highest-frequency reason to visit, and every other ask can then be placed next to it."},
+    {"priority": 2, "action": "Add a native online donation flow with card and Apple/Google Pay, plus Gift Aid capture", "addresses": ["F1"], "effort": "medium", "rationale": "Gift Aid alone is worth 25p per eligible pound and is currently uncollected on cash and cheque giving."},
+    {"priority": 3, "action": "Name and publish the capital project the £156k surplus is building toward, as a dedicated appeal page with a progress figure", "addresses": ["F3", "F1"], "effort": "low", "rationale": "GLMCC's model: an unnamed reserve raises nothing, a named project raises money and explains the surplus at the same time."},
+    {"priority": 4, "action": "Launch a recurring monthly giving tier priced as a daily habit, mirroring Consistent Deeds", "addresses": ["F1", "F4"], "effort": "medium", "rationale": "Converts volatile seasonal giving into a predictable base. 200 donors at £15/month is £36k of certainty."},
+    {"priority": 5, "action": "Split /services/ into a page per programme - Hifz, Arabic, Islamic studies, Nikah - each with fees, times, age range and an enquiry form", "addresses": ["F5"], "effort": "low", "rationale": "Four search entry points instead of one, and it removes the phone call currently required to learn basic details."},
+    {"priority": 6, "action": "Introduce a funeral and janazah service", "addresses": ["F6"], "effort": "high", "rationale": "The single highest-loyalty service in the sector and the clearest reason Sheldon families currently travel to Small Heath."},
+    {"priority": 7, "action": "Open a second income line from the existing building - hall hire, the car park, or paid short courses", "addresses": ["F4"], "effort": "medium", "rationale": "A 1,000-capacity building with a large car park is an under-used asset; Deen Central shows the cost of donation-only funding."},
+    {"priority": 8, "action": "Start a women's programme and a youth activity, each with its own page", "addresses": ["F7"], "effort": "medium", "rationale": "Matches JMIC Muslimah and SIEA's sport clubs, and reaches the two constituencies the current offer misses."},
+    {"priority": 9, "action": "Lead the homepage with scholarship, the Sheldon-Solihull first-mover story, and the anti-extremism position", "addresses": ["F9"], "effort": "low", "rationale": "The one thing no local competitor can copy."}
+  ]
+}
