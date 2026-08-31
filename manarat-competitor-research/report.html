@@ -1,0 +1,760 @@
+<title>Manarat in Its Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,500;0,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root {
+  color-scheme: light;
+  --ground:      #F1F4F3;
+  --surface:     #FBFCFC;
+  --surface-2:   #E8EDEB;
+  --ink:         #101A19;
+  --ink-soft:    #4E5C59;
+  --ink-mute:    #74827E;
+  --rule:        #D3DCDA;
+  --rule-soft:   #E2E9E7;
+  --accent:      #008C79;
+  --accent-wash: #DEEFEB;
+  --subject:     #C05A1B;
+  --subject-wash:#F7E6D9;
+  --sev-high:    #A32E1C;
+  --sev-high-bg: #F6E2DE;
+  --sev-med:     #8A6410;
+  --sev-med-bg:  #F5EBD6;
+  --sev-low:     #5C6B67;
+  --sev-low-bg:  #E6EBEA;
+  --shadow:      0 1px 2px rgba(16,26,25,.05), 0 8px 24px -12px rgba(16,26,25,.16);
+
+  --f-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --f-body:    "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --f-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground:      #0C1211;
+    --surface:     #131C1A;
+    --surface-2:   #1B2624;
+    --ink:         #E2EAE7;
+    --ink-soft:    #A3B2AE;
+    --ink-mute:    #7D8D89;
+    --rule:        #27342F;
+    --rule-soft:   #1E2926;
+    --accent:      #12A88F;
+    --accent-wash: #102A26;
+    --subject:     #D9713A;
+    --subject-wash:#2E1D12;
+    --sev-high:    #E27A63;
+    --sev-high-bg: #2C1712;
+    --sev-med:     #D3A244;
+    --sev-med-bg:  #2A2210;
+    --sev-low:     #90A19C;
+    --sev-low-bg:  #1C2523;
+    --shadow:      0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground:      #0C1211;
+  --surface:     #131C1A;
+  --surface-2:   #1B2624;
+  --ink:         #E2EAE7;
+  --ink-soft:    #A3B2AE;
+  --ink-mute:    #7D8D89;
+  --rule:        #27342F;
+  --rule-soft:   #1E2926;
+  --accent:      #12A88F;
+  --accent-wash: #102A26;
+  --subject:     #D9713A;
+  --subject-wash:#2E1D12;
+  --sev-high:    #E27A63;
+  --sev-high-bg: #2C1712;
+  --sev-med:     #D3A244;
+  --sev-med-bg:  #2A2210;
+  --sev-low:     #90A19C;
+  --sev-low-bg:  #1C2523;
+  --shadow:      0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+/* ---------- masthead ---------- */
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  background: var(--surface);
+}
+.masthead-inner {
+  max-width: 1240px; margin: 0 auto;
+  padding: clamp(32px, 6vw, 68px) clamp(20px, 5vw, 56px) clamp(28px, 4vw, 44px);
+  display: flex; flex-direction: column; gap: 22px;
+}
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11.5px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.masthead h1 {
+  font-family: var(--f-display);
+  font-size: clamp(2.3rem, 6.2vw, 4.1rem);
+  font-weight: 500; line-height: 1.02; letter-spacing: -.018em;
+  text-wrap: balance; margin: 0;
+}
+.masthead h1 em { font-style: italic; color: var(--subject); }
+.standfirst {
+  font-family: var(--f-display);
+  font-size: clamp(1.05rem, 2.1vw, 1.32rem);
+  line-height: 1.5; color: var(--ink-soft);
+  max-width: 46ch; margin: 0;
+}
+.masthead-meta {
+  display: flex; flex-wrap: wrap; gap: 10px 28px;
+  padding-top: 20px; border-top: 1px solid var(--rule-soft);
+  font-family: var(--f-mono); font-size: 12px; color: var(--ink-mute);
+}
+.masthead-meta b { color: var(--ink-soft); font-weight: 500; }
+
+/* ---------- shell ---------- */
+.shell {
+  max-width: 1240px; margin: 0 auto;
+  padding: clamp(32px, 5vw, 60px) clamp(20px, 5vw, 56px) 96px;
+  display: grid; gap: clamp(32px, 5vw, 56px);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1080px) {
+  .shell { grid-template-columns: 208px minmax(0, 1fr); align-items: start; }
+}
+
+/* ---------- rail ---------- */
+.rail { display: none; }
+@media (min-width: 1080px) {
+  .rail {
+    display: block; position: sticky; top: 32px;
+    font-family: var(--f-mono); font-size: 12px;
+  }
+  .rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+  .rail a {
+    display: flex; gap: 10px; padding: 7px 10px 7px 12px;
+    color: var(--ink-mute); text-decoration: none; border-left: 2px solid var(--rule);
+    line-height: 1.35;
+  }
+  .rail a:hover { color: var(--ink); border-left-color: var(--accent); background: var(--surface); }
+  .rail a .n { color: var(--ink-mute); font-variant-numeric: tabular-nums; }
+}
+
+.body-col { min-width: 0; display: flex; flex-direction: column; gap: clamp(40px, 6vw, 68px); }
+
+/* ---------- sections ---------- */
+section { scroll-margin-top: 24px; }
+.sec-head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 22px; }
+/* a slim shaft capped by a square — the minaret the name "Manarat" refers to */
+.minaret { flex: none; width: 9px; margin-top: 9px; display: flex; flex-direction: column; align-items: center; }
+.minaret i { display: block; width: 7px; height: 7px; background: var(--accent); }
+.minaret u { display: block; width: 2px; flex: 1; min-height: 26px; background: var(--rule); text-decoration: none; }
+.sec-head h2 {
+  font-family: var(--f-display); font-weight: 500;
+  font-size: clamp(1.6rem, 3.4vw, 2.15rem); line-height: 1.14; letter-spacing: -.014em;
+  margin: 0; text-wrap: balance;
+}
+.sec-head .sec-note { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); margin-top: 7px; }
+
+.prose { max-width: 68ch; display: flex; flex-direction: column; gap: 18px; }
+.prose p { margin: 0; }
+.prose strong { font-weight: 600; }
+.prose h3 {
+  font-family: var(--f-display); font-size: 1.24rem; font-weight: 600;
+  margin: 14px 0 0; letter-spacing: -.008em;
+}
+
+/* ---------- cards / panels ---------- */
+.panel {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 3px; padding: clamp(18px, 3vw, 28px);
+  box-shadow: var(--shadow);
+}
+.panel-title {
+  font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-mute); margin: 0 0 4px;
+}
+.panel-sub { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 22px; max-width: 62ch; }
+
+/* ---------- KPI row ---------- */
+.kpis { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); }
+.kpi {
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 3px;
+  padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 5px;
+}
+.kpi .k-label { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-mute); }
+.kpi .k-val {
+  font-family: var(--f-display); font-size: clamp(1.6rem, 3.6vw, 2.05rem); font-weight: 500;
+  line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums;
+}
+.kpi .k-foot { font-size: 12.5px; color: var(--ink-soft); line-height: 1.4; }
+.kpi.is-subject { border-color: var(--subject); box-shadow: inset 3px 0 0 var(--subject); }
+.kpi.is-subject .k-val { color: var(--subject); }
+
+/* ---------- charts ---------- */
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 20px; font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-soft); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend i { width: 11px; height: 11px; border-radius: 2px; flex: none; }
+.sw-accent { background: var(--accent); }
+.sw-subject { background: var(--subject); }
+
+.chart { display: flex; flex-direction: column; gap: 2px; }
+.row {
+  display: grid; grid-template-columns: minmax(112px, 190px) minmax(0, 1fr);
+  gap: 8px 16px; align-items: center; padding: 7px 0;
+}
+@media (max-width: 620px) { .row { grid-template-columns: 1fr; gap: 4px; padding: 9px 0; } }
+.row-name { font-size: 13.5px; line-height: 1.3; color: var(--ink-soft); }
+.row-name b { display: block; font-weight: 600; color: var(--ink); }
+.row-name .meta { font-family: var(--f-mono); font-size: 10.5px; color: var(--ink-mute); }
+.row.is-subject .row-name b { color: var(--subject); }
+
+.track { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.bar-wrap { flex: 1 1 auto; min-width: 0; background: var(--rule-soft); border-radius: 3px; height: 26px; position: relative; }
+.bar {
+  height: 100%; background: var(--accent);
+  border-radius: 0 4px 4px 0; min-width: 3px;
+  transition: filter .15s ease;
+}
+.bar.is-subject { background: var(--subject); }
+.row:hover .bar { filter: brightness(1.12); }
+.bar-val {
+  flex: none; font-family: var(--f-mono); font-size: 13px; font-weight: 500;
+  font-variant-numeric: tabular-nums; min-width: 92px; text-align: right;
+}
+.row.is-subject .bar-val { color: var(--subject); }
+.nodata {
+  flex: 1 1 auto; height: 26px; display: flex; align-items: center; padding-left: 12px;
+  border-left: 2px dashed var(--rule);
+  font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-mute);
+}
+.youchip {
+  display: inline-block; margin-left: 8px; padding: 1px 6px; border-radius: 2px;
+  background: var(--subject-wash); color: var(--subject);
+  font-family: var(--f-mono); font-size: 9.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  vertical-align: 2px;
+}
+.axis-note { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule-soft); font-size: 12.5px; color: var(--ink-mute); }
+
+/* meters */
+.meter-wrap { position: relative; flex: 1 1 auto; min-width: 0; height: 26px; background: var(--rule-soft); border-radius: 3px; }
+.meter-wrap::after {
+  content: ""; position: absolute; inset-block: -4px; left: 100%; width: 1px; background: var(--rule);
+}
+.meter { height: 100%; border-radius: 0 4px 4px 0; background: var(--accent); }
+.meter.is-subject { background: var(--subject); }
+
+/* ---------- tables ---------- */
+.scroller { overflow-x: auto; margin: 0 -4px; padding: 0 4px 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 640px; }
+caption { text-align: left; font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); padding-bottom: 12px; }
+th, td { text-align: left; padding: 10px 14px 10px 0; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+thead th {
+  font-family: var(--f-mono); font-size: 10.5px; font-weight: 500; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--ink-mute); border-bottom: 1px solid var(--rule); white-space: nowrap;
+}
+td.num, th.num { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; padding-right: 0; }
+tbody tr.is-subject { background: var(--subject-wash); }
+tbody tr.is-subject td { font-weight: 500; }
+tbody tr.is-subject td:first-child { box-shadow: inset 3px 0 0 var(--subject); padding-left: 12px; }
+.org { font-weight: 600; }
+.org small { display: block; font-weight: 400; font-family: var(--f-mono); font-size: 10.5px; color: var(--ink-mute); letter-spacing: .02em; }
+.dim { color: var(--ink-mute); }
+
+/* matrix marks — never colour alone */
+.mk { font-family: var(--f-mono); font-size: 13px; font-weight: 600; white-space: nowrap; }
+.mk-y { color: var(--accent); }
+.mk-n { color: var(--ink-mute); font-weight: 400; }
+.mk-p { color: var(--subject); font-size: 11px; letter-spacing: .02em; }
+.matrix td:not(:first-child), .matrix th:not(:first-child) { text-align: center; padding-right: 8px; padding-left: 8px; }
+.matrix th:first-child, .matrix td:first-child { min-width: 208px; }
+
+/* ---------- findings ---------- */
+.findings { display: flex; flex-direction: column; gap: 2px; }
+.finding {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 3px; padding: 18px 20px;
+  display: grid; gap: 6px 16px;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+}
+@media (max-width: 620px) { .finding { grid-template-columns: auto 1fr; } }
+.f-id {
+  font-family: var(--f-mono); font-size: 12px; font-weight: 600;
+  color: var(--ink-mute); font-variant-numeric: tabular-nums;
+}
+.f-title { font-family: var(--f-display); font-size: 1.15rem; font-weight: 600; line-height: 1.25; letter-spacing: -.008em; }
+.f-body { grid-column: 2 / -1; font-size: 14.5px; color: var(--ink-soft); line-height: 1.58; }
+@media (max-width: 620px) { .f-body { grid-column: 1 / -1; } }
+.f-body strong { color: var(--ink); font-weight: 600; }
+.chip {
+  font-family: var(--f-mono); font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 2px; white-space: nowrap;
+}
+@media (max-width: 620px) { .chip { grid-column: 2; justify-self: start; } }
+.chip-high { background: var(--sev-high-bg); color: var(--sev-high); }
+.chip-med  { background: var(--sev-med-bg);  color: var(--sev-med); }
+.chip-low  { background: var(--sev-low-bg);  color: var(--sev-low); }
+
+/* ---------- recs ---------- */
+.rec-table td:first-child { font-family: var(--f-mono); font-weight: 600; color: var(--accent); width: 34px; padding-right: 8px; font-variant-numeric: tabular-nums; }
+.rec-table .fixes { font-family: var(--f-mono); font-size: 11px; color: var(--ink-mute); white-space: nowrap; }
+.effort { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; }
+.callout {
+  border-left: 3px solid var(--subject); background: var(--subject-wash);
+  padding: 16px 20px; border-radius: 0 3px 3px 0;
+  font-family: var(--f-display); font-size: 1.08rem; line-height: 1.5;
+}
+.callout strong { font-weight: 600; }
+
+/* ---------- gaps ---------- */
+.gaps { display: flex; flex-direction: column; gap: 14px; counter-reset: g; }
+.gap { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: baseline; font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+.gap::before {
+  counter-increment: g; content: counter(g);
+  font-family: var(--f-mono); font-size: 11px; font-weight: 600; color: var(--ink-mute);
+  border: 1px solid var(--rule); border-radius: 2px; padding: 1px 6px;
+}
+.gap strong { color: var(--ink); font-weight: 600; }
+
+footer {
+  border-top: 1px solid var(--rule); margin-top: 8px; padding-top: 24px;
+  font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-mute); line-height: 1.7;
+}
+
+/* ---------- tooltip ---------- */
+#tip {
+  position: fixed; z-index: 50; pointer-events: none; opacity: 0;
+  transition: opacity .12s ease;
+  background: var(--ink); color: var(--ground);
+  font-family: var(--f-mono); font-size: 11.5px; line-height: 1.5;
+  padding: 7px 10px; border-radius: 3px; max-width: 260px;
+  box-shadow: 0 6px 20px -6px rgba(0,0,0,.5);
+}
+#tip.on { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="eyebrow">Competitor &amp; market research · Sheldon · Solihull · East Birmingham</div>
+    <h1>Second in the market,<br>last on the <em>website</em>.</h1>
+    <p class="standfirst">Manarat Foundation out-raises every local competitor except one. The gaps are not in the organisation — they are in the five pages that represent it.</p>
+    <div class="masthead-meta">
+      <span><b>Subject</b> manaratfoundation.org.uk</span>
+      <span><b>Charity</b> 1148223</span>
+      <span><b>Compiled</b> 31 Aug 2026</span>
+      <span><b>Comparators</b> 5</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <ol>
+      <li><a href="#summary"><span class="n">01</span> Summary</a></li>
+      <li><a href="#map"><span class="n">02</span> Market map</a></li>
+      <li><a href="#rivals"><span class="n">03</span> The rivals</a></li>
+      <li><a href="#matrix"><span class="n">04</span> Feature matrix</a></li>
+      <li><a href="#findings"><span class="n">05</span> Findings</a></li>
+      <li><a href="#recs"><span class="n">06</span> What to do</a></li>
+      <li><a href="#method"><span class="n">07</span> Method &amp; gaps</a></li>
+    </ol>
+  </nav>
+
+  <main class="body-col">
+
+    <!-- 01 -->
+    <section id="summary">
+      <div class="sec-head">
+        <div class="minaret"><i></i><u></u></div>
+        <div><h2>Where Manarat actually stands</h2>
+        <div class="sec-note">Charity Commission · year to 31 March 2025</div></div>
+      </div>
+
+      <div class="kpis" style="margin-bottom:26px">
+        <div class="kpi is-subject">
+          <div class="k-label">Total income</div>
+          <div class="k-val">£394k</div>
+          <div class="k-foot">2nd of 5 in the local market</div>
+        </div>
+        <div class="kpi">
+          <div class="k-label">Expenditure</div>
+          <div class="k-val">£239k</div>
+          <div class="k-foot">Leaving a ~£156k surplus</div>
+        </div>
+        <div class="kpi">
+          <div class="k-label">Spend ratio</div>
+          <div class="k-val">61%</div>
+          <div class="k-foot">Lowest of every org with real figures</div>
+        </div>
+        <div class="kpi">
+          <div class="k-label">Founded</div>
+          <div class="k-val">2012</div>
+          <div class="k-foot">Against a 1973 incumbent next door</div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p>Manarat Foundation is the <strong>second-largest organisation by income in its immediate local market</strong> — £394,135 in the year to 31 March 2025, behind only Jami Mosque &amp; Islamic Centre and well ahead of every other Solihull-area competitor. For an organisation founded in 2012, competing against an institution that has been on the same road since 1973, that is a genuinely strong position.</p>
+        <p>The vulnerabilities are not about size. They are three specific things:</p>
+        <p><strong>The website cannot take a donation.</strong> Published giving routes are cheque and in person. Every direct competitor except the education academy takes card payments.</p>
+        <p><strong>The prayer timetable is a PDF from July 2020.</strong> The highest-frequency reason to visit a masjid website has been handed to third-party aggregators.</p>
+        <p><strong>Only 61% of income is being spent.</strong> A ~£156k annual surplus is accumulating with no publicly named project attached to it.</p>
+        <p>All three are unusually cheap to fix relative to their impact, and the first two are website work rather than organisational change.</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="map">
+      <div class="sec-head">
+        <div class="minaret"><i></i><u></u></div>
+        <div><h2>The market map</h2>
+        <div class="sec-note">Most recent published figures · periods differ</div></div>
+      </div>
+
+      <div class="panel" style="margin-bottom:16px">
+        <p class="panel-title">Total annual income</p>
+        <p class="panel-sub">Each organisation's most recently published year. Green Lane is a regional benchmark rather than a head-to-head rival — it competes for the same donor pounds, not the same prayer footfall.</p>
+        <div class="legend">
+          <span><i class="sw-subject"></i> Manarat Foundation</span>
+          <span><i class="sw-accent"></i> Comparison set</span>
+        </div>
+        <div class="chart" id="income-chart">
+          <div class="row" data-tip="Green Lane Masjid — £5,380,031 income, year to 31 Dec 2024. Roughly 13.6× Manarat.">
+            <div class="row-name"><b>Green Lane Masjid</b><span class="meta">benchmark · est. 1979</span></div>
+            <div class="track"><div class="bar-wrap"><div class="bar" style="width:100%"></div></div><div class="bar-val">£5.38m</div></div>
+          </div>
+          <div class="row" data-tip="Jami Mosque & Islamic Centre — £1,933,550 income, year to 31 Mar 2024. Only 19% from donations.">
+            <div class="row-name"><b>Jami Mosque &amp; Islamic Centre</b><span class="meta">est. 1973 · Coventry Rd</span></div>
+            <div class="track"><div class="bar-wrap"><div class="bar" style="width:35.9%"></div></div><div class="bar-val">£1.93m</div></div>
+          </div>
+          <div class="row is-subject" data-tip="Manarat Foundation — £394,135 income, year to 31 Mar 2025. Second of five locally.">
+            <div class="row-name"><b>Manarat Foundation<span class="youchip">you</span></b><span class="meta">est. 2012 · Sheldon</span></div>
+            <div class="track"><div class="bar-wrap"><div class="bar is-subject" style="width:7.3%"></div></div><div class="bar-val">£394k</div></div>
+          </div>
+          <div class="row" data-tip="Solihull Islamic Education Academy — £156,496 income, year to 31 Aug 2024.">
+            <div class="row-name"><b>Solihull Islamic Education Academy</b><span class="meta">education only</span></div>
+            <div class="track"><div class="bar-wrap"><div class="bar" style="width:2.9%"></div></div><div class="bar-val">£156k</div></div>
+          </div>
+          <div class="row" data-tip="Solihull Central Masjid filed a nil return for the year to 31 Dec 2024. The £0 does not reflect actual activity.">
+            <div class="row-name"><b>Solihull Central Masjid</b><span class="meta">est. 2016</span></div>
+            <div class="track"><div class="nodata">nil return filed — not plotted as zero</div></div>
+          </div>
+          <div class="row" data-tip="Deen Central — no published charity figures located.">
+            <div class="row-name"><b>Deen Central</b><span class="meta">Solihull</span></div>
+            <div class="track"><div class="nodata">no published figures</div></div>
+          </div>
+        </div>
+        <p class="axis-note">Two organisations are shown without bars rather than at zero: plotting missing or nil-return data as a real value would misstate both.</p>
+      </div>
+
+      <div class="panel">
+        <p class="panel-title">Share of income actually spent</p>
+        <p class="panel-sub">The proportion of the year's income deployed on activity. Jami Mosque and Solihull Central are omitted — neither publishes a comparable expenditure figure.</p>
+        <div class="legend">
+          <span><i class="sw-subject"></i> Manarat Foundation</span>
+          <span><i class="sw-accent"></i> Comparison set</span>
+        </div>
+        <div class="chart">
+          <div class="row" data-tip="Green Lane Masjid spends 93.9% of income — £5.05m of £5.38m.">
+            <div class="row-name"><b>Green Lane Masjid</b></div>
+            <div class="track"><div class="meter-wrap"><div class="meter" style="width:93.9%"></div></div><div class="bar-val">93.9%</div></div>
+          </div>
+          <div class="row" data-tip="Solihull Islamic Education Academy spends 86.3% of income — £135,095 of £156,496.">
+            <div class="row-name"><b>Solihull Islamic Education Academy</b></div>
+            <div class="track"><div class="meter-wrap"><div class="meter" style="width:86.3%"></div></div><div class="bar-val">86.3%</div></div>
+          </div>
+          <div class="row is-subject" data-tip="Manarat Foundation spends 60.7% of income — £239,198 of £394,135. A ~£156k surplus.">
+            <div class="row-name"><b>Manarat Foundation<span class="youchip">you</span></b></div>
+            <div class="track"><div class="meter-wrap"><div class="meter is-subject" style="width:60.7%"></div></div><div class="bar-val">60.7%</div></div>
+          </div>
+        </div>
+        <p class="axis-note">Scale runs 0–100% of that year's income. A low ratio is not automatically bad — but it needs a named reason, and there isn't one in public.</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="rivals">
+      <div class="sec-head">
+        <div class="minaret"><i></i><u></u></div>
+        <div><h2>The rivals, and what each one teaches</h2>
+        <div class="sec-note">Four direct competitors, one benchmark</div></div>
+      </div>
+
+      <div class="scroller" style="margin-bottom:26px">
+        <table>
+          <caption>Comparison set at a glance</caption>
+          <thead>
+            <tr>
+              <th>Organisation</th><th>Founded</th><th class="num">Income</th>
+              <th class="num">Spend ratio</th><th>Period end</th><th>Threat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="org">Green Lane Masjid<small>charity 1125833</small></td>
+              <td class="num">1979</td><td class="num">£5,380,031</td><td class="num">93.9%</td>
+              <td>31 Dec 2024</td><td class="dim">Benchmark</td>
+            </tr>
+            <tr>
+              <td class="org">Jami Mosque &amp; Islamic Centre<small>charity 1000355</small></td>
+              <td class="num">1973</td><td class="num">£1,933,550</td><td class="num dim">—</td>
+              <td>31 Mar 2024</td><td>High</td>
+            </tr>
+            <tr class="is-subject">
+              <td class="org">Manarat Foundation<small>charity 1148223</small></td>
+              <td class="num">2012</td><td class="num">£394,135</td><td class="num">60.7%</td>
+              <td>31 Mar 2025</td><td class="dim">— subject —</td>
+            </tr>
+            <tr>
+              <td class="org">Solihull Islamic Education Academy<small>charity 1138757</small></td>
+              <td class="num dim">—</td><td class="num">£156,496</td><td class="num">86.3%</td>
+              <td>31 Aug 2024</td><td>Medium</td>
+            </tr>
+            <tr>
+              <td class="org">Solihull Central Masjid<small>charity 1200650</small></td>
+              <td class="num">2016</td><td class="num dim">nil return</td><td class="num dim">—</td>
+              <td>31 Dec 2024</td><td>Medium, rising</td>
+            </tr>
+            <tr>
+              <td class="org">Deen Central<small>no charity number located</small></td>
+              <td class="num dim">—</td><td class="num dim">not published</td><td class="num dim">—</td>
+              <td class="dim">—</td><td>Low, falling</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prose">
+        <h3>Jami Mosque &amp; Islamic Centre — the real rival</h3>
+        <p>Same arterial road, about three miles west, with a fifty-year head start on donor relationships and a capacity of 2,000 across two halls. It runs an evening maktab from 1975, a Hifz madrasa from 1983, a full-time Darul Uloom boys' secondary school from 1985, and funeral services from 1995.</p>
+        <p>But the number that matters is this: <strong>only 19% of its £1.93m income comes from donations.</strong> Rental property and education fees carry the organisation. And its donation income — £362,430 — is slightly <em>below</em> Manarat's total income. Manarat is already competitive on fundraising. It is not competitive on diversification.</p>
+
+        <h3>Solihull Central Masjid — the rising claim</h3>
+        <p>Established 2016 on Warwick Road, and the nearest masjid inside Solihull proper. It competes on convenience rather than scholarship — town-centre proximity, motorway access via the M42, M40 and M6 — and monetises its building through <strong>catering equipment hire</strong>. It filed a nil return for 2024, so its published £0 tells you nothing; it is almost certainly a stronger competitor than the register suggests. As it matures, Manarat's claim to be the masjid for <em>Sheldon and Solihull</em> gets harder to hold.</p>
+
+        <h3>Solihull Islamic Education Academy — the quiet overlap</h3>
+        <p>Not a masjid, so no competition for prayer footfall — but direct competition for the same families' children and their weekend education spend, <strong>which is Manarat's core programme</strong>. It teaches mother-tongue languages beyond Arabic — Bangla and Urdu — and runs weekly badminton and football clubs for teenagers. Both reach families that a prayer-and-Quran-only offer does not.</p>
+
+        <h3>Deen Central — the cautionary case</h3>
+        <p>A Solihull organisation with an overlapping education-and-community pitch that has publicly stated its <strong>donor income dropped by almost 100%</strong> while daily masjid overheads continued. That is a live demonstration of the risk in donation-only funding against a fixed building — the exact shape of Manarat's own income. It may be worth approaching as a partner rather than treating as a rival.</p>
+
+        <h3>Green Lane Masjid — the benchmark</h3>
+        <p>£5.38m income, 94% of it deployed, and a fundraising machine: a foodbank running eight years, Celebrate Eid at 60,000–80,000 attendees, and an international wing that has raised over £7m in six years. Roughly 13.6× Manarat's income, with donation income alone about 12× Manarat's total.</p>
+        <p>The transferable lesson is not scale. It is that <strong>Green Lane never asks for a donation.</strong> It asks for a named project, monthly, at a daily price — "£20 a month, 67p a day" — with every appeal on a page of its own. And its 94% spend ratio is itself the fundraising argument.</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="matrix">
+      <div class="sec-head">
+        <div class="minaret"><i></i><u></u></div>
+        <div><h2>Feature matrix</h2>
+        <div class="sec-note">What each organisation offers, and what Manarat doesn't</div></div>
+      </div>
+
+      <div class="panel">
+        <p class="panel-sub" style="margin-bottom:18px">Manarat is the only organisation in the set offering <strong>civil marriage registration alongside Nikah</strong> — a real, unexploited differentiator. It is also the only one with no earned-income line at all.</p>
+        <div class="scroller">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>Capability</th><th>Manarat</th><th>Jami</th><th>Solihull C.</th>
+                <th>SIEA</th><th>Deen C.</th><th>Green Lane</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Live on-site prayer timetable</td>
+                <td><span class="mk mk-p">PDF, 2020</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">n/a</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Native online donation flow</td>
+                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Recurring / monthly giving</td>
+                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Named campaign pages</td>
+                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Per-service sub-pages</td>
+                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Women's programme</td>
+                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Funeral / janazah service</td>
+                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Full-time school</td>
+                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-p">College</span></td></tr>
+              <tr><td>Nikah / marriage services</td>
+                <td><span class="mk mk-y">Yes + civil</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Foodbank / welfare delivery</td>
+                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Youth sport / clubs</td>
+                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>Earned income stream</td>
+                <td><span class="mk mk-n">None</span></td><td><span class="mk mk-p">Rental + fees</span></td><td><span class="mk mk-p">Catering hire</span></td><td><span class="mk mk-p">Course fees</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+              <tr><td>News / press releases</td>
+                <td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-n">No</span></td><td><span class="mk mk-y">Yes</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="axis-note">Page inventories come from the search index rather than a full crawl, so these are a floor, not a ceiling — an organisation may have pages not surfaced here.</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="findings">
+      <div class="sec-head">
+        <div class="minaret"><i></i><u></u></div>
+        <div><h2>Findings</h2>
+        <div class="sec-note">Nine, by severity · IDs referenced by the recommendations</div></div>
+      </div>
+
+      <div class="findings">
+        <div class="finding">
+          <div class="f-id">F1</div><div class="f-title">The website cannot take a donation</div><div class="chip chip-high">High</div>
+          <div class="f-body">Published routes are cheque and in person. Cash-and-cheque giving structurally excludes under-40 donors and makes <strong>Ramadan night-giving — the highest-intent moment in the Islamic giving calendar — almost impossible to capture.</strong> Online giving is currently intermediated by MosquePay.</div>
+        </div>
+        <div class="finding">
+          <div class="f-id">F2</div><div class="f-title">Prayer times are a six-year-old PDF</div><div class="chip chip-high">High</div>
+          <div class="f-body">The timetable on the site was uploaded in July 2020. Prayer times are the highest-frequency reason a local Muslim opens a masjid website, and that recurring traffic currently goes to MosquePay, The Masjid App and MosqueFinder instead. Jami, Deen Central and Green Lane all host live timetables themselves.</div>
+        </div>
+        <div class="finding">
+          <div class="f-id">F3</div><div class="f-title">Only 61% of income is being spent</div><div class="chip chip-high">High</div>
+          <div class="f-body">£394,135 in, £239,198 out, a ~£156k surplus in one year. Green Lane deploys 94%, the education academy 86%. Either Manarat is building toward a capital project — in which case <strong>that project is not named anywhere public and is therefore raising nothing</strong> — or it is under-deploying. Both readings have the same fix: name the project.</div>
+        </div>
+        <div class="finding">
+          <div class="f-id">F4</div><div class="f-title">Single-source income concentration</div><div class="chip chip-med">Medium</div>
+          <div class="f-body">Manarat appears almost entirely donation-funded. Jami takes 19% from donations; Solihull Central hires out catering equipment; the academy charges fees. Deen Central, donation-only, has reported a near-total collapse in donor income. Manarat has a 1,000-capacity building and a large car park with no visible earned-income line.</div>
+        </div>
+        <div class="finding">
+          <div class="f-id">F5</div><div class="f-title">Thin site, no per-service pages</div><div class="chip chip-med">Medium</div>
+          <div class="f-body">Roughly five top-level pages against Jami's service tree and Green Lane's project-per-page structure. The Hifz programme, Arabic course and combined Islamic-plus-civil marriage registration each justify their own page, and each is a distinct search entry point currently collapsed into one.</div>
+        </div>
+        <div class="finding">
+          <div class="f-id">F6</div><div class="f-title">No funeral or janazah service</div><div class="chip chip-med">Medium</div>
+          <div class="f-body">Jami has run funerals since 1995; Green Lane offers them. A bereaved family that travels to Small Heath at the hardest moment of their lives tends to keep going there afterwards. <strong>This is the highest-loyalty service in the sector</strong> and Manarat does not appear to offer it.</div>
+        </div>
+        <div class="finding">
+          <div class="f-id">F7</div><div class="f-title">No visible women's or youth programme</div><div class="chip chip-med">Medium</div>
+          <div class="f-body">Jami runs a dedicated Muslimah section; the academy runs weekly badminton and football. Manarat's public offer — prayers, Quran, Arabic, Nikah — reaches men and children, but not women or teenagers as distinct constituencies.</div>
+        </div>
+        <div class="finding">
+          <div class="f-id">F8</div><div class="f-title">Discoverability is rented, not owned</div><div class="chip chip-low">Low</div>
+          <div class="f-body">MosquePay, The Masjid App, MosqueFinder and Giving is Great own the recurring visit and the donor relationship. Fine as acquisition channels; a problem as the primary one.</div>
+        </div>
+        <div class="finding">
+          <div class="f-id">F9</div><div class="f-title">The strongest differentiator is unstated</div><div class="chip chip-low">Low</div>
+          <div class="f-body">Founded by scholars, the first purpose-established masjid for Sheldon and Solihull, and an explicit anti-extremism position. That last one is rare, publicly valuable, and absent from how the site sells itself. Solihull Central competes on parking and motorway access; <strong>Manarat can compete on scholarship and civic trust.</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="recs">
+      <div class="sec-head">
+        <div class="minaret"><i></i><u></u></div>
+        <div><h2>What to do, in order</h2>
+        <div class="sec-note">Ranked by impact against effort</div></div>
+      </div>
+
+      <div class="scroller" style="margin-bottom:22px">
+        <table class="rec-table">
+          <thead><tr><th class="num">#</th><th>Action</th><th>Fixes</th><th>Effort</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><b>Live prayer timetable</b> — auto-calculated, mobile-first, with Jumu'ah and Janazah announcements</td><td class="fixes">F2, F8</td><td class="effort">Low</td><td>Recovers the highest-frequency reason to visit; every other ask can then sit next to it</td></tr>
+            <tr><td>2</td><td><b>Native online donation flow</b> — card, Apple/Google Pay, and Gift Aid capture</td><td class="fixes">F1</td><td class="effort">Medium</td><td>Gift Aid is worth 25p per eligible pound and is currently uncollected on cash and cheque</td></tr>
+            <tr><td>3</td><td><b>Name the capital project</b> the surplus is building toward — its own appeal page, with a progress figure</td><td class="fixes">F3, F1</td><td class="effort">Low</td><td>An unnamed reserve raises nothing; a named project raises money <em>and</em> explains the surplus</td></tr>
+            <tr><td>4</td><td><b>Recurring monthly giving</b>, priced as a daily habit</td><td class="fixes">F1, F4</td><td class="effort">Medium</td><td>200 donors at £15/month is £36k of certainty against volatile seasonal giving</td></tr>
+            <tr><td>5</td><td><b>Split the services page</b> — one page each for Hifz, Arabic, Islamic studies and Nikah, with fees, times, age range and an enquiry form</td><td class="fixes">F5</td><td class="effort">Low</td><td>Four search entry points instead of one; removes the phone call now needed for basic details</td></tr>
+            <tr><td>6</td><td><b>Introduce funeral and janazah services</b></td><td class="fixes">F6</td><td class="effort">High</td><td>The clearest reason Sheldon families currently travel to Small Heath</td></tr>
+            <tr><td>7</td><td><b>Open a second income line</b> from the existing building — hall hire, the car park, or paid short courses</td><td class="fixes">F4</td><td class="effort">Medium</td><td>A 1,000-capacity building with a large car park is an under-used asset</td></tr>
+            <tr><td>8</td><td><b>Start a women's programme and a youth activity</b>, each with its own page</td><td class="fixes">F7</td><td class="effort">Medium</td><td>Matches Jami's Muslimah section and the academy's sport clubs; reaches the constituencies now missed</td></tr>
+            <tr><td>9</td><td><b>Lead with scholarship</b> — the founding scholars, the Sheldon–Solihull first-mover story, the anti-extremism position</td><td class="fixes">F9</td><td class="effort">Low</td><td>The one thing no local competitor can copy</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">If only three things get done, do <strong>1, 2 and 3</strong>. All are low or medium effort, all are website work rather than organisational change, and together they close the donation gap, recover the recurring traffic, and turn a dormant £156k surplus into a fundraising story.</div>
+    </section>
+
+    <!-- 07 -->
+    <section id="method">
+      <div class="sec-head">
+        <div class="minaret"><i></i><u></u></div>
+        <div><h2>Method, sources and gaps</h2>
+        <div class="sec-note">What this research rests on — and what it doesn't</div></div>
+      </div>
+
+      <div class="prose" style="margin-bottom:24px">
+        <p><strong>Sources.</strong> Charity Commission for England and Wales (Register of Charities) for all financial and governance figures; Companies House; organisation websites surfaced via the search index; and the MosquePay, The Masjid App, TotalGiving and CharityChoice donation platforms.</p>
+      </div>
+
+      <div class="panel">
+        <p class="panel-title">Gaps — limits of the research environment, not of the market</p>
+        <div class="gaps" style="margin-top:18px">
+          <div class="gap"><span><strong>No live page crawls.</strong> Outbound HTTPS to these domains was blocked by the research environment's egress proxy. Site structure is evidenced by known URLs from the search index rather than a full crawl, so page inventories are a floor, not a ceiling.</span></div>
+          <div class="gap"><span><strong>No quantitative SEO data.</strong> The connected Ahrefs plan does not include Site Explorer, and the Semrush account has no API units remaining. There are no traffic, domain-rating or keyword figures anywhere in this research — every quantitative claim here is financial, from the Charity Commission.</span></div>
+          <div class="gap"><span><strong>Solihull Central Masjid filed a nil return</strong> for the year to 31 December 2024, so its published £0 does not reflect real activity. It is likely a stronger competitor than its figures suggest.</span></div>
+          <div class="gap"><span><strong>Comparison periods differ</strong> — year ends range from 31 March 2024 (Jami) to 31 March 2025 (Manarat). Figures are each organisation's most recent published set, not a single common year.</span></div>
+        </div>
+      </div>
+
+      <footer>
+        Compiled 31 August 2026 · Financial and governance data © Crown copyright, Charity Commission for England and Wales, used under the Open Government Licence · Figures are each organisation's most recently published annual return and are not restated to a common year end.
+      </footer>
+    </section>
+
+  </main>
+</div>
+
+<div id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var tip = document.getElementById('tip');
+  var rows = document.querySelectorAll('.row[data-tip]');
+
+  function place(e) {
+    var pad = 14;
+    var x = e.clientX + pad, y = e.clientY + pad;
+    var r = tip.getBoundingClientRect();
+    if (x + r.width > window.innerWidth - 8) x = e.clientX - r.width - pad;
+    if (y + r.height > window.innerHeight - 8) y = e.clientY - r.height - pad;
+    tip.style.left = Math.max(8, x) + 'px';
+    tip.style.top = Math.max(8, y) + 'px';
+  }
+
+  rows.forEach(function (row) {
+    row.setAttribute('tabindex', '0');
+    row.addEventListener('mouseenter', function (e) {
+      tip.textContent = row.getAttribute('data-tip');
+      tip.classList.add('on');
+      place(e);
+    });
+    row.addEventListener('mousemove', place);
+    row.addEventListener('mouseleave', function () { tip.classList.remove('on'); });
+    row.addEventListener('focus', function () {
+      tip.textContent = row.getAttribute('data-tip');
+      tip.classList.add('on');
+      var b = row.getBoundingClientRect();
+      tip.style.left = Math.max(8, b.left) + 'px';
+      tip.style.top = (b.bottom + 8) + 'px';
+    });
+    row.addEventListener('blur', function () { tip.classList.remove('on'); });
+  });
+})();
+</script>
