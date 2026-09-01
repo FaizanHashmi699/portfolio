@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Newsreader, IBM_Plex_Sans } from "next/font/google";
+import { Manrope, Amiri } from "next/font/google";
 import "./globals.css";
 
-const newsreader = Newsreader({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-newsreader",
+  variable: "--font-manrope",
   display: "swap",
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const plex = IBM_Plex_Sans({
-  subsets: ["latin"],
-  variable: "--font-plex",
+/** A true naskh, for the Arabic wordmark. */
+const amiri = Amiri({
+  subsets: ["arabic", "latin"],
+  variable: "--font-amiri",
   display: "swap",
-  weight: ["400", "500", "600"],
+  weight: ["400", "700"],
 });
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://manaratfoundation.org.uk";
@@ -80,7 +81,7 @@ const JSON_LD = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${newsreader.variable} ${plex.variable}`}>
+    <html lang="en" className={`${manrope.variable} ${amiri.variable}`}>
       <body className="font-sans antialiased">
         <script
           type="application/ld+json"

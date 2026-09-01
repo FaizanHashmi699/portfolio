@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { recordDonation } from "@/actions/public";
 import { giftAidBonus, money } from "@/lib/format";
 
@@ -24,10 +24,41 @@ export function DonateForm({
   const [frequency, setFrequency] = useState<"one_off" | "monthly">("one_off");
   const [amount, setAmount] = useState<string>("25");
   const [giftAid, setGiftAid] = useState(false);
+  const [redirecting, setRedirecting] = useState(false);
+  const [handoff, setHandoff] = useState<string | null>(null);
 
   const presets = frequency === "monthly" ? PRESETS_MONTHLY : PRESETS_ONE_OFF;
   const numeric = Number(amount);
   const pence = Number.isFinite(numeric) && numeric > 0 ? Math.round(numeric * 100) : 0;
+
+  // When a gateway is live, the recorded pledge is handed straight to it.
+  useEffect(() => {
+    if (!state?.ok || !paymentsLive || !state.reference) return;
+    let cancelled = false;
+    setRedirecting(true);
+    (async () => {
+      try {
+        const res = await fetch("/api/donations/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ reference: state.reference }),
+        });
+        const body = (await res.json()) as { url?: string; error?: string };
+        if (cancelled) return;
+        if (res.ok && body.url) {
+          window.location.assign(body.url);
+          return;
+        }
+        setHandoff(body.error ?? "We could not open the payment page.");
+      } catch {
+        if (!cancelled) setHandoff("We could not reach the payment page.");
+      }
+      if (!cancelled) setRedirecting(false);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [state, paymentsLive]);
 
   if (state?.ok) {
     return (
@@ -40,11 +71,22 @@ export function DonateForm({
           {frequency === "monthly" ? " per month" : ""} has been recorded under reference{" "}
           <span className="font-mono font-semibold text-ink">{state.reference}</span>.
         </p>
-        <p className="mt-3 text-sm text-ink-soft">
-          {paymentsLive
-            ? "You will be redirected to complete payment."
-            : "Card payment is not yet switched on for this site. A member of the team will be in touch to arrange your gift, or you can give at the masjid quoting this reference."}
-        </p>
+        {paymentsLive ? (
+          handoff ? (
+            <p className="mt-3 rounded-sm bg-accent-wash px-3 py-2 text-sm text-accent">
+              {handoff} Your reference is saved — quote it at the masjid, or try again.
+            </p>
+          ) : (
+            <p className="mt-3 text-sm text-ink-soft" aria-live="polite">
+              {redirecting ? "Opening the secure payment page…" : "Redirecting you to pay…"}
+            </p>
+          )
+        ) : (
+          <p className="mt-3 text-sm text-ink-soft">
+            Card payment is not switched on for this site yet. A member of the team will be in
+            touch to arrange your gift, or you can give at the masjid quoting this reference.
+          </p>
+        )}
       </div>
     );
   }
@@ -198,9 +240,11 @@ export function DonateForm({
       >
         {pending
           ? "Please wait…"
-          : `Give ${money(pence)}${frequency === "monthly" ? " a month" : ""}${
-              campaignTitle ? ` to ${campaignTitle}` : ""
-            }`}
+          : paymentsLive
+            ? `Continue to pay ${money(pence)}${frequency === "monthly" ? " a month" : ""}`
+            : `Pledge ${money(pence)}${frequency === "monthly" ? " a month" : ""}${
+                campaignTitle ? ` to ${campaignTitle}` : ""
+              }`}
       </button>
 
       {!paymentsLive && (

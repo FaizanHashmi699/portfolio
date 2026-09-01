@@ -1,22 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ground:      #f4f6f5;
+  /* Manarat brand */
+  --color-ground:      #f7fbfe;
   --color-surface:     #ffffff;
-  --color-surface-2:   #eaefed;
-  --color-ink:         #101a19;
-  --color-ink-soft:    #46534f;
-  --color-ink-mute:    #6d7b77;
-  --color-rule:        #d6dedb;
-  --color-rule-soft:   #e6ecea;
-  --color-brand:       #00655a;
-  --color-brand-deep:  #004a42;
-  --color-brand-wash:  #e0efec;
-  --color-accent:      #b4541a;
-  --color-accent-wash: #f8e9dd;
+  --color-surface-2:   #eef6fc;
+  --color-ink:         #0b2a55;
+  --color-ink-soft:    #5b6b7f;
+  --color-ink-mute:    #7c8ca0;
+  --color-rule:        #d8e7f5;
+  --color-rule-soft:   #e8f1fa;
+  --color-brand:       #1591dc;
+  --color-brand-deep:  #0b2a55;
+  --color-brand-mid:   #0f74b3;
+  --color-brand-wash:  #e6f3fc;
+  --color-accent:      #b8791f;
+  --color-accent-wash: #fbf1de;
 
-  --font-display: var(--font-newsreader), "Iowan Old Style", Georgia, serif;
-  --font-sans: var(--font-plex), "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-display: var(--font-manrope), "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-sans: var(--font-manrope), "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-arabic: var(--font-amiri), "Scheherazade New", serif;
 }
 
 html {

@@ -34,7 +34,7 @@ export function Hero3D() {
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       const scene = new THREE.Scene();
-      scene.fog = new THREE.Fog(0x03110f, 9, 26);
+      scene.fog = new THREE.Fog(0x041a33, 9, 26);
 
       const camera = new THREE.PerspectiveCamera(
         42,
@@ -67,7 +67,7 @@ export function Hero3D() {
 
       const extrude = { depth: 0.16, bevelEnabled: true, bevelSize: 0.05, bevelThickness: 0.05, bevelSegments: 2 };
 
-      const brand = new THREE.Color(0x1fa892);
+      const brand = new THREE.Color(0x1591dc);
       const gold = new THREE.Color(0xd6a24a);
 
       const group = new THREE.Group();
@@ -102,12 +102,14 @@ export function Hero3D() {
         depth: 0.1,
       });
       ringGeo.center();
+      // Light blue, so the single gold note stays on the central star's cage.
       const ringMat = new THREE.MeshStandardMaterial({
-        color: gold,
-        metalness: 0.5,
-        roughness: 0.35,
+        color: new THREE.Color(0x9fd8f8),
+        metalness: 0.4,
+        roughness: 0.3,
+        emissive: new THREE.Color(0x1a5f92),
         transparent: true,
-        opacity: 0.85,
+        opacity: 0.8,
       });
       const satellites: InstanceType<typeof THREE.Mesh>[] = [];
       const RING = 8;
@@ -132,7 +134,7 @@ export function Hero3D() {
       pointsGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
       const dust = new THREE.Points(
         pointsGeo,
-        new THREE.PointsMaterial({ color: 0x8fd8c9, size: 0.055, transparent: true, opacity: 0.5 }),
+        new THREE.PointsMaterial({ color: 0x8fd0f7, size: 0.055, transparent: true, opacity: 0.5 }),
       );
       scene.add(dust);
 
@@ -140,7 +142,7 @@ export function Hero3D() {
       const key = new THREE.DirectionalLight(0xffffff, 1.5);
       key.position.set(4, 6, 8);
       scene.add(key);
-      const rim = new THREE.DirectionalLight(0x54e0c4, 0.85);
+      const rim = new THREE.DirectionalLight(0x4aa8e8, 0.9);
       rim.position.set(-6, -3, 4);
       scene.add(rim);
 

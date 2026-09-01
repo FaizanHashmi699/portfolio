@@ -32,7 +32,7 @@ export default async function HomePage() {
 
       <main id="main">
         {/* ---------- Hero: 3D khatim field ---------- */}
-        <section className="relative isolate overflow-hidden bg-brand-deep text-white">
+        <section className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#062b55_0%,#0f4d80_55%,#1591dc_135%)] text-white">
           <Hero3D />
           <div
             aria-hidden
