@@ -1,16 +1,53 @@
-import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { Hero3D } from "@/components/hero-3d";
-import { LivePrayerClock, PatternOverlay } from "@/components/live-prayer";
+import { HeroSlider, type HeroSlide } from "@/components/hero-slider";
+import { LivePrayerClock } from "@/components/live-prayer";
 import { IslamicEvents } from "@/components/islamic-events";
 import { CampaignProgress } from "@/components/campaign-progress";
+import {
+  Container,
+  Section,
+  SectionHead,
+  Button,
+  Card,
+  ArrowIcon,
+  KhatimPattern,
+  Figure,
+} from "@/components/ui";
 import { getPrayerSettings, toPrayerConfig } from "@/lib/settings";
 import { createClient } from "@/lib/supabase/server";
-import { qiblaBearing, compassPoint } from "@/lib/qibla";
+import { moneyShort } from "@/lib/format";
+import Link from "next/link";
 import type { Campaign, Programme } from "@/lib/types";
 
 export const revalidate = 300;
+
+const SLIDES: HeroSlide[] = [
+  {
+    eyebrow: "Sheldon · Solihull · Birmingham",
+    title: "A light for",
+    titleAccent: "the community.",
+    body: "Manarat means lighthouse. Founded by scholars in 2012, we were the first purpose-established masjid and Islamic centre for the Muslims of this area.",
+    primary: { label: "Today's prayer times", href: "/prayer-times" },
+    secondary: { label: "About Manarat", href: "/about" },
+  },
+  {
+    eyebrow: "The Academy",
+    title: "Hifz, Arabic and",
+    titleAccent: "Islamic studies.",
+    body: "A three-year Qur'an memorisation programme, Arabic from the alphabet upward, and Tajweed taught by qualified huffaz — weekdays and weekends.",
+    primary: { label: "See our classes", href: "/programmes" },
+    secondary: { label: "Enquire about a place", href: "/programmes/hifz" },
+  },
+  {
+    eyebrow: "The Manarat Expansion",
+    title: "Room for every",
+    titleAccent: "worshipper.",
+    body: "On Jumu'ah the hall is full and our classes are at capacity. This appeal funds an extended prayer hall, four teaching rooms and a dedicated women's area.",
+    primary: { label: "Support the appeal", href: "/donate" },
+    secondary: { label: "What it funds", href: "/appeal" },
+  },
+];
 
 export default async function HomePage() {
   const settings = await getPrayerSettings();
@@ -24,210 +61,263 @@ export default async function HomePage() {
 
   const list = (programmes ?? []) as Programme[];
   const appeal = campaign as Campaign | null;
-  const bearing = qiblaBearing(settings.latitude, settings.longitude);
 
   return (
     <>
       <SiteHeader />
 
       <main id="main">
-        {/* ---------- Hero: 3D khatim field ---------- */}
-        <section className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#062b55_0%,#0f4d80_55%,#1591dc_135%)] text-white">
-          <Hero3D />
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,42,37,0.94)_0%,rgba(0,42,37,0.82)_38%,rgba(0,42,37,0.35)_65%,rgba(0,42,37,0.55)_100%)]"
-          />
-          <div className="relative mx-auto grid max-w-6xl gap-14 px-5 py-20 sm:px-8 lg:grid-cols-[1.05fr_minmax(0,440px)] lg:py-28">
-            <div className="flex flex-col justify-center gap-6">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-white/60">
-                Founded by scholars · 2012 · Registered charity 1148223
-              </p>
-              <h1 className="font-display text-[2.6rem] leading-[1.02] font-medium tracking-tight text-balance sm:text-6xl lg:text-7xl">
-                A light for Sheldon
-                <span className="block text-brand-wash">and Solihull.</span>
-              </h1>
-              <p className="max-w-xl text-lg leading-relaxed text-white/75">
-                Manarat means lighthouse. We were the first purpose-established masjid and Islamic
-                centre for the Muslims of this area — founded by scholars, open to over a thousand
-                worshippers, teaching a deen of knowledge, tolerance and service.
-              </p>
-              <div className="flex flex-wrap gap-3 pt-2">
+        {/* ---------------------------------------------------- hero */}
+        <HeroSlider
+          slides={SLIDES}
+          aside={<LivePrayerClock config={config} jumuahTimes={settings.jumuah_times} />}
+        />
+
+        {/* ---------------------------------------------- quick actions */}
+        <Section tone="surface" className="!py-0">
+          <Container>
+            <div className="-mt-10 grid gap-3 rounded-panel border border-rule bg-surface p-3 shadow-lg sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { href: "/prayer-times", title: "Prayer times", note: "Today and the month ahead", d: "M12 6.6V12l3.6 2.2M20.4 12a8.4 8.4 0 1 1-16.8 0 8.4 8.4 0 0 1 16.8 0Z" },
+                { href: "/programmes", title: "Our classes", note: "Hifz, Arabic, Islamic studies", d: "M4 18V6.5A2.5 2.5 0 0 1 6.5 4H20v13H6.5A2.5 2.5 0 0 0 4 19.5M8 8.5h7" },
+                { href: "/calendar", title: "Islamic calendar", note: "Ramadan, Eid and the sacred days", d: "M7 3v3M17 3v3M3.5 9.5h17M4.5 6h15v14h-15z" },
+                { href: "/donate", title: "Give sadaqah", note: "One-off or monthly, with Gift Aid", d: "M12 20.4S3.6 15.6 3.6 9.9A4.3 4.3 0 0 1 12 8a4.3 4.3 0 0 1 8.4 1.9c0 5.7-8.4 10.5-8.4 10.5Z" },
+              ].map((a) => (
                 <Link
-                  href="/programmes"
-                  className="rounded-sm bg-white px-6 py-3 font-medium text-brand-deep transition-transform hover:-translate-y-0.5"
+                  key={a.href}
+                  href={a.href}
+                  className="group flex items-start gap-4 rounded-card p-5 transition-colors duration-300 hover:bg-surface-2"
                 >
-                  Our programmes
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-card bg-brand-wash text-brand transition-colors duration-300 group-hover:bg-brand group-hover:text-white">
+                    <svg viewBox="0 0 24 24" aria-hidden className="h-5 w-5 fill-none stroke-current stroke-[1.6]" strokeLinecap="round" strokeLinejoin="round">
+                      <path d={a.d} />
+                    </svg>
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block font-bold text-navy-900">{a.title}</span>
+                    <span className="mt-0.5 block text-[0.85rem] leading-snug text-ink-soft">{a.note}</span>
+                  </span>
                 </Link>
-                <Link
-                  href="/donate"
-                  className="rounded-sm border border-white/30 px-6 py-3 font-medium text-white backdrop-blur-sm transition-colors hover:border-white hover:bg-white/10"
-                >
-                  Support the masjid
-                </Link>
+              ))}
+            </div>
+          </Container>
+        </Section>
+
+        {/* ---------------------------------------------------- welcome */}
+        <Section tone="surface">
+          <Container>
+            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+              <div className="order-2 grid grid-cols-2 gap-4 lg:order-1">
+                <Figure alt="The prayer hall at Manarat Foundation" aspect="3/4" seed={0} className="mt-8" />
+                <Figure alt="Students in the Qur'an academy" aspect="3/4" seed={1} />
               </div>
 
-              <dl className="mt-4 flex flex-wrap gap-x-10 gap-y-4 border-t border-white/15 pt-6">
-                {[
-                  { k: "Established", v: "2012" },
-                  { k: "Capacity", v: "1,000+" },
-                  { k: "Qibla from here", v: `${bearing.toFixed(0)}° ${compassPoint(bearing)}` },
-                ].map((s) => (
-                  <div key={s.k}>
-                    <dt className="text-[10px] uppercase tracking-[0.14em] text-white/50">{s.k}</dt>
-                    <dd className="font-display text-2xl font-medium tabular-nums">{s.v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            <div className="lg:pt-4">
-              <LivePrayerClock config={config} jumuahTimes={settings.jumuah_times} />
-            </div>
-          </div>
-        </section>
-
-        {/* ---------- Programmes ---------- */}
-        <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-          <div className="mb-10 flex flex-wrap items-end gap-4">
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.16em] text-ink-mute">What we teach</p>
-              <h2 className="mt-2 font-display text-4xl font-medium tracking-tight">
-                Classes, in full detail.
-              </h2>
-              <p className="mt-3 max-w-2xl text-ink-soft">
-                Ages, timetable, fees and teachers for every programme — so a parent can decide
-                without picking up the phone.
-              </p>
-            </div>
-            <Link href="/programmes" className="ml-auto text-sm font-medium text-brand hover:underline">
-              All programmes →
-            </Link>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            {list.map((p) => (
-              <Link
-                key={p.id}
-                href={`/programmes/${p.slug}`}
-                className="group relative flex flex-col gap-3 overflow-hidden rounded-md border border-rule bg-surface p-7 transition-all hover:-translate-y-0.5 hover:border-brand hover:shadow-md"
-              >
-                <span aria-hidden className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 text-brand opacity-[0.06] transition-opacity group-hover:opacity-[0.13]">
-                  <svg viewBox="0 0 100 100" className="h-full w-full">
-                    <path d="M50 4 61 35 92 46 61 57 50 96 39 57 8 46 39 35Z" fill="currentColor" />
-                  </svg>
-                </span>
-                <h3 className="font-display text-2xl font-medium transition-colors group-hover:text-brand">
-                  {p.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-ink-soft">{p.summary}</p>
-                <dl className="mt-auto flex flex-wrap gap-x-6 gap-y-1 pt-3 text-xs text-ink-mute">
-                  {p.age_range && (
-                    <div className="flex gap-1.5">
-                      <dt className="uppercase tracking-[0.1em]">Ages</dt>
-                      <dd className="font-medium text-ink-soft">{p.age_range}</dd>
-                    </div>
-                  )}
-                  {p.schedule && (
-                    <div className="flex gap-1.5">
-                      <dt className="uppercase tracking-[0.1em]">When</dt>
-                      <dd className="font-medium text-ink-soft">{p.schedule}</dd>
-                    </div>
-                  )}
-                </dl>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* ---------- Islamic calendar ---------- */}
-        <section className="relative overflow-hidden border-y border-rule bg-surface">
-          <span aria-hidden className="absolute inset-0 text-brand">
-            <PatternOverlay opacity={0.04} />
-          </span>
-          <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8">
-            <div className="mb-10 flex flex-wrap items-end gap-4">
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.16em] text-ink-mute">
-                  The Islamic year
-                </p>
-                <h2 className="mt-2 font-display text-4xl font-medium tracking-tight">
-                  What&rsquo;s coming up.
-                </h2>
-                <p className="mt-3 max-w-2xl text-ink-soft">
-                  Ramadan, the two Eids and the sacred days, with a live countdown to each.
-                </p>
-              </div>
-              <Link href="/calendar" className="ml-auto text-sm font-medium text-brand hover:underline">
-                Full calendar →
-              </Link>
-            </div>
-            <IslamicEvents limit={4} today={new Date()} />
-          </div>
-        </section>
-
-        {/* ---------- Appeal ---------- */}
-        {appeal && (
-          <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-            <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-              <div className="space-y-4">
-                <p className="text-[11px] uppercase tracking-[0.16em] text-ink-mute">
-                  Our current appeal
-                </p>
-                <h2 className="font-display text-4xl font-medium tracking-tight text-balance">
-                  {appeal.title}
-                </h2>
-                <p className="text-lg leading-relaxed text-ink-soft">{appeal.summary}</p>
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <Link
-                    href="/donate"
-                    className="rounded-sm bg-brand px-6 py-3 font-medium text-white transition-colors hover:bg-brand-deep"
-                  >
-                    Give to the appeal
-                  </Link>
-                  <Link
-                    href="/appeal"
-                    className="rounded-sm border border-rule px-6 py-3 font-medium transition-colors hover:border-brand"
-                  >
-                    What it funds
-                  </Link>
+              <div className="order-1 lg:order-2">
+                <SectionHead
+                  eyebrow="Welcome to Manarat"
+                  title={<>A masjid built by scholars, for its neighbours.</>}
+                  lede="We began in 2012 as the first purpose-established masjid and Islamic centre for Sheldon, Solihull and the surrounding areas. Today more than a thousand worshippers pray here."
+                />
+                <ul className="mt-8 grid gap-4">
+                  {[
+                    ["Founded by scholars", "Our teaching is led by qualified ulama, not volunteers filling a gap."],
+                    ["Open to everyone", "We serve our neighbours whoever they are, and reject extremism in all its forms."],
+                    ["Education first", "From a child's first letters of Arabic to a three-year Hifz programme."],
+                  ].map(([t, d]) => (
+                    <li key={t} className="flex gap-4">
+                      <span className="mt-1 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-wash text-brand">
+                        <svg viewBox="0 0 16 16" aria-hidden className="h-3 w-3 fill-none stroke-current stroke-[2.4]" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M3 8.5 6.5 12 13 4.5" />
+                        </svg>
+                      </span>
+                      <span>
+                        <span className="block font-bold text-navy-900">{t}</span>
+                        <span className="mt-0.5 block text-[0.95rem] leading-relaxed text-ink-soft">{d}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-9 flex flex-wrap gap-3">
+                  <Button href="/about">Our story</Button>
+                  <Button href="/contact" variant="outline">Visit us</Button>
                 </div>
               </div>
-              <div className="rounded-md border border-rule bg-surface p-8">
-                <CampaignProgress raisedPence={appeal.raised_pence} targetPence={appeal.target_pence} />
-              </div>
             </div>
-          </section>
+          </Container>
+        </Section>
+
+        {/* ---------------------------------------------------- academy */}
+        <Section tone="ground">
+          <Container>
+            <SectionHead
+              eyebrow="The Academy"
+              title="Every class, in full detail."
+              lede="Ages, timetable, fees and who teaches — so a parent can decide without picking up the phone."
+              action={
+                <Button href="/programmes" variant="outline">
+                  All programmes <ArrowIcon />
+                </Button>
+              }
+            />
+
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-2">
+              {list.map((p, i) => (
+                <Card key={p.id} interactive className="overflow-hidden">
+                  <Link href={`/programmes/${p.slug}`} className="block">
+                    <div className="grid gap-0 sm:grid-cols-[150px_minmax(0,1fr)]">
+                      <Figure
+                        alt={p.title}
+                        aspect="1/1"
+                        seed={i + 2}
+                        className="!rounded-none !border-0 h-full"
+                      />
+                      <div className="p-6">
+                        <h3 className="font-display text-[1.3rem] font-extrabold text-navy-900">
+                          {p.title}
+                        </h3>
+                        <p className="mt-2 text-[0.92rem] leading-relaxed text-ink-soft">
+                          {p.summary}
+                        </p>
+                        <dl className="mt-4 flex flex-wrap gap-x-5 gap-y-1.5 border-t border-rule-soft pt-4 text-[0.78rem]">
+                          {p.age_range && (
+                            <div className="flex gap-1.5">
+                              <dt className="uppercase tracking-[0.1em] text-ink-mute">Ages</dt>
+                              <dd className="font-semibold text-ink">{p.age_range}</dd>
+                            </div>
+                          )}
+                          {p.schedule && (
+                            <div className="flex gap-1.5">
+                              <dt className="uppercase tracking-[0.1em] text-ink-mute">When</dt>
+                              <dd className="font-semibold text-ink">{p.schedule}</dd>
+                            </div>
+                          )}
+                        </dl>
+                      </div>
+                    </div>
+                  </Link>
+                </Card>
+              ))}
+            </div>
+          </Container>
+        </Section>
+
+        {/* ---------------------------------------------------- appeal */}
+        {appeal && (
+          <Section tone="navy" className="overflow-hidden">
+            <span aria-hidden className="absolute inset-0 text-white">
+              <KhatimPattern id="appeal" opacity={0.05} size={80} />
+            </span>
+            <span
+              aria-hidden
+              className="absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full"
+              style={{ background: "radial-gradient(circle, rgba(21,145,220,.34), transparent 66%)" }}
+            />
+            <Container className="relative">
+              <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+                <div>
+                  <SectionHead
+                    eyebrow="Our current appeal"
+                    title={appeal.title}
+                    lede={appeal.summary}
+                    onNavy
+                  />
+                  <div className="mt-9 flex flex-wrap gap-3">
+                    <Button href="/donate" variant="white" size="lg">
+                      Give to the appeal <ArrowIcon />
+                    </Button>
+                    <Button href="/appeal" variant="ghost-white" size="lg">
+                      What it funds
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="rounded-panel border border-white/15 bg-white/[0.07] p-8 backdrop-blur-sm">
+                  <p className="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-blue-300">
+                    Raised so far
+                  </p>
+                  <div className="mt-5">
+                    <CampaignProgress
+                      raisedPence={appeal.raised_pence}
+                      targetPence={appeal.target_pence}
+                      onNavy
+                    />
+                  </div>
+                  <dl className="mt-8 grid grid-cols-3 gap-4 border-t border-white/15 pt-6">
+                    {[
+                      ["Target", moneyShort(appeal.target_pence)],
+                      ["Gift Aid", "+25%"],
+                      ["Charity", "1148223"],
+                    ].map(([k, v]) => (
+                      <div key={k}>
+                        <dt className="text-[0.62rem] uppercase tracking-[0.14em] text-white/50">{k}</dt>
+                        <dd className="mt-1 font-display text-lg font-extrabold tabular-nums text-white">{v}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </div>
+            </Container>
+          </Section>
         )}
 
-        {/* ---------- Tools strip ---------- */}
-        <section className="border-t border-rule bg-surface-2/60">
-          <div className="mx-auto grid max-w-6xl gap-4 px-5 py-14 sm:px-8 md:grid-cols-3">
-            {[
-              { href: "/prayer-times", title: "Prayer timetable", note: "Today and the whole month, recalculated daily.", icon: "M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" },
-              { href: "/qibla", title: "Qibla finder", note: "The direction of the Ka'bah from anywhere.", icon: "M12 2 15 12 12 22 9 12Z" },
-              { href: "/live", title: "Masjid display", note: "Full-screen clock for the foyer screen.", icon: "M3 5h18v12H3zM8 21h8" },
-            ].map((c) => (
-              <Link
-                key={c.href}
-                href={c.href}
-                className="group flex items-start gap-4 rounded-md border border-rule bg-surface p-6 transition-all hover:-translate-y-0.5 hover:border-brand"
-              >
-                <span className="mt-0.5 shrink-0 rounded-sm bg-brand-wash p-2 text-brand-deep">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
-                    <path d={c.icon} strokeLinecap="round" />
-                  </svg>
-                </span>
-                <span>
-                  <span className="block font-display text-lg font-medium group-hover:text-brand">
-                    {c.title}
-                  </span>
-                  <span className="mt-0.5 block text-sm text-ink-soft">{c.note}</span>
-                </span>
-              </Link>
-            ))}
-          </div>
-        </section>
+        {/* ---------------------------------------------------- calendar */}
+        <Section tone="surface">
+          <Container>
+            <SectionHead
+              eyebrow="The Islamic year"
+              title="What's coming up."
+              lede="Ramadan, both Eids and the sacred days, with a live countdown to each."
+              action={
+                <Button href="/calendar" variant="outline">
+                  Full calendar <ArrowIcon />
+                </Button>
+              }
+            />
+            <div className="mt-12">
+              <IslamicEvents limit={4} today={new Date()} />
+            </div>
+          </Container>
+        </Section>
+
+        {/* ---------------------------------------------------- visit */}
+        <Section tone="ground">
+          <Container>
+            <Card className="overflow-hidden">
+              <div className="grid lg:grid-cols-[minmax(0,1fr)_42%]">
+                <div className="p-8 sm:p-12">
+                  <SectionHead
+                    eyebrow="Visit the masjid"
+                    title="155 Coventry Road, Sheldon."
+                    lede="A spacious hall with ample parking, open for all five prayers and two Jumu'ah congregations every Friday."
+                  />
+                  <dl className="mt-8 grid gap-5 sm:grid-cols-2">
+                    {[
+                      ["Jumu'ah", settings.jumuah_times],
+                      ["Capacity", "1,000+ worshippers"],
+                      ["Parking", "On site, free"],
+                      ["Established", "2012"],
+                    ].map(([k, v]) => (
+                      <div key={k} className="border-l-2 border-brand pl-4">
+                        <dt className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-ink-mute">{k}</dt>
+                        <dd className="mt-1 font-semibold text-navy-900">{v}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <div className="mt-9 flex flex-wrap gap-3">
+                    <Button href="/contact">Get directions</Button>
+                    <Button href="/prayer-times" variant="outline">Prayer timetable</Button>
+                  </div>
+                </div>
+                <Figure
+                  alt="Manarat Foundation on Coventry Road"
+                  aspect="4/5"
+                  seed={7}
+                  className="!rounded-none !border-0 !border-l h-full min-h-[280px]"
+                />
+              </div>
+            </Card>
+          </Container>
+        </Section>
       </main>
 
       <SiteFooter />

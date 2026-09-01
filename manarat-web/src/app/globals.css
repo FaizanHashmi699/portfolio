@@ -1,38 +1,94 @@
 @import "tailwindcss";
 
+/**
+ * Manarat design system.
+ *
+ * Strictly the brand palette — every colour below is either a brand value or
+ * a tint of one. No hue outside this set appears anywhere in the app.
+ *
+ *   #1591DC  primary
+ *   #0B2A55  navy      #062B55 navy deep
+ *   #F4FAFF  light      #D8E7F5 border
+ *   #5B6B7F  muted      #FFFFFF white
+ */
 @theme {
-  /* Manarat brand */
-  --color-ground:      #f7fbfe;
+  /* ---- brand ---- */
+  --color-navy-950:  #062b55;
+  --color-navy-900:  #0b2a55;
+  --color-navy-800:  #123a6b;
+  --color-navy-700:  #1a4b85;
+
+  --color-blue-700:  #0f74b3;   /* primary, pressed */
+  --color-blue-600:  #1591dc;   /* primary */
+  --color-blue-500:  #3ba5e3;   /* primary, hover */
+  --color-blue-300:  #8fd0f7;   /* on-navy accent */
+  --color-blue-100:  #d8e7f5;   /* border */
+  --color-blue-50:   #f4faff;   /* light ground */
+
+  --color-slate-500: #5b6b7f;   /* muted text */
+  --color-slate-400: #7c8ca0;
+  --color-white:     #ffffff;
+
+  /* ---- semantic ---- */
+  --color-ground:      #f4faff;
   --color-surface:     #ffffff;
-  --color-surface-2:   #eef6fc;
+  --color-surface-2:   #eaf4fd;
   --color-ink:         #0b2a55;
   --color-ink-soft:    #5b6b7f;
   --color-ink-mute:    #7c8ca0;
   --color-rule:        #d8e7f5;
-  --color-rule-soft:   #e8f1fa;
+  --color-rule-soft:   #e8f2fb;
   --color-brand:       #1591dc;
-  --color-brand-deep:  #0b2a55;
   --color-brand-mid:   #0f74b3;
+  --color-brand-deep:  #0b2a55;
   --color-brand-wash:  #e6f3fc;
-  --color-accent:      #b8791f;
-  --color-accent-wash: #fbf1de;
+  --color-brand-light: #8fd0f7;
+
+  /* ---- one spacing scale ---- */
+  --spacing-section:    6rem;   /*  96px — desktop section rhythm */
+  --spacing-section-sm: 4rem;   /*  64px — mobile */
+  --spacing-gutter:     1.5rem;
+
+  /* ---- one radius scale ---- */
+  --radius-card:  16px;
+  --radius-panel: 24px;
+  --radius-chip:  999px;
+
+  /* ---- one elevation system, navy-tinted ---- */
+  --shadow-sm:  0 1px 2px rgba(11, 42, 85, .05);
+  --shadow-md:  0 2px 4px rgba(11, 42, 85, .05), 0 12px 28px -12px rgba(11, 42, 85, .22);
+  --shadow-lg:  0 4px 8px rgba(11, 42, 85, .06), 0 24px 48px -20px rgba(11, 42, 85, .34);
+  --shadow-brand: 0 8px 24px -10px rgba(21, 145, 220, .75);
 
   --font-display: var(--font-manrope), "Segoe UI", Helvetica, Arial, sans-serif;
   --font-sans: var(--font-manrope), "Segoe UI", Helvetica, Arial, sans-serif;
   --font-arabic: var(--font-amiri), "Scheherazade New", serif;
+
+  --ease-out-soft: cubic-bezier(.22, 1, .36, 1);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--color-ground);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+
+/* Consistent measure for running text. */
+.prose-measure { max-width: 62ch; }
+
+/* Headings share one optical treatment. */
+h1, h2, h3 { letter-spacing: -0.025em; text-wrap: balance; }
+
+::selection { background: var(--color-blue-100); color: var(--color-navy-900); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }
