@@ -12,7 +12,7 @@ export default function AboutPage() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-3xl px-5 py-12 sm:px-8">
+      <main id="main" className="mx-auto max-w-3xl px-5 py-12 sm:px-8">
         <h1 className="font-display text-4xl font-medium tracking-tight">About Manarat</h1>
 
         <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink-soft">

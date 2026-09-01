@@ -14,7 +14,7 @@ export default async function ContactPage() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-3xl px-5 py-12 sm:px-8">
+      <main id="main" className="mx-auto max-w-3xl px-5 py-12 sm:px-8">
         <h1 className="font-display text-4xl font-medium tracking-tight">Contact</h1>
         <p className="mt-3 text-ink-soft">
           The office is open around prayer times. For class places, please use the enquiry form on

@@ -30,7 +30,7 @@ export default async function AppealPage() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-5xl px-5 py-12 sm:px-8">
+      <main id="main" className="mx-auto max-w-5xl px-5 py-12 sm:px-8">
         <p className="text-[11px] uppercase tracking-[0.16em] text-ink-mute">Our current appeal</p>
         <h1 className="mt-3 font-display text-4xl font-medium tracking-tight text-balance sm:text-5xl">
           {appeal.title}

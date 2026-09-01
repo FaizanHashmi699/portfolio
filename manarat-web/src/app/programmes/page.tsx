@@ -25,7 +25,7 @@ export default async function ProgrammesPage() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
+      <main id="main" className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
         <h1 className="font-display text-4xl font-medium tracking-tight">Programmes</h1>
         <p className="mt-3 max-w-2xl text-ink-soft">
           Every class we run, with the ages, the timetable and the fees set out in full. If a

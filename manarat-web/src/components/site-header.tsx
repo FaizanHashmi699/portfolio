@@ -3,8 +3,9 @@ import Link from "next/link";
 const NAV = [
   { href: "/prayer-times", label: "Prayer times" },
   { href: "/programmes", label: "Programmes" },
-  { href: "/appeal", label: "Our appeal" },
-  { href: "/about", label: "About" },
+  { href: "/calendar", label: "Calendar" },
+  { href: "/qibla", label: "Qibla" },
+  { href: "/appeal", label: "Appeal" },
   { href: "/contact", label: "Contact" },
 ];
 

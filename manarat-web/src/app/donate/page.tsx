@@ -31,7 +31,7 @@ export default async function DonatePage() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-5xl px-5 py-12 sm:px-8">
+      <main id="main" className="mx-auto max-w-5xl px-5 py-12 sm:px-8">
         <h1 className="font-display text-4xl font-medium tracking-tight">Donate</h1>
         <p className="mt-3 max-w-2xl text-ink-soft">
           Sadaqah, Zakat and support for the masjid&rsquo;s daily work. If you pay UK tax, Gift Aid

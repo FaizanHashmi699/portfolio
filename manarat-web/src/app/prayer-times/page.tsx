@@ -40,7 +40,7 @@ export default async function PrayerTimesPage() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
+      <main id="main" className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
         <h1 className="font-display text-4xl font-medium tracking-tight">Prayer times</h1>
         <p className="mt-3 max-w-2xl text-ink-soft">
           Calculated for the masjid&rsquo;s own coordinates and refreshed every day, so the times

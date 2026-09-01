@@ -21,6 +21,8 @@ export function SiteFooter() {
             {[
               { href: "/prayer-times", label: "Prayer times" },
               { href: "/programmes", label: "Programmes" },
+              { href: "/calendar", label: "Islamic calendar" },
+              { href: "/qibla", label: "Qibla finder" },
               { href: "/appeal", label: "The Manarat Expansion" },
               { href: "/donate", label: "Donate" },
               { href: "/contact", label: "Contact" },

@@ -50,7 +50,7 @@ export default async function ProgrammePage({
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-5xl px-5 py-12 sm:px-8">
+      <main id="main" className="mx-auto max-w-5xl px-5 py-12 sm:px-8">
         <Link href="/programmes" className="text-sm text-ink-mute hover:text-brand">
           ← All programmes
         </Link>
