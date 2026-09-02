@@ -7,6 +7,7 @@ import { Container, Section, Card, KhatimPattern } from "@/components/ui";
 import { createClient } from "@/lib/supabase/server";
 import { paymentsEnabled } from "@/lib/payments";
 import { moneyShort } from "@/lib/format";
+import { findGivingOption } from "@/lib/giving";
 import type { Campaign } from "@/lib/types";
 
 export const metadata: Metadata = {
@@ -35,7 +36,24 @@ const REASSURANCE = [
   },
 ];
 
-export default async function DonatePage() {
+export default async function DonatePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ cause?: string; amount?: string; frequency?: string }>;
+}) {
+  const params = await searchParams;
+
+  // Everything below comes from a query string, so nothing is trusted: the
+  // cause must match our own list and the amount is clamped to a sane range.
+  const option = findGivingOption(params.cause);
+  const parsedAmount = Number(params.amount);
+  const initialAmount =
+    Number.isFinite(parsedAmount) && parsedAmount >= 1 && parsedAmount <= 100000
+      ? Math.round(parsedAmount)
+      : (option?.suggested ?? undefined);
+  const initialFrequency =
+    params.frequency === "monthly" || option?.monthly ? "monthly" : "one_off";
+
   const supabase = await createClient();
   const { data } = await supabase
     .from("campaigns")
@@ -93,6 +111,10 @@ export default async function DonatePage() {
                 </p>
                 <DonateForm
                   campaignId={appeal?.id ?? null}
+                  initialAmount={initialAmount}
+                  initialFrequency={initialFrequency}
+                  causeSlug={option?.slug ?? null}
+                  designation={option?.label ?? null}
                   campaignTitle={appeal?.title ?? null}
                   paymentsLive={live}
                 />

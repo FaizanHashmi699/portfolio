@@ -50,6 +50,9 @@ export const metadata: Metadata = {
 const JSON_LD = {
   "@context": "https://schema.org",
   "@type": "Mosque",
+  // Stable id so page-level graphs (the homepage FAQ, for one) can point at
+  // this entity instead of describing a second, competing one.
+  "@id": `${SITE}#organisation`,
   name: "Manarat Foundation",
   alternateName: "Manarat Masjid Sheldon",
   url: SITE,

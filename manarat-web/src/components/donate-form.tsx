@@ -16,14 +16,27 @@ export function DonateForm({
   campaignId,
   campaignTitle,
   paymentsLive,
+  initialAmount,
+  initialFrequency = "one_off",
+  causeSlug,
+  designation,
 }: {
   campaignId: string | null;
   campaignTitle: string | null;
   paymentsLive: boolean;
+  /** Prefill from a "ways to give" card, in whole pounds. */
+  initialAmount?: number;
+  initialFrequency?: "one_off" | "monthly";
+  /** Slug of the giving category the donor arrived from, posted with the form. */
+  causeSlug?: string | null;
+  /** Human label for that category, shown to the donor. */
+  designation?: string | null;
 }) {
   const [state, action, pending] = useActionState(recordDonation, null);
-  const [frequency, setFrequency] = useState<"one_off" | "monthly">("one_off");
-  const [amount, setAmount] = useState<string>("25");
+  const [frequency, setFrequency] = useState<"one_off" | "monthly">(initialFrequency);
+  const [amount, setAmount] = useState<string>(
+    String(initialAmount ?? (initialFrequency === "monthly" ? 15 : 25)),
+  );
   const [giftAid, setGiftAid] = useState(false);
   const [redirecting, setRedirecting] = useState(false);
   const [handoff, setHandoff] = useState<string | null>(null);
@@ -95,6 +108,24 @@ export function DonateForm({
   return (
     <form action={action} className="space-y-6">
       {campaignId && <input type="hidden" name="campaign_id" value={campaignId} />}
+      {causeSlug && <input type="hidden" name="designation" value={causeSlug} />}
+
+      {designation && (
+        <p className="flex flex-wrap items-center gap-2.5 rounded-card border border-brand/40 bg-brand-wash px-5 py-4 text-sm">
+          <span className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-ink-mute">
+            Giving as
+          </span>
+          <strong className="font-display text-[1rem] font-extrabold tracking-tight text-brand-deep">
+            {designation}
+          </strong>
+          <a
+            href="/donate"
+            className="ml-auto text-xs font-bold text-brand underline-offset-4 hover:underline"
+          >
+            Change
+          </a>
+        </p>
+      )}
       <input type="hidden" name="frequency" value={frequency} />
       <input type="hidden" name="amount_pounds" value={amount} />
 

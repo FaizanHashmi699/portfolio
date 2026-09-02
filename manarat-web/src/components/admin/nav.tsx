@@ -10,6 +10,7 @@ export const ADMIN_NAV = [
   { href: "/admin/subscribers", label: "Subscribers" },
   { href: "/admin/programmes", label: "Programmes" },
   { href: "/admin/campaigns", label: "Appeals" },
+  { href: "/admin/testimonials", label: "Testimonials" },
   { href: "/admin/prayer-settings", label: "Prayer times" },
 ];
 

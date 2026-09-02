@@ -87,3 +87,13 @@ export interface PrayerSettings {
   isha_offset: number;
   jumuah_times: string;
 }
+
+export interface Testimonial {
+  id: string;
+  quote: string;
+  author_name: string;
+  author_role: string | null;
+  published: boolean;
+  sort_order: number;
+  created_at: string;
+}

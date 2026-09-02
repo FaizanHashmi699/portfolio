@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { findGivingOption } from "@/lib/giving";
 
 export interface ActionResult {
   ok: boolean;
@@ -91,8 +92,16 @@ export async function recordDonation(
   const donor_email = str(form, "donor_email").toLowerCase() || null;
   const donor_postcode = str(form, "donor_postcode") || null;
   const gift_aid = form.get("gift_aid") === "on";
-  const message = str(form, "message") || null;
   const campaign_id = str(form, "campaign_id") || null;
+
+  // The giving category the donor picked on the homepage. Kept with the
+  // message so the treasurer can see what a gift was given as; the value is
+  // matched against our own list rather than trusted from the query string.
+  const designation = findGivingOption(str(form, "designation"))?.label ?? null;
+  const note = str(form, "message") || null;
+  const message = designation
+    ? `[${designation}]${note ? ` ${note}` : ""}`
+    : note;
 
   if (!amountRaw || Number.isNaN(amount) || amount < 1) {
     return { ok: false, message: "Please choose an amount of £1 or more." };

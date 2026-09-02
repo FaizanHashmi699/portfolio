@@ -196,3 +196,42 @@ export async function savePrayerSettings(
   revalidatePath("/");
   return { ok: true, message: "Prayer settings saved. The timetable updates immediately." };
 }
+
+/* ---------------- testimonials ---------------- */
+
+export async function saveTestimonial(
+  _prev: AdminResult | null,
+  form: FormData,
+): Promise<AdminResult> {
+  const supabase = await createClient();
+  const id = str(form, "id");
+
+  const payload = {
+    quote: str(form, "quote"),
+    author_name: str(form, "author_name"),
+    author_role: str(form, "author_role") || null,
+    sort_order: num(form, "sort_order"),
+    published: bool(form, "published"),
+  };
+
+  if (!payload.quote || !payload.author_name) {
+    return { ok: false, message: "A quote and the person's name are both required." };
+  }
+
+  const { error } = id
+    ? await supabase.from("testimonials").update(payload).eq("id", id)
+    : await supabase.from("testimonials").insert(payload);
+
+  if (error) return { ok: false, message: error.message };
+
+  revalidatePath("/admin/testimonials");
+  revalidatePath("/");
+  return { ok: true, message: id ? "Testimonial updated." : "Testimonial added." };
+}
+
+export async function deleteTestimonial(formData: FormData) {
+  const supabase = await createClient();
+  await supabase.from("testimonials").delete().eq("id", String(formData.get("id")));
+  revalidatePath("/admin/testimonials");
+  revalidatePath("/");
+}
