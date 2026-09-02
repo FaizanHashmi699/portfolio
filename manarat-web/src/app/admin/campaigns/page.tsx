@@ -17,7 +17,7 @@ export default async function AdminCampaignsPage() {
         note="A named project with a visible total raises money. An unnamed reserve does not. The total below updates itself as donations are confirmed."
       />
 
-      <div className="space-y-4">
+      <div className="space-y-5">
         {campaigns.map((c) => (
           <CampaignEditor key={c.id} campaign={c} />
         ))}

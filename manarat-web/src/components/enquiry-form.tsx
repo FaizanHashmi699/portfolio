@@ -4,8 +4,9 @@ import { useActionState } from "react";
 import { submitEnquiry } from "@/actions/public";
 
 const field =
-  "w-full rounded-sm border border-rule bg-surface px-3 py-2 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/20";
-const label = "block text-[11px] uppercase tracking-[0.12em] text-ink-mute mb-1.5";
+  "w-full rounded-[10px] border border-rule bg-surface px-4 py-3 text-[0.95rem] text-ink outline-none transition-colors placeholder:text-ink-mute focus:border-brand focus:ring-4 focus:ring-brand/15";
+const label =
+  "mb-2 block text-[0.68rem] font-bold uppercase tracking-[0.16em] text-ink-mute";
 
 export function EnquiryForm({
   programmeId,
@@ -18,15 +19,17 @@ export function EnquiryForm({
 
   if (state?.ok) {
     return (
-      <div className="rounded-sm border border-brand/30 bg-brand-wash p-6">
-        <p className="font-display text-lg font-medium text-brand-deep">Enquiry received</p>
-        <p className="mt-1 text-sm text-ink-soft">{state.message}</p>
+      <div className="rounded-card border border-brand/40 bg-brand-wash p-7 shadow-sm">
+        <p className="font-display text-[1.25rem] font-extrabold tracking-tight text-brand-deep">
+          Enquiry received
+        </p>
+        <p className="mt-2.5 text-[0.95rem] leading-[1.7] text-ink-soft">{state.message}</p>
       </div>
     );
   }
 
   return (
-    <form action={action} className="space-y-4">
+    <form action={action} className="space-y-5">
       <input type="hidden" name="programme_id" value={programmeId} />
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -70,17 +73,22 @@ export function EnquiryForm({
       </div>
 
       {state && !state.ok && (
-        <p className="rounded-sm bg-accent-wash px-3 py-2 text-sm text-accent">{state.message}</p>
+        <p
+          role="alert"
+          className="rounded-[10px] border border-brand/40 border-l-[3px] border-l-brand bg-brand-wash px-4 py-3 text-sm leading-[1.7] text-brand-deep"
+        >
+          {state.message}
+        </p>
       )}
 
       <button
         type="submit"
         disabled={pending}
-        className="rounded-sm bg-brand px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-deep disabled:opacity-60"
+        className="inline-flex items-center justify-center rounded-chip bg-brand px-7 py-3.5 text-[0.92rem] font-bold text-white shadow-brand transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 hover:bg-blue-700 disabled:translate-y-0 disabled:opacity-55 disabled:shadow-none"
       >
         {pending ? "Sending…" : `Enquire about ${programmeTitle}`}
       </button>
-      <p className="text-xs text-ink-mute">
+      <p className="text-xs leading-[1.7] text-ink-mute">
         We use your details only to answer this enquiry. We never sell or share them.
       </p>
     </form>

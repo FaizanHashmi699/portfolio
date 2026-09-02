@@ -330,3 +330,40 @@ export function Figure({
     </div>
   );
 }
+
+/** Shared masthead for interior pages. */
+export function PageMasthead({
+  eyebrow,
+  title,
+  lede,
+}: {
+  eyebrow: string;
+  title: string;
+  lede?: string;
+}) {
+  return (
+    <section className="relative overflow-hidden bg-navy-950 pb-32 pt-16 text-white sm:pt-20">
+      <span aria-hidden className="absolute inset-0 text-blue-300">
+        <KhatimPattern id={`mast-${eyebrow.replace(/\W/g, "")}`} opacity={0.06} size={72} />
+      </span>
+      <span
+        aria-hidden
+        className="absolute -right-40 -top-32 h-[500px] w-[500px] rounded-full"
+        style={{ background: "radial-gradient(circle, rgba(21,145,220,.3), transparent 68%)" }}
+      />
+      <Container className="relative">
+        <div className="max-w-2xl">
+          <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-blue-300">
+            {eyebrow}
+          </p>
+          <h1 className="mt-4 font-display text-[clamp(2.2rem,5vw,3.4rem)] font-extrabold leading-[1.05]">
+            {title}
+          </h1>
+          {lede && (
+            <p className="mt-5 text-[1.05rem] leading-[1.7] text-white/72">{lede}</p>
+          )}
+        </div>
+      </Container>
+    </section>
+  );
+}

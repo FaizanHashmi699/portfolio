@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { Container, Section, SectionHead, Card, PageMasthead, Button, ArrowIcon } from "@/components/ui";
 import { IslamicEvents } from "@/components/islamic-events";
 import { gregorianToHijri, formatHijri, HIJRI_MONTHS, hijriToGregorian } from "@/lib/hijri";
 
@@ -27,79 +28,148 @@ export default function CalendarPage() {
     };
   });
 
+  const gregorian = new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(now);
+
   return (
     <>
       <SiteHeader />
-      <main id="main" className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
-        <p className="text-[11px] uppercase tracking-[0.16em] text-ink-mute">The Islamic year</p>
-        <h1 className="mt-2 font-display text-4xl font-medium tracking-tight sm:text-5xl">
-          Islamic calendar
-        </h1>
+      <main id="main">
+        <PageMasthead
+          eyebrow="The Islamic year"
+          title="Islamic calendar."
+          lede="Today's Hijri date, the months of the year ahead, and the sacred days worth putting in the diary."
+        />
 
-        <div className="mt-8 flex flex-wrap items-end gap-x-10 gap-y-4 rounded-md border border-rule bg-surface p-7">
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.14em] text-ink-mute">Today</p>
-            <p className="mt-1 font-display text-3xl font-medium text-brand-deep">
-              {formatHijri(hijri)}
-            </p>
-          </div>
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.14em] text-ink-mute">Gregorian</p>
-            <p className="mt-1 font-display text-3xl font-medium">
-              {new Intl.DateTimeFormat("en-GB", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              }).format(now)}
-            </p>
-          </div>
-        </div>
+        <Section tone="ground" className="!pt-0">
+          <Container>
+            <div className="-mt-24 grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+              <Card className="overflow-hidden">
+                <div className="grid gap-px bg-rule sm:grid-cols-2">
+                  <div className="bg-surface p-8 sm:p-10">
+                    <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-ink-mute">
+                      Today, Hijri
+                    </p>
+                    <p className="mt-3 font-display text-[clamp(1.6rem,3.4vw,2.1rem)] font-extrabold leading-tight text-brand-deep">
+                      {formatHijri(hijri)}
+                    </p>
+                    <p className="mt-2 text-sm text-ink-soft">
+                      {HIJRI_MONTHS[hijri.month - 1]} is month {hijri.month} of {hijri.year} AH.
+                    </p>
+                  </div>
+                  <div className="bg-surface p-8 sm:p-10">
+                    <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-ink-mute">
+                      Today, Gregorian
+                    </p>
+                    <p className="mt-3 font-display text-[clamp(1.6rem,3.4vw,2.1rem)] font-extrabold leading-tight">
+                      {gregorian}
+                    </p>
+                    <p className="mt-2 text-sm text-ink-soft">
+                      The Hijri day begins at maghrib, so after sunset the date above moves on.
+                    </p>
+                  </div>
+                </div>
+              </Card>
 
-        <section className="mt-14">
-          <h2 className="font-display text-2xl font-medium tracking-tight">Upcoming observances</h2>
-          <p className="mt-1 mb-6 max-w-2xl text-sm text-ink-soft">
-            Counted from today. Dates are the arithmetic Hijri calendar; the masjid announces the
-            confirmed date once the moon is sighted.
-          </p>
-          <IslamicEvents limit={10} today={now} />
-        </section>
+              <aside className="grid gap-5">
+                <Card className="p-6">
+                  <h2 className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-ink-mute">
+                    How these dates work
+                  </h2>
+                  <p className="mt-3 text-sm leading-[1.7] text-ink-soft">
+                    We use the tabular Islamic calendar — the same arithmetic behind printed
+                    timetables and date converters. Because a month truly begins on local sighting
+                    of the new moon, an observed date can fall a day either side.
+                  </p>
+                  <p className="mt-3 text-sm leading-[1.7] text-ink-soft">
+                    Manarat announces the confirmed dates for Ramadan and both Eids from the minbar
+                    and by newsletter.
+                  </p>
+                </Card>
 
-        <section className="mt-14">
-          <h2 className="font-display text-2xl font-medium tracking-tight">
-            The months of {hijri.year} AH
-          </h2>
-          <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-            {months.map((m) => (
-              <div
-                key={m.number}
-                className={`flex items-baseline gap-3 rounded-sm border px-4 py-3 ${
-                  m.isCurrent ? "border-brand bg-brand-wash" : "border-rule bg-surface"
-                }`}
-              >
-                <span className="w-5 shrink-0 text-right font-mono text-xs text-ink-mute">
-                  {m.number}
-                </span>
-                <span className="font-medium">{m.name}</span>
-                {m.isCurrent && (
-                  <span className="rounded-sm bg-brand px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.1em] text-white">
-                    now
+                <Card className="p-6">
+                  <h2 className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-ink-mute">
+                    Also useful
+                  </h2>
+                  <div className="mt-4 grid gap-2.5">
+                    <Button href="/prayer-times" variant="outline" className="w-full justify-between">
+                      Prayer times <ArrowIcon />
+                    </Button>
+                    <Button href="/qibla" variant="outline" className="w-full justify-between">
+                      Qibla finder <ArrowIcon />
+                    </Button>
+                  </div>
+                </Card>
+              </aside>
+            </div>
+          </Container>
+        </Section>
+
+        <Section tone="surface">
+          <Container>
+            <SectionHead
+              eyebrow="What's coming"
+              title="Upcoming observances"
+              lede="Counted from today. The masjid confirms each date once the moon is sighted."
+            />
+            <div className="mt-10">
+              <IslamicEvents limit={10} today={now} />
+            </div>
+          </Container>
+        </Section>
+
+        <Section tone="ground">
+          <Container>
+            <SectionHead
+              eyebrow={`${hijri.year} AH`}
+              title="The twelve months"
+              lede="Each month with the Gregorian date it begins on, so you can plan around it."
+            />
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {months.map((m) => (
+                <Card
+                  key={m.number}
+                  interactive
+                  className={`flex items-center gap-4 p-5 ${
+                    m.isCurrent ? "!border-brand shadow-md" : ""
+                  }`}
+                >
+                  <span
+                    aria-hidden
+                    className={`grid h-11 w-11 shrink-0 place-items-center rounded-full font-display text-sm font-extrabold ${
+                      m.isCurrent ? "bg-brand text-white" : "bg-brand-wash text-brand-deep"
+                    }`}
+                  >
+                    {m.number}
                   </span>
-                )}
-                <span className="ml-auto text-xs tabular-nums text-ink-mute">
-                  {new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "2-digit" })
-                    .format(m.startsOn)}
-                </span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <p className="mt-10 max-w-2xl text-xs leading-relaxed text-ink-mute">
-          These dates follow the tabular Islamic calendar, which is what printed timetables and
-          date converters use. Because months actually begin on local sighting of the new moon, an
-          observed date can fall a day either side. Manarat announces the confirmed dates for
-          Ramadan and both Eids from the minbar and by newsletter.
-        </p>
+                  <span className="min-w-0">
+                    <span className="flex items-center gap-2">
+                      <span className="truncate font-display font-bold text-brand-deep">
+                        {m.name}
+                      </span>
+                      {m.isCurrent && (
+                        <span className="shrink-0 rounded-chip bg-brand px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-[0.12em] text-white">
+                          Now
+                        </span>
+                      )}
+                    </span>
+                    <span className="mt-0.5 block text-sm tabular-nums text-ink-soft">
+                      begins{" "}
+                      {new Intl.DateTimeFormat("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      }).format(m.startsOn)}
+                    </span>
+                  </span>
+                </Card>
+              ))}
+            </div>
+          </Container>
+        </Section>
       </main>
       <SiteFooter />
     </>

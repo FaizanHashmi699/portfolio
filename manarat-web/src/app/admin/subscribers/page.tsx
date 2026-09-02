@@ -1,13 +1,24 @@
 import { createClient } from "@/lib/supabase/server";
-import { EmptyState, PageTitle } from "@/components/admin/ui";
+import {
+  EmptyState,
+  PageTitle,
+  AdminTable,
+  adminRow,
+  adminCell,
+} from "@/components/admin/ui";
 import { dateTimeShort } from "@/lib/format";
 import type { Subscriber } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
+const HEAD = [{ label: "Email" }, { label: "Name" }, { label: "Joined" }];
+
 export default async function SubscribersPage() {
   const supabase = await createClient();
-  const { data } = await supabase.from("subscribers").select("*").order("created_at", { ascending: false });
+  const { data } = await supabase
+    .from("subscribers")
+    .select("*")
+    .order("created_at", { ascending: false });
   const subs = (data ?? []) as Subscriber[];
   const active = subs.filter((s) => !s.unsubscribed);
 
@@ -22,39 +33,35 @@ export default async function SubscribersPage() {
         <EmptyState>No subscribers yet.</EmptyState>
       ) : (
         <>
-          <p className="mb-4 text-sm text-ink-soft">
-            <strong className="font-semibold text-ink">{active.length}</strong> active
-            {subs.length !== active.length && ` · ${subs.length - active.length} unsubscribed`}
-          </p>
-          <div className="overflow-x-auto rounded-sm border border-rule bg-surface">
-            <table className="w-full min-w-[440px] text-sm">
-              <thead>
-                <tr className="border-b border-rule text-left text-[10px] uppercase tracking-[0.1em] text-ink-mute">
-                  <th className="px-4 py-2.5 font-medium">Email</th>
-                  <th className="px-4 py-2.5 font-medium">Name</th>
-                  <th className="px-4 py-2.5 font-medium">Joined</th>
-                </tr>
-              </thead>
-              <tbody>
-                {subs.map((s) => (
-                  <tr key={s.id} className="border-b border-rule-soft last:border-0">
-                    <td className="px-4 py-2.5">
-                      {s.email}
-                      {s.unsubscribed && (
-                        <span className="ml-2 text-[10px] uppercase tracking-[0.08em] text-ink-mute">
-                          unsubscribed
-                        </span>
-                      )}
-                    </td>
-                    <td className="px-4 py-2.5 text-ink-soft">{s.name ?? "—"}</td>
-                    <td className="px-4 py-2.5 whitespace-nowrap text-ink-mute">
-                      {dateTimeShort(s.created_at)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mb-5 flex flex-wrap gap-2.5">
+            <span className="rounded-chip border border-brand bg-brand-wash px-4 py-1.5 text-sm font-bold text-brand-deep">
+              {active.length} active
+            </span>
+            {subs.length !== active.length && (
+              <span className="rounded-chip border border-rule bg-surface-2 px-4 py-1.5 text-sm font-bold text-ink-mute">
+                {subs.length - active.length} unsubscribed
+              </span>
+            )}
           </div>
+
+          <AdminTable head={HEAD} minWidth={480}>
+            {subs.map((s) => (
+              <tr key={s.id} className={adminRow}>
+                <td className={adminCell}>
+                  <span className="font-medium text-ink">{s.email}</span>
+                  {s.unsubscribed && (
+                    <span className="ml-2.5 rounded-chip border border-rule bg-surface-2 px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-[0.12em] text-ink-mute">
+                      unsubscribed
+                    </span>
+                  )}
+                </td>
+                <td className={`${adminCell} text-ink-soft`}>{s.name ?? "—"}</td>
+                <td className={`${adminCell} whitespace-nowrap text-ink-mute`}>
+                  {dateTimeShort(s.created_at)}
+                </td>
+              </tr>
+            ))}
+          </AdminTable>
         </>
       )}
     </>

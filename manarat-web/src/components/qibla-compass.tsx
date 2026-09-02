@@ -53,8 +53,8 @@ export function QiblaCompass({ fallback }: { fallback: Coords }) {
   const needle = heading === null ? bearing : bearing - heading;
 
   return (
-    <div className="grid gap-8 sm:grid-cols-[240px_minmax(0,1fr)] sm:items-center">
-      <div className="relative mx-auto aspect-square w-full max-w-[240px]">
+    <div className="grid gap-10 sm:grid-cols-[260px_minmax(0,1fr)] sm:items-center">
+      <div className="relative mx-auto aspect-square w-full max-w-[260px]">
         <svg viewBox="0 0 200 200" className="h-full w-full" role="img"
              aria-label={`Qibla is ${bearing.toFixed(1)} degrees, ${compassPoint(bearing)}, from ${coords.label}`}>
           <circle cx="100" cy="100" r="94" className="fill-surface stroke-rule" strokeWidth="1.5" />
@@ -106,37 +106,50 @@ export function QiblaCompass({ fallback }: { fallback: Coords }) {
         </svg>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-6">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.14em] text-ink-mute">Qibla bearing</p>
-          <p className="font-display text-4xl font-medium tabular-nums text-brand-deep">
-            {bearing.toFixed(1)}°{" "}
-            <span className="text-2xl text-ink-soft">{compassPoint(bearing)}</span>
+          <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-ink-mute">
+            Qibla bearing
+          </p>
+          <p className="mt-2 font-display text-[clamp(2.4rem,6vw,3.4rem)] font-extrabold leading-none tabular-nums text-brand-deep">
+            {bearing.toFixed(1)}&deg;
+            <span className="ml-3 align-middle text-[0.4em] font-bold uppercase tracking-[0.14em] text-brand">
+              {compassPoint(bearing)}
+            </span>
           </p>
         </div>
 
-        <dl className="grid gap-2 text-sm">
-          <div className="flex gap-3">
-            <dt className="w-24 shrink-0 text-[11px] uppercase tracking-[0.1em] text-ink-mute">From</dt>
-            <dd>{coords.label}</dd>
-          </div>
-          <div className="flex gap-3">
-            <dt className="w-24 shrink-0 text-[11px] uppercase tracking-[0.1em] text-ink-mute">Distance</dt>
-            <dd className="tabular-nums">{Math.round(distance).toLocaleString("en-GB")} km to the Ka&rsquo;bah</dd>
-          </div>
-          <div className="flex gap-3">
-            <dt className="w-24 shrink-0 text-[11px] uppercase tracking-[0.1em] text-ink-mute">Compass</dt>
-            <dd>{heading === null ? "Not available on this device" : `Live — ${Math.round(heading)}° heading`}</dd>
-          </div>
+        <dl className="grid gap-px overflow-hidden rounded-card border border-rule bg-rule">
+          {[
+            { k: "From", v: coords.label },
+            {
+              k: "Distance",
+              v: `${Math.round(distance).toLocaleString("en-GB")} km to the Ka\u2019bah`,
+            },
+            {
+              k: "Compass",
+              v:
+                heading === null
+                  ? "Not available on this device"
+                  : `Live \u2014 ${Math.round(heading)}\u00b0 heading`,
+            },
+          ].map((row) => (
+            <div key={row.k} className="flex flex-wrap gap-x-4 gap-y-1 bg-surface px-5 py-3.5">
+              <dt className="w-24 shrink-0 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-ink-mute">
+                {row.k}
+              </dt>
+              <dd className="text-sm font-medium tabular-nums text-ink">{row.v}</dd>
+            </div>
+          ))}
         </dl>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-3">
           <button
             onClick={locate}
             disabled={state === "locating"}
-            className="rounded-sm bg-brand px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-deep disabled:opacity-60"
+            className="inline-flex items-center justify-center gap-2.5 rounded-chip bg-brand px-6 py-3 text-[0.9rem] font-bold text-white shadow-brand transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 hover:bg-blue-700 disabled:translate-y-0 disabled:opacity-60"
           >
-            {state === "locating" ? "Locating…" : "Use my location"}
+            {state === "locating" ? "Locating\u2026" : "Use my location"}
           </button>
           {state === "you" && (
             <button
@@ -144,7 +157,7 @@ export function QiblaCompass({ fallback }: { fallback: Coords }) {
                 setCoords(fallback);
                 setState("masjid");
               }}
-              className="rounded-sm border border-rule px-4 py-2 text-sm transition-colors hover:border-brand"
+              className="inline-flex items-center justify-center gap-2.5 rounded-chip border border-rule bg-surface px-6 py-3 text-[0.9rem] font-bold text-navy-900 transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 hover:border-brand hover:shadow-md"
             >
               Back to the masjid
             </button>
@@ -152,14 +165,14 @@ export function QiblaCompass({ fallback }: { fallback: Coords }) {
         </div>
 
         {state === "denied" && (
-          <p className="rounded-sm bg-accent-wash px-3 py-2 text-sm text-accent">
+          <p className="rounded-card border border-rule bg-brand-wash px-4 py-3 text-sm leading-[1.7] text-brand-deep">
             Location is unavailable, so the bearing shown is from the masjid.
           </p>
         )}
-        <p className="text-xs leading-relaxed text-ink-mute">
+        <p className="text-sm leading-[1.7] text-ink-soft">
           The bearing is the great-circle direction to the Ka&rsquo;bah, measured clockwise from
-          true north. A phone compass reads magnetic north, so allow for local declination — about
-          1° west in the Midlands.
+          true north. A phone compass reads magnetic north, so allow for local declination &mdash;
+          about 1&deg; west in the Midlands.
         </p>
       </div>
     </div>

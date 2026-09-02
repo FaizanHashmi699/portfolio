@@ -1,16 +1,8 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/actions/admin";
-
-const NAV = [
-  { href: "/admin", label: "Dashboard" },
-  { href: "/admin/enquiries", label: "Enquiries" },
-  { href: "/admin/donations", label: "Donations" },
-  { href: "/admin/subscribers", label: "Subscribers" },
-  { href: "/admin/programmes", label: "Programmes" },
-  { href: "/admin/campaigns", label: "Appeals" },
-  { href: "/admin/prayer-settings", label: "Prayer times" },
-];
+import { AdminNav } from "@/components/admin/nav";
+import { adminButtonQuiet } from "@/components/admin/ui";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -25,56 +17,69 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   if (!admin) {
     return (
-      <main className="mx-auto max-w-lg px-5 py-24 text-center">
-        <h1 className="font-display text-2xl font-medium">Not authorised</h1>
-        <p className="mt-3 text-sm text-ink-soft">
-          Your account <strong>{user.email}</strong> is signed in but has not been granted admin
-          access. Ask an existing administrator to add you.
-        </p>
-        <form action={signOut} className="mt-6">
-          <button className="rounded-sm border border-rule px-4 py-2 text-sm hover:border-brand">
-            Sign out
-          </button>
-        </form>
+      <main className="mx-auto flex min-h-screen max-w-lg items-center px-6 py-24">
+        <div className="w-full rounded-card border border-rule bg-surface p-9 text-center shadow-sm">
+          <h1 className="font-display text-[1.6rem] font-extrabold tracking-tight text-brand-deep">
+            Not authorised
+          </h1>
+          <p className="mt-3 text-[0.95rem] leading-[1.7] text-ink-soft">
+            Your account <strong className="text-ink">{user.email}</strong> is signed in but has not
+            been granted admin access. Ask an existing administrator to add you.
+          </p>
+          <form action={signOut} className="mt-7">
+            <button className={adminButtonQuiet}>Sign out</button>
+          </form>
+        </div>
       </main>
     );
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-ground">
       <header className="border-b border-rule bg-surface">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-3 px-5 py-3 sm:px-8">
-          <Link href="/admin" className="flex items-center gap-2.5">
-            <span aria-hidden className="flex flex-col items-center">
-              <span className="block h-1.5 w-1.5 bg-brand" />
-              <span className="block h-4 w-[2px] bg-brand/35" />
+        <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-x-5 gap-y-3 px-6 py-4 sm:px-8">
+          <Link href="/admin" className="group flex items-center gap-3">
+            <span
+              aria-hidden
+              className="grid h-9 w-9 shrink-0 place-items-center rounded-[11px] bg-gradient-to-br from-brand to-brand-deep shadow-[0_6px_18px_-8px_rgba(21,145,220,.9)] transition-transform duration-[400ms] group-hover:-rotate-6"
+            >
+              <svg viewBox="0 0 32 32" className="h-[19px] w-[19px] fill-white">
+                <path d="M16 2.5 19.9 12.1 29.5 16 19.9 19.9 16 29.5 12.1 19.9 2.5 16 12.1 12.1Z" />
+                <circle cx="16" cy="16" r="2.6" className="fill-brand-deep" />
+              </svg>
             </span>
-            <span className="font-display text-base font-medium">Manarat admin</span>
+            <span className="leading-tight">
+              <span className="block font-display text-[0.98rem] font-extrabold tracking-tight text-brand-deep">
+                Manarat admin
+              </span>
+              <span className="block text-[0.6rem] font-bold uppercase tracking-[0.16em] text-ink-mute">
+                Foundation control room
+              </span>
+            </span>
           </Link>
-          <span className="ml-auto text-xs text-ink-mute">{user.email}</span>
-          <Link href="/" className="text-xs text-ink-mute hover:text-brand">
+
+          <span className="ml-auto hidden rounded-chip bg-brand-wash px-3.5 py-1.5 text-xs font-bold text-brand-deep sm:inline-block">
+            {user.email}
+          </span>
+          <Link
+            href="/"
+            className="text-xs font-bold text-ink-mute transition-colors hover:text-brand"
+          >
             View site ↗
           </Link>
           <form action={signOut}>
-            <button className="text-xs text-ink-mute hover:text-brand">Sign out</button>
+            <button className="text-xs font-bold text-ink-mute transition-colors hover:text-brand">
+              Sign out
+            </button>
           </form>
         </div>
-        <nav className="mx-auto max-w-6xl px-5 sm:px-8">
-          <ul className="-mb-px flex flex-wrap gap-x-5 text-sm">
-            {NAV.map((n) => (
-              <li key={n.href}>
-                <Link
-                  href={n.href}
-                  className="inline-block border-b-2 border-transparent py-2.5 text-ink-soft hover:border-brand hover:text-brand"
-                >
-                  {n.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+
+        <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
+          <AdminNav />
+        </div>
       </header>
-      <main className="mx-auto max-w-6xl px-5 py-10 sm:px-8">{children}</main>
+
+      <main className="mx-auto max-w-[1200px] px-6 py-10 sm:px-8 sm:py-12">{children}</main>
     </div>
   );
 }

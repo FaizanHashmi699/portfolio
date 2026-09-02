@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { Stat, StatusPill, EmptyState, PageTitle } from "@/components/admin/ui";
+import {
+  Stat,
+  StatusPill,
+  EmptyState,
+  PageTitle,
+  AdminTable,
+  adminRow,
+  adminCell,
+} from "@/components/admin/ui";
 import { money, moneyShort, dateTimeShort, giftAidBonus } from "@/lib/format";
 import type { Campaign, Donation, Enquiry } from "@/lib/types";
 
@@ -36,7 +44,7 @@ export default async function AdminDashboard() {
         note="Everything arriving through the site, in one place."
       />
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <Stat
           label="Confirmed income"
           value={moneyShort(paidTotal)}
@@ -61,32 +69,42 @@ export default async function AdminDashboard() {
         />
       </div>
 
-      <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <Stat label="New enquiries" value={String(newEnquiries)} note="Unanswered" tone={newEnquiries > 0 ? "accent" : "default"} />
         <Stat label="Newsletter" value={String(subsRes.count ?? 0)} note="Active subscribers" />
         {campaign && (
-          <div className="rounded-sm border border-rule bg-surface p-5 sm:col-span-2">
-            <p className="text-[10px] uppercase tracking-[0.12em] text-ink-mute">Current appeal</p>
-            <p className="mt-1 font-display text-lg font-medium">{campaign.title}</p>
-            <div className="mt-3 h-2 w-full overflow-hidden rounded-sm bg-surface-2">
+          <div className="rounded-card border border-rule bg-surface p-6 shadow-sm sm:col-span-2">
+            <p className="text-[0.64rem] font-bold uppercase tracking-[0.16em] text-ink-mute">
+              Current appeal
+            </p>
+            <p className="mt-2 font-display text-[1.2rem] font-extrabold tracking-tight text-brand-deep">
+              {campaign.title}
+            </p>
+            <div className="mt-4 h-2.5 w-full overflow-hidden rounded-chip bg-surface-2">
               <div
-                className="h-full bg-brand"
+                className="h-full rounded-chip bg-brand"
                 style={{
                   width: `${Math.min(100, campaign.target_pence ? (campaign.raised_pence / campaign.target_pence) * 100 : 0)}%`,
                 }}
               />
             </div>
-            <p className="mt-2 text-xs text-ink-soft">
-              {money(campaign.raised_pence)} of {moneyShort(campaign.target_pence)}
+            <p className="mt-2.5 text-sm text-ink-soft">
+              <strong className="font-bold text-brand-deep">{money(campaign.raised_pence)}</strong>{" "}
+              of {moneyShort(campaign.target_pence)}
             </p>
           </div>
         )}
       </div>
 
-      <section className="mt-10">
-        <div className="mb-3 flex items-center gap-4">
-          <h2 className="font-display text-xl font-medium">Latest enquiries</h2>
-          <Link href="/admin/enquiries" className="ml-auto text-sm text-brand hover:underline">
+      <section className="mt-12">
+        <div className="mb-5 flex flex-wrap items-center gap-4">
+          <h2 className="font-display text-[1.35rem] font-extrabold tracking-tight text-brand-deep">
+            Latest enquiries
+          </h2>
+          <Link
+            href="/admin/enquiries"
+            className="ml-auto rounded-chip border border-rule px-4 py-2 text-xs font-bold text-brand-deep transition-all duration-300 hover:-translate-y-0.5 hover:border-brand hover:shadow-sm"
+          >
             All enquiries →
           </Link>
         </div>
@@ -96,38 +114,29 @@ export default async function AdminDashboard() {
             No enquiries yet. They will appear here as soon as someone uses a programme form.
           </EmptyState>
         ) : (
-          <div className="overflow-x-auto rounded-sm border border-rule bg-surface">
-            <table className="w-full min-w-[560px] text-sm">
-              <thead>
-                <tr className="border-b border-rule text-left text-[10px] uppercase tracking-[0.1em] text-ink-mute">
-                  <th className="px-4 py-2.5 font-medium">Received</th>
-                  <th className="px-4 py-2.5 font-medium">From</th>
-                  <th className="px-4 py-2.5 font-medium">Child</th>
-                  <th className="px-4 py-2.5 font-medium">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {enquiries.map((e) => (
-                  <tr key={e.id} className="border-b border-rule-soft last:border-0">
-                    <td className="px-4 py-2.5 whitespace-nowrap text-ink-mute">
-                      {dateTimeShort(e.created_at)}
-                    </td>
-                    <td className="px-4 py-2.5">
-                      <span className="font-medium">{e.parent_name}</span>
-                      <span className="block text-xs text-ink-mute">{e.email}</span>
-                    </td>
-                    <td className="px-4 py-2.5 text-ink-soft">
-                      {e.child_name ?? "—"}
-                      {e.child_age ? `, ${e.child_age}` : ""}
-                    </td>
-                    <td className="px-4 py-2.5">
-                      <StatusPill status={e.status} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <AdminTable
+            head={[{ label: "Received" }, { label: "From" }, { label: "Child" }, { label: "Status" }]}
+            minWidth={600}
+          >
+            {enquiries.map((e) => (
+              <tr key={e.id} className={adminRow}>
+                <td className={`${adminCell} whitespace-nowrap text-ink-mute`}>
+                  {dateTimeShort(e.created_at)}
+                </td>
+                <td className={adminCell}>
+                  <span className="font-bold text-brand-deep">{e.parent_name}</span>
+                  <span className="mt-0.5 block text-xs text-ink-mute">{e.email}</span>
+                </td>
+                <td className={`${adminCell} text-ink-soft`}>
+                  {e.child_name ?? "\u2014"}
+                  {e.child_age ? `, ${e.child_age}` : ""}
+                </td>
+                <td className={adminCell}>
+                  <StatusPill status={e.status} />
+                </td>
+              </tr>
+            ))}
+          </AdminTable>
         )}
       </section>
     </>

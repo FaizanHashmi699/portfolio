@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { savePrayerSettings } from "@/actions/admin";
-import { adminField, adminLabel } from "@/components/admin/ui";
+import { adminField, adminLabel, adminButton } from "@/components/admin/ui";
 import { METHOD_LABELS } from "@/lib/prayer-times";
 import type { PrayerSettings } from "@/lib/types";
 
@@ -24,18 +24,18 @@ export function PrayerSettingsForm({ settings }: { settings: PrayerSettings }) {
         <input name="masjid_name" defaultValue={settings.masjid_name} className={adminField} />
       </div>
 
-      <fieldset className="grid gap-4 sm:grid-cols-3">
+      <fieldset className="grid gap-5 sm:grid-cols-3">
         <legend className={adminLabel}>Location</legend>
         <div>
-          <label className="mb-1 block text-xs text-ink-soft">Latitude</label>
+          <label className="mb-1.5 block text-xs font-medium text-ink-soft">Latitude</label>
           <input name="latitude" type="number" step="0.0001" defaultValue={settings.latitude} className={adminField} />
         </div>
         <div>
-          <label className="mb-1 block text-xs text-ink-soft">Longitude</label>
+          <label className="mb-1.5 block text-xs font-medium text-ink-soft">Longitude</label>
           <input name="longitude" type="number" step="0.0001" defaultValue={settings.longitude} className={adminField} />
         </div>
         <div>
-          <label className="mb-1 block text-xs text-ink-soft">Timezone</label>
+          <label className="mb-1.5 block text-xs font-medium text-ink-soft">Timezone</label>
           <input name="timezone" defaultValue={settings.timezone} className={adminField} />
         </div>
       </fieldset>
@@ -65,7 +65,7 @@ export function PrayerSettingsForm({ settings }: { settings: PrayerSettings }) {
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
           {OFFSETS.map((o) => (
             <div key={o.name}>
-              <label className="mb-1 block text-xs text-ink-soft">{o.label}</label>
+              <label className="mb-1.5 block text-xs font-medium text-ink-soft">{o.label}</label>
               <input
                 name={o.name}
                 type="number"
@@ -82,13 +82,14 @@ export function PrayerSettingsForm({ settings }: { settings: PrayerSettings }) {
       <div>
         <label className={adminLabel}>Jumu&rsquo;ah times</label>
         <input name="jumuah_times" defaultValue={settings.jumuah_times} className={adminField} />
-        <p className="mt-1 text-xs text-ink-mute">Free text, e.g. &ldquo;13:15, 14:15&rdquo;.</p>
+        <p className="mt-2 text-xs text-ink-mute">Free text, e.g. &ldquo;13:15, 14:15&rdquo;.</p>
       </div>
 
       {state && (
         <p
-          className={`rounded-sm px-3 py-2 text-sm ${
-            state.ok ? "bg-brand-wash text-brand-deep" : "bg-accent-wash text-accent"
+          role="status"
+          className={`rounded-[10px] border-l-[3px] border-brand px-4 py-3 text-sm leading-[1.7] ${
+            state.ok ? "bg-brand-wash text-brand-deep" : "bg-surface-2 text-ink"
           }`}
         >
           {state.message}
@@ -98,7 +99,7 @@ export function PrayerSettingsForm({ settings }: { settings: PrayerSettings }) {
       <button
         type="submit"
         disabled={pending}
-        className="rounded-sm bg-brand px-5 py-2.5 text-sm font-medium text-white hover:bg-brand-deep disabled:opacity-60"
+        className={adminButton}
       >
         {pending ? "Saving…" : "Save settings"}
       </button>

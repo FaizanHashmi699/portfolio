@@ -32,13 +32,17 @@ export function PrayerTimesCard({
   }).format(new Date());
 
   return (
-    <div className="overflow-hidden rounded-sm border border-rule bg-surface">
-      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-rule-soft bg-brand-wash px-5 py-4">
-        <p className="font-display text-lg font-medium text-brand-deep">Today&rsquo;s prayers</p>
-        <p className="text-xs uppercase tracking-[0.12em] text-ink-mute">{dateLabel}</p>
+    <div className="overflow-hidden rounded-card border border-rule bg-surface shadow-sm">
+      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1.5 border-b border-rule bg-brand-wash px-6 py-5">
+        <p className="font-display text-[1.1rem] font-extrabold tracking-tight text-brand-deep">
+          Today&rsquo;s prayers
+        </p>
+        <p className="text-[0.64rem] font-bold uppercase tracking-[0.14em] text-ink-mute">
+          {dateLabel}
+        </p>
         <p className="ml-auto text-sm text-ink-soft">
-          Next: <span className="font-semibold text-brand-deep">{PRAYER_LABELS[next.key]}</span>{" "}
-          <span className="tabular-nums font-semibold text-brand-deep">
+          Next: <span className="font-bold text-brand-deep">{PRAYER_LABELS[next.key]}</span>{" "}
+          <span className="font-bold tabular-nums text-brand-deep">
             {formatMinutes(next.at)}
           </span>
           {next.tomorrow && <span className="text-ink-mute"> (tomorrow)</span>}
@@ -50,14 +54,14 @@ export function PrayerTimesCard({
           Prayer beginning and congregation times for {dateLabel}
         </caption>
         <thead>
-          <tr className="border-b border-rule-soft text-left text-[11px] uppercase tracking-[0.1em] text-ink-mute">
-            <th scope="col" className="px-5 py-2 font-medium">
+          <tr className="border-b border-rule bg-surface-2/60 text-left text-[0.62rem] uppercase tracking-[0.14em] text-ink-mute">
+            <th scope="col" className="px-6 py-3 font-bold">
               Prayer
             </th>
-            <th scope="col" className="px-3 py-2 text-right font-medium">
+            <th scope="col" className="px-3 py-3 text-right font-bold">
               Begins
             </th>
-            <th scope="col" className="px-5 py-2 text-right font-medium">
+            <th scope="col" className="px-6 py-3 text-right font-bold">
               Jama&rsquo;ah
             </th>
           </tr>
@@ -69,27 +73,30 @@ export function PrayerTimesCard({
             return (
               <tr
                 key={key}
-                className={`border-b border-rule-soft last:border-0 ${
-                  isNext ? "bg-brand-wash/60" : ""
+                className={`border-b border-rule-soft transition-colors last:border-0 ${
+                  isNext ? "bg-brand-wash" : "hover:bg-surface-2/50"
                 }`}
               >
                 <th
                   scope="row"
-                  className={`px-5 py-2.5 text-left font-medium ${
-                    isSunrise ? "text-ink-mute" : "text-ink"
+                  className={`relative px-6 py-3 text-left font-bold ${
+                    isSunrise ? "text-ink-mute" : "text-brand-deep"
                   }`}
                 >
+                  {isNext && (
+                    <span aria-hidden className="absolute inset-y-0 left-0 w-[3px] bg-brand" />
+                  )}
                   {PRAYER_LABELS[key]}
                   {isNext && (
-                    <span className="ml-2 rounded-sm bg-brand px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.1em] text-white">
-                      next
+                    <span className="ml-2.5 rounded-chip bg-brand px-2 py-0.5 align-middle text-[0.58rem] font-bold uppercase tracking-[0.12em] text-white">
+                      Next
                     </span>
                   )}
                 </th>
-                <td className="px-3 py-2.5 text-right tabular-nums text-ink-soft">
+                <td className="px-3 py-3 text-right tabular-nums text-ink-soft">
                   {formatMinutes(times.begins[key])}
                 </td>
-                <td className="px-5 py-2.5 text-right font-semibold tabular-nums">
+                <td className="px-6 py-3 text-right font-bold tabular-nums text-ink">
                   {isSunrise ? (
                     <span className="text-ink-mute">&mdash;</span>
                   ) : (
@@ -103,9 +110,9 @@ export function PrayerTimesCard({
       </table>
 
       {!compact && (
-        <div className="space-y-1 border-t border-rule-soft px-5 py-4 text-xs text-ink-mute">
+        <div className="space-y-1.5 border-t border-rule bg-surface-2/50 px-6 py-4 text-xs leading-[1.6] text-ink-mute">
           <p>
-            <span className="font-medium text-ink-soft">Jumu&rsquo;ah:</span>{" "}
+            <span className="font-bold text-brand-deep">Jumu&rsquo;ah:</span>{" "}
             {settings.jumuah_times}
           </p>
           <p>

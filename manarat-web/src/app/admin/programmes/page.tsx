@@ -17,7 +17,7 @@ export default async function AdminProgrammesPage() {
         note="Fees, times and age ranges shown on the public programme pages. Keeping these current is what lets a parent decide without phoning."
       />
 
-      <div className="space-y-4">
+      <div className="space-y-5">
         {programmes.map((p) => (
           <ProgrammeEditor key={p.id} programme={p} />
         ))}

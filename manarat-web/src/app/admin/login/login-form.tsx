@@ -2,13 +2,13 @@
 
 import { useActionState } from "react";
 import { signIn } from "@/actions/admin";
-import { adminField, adminLabel } from "@/components/admin/ui";
+import { adminField, adminLabel, adminButton } from "@/components/admin/ui";
 
 export function LoginForm() {
   const [state, action, pending] = useActionState(signIn, null);
 
   return (
-    <form action={action} className="space-y-4">
+    <form action={action} className="space-y-5">
       <div>
         <label className={adminLabel} htmlFor="email">
           Email
@@ -30,13 +30,18 @@ export function LoginForm() {
       </div>
 
       {state && !state.ok && (
-        <p className="rounded-sm bg-accent-wash px-3 py-2 text-sm text-accent">{state.message}</p>
+        <p
+          role="alert"
+          className="rounded-[10px] border border-brand/40 border-l-[3px] border-l-brand bg-brand-wash px-4 py-3 text-sm leading-[1.7] text-brand-deep"
+        >
+          {state.message}
+        </p>
       )}
 
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-sm bg-brand px-5 py-2.5 font-medium text-white transition-colors hover:bg-brand-deep disabled:opacity-60"
+        className={`${adminButton} w-full py-3.5`}
       >
         {pending ? "Signing in…" : "Sign in"}
       </button>

@@ -8,8 +8,9 @@ const PRESETS_ONE_OFF = [10, 25, 50, 100, 250];
 const PRESETS_MONTHLY = [5, 10, 15, 25, 50];
 
 const field =
-  "w-full rounded-sm border border-rule bg-surface px-3 py-2 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/20";
-const label = "block text-[11px] uppercase tracking-[0.12em] text-ink-mute mb-1.5";
+  "w-full rounded-[10px] border border-rule bg-surface px-4 py-3 text-[0.95rem] text-ink outline-none transition-colors placeholder:text-ink-mute focus:border-brand focus:ring-4 focus:ring-brand/15";
+const label =
+  "mb-2 block text-[0.68rem] font-bold uppercase tracking-[0.16em] text-ink-mute";
 
 export function DonateForm({
   campaignId,
@@ -62,27 +63,27 @@ export function DonateForm({
 
   if (state?.ok) {
     return (
-      <div className="rounded-sm border border-brand/30 bg-brand-wash p-6">
-        <p className="font-display text-xl font-medium text-brand-deep">
+      <div className="rounded-card border border-brand/40 bg-brand-wash p-7 shadow-sm">
+        <p className="font-display text-[1.4rem] font-extrabold tracking-tight text-brand-deep">
           Jazakum Allahu khayran
         </p>
-        <p className="mt-2 text-sm text-ink-soft">
+        <p className="mt-3 text-[0.95rem] leading-[1.7] text-ink-soft">
           Your pledge of <strong>{money(pence)}</strong>
           {frequency === "monthly" ? " per month" : ""} has been recorded under reference{" "}
           <span className="font-mono font-semibold text-ink">{state.reference}</span>.
         </p>
         {paymentsLive ? (
           handoff ? (
-            <p className="mt-3 rounded-sm bg-accent-wash px-3 py-2 text-sm text-accent">
+            <p className="mt-4 rounded-[10px] border-l-[3px] border-brand bg-surface px-4 py-3 text-sm leading-[1.7] text-brand-deep">
               {handoff} Your reference is saved — quote it at the masjid, or try again.
             </p>
           ) : (
-            <p className="mt-3 text-sm text-ink-soft" aria-live="polite">
+            <p className="mt-4 text-sm text-ink-soft" aria-live="polite">
               {redirecting ? "Opening the secure payment page…" : "Redirecting you to pay…"}
             </p>
           )
         ) : (
-          <p className="mt-3 text-sm text-ink-soft">
+          <p className="mt-4 text-sm leading-[1.7] text-ink-soft">
             Card payment is not switched on for this site yet. A member of the team will be in
             touch to arrange your gift, or you can give at the masjid quoting this reference.
           </p>
@@ -114,14 +115,16 @@ export function DonateForm({
                 setAmount(opt.key === "monthly" ? "15" : "25");
               }}
               aria-pressed={frequency === opt.key}
-              className={`rounded-sm border px-4 py-3 text-left transition-colors ${
+              className={`rounded-card border px-5 py-4 text-left transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] ${
                 frequency === opt.key
-                  ? "border-brand bg-brand-wash"
-                  : "border-rule bg-surface hover:border-brand/50"
+                  ? "border-brand bg-brand-wash shadow-sm"
+                  : "border-rule bg-surface hover:-translate-y-0.5 hover:border-brand/50 hover:shadow-sm"
               }`}
             >
-              <span className="block text-sm font-semibold text-ink">{opt.title}</span>
-              <span className="block text-xs text-ink-mute">{opt.note}</span>
+              <span className="block font-display text-[0.95rem] font-extrabold text-brand-deep">
+                {opt.title}
+              </span>
+              <span className="mt-0.5 block text-xs text-ink-mute">{opt.note}</span>
             </button>
           ))}
         </div>
@@ -136,17 +139,17 @@ export function DonateForm({
               type="button"
               onClick={() => setAmount(String(p))}
               aria-pressed={amount === String(p)}
-              className={`rounded-sm border px-4 py-2 text-sm font-medium tabular-nums transition-colors ${
+              className={`rounded-chip border px-5 py-2.5 text-sm font-bold tabular-nums transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] ${
                 amount === String(p)
-                  ? "border-brand bg-brand text-white"
-                  : "border-rule bg-surface text-ink hover:border-brand/50"
+                  ? "border-brand bg-brand text-white shadow-brand"
+                  : "border-rule bg-surface text-brand-deep hover:-translate-y-0.5 hover:border-brand/50"
               }`}
             >
               £{p}
             </button>
           ))}
-          <div className="flex items-center gap-2 rounded-sm border border-rule bg-surface px-3">
-            <span className="text-sm text-ink-mute">£</span>
+          <div className="flex items-center gap-1.5 rounded-chip border border-rule bg-surface px-4 focus-within:border-brand">
+            <span className="text-sm font-bold text-ink-mute">£</span>
             <label htmlFor="custom-amount" className="sr-only">
               Custom amount in pounds
             </label>
@@ -157,12 +160,12 @@ export function DonateForm({
               step="1"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="w-20 bg-transparent py-2 text-sm tabular-nums outline-none"
+              className="w-20 bg-transparent py-2.5 text-sm font-bold tabular-nums text-brand-deep outline-none"
             />
           </div>
         </div>
         {frequency === "monthly" && pence > 0 && (
-          <p className="mt-2 text-xs text-ink-mute">
+          <p className="mt-3 text-xs text-ink-mute">
             That&rsquo;s about {money(Math.round(pence / 30))} a day, and{" "}
             {money(pence * 12)} over a year.
           </p>
@@ -184,25 +187,25 @@ export function DonateForm({
         </div>
       </div>
 
-      <div className="rounded-sm border border-rule bg-surface p-4">
+      <div className="rounded-card border border-rule bg-brand-wash/45 p-5">
         <label className="flex cursor-pointer items-start gap-3">
           <input
             type="checkbox"
             name="gift_aid"
             checked={giftAid}
             onChange={(e) => setGiftAid(e.target.checked)}
-            className="mt-1 h-4 w-4 accent-[#00655a]"
+            className="mt-0.5 h-4 w-4 shrink-0 accent-[#1591dc]"
           />
           <span>
-            <span className="block text-sm font-semibold text-ink">
+            <span className="block text-[0.95rem] font-bold text-brand-deep">
               Add Gift Aid
               {pence > 0 && (
-                <span className="ml-1 font-normal text-brand">
+                <span className="ml-1 font-bold text-brand">
                   — worth another {money(giftAidBonus(pence))} at no cost to you
                 </span>
               )}
             </span>
-            <span className="mt-1 block text-xs leading-relaxed text-ink-mute">
+            <span className="mt-2 block text-xs leading-[1.7] text-ink-mute">
               I am a UK taxpayer and understand that if I pay less Income Tax and/or Capital Gains
               Tax than the amount of Gift Aid claimed on all my donations in that tax year, it is my
               responsibility to pay any difference.
@@ -230,13 +233,18 @@ export function DonateForm({
       </div>
 
       {state && !state.ok && (
-        <p className="rounded-sm bg-accent-wash px-3 py-2 text-sm text-accent">{state.message}</p>
+        <p
+          role="alert"
+          className="rounded-[10px] border border-brand/40 border-l-[3px] border-l-brand bg-brand-wash px-4 py-3 text-sm leading-[1.7] text-brand-deep"
+        >
+          {state.message}
+        </p>
       )}
 
       <button
         type="submit"
         disabled={pending || pence === 0}
-        className="w-full rounded-sm bg-brand px-5 py-3 font-medium text-white transition-colors hover:bg-brand-deep disabled:opacity-60"
+        className="w-full rounded-chip bg-brand px-6 py-4 text-[0.95rem] font-bold text-white shadow-brand transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 hover:bg-blue-700 disabled:translate-y-0 disabled:opacity-55 disabled:shadow-none"
       >
         {pending
           ? "Please wait…"
@@ -248,8 +256,8 @@ export function DonateForm({
       </button>
 
       {!paymentsLive && (
-        <p className="rounded-sm border border-rule bg-surface-2 px-3 py-2 text-xs leading-relaxed text-ink-soft">
-          <strong className="font-semibold">Card payments are not switched on.</strong> This form
+        <p className="rounded-[10px] border border-rule bg-surface-2 px-4 py-3 text-xs leading-[1.7] text-ink-soft">
+          <strong className="font-bold text-brand-deep">Card payments are not switched on.</strong> This form
           records your pledge and reference; it does not take card details or move money. Add Stripe
           keys to enable live collection.
         </p>

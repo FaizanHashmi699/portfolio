@@ -69,7 +69,7 @@ export function LivePrayerClock({ config, jumuahTimes, display = false }: LivePr
   if (tick === null || !times) {
     return (
       <div
-        className="rounded-md border border-rule bg-surface p-6 text-sm text-ink-mute"
+        className="rounded-panel border border-rule bg-surface p-8 text-sm text-ink-mute shadow-sm"
         aria-live="polite"
       >
         Loading today&rsquo;s times…
@@ -102,57 +102,67 @@ export function LivePrayerClock({ config, jumuahTimes, display = false }: LivePr
   }).format(new Date());
 
   return (
-    <div className="overflow-hidden rounded-md border border-rule bg-surface shadow-sm">
+    <div className="overflow-hidden rounded-panel border border-rule bg-surface shadow-md">
       {/* Countdown */}
-      <div className="relative overflow-hidden bg-brand-deep px-6 py-6 text-white">
+      <div className="relative overflow-hidden bg-navy-950 px-6 py-7 text-white sm:px-8">
         <PatternOverlay />
-        <div className="relative flex flex-wrap items-end gap-x-8 gap-y-4">
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.16em] text-white/60">
+        <span
+          aria-hidden
+          className="absolute -right-24 -top-28 h-[360px] w-[360px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(21,145,220,.34), transparent 68%)" }}
+        />
+        <div className="relative flex flex-wrap items-end gap-x-8 gap-y-5">
+          <div className="min-w-0">
+            <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-blue-300">
               {next.tomorrow ? "Tomorrow's first jama'ah" : "Next jama'ah"}
             </p>
             <p
-              className={`mt-1 font-display font-medium leading-none ${
-                display ? "text-6xl" : "text-4xl"
+              className={`mt-2 font-display font-extrabold leading-none tracking-tight ${
+                display ? "text-[clamp(2.6rem,6vw,4.2rem)]" : "text-[clamp(1.8rem,4vw,2.6rem)]"
               }`}
             >
               {PRAYER_LABELS[next.key]}{" "}
-              <span className="tabular-nums text-white/70">{formatMinutes(next.at)}</span>
+              <span className="tabular-nums text-blue-300">{formatMinutes(next.at)}</span>
             </p>
           </div>
 
           <div className="ml-auto text-right">
-            <p className="text-[11px] uppercase tracking-[0.16em] text-white/60">Begins in</p>
+            <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-blue-300">
+              Begins in
+            </p>
             <p
-              className={`mt-1 font-display font-medium tabular-nums leading-none ${
-                display ? "text-6xl" : "text-4xl"
+              className={`mt-2 font-display font-extrabold tabular-nums leading-none tracking-tight ${
+                display ? "text-[clamp(2.6rem,6vw,4.2rem)]" : "text-[clamp(1.8rem,4vw,2.6rem)]"
               }`}
               aria-live="off"
             >
               {remaining.h}
-              <span className="text-white/45">:</span>
+              <span className="text-white/35">:</span>
               {remaining.m}
-              <span className="text-white/45">:</span>
+              <span className="text-white/35">:</span>
               {remaining.s}
             </p>
           </div>
         </div>
 
-        <div className="relative mt-5 flex flex-wrap gap-x-6 gap-y-1 border-t border-white/15 pt-4 text-xs text-white/70">
-          <span className="tabular-nums">{clock}</span>
-          <span>{gregorianLabel}</span>
-          <span className="text-white/90">{formatHijri(hijri)}</span>
+        <div className="relative mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-white/12 pt-5 text-xs">
+          <span className="rounded-chip bg-white/10 px-3 py-1 font-bold tabular-nums text-white">
+            {clock}
+          </span>
+          <span className="text-white/60">{gregorianLabel}</span>
+          <span aria-hidden className="text-white/25">&middot;</span>
+          <span className="font-medium text-blue-300">{formatHijri(hijri)}</span>
         </div>
       </div>
 
       {/* Today's table */}
-      <table className={`w-full ${display ? "text-lg" : "text-sm"}`}>
+      <table className={`w-full ${display ? "text-lg" : "text-[0.95rem]"}`}>
         <caption className="sr-only">Prayer beginning and congregation times for today</caption>
         <thead>
-          <tr className="border-b border-rule-soft text-left text-[11px] uppercase tracking-[0.1em] text-ink-mute">
-            <th scope="col" className="px-6 py-2.5 font-medium">Prayer</th>
-            <th scope="col" className="px-3 py-2.5 text-right font-medium">Begins</th>
-            <th scope="col" className="px-6 py-2.5 text-right font-medium">Jama&rsquo;ah</th>
+          <tr className="border-b border-rule bg-surface-2/60 text-left text-[0.66rem] uppercase tracking-[0.14em] text-ink-mute">
+            <th scope="col" className="px-6 py-3 font-bold sm:px-8">Prayer</th>
+            <th scope="col" className="px-3 py-3 text-right font-bold">Begins</th>
+            <th scope="col" className="px-6 py-3 text-right font-bold sm:px-8">Jama&rsquo;ah</th>
           </tr>
         </thead>
         <tbody>
@@ -162,28 +172,46 @@ export function LivePrayerClock({ config, jumuahTimes, display = false }: LivePr
             return (
               <tr
                 key={key}
-                className={`border-b border-rule-soft last:border-0 transition-colors ${
-                  isNext ? "bg-brand-wash" : ""
+                className={`relative border-b border-rule-soft transition-colors last:border-0 ${
+                  isNext ? "bg-brand-wash" : "hover:bg-surface-2/50"
                 }`}
               >
                 <th
                   scope="row"
-                  className={`px-6 ${display ? "py-4" : "py-3"} text-left font-medium ${
-                    isSunrise ? "text-ink-mute" : "text-ink"
-                  }`}
+                  className={`relative px-6 text-left font-bold sm:px-8 ${
+                    display ? "py-4" : "py-3.5"
+                  } ${isSunrise ? "text-ink-mute" : "text-brand-deep"}`}
                 >
+                  {isNext && (
+                    <span
+                      aria-hidden
+                      className="absolute inset-y-0 left-0 w-[3px] bg-brand"
+                    />
+                  )}
                   {PRAYER_LABELS[key]}
                   {isNext && (
-                    <span className="ml-2 rounded-sm bg-brand px-1.5 py-0.5 align-middle text-[9px] font-semibold uppercase tracking-[0.1em] text-white">
-                      next
+                    <span className="ml-2.5 rounded-chip bg-brand px-2 py-0.5 align-middle text-[0.6rem] font-bold uppercase tracking-[0.12em] text-white">
+                      Next
                     </span>
                   )}
                 </th>
-                <td className={`px-3 ${display ? "py-4" : "py-3"} text-right tabular-nums text-ink-soft`}>
+                <td
+                  className={`px-3 text-right tabular-nums text-ink-soft ${
+                    display ? "py-4" : "py-3.5"
+                  }`}
+                >
                   {formatMinutes(times.begins[key])}
                 </td>
-                <td className={`px-6 ${display ? "py-4" : "py-3"} text-right font-semibold tabular-nums`}>
-                  {isSunrise ? <span className="text-ink-mute">&mdash;</span> : formatMinutes(times.jamaah[key])}
+                <td
+                  className={`px-6 text-right font-bold tabular-nums text-ink sm:px-8 ${
+                    display ? "py-4" : "py-3.5"
+                  }`}
+                >
+                  {isSunrise ? (
+                    <span className="text-ink-mute">&mdash;</span>
+                  ) : (
+                    formatMinutes(times.jamaah[key])
+                  )}
                 </td>
               </tr>
             );
@@ -191,11 +219,12 @@ export function LivePrayerClock({ config, jumuahTimes, display = false }: LivePr
         </tbody>
       </table>
 
-      <div className="flex flex-wrap gap-x-6 gap-y-1 border-t border-rule-soft px-6 py-4 text-xs text-ink-mute">
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-rule bg-surface-2/50 px-6 py-4 text-xs text-ink-mute sm:px-8">
         <span>
-          <span className="font-medium text-ink-soft">Jumu&rsquo;ah:</span> {jumuahTimes}
+          <span className="font-bold text-brand-deep">Jumu&rsquo;ah:</span> {jumuahTimes}
         </span>
-        <span>Recalculated live — never a stale PDF.</span>
+        <span aria-hidden className="text-rule">&middot;</span>
+        <span>Recalculated live &mdash; never a stale PDF.</span>
       </div>
     </div>
   );

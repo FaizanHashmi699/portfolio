@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from "react";
 import { saveProgramme, deleteProgramme } from "@/actions/admin";
-import { adminField, adminLabel } from "@/components/admin/ui";
+import { adminField, adminLabel, adminButton } from "@/components/admin/ui";
 import type { Programme } from "@/lib/types";
 
 export function ProgrammeEditor({ programme }: { programme: Programme | null }) {
@@ -14,7 +14,7 @@ export function ProgrammeEditor({ programme }: { programme: Programme | null }) 
     return (
       <button
         onClick={() => setOpen(true)}
-        className="w-full rounded-sm border border-dashed border-rule bg-surface px-5 py-4 text-sm font-medium text-ink-soft transition-colors hover:border-brand hover:text-brand"
+        className="w-full rounded-card border border-dashed border-rule bg-surface px-5 py-5 text-sm font-bold text-ink-soft transition-all duration-300 hover:border-brand hover:bg-brand-wash/40 hover:text-brand-deep"
       >
         + Add a programme
       </button>
@@ -24,25 +24,25 @@ export function ProgrammeEditor({ programme }: { programme: Programme | null }) 
   return (
     <details
       open={isNew || open}
-      className="rounded-sm border border-rule bg-surface"
+      className="group overflow-hidden rounded-card border border-rule bg-surface shadow-sm"
       onToggle={(e) => setOpen((e.currentTarget as HTMLDetailsElement).open)}
     >
-      <summary className="cursor-pointer list-none px-5 py-4">
-        <span className="font-display text-lg font-medium">
+      <summary className="cursor-pointer list-none px-6 py-5 transition-colors hover:bg-surface-2/50">
+        <span className="font-display text-[1.1rem] font-extrabold tracking-tight text-brand-deep">
           {isNew ? "New programme" : programme.title}
         </span>
         {!isNew && !programme.published && (
-          <span className="ml-2 rounded-sm bg-surface-2 px-2 py-0.5 text-[10px] uppercase tracking-[0.08em] text-ink-mute">
+          <span className="ml-2.5 rounded-chip border border-rule bg-surface-2 px-2.5 py-1 align-middle text-[0.6rem] font-bold uppercase tracking-[0.12em] text-ink-mute">
             hidden
           </span>
         )}
-        <span className="ml-3 text-xs text-ink-mute">{open ? "Close" : "Edit"}</span>
+        <span className="ml-3 text-xs font-bold text-ink-mute">{open ? "Close" : "Edit"}</span>
       </summary>
 
-      <form action={action} className="space-y-4 border-t border-rule-soft px-5 py-5">
+      <form action={action} className="space-y-5 border-t border-rule bg-ground/50 px-6 py-6">
         {!isNew && <input type="hidden" name="id" value={programme.id} />}
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <label className={adminLabel}>Title *</label>
             <input name="title" required defaultValue={programme?.title ?? ""} className={adminField} />
@@ -68,10 +68,10 @@ export function ProgrammeEditor({ programme }: { programme: Programme | null }) 
         <div>
           <label className={adminLabel}>Full description</label>
           <textarea name="body" rows={5} defaultValue={programme?.body ?? ""} className={adminField} />
-          <p className="mt-1 text-xs text-ink-mute">Leave a blank line between paragraphs.</p>
+          <p className="mt-2 text-xs text-ink-mute">Leave a blank line between paragraphs.</p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <label className={adminLabel}>Age range</label>
             <input name="age_range" defaultValue={programme?.age_range ?? ""} className={adminField} />
@@ -97,12 +97,12 @@ export function ProgrammeEditor({ programme }: { programme: Programme | null }) 
               className={adminField}
             />
           </div>
-          <label className="flex items-end gap-2 pb-2 text-sm">
+          <label className="flex cursor-pointer items-end gap-2.5 pb-2 text-sm font-medium text-ink">
             <input
               type="checkbox"
               name="published"
               defaultChecked={programme?.published ?? true}
-              className="h-4 w-4 accent-[#00655a]"
+              className="h-4 w-4 shrink-0 accent-[#1591dc]"
             />
             Show on the public site
           </label>
@@ -110,19 +110,22 @@ export function ProgrammeEditor({ programme }: { programme: Programme | null }) 
 
         {state && (
           <p
-            className={`rounded-sm px-3 py-2 text-sm ${
-              state.ok ? "bg-brand-wash text-brand-deep" : "bg-accent-wash text-accent"
+            role="status"
+            className={`rounded-[10px] border-l-[3px] px-4 py-3 text-sm leading-[1.7] ${
+              state.ok
+                ? "border-brand bg-brand-wash text-brand-deep"
+                : "border-brand bg-surface-2 text-ink"
             }`}
           >
             {state.message}
           </p>
         )}
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2.5 border-t border-rule pt-5">
           <button
             type="submit"
             disabled={pending}
-            className="rounded-sm bg-brand px-5 py-2 text-sm font-medium text-white hover:bg-brand-deep disabled:opacity-60"
+            className={adminButton}
           >
             {pending ? "Saving…" : isNew ? "Create programme" : "Save changes"}
           </button>
@@ -130,9 +133,11 @@ export function ProgrammeEditor({ programme }: { programme: Programme | null }) 
       </form>
 
       {!isNew && (
-        <form action={deleteProgramme} className="border-t border-rule-soft px-5 py-3">
+        <form action={deleteProgramme} className="border-t border-rule bg-ground/50 px-6 py-4">
           <input type="hidden" name="id" value={programme.id} />
-          <button className="text-xs text-ink-mute hover:text-accent">Delete this programme</button>
+          <button className="text-xs font-bold text-ink-mute underline-offset-4 transition-colors hover:text-brand-deep hover:underline">
+            Delete this programme
+          </button>
         </form>
       )}
     </details>

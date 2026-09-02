@@ -34,7 +34,7 @@ export function Hero3D() {
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       const scene = new THREE.Scene();
-      scene.fog = new THREE.Fog(0x041a33, 9, 26);
+      scene.fog = new THREE.Fog(0x062b55, 9, 26);
 
       const camera = new THREE.PerspectiveCamera(
         42,
@@ -68,7 +68,8 @@ export function Hero3D() {
       const extrude = { depth: 0.16, bevelEnabled: true, bevelSize: 0.05, bevelThickness: 0.05, bevelSegments: 2 };
 
       const brand = new THREE.Color(0x1591dc);
-      const gold = new THREE.Color(0xd6a24a);
+      // The cage sits a shade lighter than the solid so the edges read.
+      const edge = new THREE.Color(0x8fd0f7);
 
       const group = new THREE.Group();
       // Sit the field to the right so it frames the headline instead of
@@ -92,7 +93,7 @@ export function Hero3D() {
 
       const cage = new THREE.LineSegments(
         new THREE.EdgesGeometry(centreGeo),
-        new THREE.LineBasicMaterial({ color: gold, transparent: true, opacity: 0.55 }),
+        new THREE.LineBasicMaterial({ color: edge, transparent: true, opacity: 0.55 }),
       );
       group.add(cage);
 
@@ -102,9 +103,9 @@ export function Hero3D() {
         depth: 0.1,
       });
       ringGeo.center();
-      // Light blue, so the single gold note stays on the central star's cage.
+      // A lighter blue, so the satellites recede behind the central star.
       const ringMat = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(0x9fd8f8),
+        color: new THREE.Color(0x8fd0f7),
         metalness: 0.4,
         roughness: 0.3,
         emissive: new THREE.Color(0x1a5f92),

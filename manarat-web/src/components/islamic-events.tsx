@@ -1,4 +1,4 @@
-import { upcomingEvents, type DatedIslamicEvent } from "@/lib/hijri";
+import { upcomingEvents, HIJRI_MONTHS, type DatedIslamicEvent } from "@/lib/hijri";
 
 function gregorianLabel(g: { year: number; month: number; day: number }) {
   return new Intl.DateTimeFormat("en-GB", {
@@ -21,35 +21,51 @@ export function IslamicEvents({ limit = 6, today }: { limit?: number; today: Dat
   const events = upcomingEvents(today, limit);
 
   return (
-    <ol className="grid gap-3 sm:grid-cols-2">
-      {events.map((e) => (
-        <li
-          key={`${e.slug}-${e.hijriYear}`}
-          className={`flex flex-col gap-1.5 rounded-md border p-5 transition-colors ${
-            e.isActive || e.isToday
-              ? "border-brand bg-brand-wash"
-              : e.major
-                ? "border-rule bg-surface hover:border-brand/50"
-                : "border-rule bg-surface"
-          }`}
-        >
-          <div className="flex items-baseline gap-3">
-            <h3 className="font-display text-lg font-medium">{e.name}</h3>
+    <ol className="grid gap-5 sm:grid-cols-2">
+      {events.map((e) => {
+        const live = e.isActive || e.isToday;
+        return (
+          <li
+            key={`${e.slug}-${e.hijriYear}`}
+            className={`group relative flex flex-col overflow-hidden rounded-card border bg-surface p-6 shadow-sm transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1 hover:shadow-lg sm:p-7 ${
+              live ? "border-brand shadow-md" : "border-rule hover:border-brand/40"
+            }`}
+          >
+            {/* A thin brand rule that fills in on hover — the only decoration. */}
             <span
-              className={`ml-auto shrink-0 rounded-sm px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${
-                e.isActive || e.isToday ? "bg-brand text-white" : "bg-surface-2 text-ink-mute"
+              aria-hidden
+              className={`absolute inset-x-0 top-0 h-[3px] bg-brand transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${
+                live ? "scale-x-100" : "origin-left scale-x-0 group-hover:scale-x-100"
               }`}
-            >
-              {awayLabel(e)}
-            </span>
-          </div>
-          <p className="text-sm font-medium text-ink-soft">
-            {gregorianLabel(e.gregorian)}
-            <span className="text-ink-mute"> · {e.day} {["Muharram","Safar","Rabi al-Awwal","Rabi al-Thani","Jumada al-Ula","Jumada al-Akhirah","Rajab","Sha'ban","Ramadan","Shawwal","Dhul Qa'dah","Dhul Hijjah"][e.month-1]} {e.hijriYear}</span>
-          </p>
-          <p className="text-sm leading-relaxed text-ink-mute">{e.note}</p>
-        </li>
-      ))}
+            />
+
+            <div className="flex items-start gap-4">
+              <h3 className="font-display text-[1.15rem] font-extrabold leading-snug tracking-tight text-brand-deep">
+                {e.name}
+              </h3>
+              <span
+                className={`ml-auto shrink-0 rounded-chip px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.12em] ${
+                  live ? "bg-brand text-white" : "bg-brand-wash text-brand-mid"
+                }`}
+              >
+                {awayLabel(e)}
+              </span>
+            </div>
+
+            <p className="mt-4 font-display text-[0.95rem] font-bold text-ink">
+              {gregorianLabel(e.gregorian)}
+            </p>
+            <p className="mt-1 text-sm text-ink-mute">
+              {e.day} {HIJRI_MONTHS[e.month - 1]} {e.hijriYear} AH
+              {e.days && e.days > 1 ? ` · ${e.days} days` : ""}
+            </p>
+
+            <p className="mt-4 border-t border-rule-soft pt-4 text-sm leading-[1.7] text-ink-soft">
+              {e.note}
+            </p>
+          </li>
+        );
+      })}
     </ol>
   );
 }

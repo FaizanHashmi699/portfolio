@@ -16,11 +16,11 @@ export default async function PrayerSettingsPage() {
       />
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
-        <div className="rounded-sm border border-rule bg-surface p-6">
+        <div className="rounded-card border border-rule bg-surface p-7 shadow-sm">
           <PrayerSettingsForm settings={settings} />
         </div>
         <div>
-          <p className="mb-3 text-[11px] uppercase tracking-[0.12em] text-ink-mute">
+          <p className="mb-4 text-[0.64rem] font-bold uppercase tracking-[0.16em] text-ink-mute">
             Live preview
           </p>
           <PrayerTimesCard settings={settings} />
