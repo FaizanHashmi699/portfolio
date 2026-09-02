@@ -3,7 +3,13 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Container, Section, SectionHead, Card, PageMasthead, Button, ArrowIcon } from "@/components/ui";
 import { IslamicEvents } from "@/components/islamic-events";
-import { gregorianToHijri, formatHijri, HIJRI_MONTHS, hijriToGregorian } from "@/lib/hijri";
+import {
+  gregorianToHijri,
+  formatHijri,
+  HIJRI_MONTHS,
+  hijriToGregorian,
+  upcomingEvents,
+} from "@/lib/hijri";
 
 export const metadata: Metadata = {
   title: "Islamic calendar",
@@ -27,6 +33,10 @@ export default function CalendarPage() {
       isCurrent: i + 1 === hijri.month,
     };
   });
+
+  // The single next observance, shown alongside today's date so the card
+  // answers "what's next" without the reader scrolling.
+  const nextUp = upcomingEvents(now, 1)[0];
 
   const gregorian = new Intl.DateTimeFormat("en-GB", {
     day: "numeric",
@@ -72,6 +82,44 @@ export default function CalendarPage() {
                     </p>
                   </div>
                 </div>
+
+                {nextUp && (
+                  <div className="flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-rule bg-surface-2/50 px-8 py-6 sm:px-10">
+                    <div className="min-w-0">
+                      <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-ink-mute">
+                        Next observance
+                      </p>
+                      <p className="mt-1.5 font-display text-[1.15rem] font-extrabold tracking-tight text-brand-deep">
+                        {nextUp.name}
+                      </p>
+                      <p className="mt-0.5 text-sm text-ink-soft">
+                        {new Intl.DateTimeFormat("en-GB", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        }).format(
+                          new Date(
+                            Date.UTC(
+                              nextUp.gregorian.year,
+                              nextUp.gregorian.month - 1,
+                              nextUp.gregorian.day,
+                            ),
+                          ),
+                        )}{" "}
+                        &middot; {nextUp.day} {HIJRI_MONTHS[nextUp.month - 1]} {nextUp.hijriYear} AH
+                      </p>
+                    </div>
+                    <span className="ml-auto rounded-chip bg-brand px-4 py-2 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-white">
+                      {nextUp.isToday
+                        ? "Today"
+                        : nextUp.isActive
+                          ? "Now"
+                          : nextUp.daysAway === 1
+                            ? "Tomorrow"
+                            : `In ${nextUp.daysAway} days`}
+                    </span>
+                  </div>
+                )}
               </Card>
 
               <aside className="grid gap-5">
